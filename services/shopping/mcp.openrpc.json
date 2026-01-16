@@ -27,7 +27,7 @@
           "name": "checkout",
           "required": true,
           "schema": {
-            "$ref": "https://ucp.dev/schemas/shopping/checkout.json"
+            "$ref": "https://ucp.dev/schemas/shopping/checkout.create_req.json"
           }
         }
       ],
@@ -72,7 +72,7 @@
           "name": "checkout",
           "required": true,
           "schema": {
-            "$ref": "https://ucp.dev/schemas/shopping/checkout.json"
+            "$ref": "https://ucp.dev/schemas/shopping/checkout.update_req.json"
           }
         }
       ],
@@ -95,10 +95,10 @@
           }
         },
         {
-          "name": "payment",
-          "required": false,
+          "name": "checkout",
+          "required": true,
           "schema": {
-            "$ref": "https://ucp.dev/schemas/shopping/payment.json"
+            "$ref": "https://ucp.dev/schemas/shopping/checkout.complete_req.json"
           }
         },
         {

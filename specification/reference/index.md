@@ -4,6 +4,14 @@ This page provides a reference for all the capability data models and types used
 
 ## Capability Schemas
 
+### Checkout Complete Request
+
+| Name    | Type                                                                       | Required | Description |
+| ------- | -------------------------------------------------------------------------- | -------- | ----------- |
+| payment | [Payment Complete Request](/specification/reference/#payment-complete_req) | **Yes**  |             |
+
+______________________________________________________________________
+
 ### Checkout Create Request
 
 | Name       | Type                                                                                    | Required | Description                           |
@@ -11,7 +19,7 @@ This page provides a reference for all the capability data models and types used
 | line_items | Array\[[Line Item Create Request](/specification/reference/#line-item-create-request)\] | **Yes**  | List of line items being checked out. |
 | buyer      | [Buyer](/specification/reference/#buyer)                                                | No       | Representation of the buyer.          |
 | currency   | string                                                                                  | **Yes**  | ISO 4217 currency code.               |
-| payment    | [Payment Create Request](/specification/reference/#payment-create-request)              | **Yes**  |                                       |
+| payment    | [Payment Create Request](/specification/reference/#payment-create-request)              | No       |                                       |
 
 ______________________________________________________________________
 
@@ -23,7 +31,7 @@ ______________________________________________________________________
 | line_items | Array\[[Line Item Update Request](/specification/reference/#line-item-update-request)\] | **Yes**  | List of line items being checked out.      |
 | buyer      | [Buyer](/specification/reference/#buyer)                                                | No       | Representation of the buyer.               |
 | currency   | string                                                                                  | **Yes**  | ISO 4217 currency code.                    |
-| payment    | [Payment Update Request](/specification/reference/#payment-update-request)              | **Yes**  |                                            |
+| payment    | [Payment Update Request](/specification/reference/#payment-update-request)              | No       |                                            |
 
 ______________________________________________________________________
 
@@ -62,6 +70,15 @@ ______________________________________________________________________
 
 ______________________________________________________________________
 
+### Payment Complete Request
+
+| Name                   | Type                                                                        | Required | Description                                                                                                                                                                                                                |
+| ---------------------- | --------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| selected_instrument_id | string                                                                      | No       | The id of the currently selected payment instrument from the instruments array. Set by the agent when submitting payment, and echoed back by the merchant in finalized state.                                              |
+| instruments            | Array\[[Payment Instrument](/specification/reference/#payment-instrument)\] | No       | The payment instruments available for this payment. Each instrument is associated with a specific handler via the handler_id field. Handlers can extend the base payment_instrument schema to add handler-specific fields. |
+
+______________________________________________________________________
+
 ### Payment Create Request
 
 | Name                   | Type                                                                        | Required | Description                                                                                                                                                                                                                |
@@ -77,14 +94,6 @@ ______________________________________________________________________
 | ---------------------- | --------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | selected_instrument_id | string                                                                      | No       | The id of the currently selected payment instrument from the instruments array. Set by the agent when submitting payment, and echoed back by the merchant in finalized state.                                              |
 | instruments            | Array\[[Payment Instrument](/specification/reference/#payment-instrument)\] | No       | The payment instruments available for this payment. Each instrument is associated with a specific handler via the handler_id field. Handlers can extend the base payment_instrument schema to add handler-specific fields. |
-
-______________________________________________________________________
-
-### Payment Data
-
-| Name         | Type                                                               | Required | Description |
-| ------------ | ------------------------------------------------------------------ | -------- | ----------- |
-| payment_data | [Payment Instrument](/specification/reference/#payment-instrument) | **Yes**  |             |
 
 ______________________________________________________________________
 
@@ -133,13 +142,12 @@ ______________________________________________________________________
 
 ### Buyer
 
-| Name         | Type   | Required | Description                                                                                       |
-| ------------ | ------ | -------- | ------------------------------------------------------------------------------------------------- |
-| first_name   | string | No       | First name of the buyer.                                                                          |
-| last_name    | string | No       | Last name of the buyer.                                                                           |
-| full_name    | string | No       | Optional, buyer's full name (if first_name or last_name fields are present they take precedence). |
-| email        | string | No       | Email of the buyer.                                                                               |
-| phone_number | string | No       | E.164 standard.                                                                                   |
+| Name         | Type   | Required | Description              |
+| ------------ | ------ | -------- | ------------------------ |
+| first_name   | string | No       | First name of the buyer. |
+| last_name    | string | No       | Last name of the buyer.  |
+| email        | string | No       | Email of the buyer.      |
+| phone_number | string | No       | E.164 standard.          |
 
 ______________________________________________________________________
 
@@ -229,6 +237,15 @@ ______________________________________________________________________
 
 ______________________________________________________________________
 
+### Fulfillment Group Complete Request
+
+| Name               | Type               | Required | Description                                                            |
+| ------------------ | ------------------ | -------- | ---------------------------------------------------------------------- |
+| id                 | string             | **Yes**  | Group identifier for referencing merchant-generated groups in updates. |
+| selected_option_id | ['string', 'null'] | No       | ID of the selected fulfillment option for this group.                  |
+
+______________________________________________________________________
+
 ### Fulfillment Group Create Request
 
 | Name               | Type               | Required | Description                                           |
@@ -254,6 +271,19 @@ ______________________________________________________________________
 | line_item_ids      | Array[string]                                                                                 | **Yes**  | Line item IDs included in this group/package.                          |
 | options            | Array\[[Fulfillment Option Response](/specification/reference/#fulfillment-option-response)\] | No       | Available fulfillment options for this group.                          |
 | selected_option_id | ['string', 'null']                                                                            | No       | ID of the selected fulfillment option for this group.                  |
+
+______________________________________________________________________
+
+### Fulfillment Method Complete Request
+
+| Name                    | Type                                                                                                    | Required | Description                                                                                                  |
+| ----------------------- | ------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------ |
+| id                      | string                                                                                                  | **Yes**  | Unique fulfillment method identifier.                                                                        |
+| type                    | string                                                                                                  | **Yes**  | Fulfillment method type. **Enum:** `shipping`, `pickup`                                                      |
+| line_item_ids           | Array[string]                                                                                           | **Yes**  | Line item IDs fulfilled via this method.                                                                     |
+| destinations            | Array\[[Fulfillment Destination Request](/specification/reference/#fulfillment-destination-request)\]   | No       | Available destinations. For shipping: addresses. For pickup: retail locations.                               |
+| selected_destination_id | ['string', 'null']                                                                                      | No       | ID of the selected destination.                                                                              |
+| groups                  | Array\[[Fulfillment Group Complete Request](/specification/reference/#fulfillment-group-complete_req)\] | No       | Fulfillment groups for selecting options. Agent sets selected_option_id on groups to choose shipping method. |
 
 ______________________________________________________________________
 
@@ -325,6 +355,14 @@ ______________________________________________________________________
 
 ______________________________________________________________________
 
+### Item Complete Request
+
+| Name | Type   | Required | Description                                                                                                                                    |
+| ---- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| id   | string | **Yes**  | Should be recognized by both the Platform, and the Business. For Google it should match the id provided in the "id" field in the product feed. |
+
+______________________________________________________________________
+
 ### Item Create Request
 
 | Name | Type   | Required | Description                                                                                                                                    |
@@ -349,6 +387,17 @@ ______________________________________________________________________
 | title     | string  | **Yes**  | Product title.                                                                                                                                 |
 | price     | integer | **Yes**  | Unit price in minor (cents) currency units.                                                                                                    |
 | image_url | string  | No       | Product image URI.                                                                                                                             |
+
+______________________________________________________________________
+
+### Line Item Complete Request
+
+| Name      | Type                                                                 | Required | Description                                            |
+| --------- | -------------------------------------------------------------------- | -------- | ------------------------------------------------------ |
+| id        | string                                                               | **Yes**  |                                                        |
+| item      | [Item Complete Request](/specification/reference/#item-complete_req) | **Yes**  |                                                        |
+| quantity  | integer                                                              | **Yes**  | Quantity of the item being purchased.                  |
+| parent_id | string                                                               | No       | Parent line item identifier for any nested structures. |
 
 ______________________________________________________________________
 
@@ -534,7 +583,6 @@ ______________________________________________________________________
 | postal_code      | string | No       | The postal code. For example, 94043.                                                                                                                                                                                                      |
 | first_name       | string | No       | Optional. First name of the contact associated with the address.                                                                                                                                                                          |
 | last_name        | string | No       | Optional. Last name of the contact associated with the address.                                                                                                                                                                           |
-| full_name        | string | No       | Optional. Full name of the contact associated with the address (if first_name or last_name fields are present they take precedence).                                                                                                      |
 | phone_number     | string | No       | Optional. Phone number of the contact associated with the address.                                                                                                                                                                        |
 
 ______________________________________________________________________
@@ -570,7 +618,6 @@ ______________________________________________________________________
 | postal_code      | string | No       | The postal code. For example, 94043.                                                                                                                                                                                                      |
 | first_name       | string | No       | Optional. First name of the contact associated with the address.                                                                                                                                                                          |
 | last_name        | string | No       | Optional. Last name of the contact associated with the address.                                                                                                                                                                           |
-| full_name        | string | No       | Optional. Full name of the contact associated with the address (if first_name or last_name fields are present they take precedence).                                                                                                      |
 | phone_number     | string | No       | Optional. Phone number of the contact associated with the address.                                                                                                                                                                        |
 | id               | string | No       | ID specific to this shipping destination.                                                                                                                                                                                                 |
 
@@ -588,9 +635,17 @@ ______________________________________________________________________
 | postal_code      | string | No       | The postal code. For example, 94043.                                                                                                                                                                                                      |
 | first_name       | string | No       | Optional. First name of the contact associated with the address.                                                                                                                                                                          |
 | last_name        | string | No       | Optional. Last name of the contact associated with the address.                                                                                                                                                                           |
-| full_name        | string | No       | Optional. Full name of the contact associated with the address (if first_name or last_name fields are present they take precedence).                                                                                                      |
 | phone_number     | string | No       | Optional. Phone number of the contact associated with the address.                                                                                                                                                                        |
 | id               | string | **Yes**  | ID specific to this shipping destination.                                                                                                                                                                                                 |
+
+______________________________________________________________________
+
+### Token Credential Complete Request
+
+| Name  | Type   | Required | Description                                                                |
+| ----- | ------ | -------- | -------------------------------------------------------------------------- |
+| type  | string | **Yes**  | The specific type of token produced by the handler (e.g., 'stripe_token'). |
+| token | string | **Yes**  | The token value.                                                           |
 
 ______________________________________________________________________
 
@@ -632,39 +687,151 @@ ______________________________________________________________________
 
 ## Extension Schemas
 
-### AP2 Mandate Extension
+### AP2 Mandate Extension Complete Request
 
-#### Merchant Authorization
+#### Merchant Authorization Complete Request
 
 JWS Detached Content signature (RFC 7515 Appendix F) over the checkout response body (excluding ap2 field). Format: `<base64url-header>..<base64url-signature>`. The header MUST contain 'alg' (ES256/ES384/ES512) and 'kid' claims. The signature covers both the header and JCS-canonicalized checkout payload.
 
 **Pattern:** `^[A-Za-z0-9_-]+\.\.[A-Za-z0-9_-]+$`
 
-#### Checkout Mandate
+#### Checkout Mandate Complete Request
 
 SD-JWT+kb credential in `ap2.checkout_mandate`. Proving user authorization for the checkout. Contains the full checkout including `ap2.merchant_authorization`.
 
 **Pattern:** `^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]*\.[A-Za-z0-9_-]+(~[A-Za-z0-9_-]+)*$`
 
-#### AP2 Checkout Response Object
+#### Ap2 With Merchant Authorization
 
-| Name                   | Type                                                                       | Required | Description                                                |
-| ---------------------- | -------------------------------------------------------------------------- | -------- | ---------------------------------------------------------- |
-| merchant_authorization | [Merchant Authorization](/specification/reference/#merchant-authorization) | **Yes**  | Merchant's signature proving checkout terms are authentic. |
+AP2 extension data including merchant authorization.
 
-#### AP2 Complete Request Object
+#### Ap2 With Checkout Mandate
 
 | Name             | Type                                                           | Required | Description                                      |
 | ---------------- | -------------------------------------------------------------- | -------- | ------------------------------------------------ |
-| checkout_mandate | [Checkout Mandate](/specification/reference/#checkout-mandate) | **Yes**  | SD-JWT+kb proving user authorized this checkout. |
+| checkout_mandate | [Checkout Mandate](/specification/reference/#checkout-mandate) | No       | SD-JWT+kb proving user authorized this checkout. |
 
-#### AP2 Error Code
+#### Checkout with AP2 Mandate Complete Request
+
+| Name    | Type                                                                       | Required | Description |
+| ------- | -------------------------------------------------------------------------- | -------- | ----------- |
+| payment | [Payment Complete Request](/specification/reference/#payment-complete_req) | **Yes**  |             |
+| ap2     | any                                                                        | No       |             |
+
+#### AP2 Error Code Complete Request
 
 Error codes specific to AP2 mandate verification.
 
 **Enum:** `mandate_required`, `agent_missing_key`, `mandate_invalid_signature`, `mandate_expired`, `mandate_scope_mismatch`, `merchant_authorization_invalid`, `merchant_authorization_missing`
 
-#### Checkout with AP2 Mandate
+______________________________________________________________________
+
+### AP2 Mandate Extension Create Request
+
+#### Merchant Authorization Create Request
+
+JWS Detached Content signature (RFC 7515 Appendix F) over the checkout response body (excluding ap2 field). Format: `<base64url-header>..<base64url-signature>`. The header MUST contain 'alg' (ES256/ES384/ES512) and 'kid' claims. The signature covers both the header and JCS-canonicalized checkout payload.
+
+**Pattern:** `^[A-Za-z0-9_-]+\.\.[A-Za-z0-9_-]+$`
+
+#### Checkout Mandate Create Request
+
+SD-JWT+kb credential in `ap2.checkout_mandate`. Proving user authorization for the checkout. Contains the full checkout including `ap2.merchant_authorization`.
+
+**Pattern:** `^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]*\.[A-Za-z0-9_-]+(~[A-Za-z0-9_-]+)*$`
+
+#### Ap2 With Merchant Authorization
+
+AP2 extension data including merchant authorization.
+
+#### Ap2 With Checkout Mandate
+
+AP2 extension data including checkout mandate.
+
+#### Checkout with AP2 Mandate Create Request
+
+| Name       | Type                                                                                    | Required | Description                           |
+| ---------- | --------------------------------------------------------------------------------------- | -------- | ------------------------------------- |
+| line_items | Array\[[Line Item Create Request](/specification/reference/#line-item-create-request)\] | **Yes**  | List of line items being checked out. |
+| buyer      | [Buyer](/specification/reference/#buyer)                                                | No       | Representation of the buyer.          |
+| currency   | string                                                                                  | **Yes**  | ISO 4217 currency code.               |
+| payment    | [Payment Create Request](/specification/reference/#payment-create-request)              | No       |                                       |
+
+#### AP2 Error Code Create Request
+
+Error codes specific to AP2 mandate verification.
+
+**Enum:** `mandate_required`, `agent_missing_key`, `mandate_invalid_signature`, `mandate_expired`, `mandate_scope_mismatch`, `merchant_authorization_invalid`, `merchant_authorization_missing`
+
+______________________________________________________________________
+
+### AP2 Mandate Extension Update Request
+
+#### Merchant Authorization Update Request
+
+JWS Detached Content signature (RFC 7515 Appendix F) over the checkout response body (excluding ap2 field). Format: `<base64url-header>..<base64url-signature>`. The header MUST contain 'alg' (ES256/ES384/ES512) and 'kid' claims. The signature covers both the header and JCS-canonicalized checkout payload.
+
+**Pattern:** `^[A-Za-z0-9_-]+\.\.[A-Za-z0-9_-]+$`
+
+#### Checkout Mandate Update Request
+
+SD-JWT+kb credential in `ap2.checkout_mandate`. Proving user authorization for the checkout. Contains the full checkout including `ap2.merchant_authorization`.
+
+**Pattern:** `^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]*\.[A-Za-z0-9_-]+(~[A-Za-z0-9_-]+)*$`
+
+#### Ap2 With Merchant Authorization
+
+AP2 extension data including merchant authorization.
+
+#### Ap2 With Checkout Mandate
+
+AP2 extension data including checkout mandate.
+
+#### Checkout with AP2 Mandate Update Request
+
+| Name       | Type                                                                                    | Required | Description                                |
+| ---------- | --------------------------------------------------------------------------------------- | -------- | ------------------------------------------ |
+| id         | string                                                                                  | **Yes**  | Unique identifier of the checkout session. |
+| line_items | Array\[[Line Item Update Request](/specification/reference/#line-item-update-request)\] | **Yes**  | List of line items being checked out.      |
+| buyer      | [Buyer](/specification/reference/#buyer)                                                | No       | Representation of the buyer.               |
+| currency   | string                                                                                  | **Yes**  | ISO 4217 currency code.                    |
+| payment    | [Payment Update Request](/specification/reference/#payment-update-request)              | No       |                                            |
+
+#### AP2 Error Code Update Request
+
+Error codes specific to AP2 mandate verification.
+
+**Enum:** `mandate_required`, `agent_missing_key`, `mandate_invalid_signature`, `mandate_expired`, `mandate_scope_mismatch`, `merchant_authorization_invalid`, `merchant_authorization_missing`
+
+______________________________________________________________________
+
+### AP2 Mandate Extension Response
+
+#### Merchant Authorization Response
+
+JWS Detached Content signature (RFC 7515 Appendix F) over the checkout response body (excluding ap2 field). Format: `<base64url-header>..<base64url-signature>`. The header MUST contain 'alg' (ES256/ES384/ES512) and 'kid' claims. The signature covers both the header and JCS-canonicalized checkout payload.
+
+**Pattern:** `^[A-Za-z0-9_-]+\.\.[A-Za-z0-9_-]+$`
+
+#### Checkout Mandate Response
+
+SD-JWT+kb credential in `ap2.checkout_mandate`. Proving user authorization for the checkout. Contains the full checkout including `ap2.merchant_authorization`.
+
+**Pattern:** `^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]*\.[A-Za-z0-9_-]+(~[A-Za-z0-9_-]+)*$`
+
+#### Ap2 With Merchant Authorization
+
+| Name                   | Type                                                                       | Required | Description                                                |
+| ---------------------- | -------------------------------------------------------------------------- | -------- | ---------------------------------------------------------- |
+| merchant_authorization | [Merchant Authorization](/specification/reference/#merchant-authorization) | No       | Merchant's signature proving checkout terms are authentic. |
+
+#### Ap2 With Checkout Mandate
+
+| Name             | Type                                                           | Required | Description                                      |
+| ---------------- | -------------------------------------------------------------- | -------- | ------------------------------------------------ |
+| checkout_mandate | [Checkout Mandate](/specification/reference/#checkout-mandate) | No       | SD-JWT+kb proving user authorized this checkout. |
+
+#### Checkout with AP2 Mandate Response
 
 | Name         | Type                                                                        | Required | Description                                                                                                                                                                                                                                                     |
 | ------------ | --------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -681,13 +848,42 @@ Error codes specific to AP2 mandate verification.
 | continue_url | string                                                                      | No       | URL for checkout handoff and session recovery. MUST be provided when status is requires_escalation. See specification for format and availability requirements.                                                                                                 |
 | payment      | [Payment Response](/specification/reference/#payment-response)              | **Yes**  |                                                                                                                                                                                                                                                                 |
 | order        | [Order Confirmation](/specification/reference/#order-confirmation)          | No       | Details about an order created for this checkout session.                                                                                                                                                                                                       |
-| ap2          | [Ap2 Checkout Response](/specification/reference/#ap2-checkout-response)    | No       | AP2 extension data including merchant authorization.                                                                                                                                                                                                            |
+| ap2          | any                                                                         | No       |                                                                                                                                                                                                                                                                 |
 
-#### Complete Checkout Request with AP2
+#### AP2 Error Code Response
 
-| Name | Type                                                                   | Required | Description                                    |
-| ---- | ---------------------------------------------------------------------- | -------- | ---------------------------------------------- |
-| ap2  | [Ap2 Complete Request](/specification/reference/#ap2-complete-request) | No       | AP2 extension data including checkout mandate. |
+Error codes specific to AP2 mandate verification.
+
+**Enum:** `mandate_required`, `agent_missing_key`, `mandate_invalid_signature`, `mandate_expired`, `mandate_scope_mismatch`, `merchant_authorization_invalid`, `merchant_authorization_missing`
+
+______________________________________________________________________
+
+### Buyer Consent Extension Complete Request
+
+#### Consent
+
+| Name         | Type    | Required | Description                                       |
+| ------------ | ------- | -------- | ------------------------------------------------- |
+| analytics    | boolean | No       | Consent for analytics and performance tracking.   |
+| preferences  | boolean | No       | Consent for storing user preferences.             |
+| marketing    | boolean | No       | Consent for marketing communications.             |
+| sale_of_data | boolean | No       | Consent for selling data to third parties (CCPA). |
+
+#### Buyer with Consent Complete Request
+
+| Name         | Type                                         | Required | Description              |
+| ------------ | -------------------------------------------- | -------- | ------------------------ |
+| first_name   | string                                       | No       | First name of the buyer. |
+| last_name    | string                                       | No       | Last name of the buyer.  |
+| email        | string                                       | No       | Email of the buyer.      |
+| phone_number | string                                       | No       | E.164 standard.          |
+| consent      | [Consent](/specification/reference/#consent) | No       | Consent tracking fields. |
+
+#### Checkout with Buyer Consent Complete Request
+
+| Name    | Type                                                                       | Required | Description |
+| ------- | -------------------------------------------------------------------------- | -------- | ----------- |
+| payment | [Payment Complete Request](/specification/reference/#payment-complete_req) | **Yes**  |             |
 
 ______________________________________________________________________
 
@@ -704,14 +900,13 @@ ______________________________________________________________________
 
 #### Buyer with Consent Create Request
 
-| Name         | Type                                         | Required | Description                                                                                       |
-| ------------ | -------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------- |
-| first_name   | string                                       | No       | First name of the buyer.                                                                          |
-| last_name    | string                                       | No       | Last name of the buyer.                                                                           |
-| full_name    | string                                       | No       | Optional, buyer's full name (if first_name or last_name fields are present they take precedence). |
-| email        | string                                       | No       | Email of the buyer.                                                                               |
-| phone_number | string                                       | No       | E.164 standard.                                                                                   |
-| consent      | [Consent](/specification/reference/#consent) | No       | Consent tracking fields.                                                                          |
+| Name         | Type                                         | Required | Description              |
+| ------------ | -------------------------------------------- | -------- | ------------------------ |
+| first_name   | string                                       | No       | First name of the buyer. |
+| last_name    | string                                       | No       | Last name of the buyer.  |
+| email        | string                                       | No       | Email of the buyer.      |
+| phone_number | string                                       | No       | E.164 standard.          |
+| consent      | [Consent](/specification/reference/#consent) | No       | Consent tracking fields. |
 
 #### Checkout with Buyer Consent Create Request
 
@@ -720,7 +915,7 @@ ______________________________________________________________________
 | line_items | Array\[[Line Item Create Request](/specification/reference/#line-item-create-request)\] | **Yes**  | List of line items being checked out. |
 | buyer      | [Buyer](/specification/reference/#buyer)                                                | No       | Buyer with consent tracking.          |
 | currency   | string                                                                                  | **Yes**  | ISO 4217 currency code.               |
-| payment    | [Payment Create Request](/specification/reference/#payment-create-request)              | **Yes**  |                                       |
+| payment    | [Payment Create Request](/specification/reference/#payment-create-request)              | No       |                                       |
 
 ______________________________________________________________________
 
@@ -737,14 +932,13 @@ ______________________________________________________________________
 
 #### Buyer with Consent Update Request
 
-| Name         | Type                                         | Required | Description                                                                                       |
-| ------------ | -------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------- |
-| first_name   | string                                       | No       | First name of the buyer.                                                                          |
-| last_name    | string                                       | No       | Last name of the buyer.                                                                           |
-| full_name    | string                                       | No       | Optional, buyer's full name (if first_name or last_name fields are present they take precedence). |
-| email        | string                                       | No       | Email of the buyer.                                                                               |
-| phone_number | string                                       | No       | E.164 standard.                                                                                   |
-| consent      | [Consent](/specification/reference/#consent) | No       | Consent tracking fields.                                                                          |
+| Name         | Type                                         | Required | Description              |
+| ------------ | -------------------------------------------- | -------- | ------------------------ |
+| first_name   | string                                       | No       | First name of the buyer. |
+| last_name    | string                                       | No       | Last name of the buyer.  |
+| email        | string                                       | No       | Email of the buyer.      |
+| phone_number | string                                       | No       | E.164 standard.          |
+| consent      | [Consent](/specification/reference/#consent) | No       | Consent tracking fields. |
 
 #### Checkout with Buyer Consent Update Request
 
@@ -754,7 +948,7 @@ ______________________________________________________________________
 | line_items | Array\[[Line Item Update Request](/specification/reference/#line-item-update-request)\] | **Yes**  | List of line items being checked out.      |
 | buyer      | [Buyer](/specification/reference/#buyer)                                                | No       | Buyer with consent tracking.               |
 | currency   | string                                                                                  | **Yes**  | ISO 4217 currency code.                    |
-| payment    | [Payment Update Request](/specification/reference/#payment-update-request)              | **Yes**  |                                            |
+| payment    | [Payment Update Request](/specification/reference/#payment-update-request)              | No       |                                            |
 
 ______________________________________________________________________
 
@@ -771,14 +965,13 @@ ______________________________________________________________________
 
 #### Buyer with Consent Response
 
-| Name         | Type                                         | Required | Description                                                                                       |
-| ------------ | -------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------- |
-| first_name   | string                                       | No       | First name of the buyer.                                                                          |
-| last_name    | string                                       | No       | Last name of the buyer.                                                                           |
-| full_name    | string                                       | No       | Optional, buyer's full name (if first_name or last_name fields are present they take precedence). |
-| email        | string                                       | No       | Email of the buyer.                                                                               |
-| phone_number | string                                       | No       | E.164 standard.                                                                                   |
-| consent      | [Consent](/specification/reference/#consent) | No       | Consent tracking fields.                                                                          |
+| Name         | Type                                         | Required | Description              |
+| ------------ | -------------------------------------------- | -------- | ------------------------ |
+| first_name   | string                                       | No       | First name of the buyer. |
+| last_name    | string                                       | No       | Last name of the buyer.  |
+| email        | string                                       | No       | Email of the buyer.      |
+| phone_number | string                                       | No       | E.164 standard.          |
+| consent      | [Consent](/specification/reference/#consent) | No       | Consent tracking fields. |
 
 #### Checkout with Buyer Consent Response
 
@@ -797,6 +990,42 @@ ______________________________________________________________________
 | continue_url | string                                                                      | No       | URL for checkout handoff and session recovery. MUST be provided when status is requires_escalation. See specification for format and availability requirements.                                                                                                 |
 | payment      | [Payment Response](/specification/reference/#payment-response)              | **Yes**  |                                                                                                                                                                                                                                                                 |
 | order        | [Order Confirmation](/specification/reference/#order-confirmation)          | No       | Details about an order created for this checkout session.                                                                                                                                                                                                       |
+
+______________________________________________________________________
+
+### Discount Extension Complete Request
+
+#### Allocation
+
+| Name   | Type    | Required | Description                                                                       |
+| ------ | ------- | -------- | --------------------------------------------------------------------------------- |
+| path   | string  | **Yes**  | JSONPath to the allocation target (e.g., '$.line_items[0]', '$.totals.shipping'). |
+| amount | integer | **Yes**  | Amount allocated to this target in minor (cents) currency units.                  |
+
+#### Applied Discount
+
+| Name        | Type                                                        | Required | Description                                                                                                                      |
+| ----------- | ----------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| code        | string                                                      | No       | The discount code. Omitted for automatic discounts.                                                                              |
+| title       | string                                                      | **Yes**  | Human-readable discount name (e.g., 'Summer Sale 20% Off').                                                                      |
+| amount      | integer                                                     | **Yes**  | Total discount amount in minor (cents) currency units.                                                                           |
+| automatic   | boolean                                                     | No       | True if applied automatically by merchant rules (no code required).                                                              |
+| method      | string                                                      | No       | Allocation method. 'each' = applied independently per item. 'across' = split proportionally by value. **Enum:** `each`, `across` |
+| priority    | integer                                                     | No       | Stacking order for discount calculation. Lower numbers applied first (1 = first).                                                |
+| allocations | Array\[[Allocation](/specification/reference/#allocation)\] | No       | Breakdown of where this discount was allocated. Sum of allocation amounts equals total amount.                                   |
+
+#### Discounts Object
+
+| Name    | Type                                                                    | Required | Description                                                                                                |
+| ------- | ----------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------- |
+| codes   | Array[string]                                                           | No       | Discount codes to apply. Case-insensitive. Replaces previously submitted codes. Send empty array to clear. |
+| applied | Array\[[Applied Discount](/specification/reference/#applied-discount)\] | No       | Discounts successfully applied (code-based and automatic).                                                 |
+
+#### Checkout with Discount Complete Request
+
+| Name    | Type                                                                       | Required | Description |
+| ------- | -------------------------------------------------------------------------- | -------- | ----------- |
+| payment | [Payment Complete Request](/specification/reference/#payment-complete_req) | **Yes**  |             |
 
 ______________________________________________________________________
 
@@ -835,7 +1064,7 @@ ______________________________________________________________________
 | line_items | Array\[[Line Item Create Request](/specification/reference/#line-item-create-request)\] | **Yes**  | List of line items being checked out. |
 | buyer      | [Buyer](/specification/reference/#buyer)                                                | No       | Representation of the buyer.          |
 | currency   | string                                                                                  | **Yes**  | ISO 4217 currency code.               |
-| payment    | [Payment Create Request](/specification/reference/#payment-create-request)              | **Yes**  |                                       |
+| payment    | [Payment Create Request](/specification/reference/#payment-create-request)              | No       |                                       |
 | discounts  | [Discounts Object](/specification/reference/#discounts-object)                          | No       |                                       |
 
 ______________________________________________________________________
@@ -876,7 +1105,7 @@ ______________________________________________________________________
 | line_items | Array\[[Line Item Update Request](/specification/reference/#line-item-update-request)\] | **Yes**  | List of line items being checked out.      |
 | buyer      | [Buyer](/specification/reference/#buyer)                                                | No       | Representation of the buyer.               |
 | currency   | string                                                                                  | **Yes**  | ISO 4217 currency code.                    |
-| payment    | [Payment Update Request](/specification/reference/#payment-update-request)              | **Yes**  |                                            |
+| payment    | [Payment Update Request](/specification/reference/#payment-update-request)              | No       |                                            |
 | discounts  | [Discounts Object](/specification/reference/#discounts-object)                          | No       |                                            |
 
 ______________________________________________________________________
@@ -930,6 +1159,48 @@ ______________________________________________________________________
 
 ______________________________________________________________________
 
+### Fulfillment Extension Complete Request
+
+#### Fulfillment Option
+
+A fulfillment option within a group (e.g., Standard Shipping $5, Express $15).
+
+#### Fulfillment Group
+
+| Name               | Type               | Required | Description                                                            |
+| ------------------ | ------------------ | -------- | ---------------------------------------------------------------------- |
+| id                 | string             | **Yes**  | Group identifier for referencing merchant-generated groups in updates. |
+| selected_option_id | ['string', 'null'] | No       | ID of the selected fulfillment option for this group.                  |
+
+#### Fulfillment Method
+
+| Name                    | Type                                                                                                    | Required | Description                                                                                                  |
+| ----------------------- | ------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------ |
+| id                      | string                                                                                                  | **Yes**  | Unique fulfillment method identifier.                                                                        |
+| type                    | string                                                                                                  | **Yes**  | Fulfillment method type. **Enum:** `shipping`, `pickup`                                                      |
+| line_item_ids           | Array[string]                                                                                           | **Yes**  | Line item IDs fulfilled via this method.                                                                     |
+| destinations            | Array\[[Fulfillment Destination Request](/specification/reference/#fulfillment-destination-request)\]   | No       | Available destinations. For shipping: addresses. For pickup: retail locations.                               |
+| selected_destination_id | ['string', 'null']                                                                                      | No       | ID of the selected destination.                                                                              |
+| groups                  | Array\[[Fulfillment Group Complete Request](/specification/reference/#fulfillment-group-complete_req)\] | No       | Fulfillment groups for selecting options. Agent sets selected_option_id on groups to choose shipping method. |
+
+#### Fulfillment Available Method
+
+Inventory availability hint for a fulfillment method type.
+
+#### Fulfillment
+
+| Name    | Type                                                                                                      | Required | Description                         |
+| ------- | --------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------- |
+| methods | Array\[[Fulfillment Method Create Request](/specification/reference/#fulfillment-method-create-request)\] | No       | Fulfillment methods for cart items. |
+
+#### Checkout with Fulfillment Complete Request
+
+| Name    | Type                                                                       | Required | Description |
+| ------- | -------------------------------------------------------------------------- | -------- | ----------- |
+| payment | [Payment Complete Request](/specification/reference/#payment-complete_req) | **Yes**  |             |
+
+______________________________________________________________________
+
 ### Fulfillment Extension Create Request
 
 #### Fulfillment Option
@@ -969,7 +1240,7 @@ Inventory availability hint for a fulfillment method type.
 | line_items  | Array\[[Line Item Create Request](/specification/reference/#line-item-create-request)\] | **Yes**  | List of line items being checked out. |
 | buyer       | [Buyer](/specification/reference/#buyer)                                                | No       | Representation of the buyer.          |
 | currency    | string                                                                                  | **Yes**  | ISO 4217 currency code.               |
-| payment     | [Payment Create Request](/specification/reference/#payment-create-request)              | **Yes**  |                                       |
+| payment     | [Payment Create Request](/specification/reference/#payment-create-request)              | No       |                                       |
 | fulfillment | [Fulfillment](/specification/reference/#fulfillment)                                    | No       | Fulfillment details.                  |
 
 ______________________________________________________________________
@@ -1015,7 +1286,7 @@ Inventory availability hint for a fulfillment method type.
 | line_items  | Array\[[Line Item Update Request](/specification/reference/#line-item-update-request)\] | **Yes**  | List of line items being checked out.      |
 | buyer       | [Buyer](/specification/reference/#buyer)                                                | No       | Representation of the buyer.               |
 | currency    | string                                                                                  | **Yes**  | ISO 4217 currency code.                    |
-| payment     | [Payment Update Request](/specification/reference/#payment-update-request)              | **Yes**  |                                            |
+| payment     | [Payment Update Request](/specification/reference/#payment-update-request)              | No       |                                            |
 | fulfillment | [Fulfillment](/specification/reference/#fulfillment)                                    | No       | Fulfillment details.                       |
 
 ______________________________________________________________________

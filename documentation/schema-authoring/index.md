@@ -106,7 +106,6 @@ Schemas that define data structures embedded within capabilities but are not ind
 Examples:
 
 - `schemas/shopping/payment.json` — Payment configuration (part of checkout)
-- `schemas/shopping/payment_data.json` — Payment submission data
 
 ### Type Schemas
 

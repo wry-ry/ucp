@@ -89,7 +89,7 @@ Maps to the [Create Checkout](https://ucp.dev/specification/checkout/#create-che
 
 #### Input Schema
 
-- [Checkout](https://ucp.dev/specification/checkout/#create-checkout) object.
+- `checkout` ([Checkout](https://ucp.dev/specification/checkout/#create-checkout)): **Required**. Contains the initial checkout session data and optional extensions.
   - Extensions (Optional):
     - `dev.ucp.shopping.buyer_consent`: [Buyer Consent](https://ucp.dev/specification/buyer-consent/index.md)
     - `dev.ucp.shopping.fulfillment`: [Fulfillment](https://ucp.dev/specification/fulfillment/index.md)
@@ -293,7 +293,7 @@ Maps to the [Get Checkout](https://ucp.dev/specification/checkout/#get-checkout)
 
 #### Input Schema
 
-- `id` (String): The ID of the checkout session.
+- `id` (String): **Required**. The ID of the checkout session.
 
 #### Output Schema
 
@@ -305,8 +305,8 @@ Maps to the [Update Checkout](https://ucp.dev/specification/checkout/#update-che
 
 #### Input Schema
 
-- `id` (String): The ID of the checkout session to update.
-- [Checkout](https://ucp.dev/specification/checkout/#update-checkout) object.
+- `id` (String): **Required**. The ID of the checkout session to update.
+- `checkout` ([Checkout](https://ucp.dev/specification/checkout/#update-checkout)): **Required**. Contains the updated checkout session data.
   - Extensions (Optional):
     - `dev.ucp.shopping.buyer_consent`: [Buyer Consent](https://ucp.dev/specification/buyer-consent/index.md)
     - `dev.ucp.shopping.fulfillment`: [Fulfillment](https://ucp.dev/specification/fulfillment/index.md)
@@ -508,8 +508,8 @@ Maps to the [Complete Checkout](https://ucp.dev/specification/checkout/#complete
 
 #### Input Schema
 
-- `id` (String): The ID of the checkout session.
-- `payment` ([Payment](https://ucp.dev/specification/checkout/#payment), Optional): Payment instrument instance submitted by the buyer.
+- `id` (String): **Required**. The ID of the checkout session.
+- `checkout` ([Checkout](https://ucp.dev/specification/checkout/#complete-checkout)): **Required**. Contains payment credentials and other finalization data to execute the transaction.
 - `idempotency_key` (String, UUID): **Required**. Unique key for retry safety.
 
 #### Output Schema

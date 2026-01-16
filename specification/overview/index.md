@@ -594,26 +594,30 @@ In this scenario, the platform identifies a digital wallet handler (e.g., `com.g
 POST /checkout-sessions/{id}/complete
 
 {
-  "payment_data": {
-    "id": "pm_1234567890abc",
-    "handler_id": "8c9202bd-63cc-4241-8d24-d57ce69ea31c",
-    "type": "card",
-    "brand": "visa",
-    "last_digits": "4242",
-    "billing_address": {
-      "street_address": "123 Main Street",
-      "extended_address": "Suite 400",
-      "address_locality": "Charleston",
-      "address_region": "SC",
-      "postal_code": "29401",
-      "address_country": "US",
-      "first_name": "Jane",
-      "last_name": "Smith"
-    },
-    "credential": {
-      "type": "PAYMENT_GATEWAY",
-      "token": "{\"signature\":\"...\",\"protocolVersion\":\"ECv2\"...}"
-    }
+  "payment": {
+    "instruments": [
+      {
+        "id": "pm_1234567890abc",
+        "handler_id": "8c9202bd-63cc-4241-8d24-d57ce69ea31c",
+        "type": "card",
+        "brand": "visa",
+        "last_digits": "4242",
+        "billing_address": {
+          "street_address": "123 Main Street",
+          "extended_address": "Suite 400",
+          "address_locality": "Charleston",
+          "address_region": "SC",
+          "postal_code": "29401",
+          "address_country": "US",
+          "first_name": "Jane",
+          "last_name": "Smith"
+        },
+        "credential": {
+          "type": "PAYMENT_GATEWAY",
+          "token": "{\"signature\":\"...\",\"protocolVersion\":\"ECv2\"...}"
+        }
+      }
+    ]
   },
   "risk_signals": {
       // ...
@@ -653,10 +657,14 @@ The platform calls `https://api.psp.com/tokens` which identity **SHOULD** have p
 POST /checkout-sessions/{id}/complete
 
 {
-  "payment_data": {
-    "handler_id": "merchant_tokenizer",
-    // ... more instrument required field
-    "credential": { "token": "tok_visa_123" }
+  "payment": {
+    "instruments": [
+      {
+        "handler_id": "merchant_tokenizer",
+        // ... more instrument required field
+        "credential": { "token": "tok_visa_123" }
+      }
+    ]
   },
   "risk_signals": {
     // ... host could send risk_signals here
@@ -712,13 +720,17 @@ The agent cryptographically signs objects using the user's private key on a non-
 POST /checkout-sessions/{id}/complete
 
 {
-  "payment_data": {
-    "handler_id": "ap2_234352",
-    // other required instruments fields
-    "credential": {
-      "type": "card",
-      "token": "eyJhbGciOiJ...", // Token would contain payment_mandate, the signed proof of funds auth
-    }
+  "payment": {
+    "instruments": [
+      {
+        "handler_id": "ap2_234352",
+        // other required instruments fields
+        "credential": {
+          "type": "card",
+          "token": "eyJhbGciOiJ...", // Token would contain payment_mandate, the signed proof of funds auth
+        }
+      }
+    ]
   },
   "risk_signals": {
     "session_id": "abc_123_xyz",

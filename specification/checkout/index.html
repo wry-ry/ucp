@@ -398,7 +398,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../playground.md" class="md-nav__link">
+      <a href="../../playground/" class="md-nav__link">
         
   
   
@@ -2701,7 +2701,7 @@ product data (price/title etc.) provided by the business through the feeds
 <tr>
 <td style="text-align: left;">payment</td>
 <td style="text-align: left;"><a href="/specification/checkout/#payment-create-request">Payment Create Request</a></td>
-<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">No</td>
 <td style="text-align: left;"></td>
 </tr>
 </tbody>
@@ -2964,7 +2964,7 @@ will replace the existing checkout session state on the business side.</p>
 <tr>
 <td style="text-align: left;">payment</td>
 <td style="text-align: left;"><a href="/specification/checkout/#payment-update-request">Payment Update Request</a></td>
-<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">No</td>
 <td style="text-align: left;"></td>
 </tr>
 </tbody>
@@ -3089,8 +3089,8 @@ as the order, and its associated items, moves through the supply chain.</p>
 <td style="text-align: left;">The unique identifier of the checkout session.Defined in path.</td>
 </tr>
 <tr>
-<td style="text-align: left;">payment_data</td>
-<td style="text-align: left;"><a href="/specification/checkout/#payment-instrument">Payment Instrument</a></td>
+<td style="text-align: left;">payment</td>
+<td style="text-align: left;"><a href="/specification/checkout/#payment-complete_req">Payment Complete Request</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;"></td>
 </tr>
@@ -3341,12 +3341,6 @@ defined below:</p>
 <td style="text-align: left;">string</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Last name of the buyer.</td>
-</tr>
-<tr>
-<td style="text-align: left;">full_name</td>
-<td style="text-align: left;">string</td>
-<td style="text-align: left;">No</td>
-<td style="text-align: left;">Optional, buyer's full name (if first_name or last_name fields are present they take precedence).</td>
 </tr>
 <tr>
 <td style="text-align: left;">email</td>
@@ -4173,12 +4167,6 @@ field or omitting them.</p>
 <td style="text-align: left;">string</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Optional. Last name of the contact associated with the address.</td>
-</tr>
-<tr>
-<td style="text-align: left;">full_name</td>
-<td style="text-align: left;">string</td>
-<td style="text-align: left;">No</td>
-<td style="text-align: left;">Optional. Full name of the contact associated with the address (if first_name or last_name fields are present they take precedence).</td>
 </tr>
 <tr>
 <td style="text-align: left;">phone_number</td>

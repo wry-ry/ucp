@@ -233,7 +233,7 @@ To be invoked by the platform when the user has expressed purchase intent (e.g.,
 | line_items | Array\[[Line Item Create Request](/specification/checkout/#line-item-create-request)\] | **Yes**  | List of line items being checked out. |
 | buyer      | [Buyer](/specification/checkout/#buyer)                                                | No       | Representation of the buyer.          |
 | currency   | string                                                                                 | **Yes**  | ISO 4217 currency code.               |
-| payment    | [Payment Create Request](/specification/checkout/#payment-create-request)              | **Yes**  |                                       |
+| payment    | [Payment Create Request](/specification/checkout/#payment-create-request)              | No       |                                       |
 
 **Output**
 
@@ -296,7 +296,7 @@ Performs a full replacement of the checkout resource. The platform is **REQUIRED
 | line_items | Array\[[Line Item Update Request](/specification/checkout/#line-item-update-request)\] | **Yes**  | List of line items being checked out.                          |
 | buyer      | [Buyer](/specification/checkout/#buyer)                                                | No       | Representation of the buyer.                                   |
 | currency   | string                                                                                 | **Yes**  | ISO 4217 currency code.                                        |
-| payment    | [Payment Update Request](/specification/checkout/#payment-update-request)              | **Yes**  |                                                                |
+| payment    | [Payment Update Request](/specification/checkout/#payment-update-request)              | No       |                                                                |
 
 **Output**
 
@@ -324,11 +324,11 @@ After this call, other details will be updated through subsequent events as the 
 
 **Inputs**
 
-| Name         | Type                                                              | Required | Description                                                    |
-| ------------ | ----------------------------------------------------------------- | -------- | -------------------------------------------------------------- |
-| id           | string                                                            | **Yes**  | The unique identifier of the checkout session.Defined in path. |
-| payment_data | [Payment Instrument](/specification/checkout/#payment-instrument) | **Yes**  |                                                                |
-| risk_signals | object                                                            | No       | Key-value pairs of risk signals.                               |
+| Name         | Type                                                                      | Required | Description                                                    |
+| ------------ | ------------------------------------------------------------------------- | -------- | -------------------------------------------------------------- |
+| id           | string                                                                    | **Yes**  | The unique identifier of the checkout session.Defined in path. |
+| payment      | [Payment Complete Request](/specification/checkout/#payment-complete_req) | **Yes**  |                                                                |
+| risk_signals | object                                                                    | No       | Key-value pairs of risk signals.                               |
 
 **Output**
 
@@ -389,13 +389,12 @@ The abstract operations above are bound to specific transport protocols as defin
 
 ### Buyer
 
-| Name         | Type   | Required | Description                                                                                       |
-| ------------ | ------ | -------- | ------------------------------------------------------------------------------------------------- |
-| first_name   | string | No       | First name of the buyer.                                                                          |
-| last_name    | string | No       | Last name of the buyer.                                                                           |
-| full_name    | string | No       | Optional, buyer's full name (if first_name or last_name fields are present they take precedence). |
-| email        | string | No       | Email of the buyer.                                                                               |
-| phone_number | string | No       | E.164 standard.                                                                                   |
+| Name         | Type   | Required | Description              |
+| ------------ | ------ | -------- | ------------------------ |
+| first_name   | string | No       | First name of the buyer. |
+| last_name    | string | No       | Last name of the buyer.  |
+| email        | string | No       | Email of the buyer.      |
+| phone_number | string | No       | E.164 standard.          |
 
 ### Fulfillment Option
 
@@ -610,7 +609,6 @@ This object MUST be one of the following types: [Token Credential Response](/spe
 | postal_code      | string | No       | The postal code. For example, 94043.                                                                                                                                                                                                      |
 | first_name       | string | No       | Optional. First name of the contact associated with the address.                                                                                                                                                                          |
 | last_name        | string | No       | Optional. Last name of the contact associated with the address.                                                                                                                                                                           |
-| full_name        | string | No       | Optional. Full name of the contact associated with the address (if first_name or last_name fields are present they take precedence).                                                                                                      |
 | phone_number     | string | No       | Optional. Phone number of the contact associated with the address.                                                                                                                                                                        |
 
 ### Response

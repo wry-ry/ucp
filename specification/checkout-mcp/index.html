@@ -398,7 +398,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../playground.md" class="md-nav__link">
+      <a href="../../playground/" class="md-nav__link">
         
   
   
@@ -1887,7 +1887,8 @@ to enable version compatibility checking and capability negotiation.</p>
 <p>Maps to the <a href="../checkout/#create-checkout">Create Checkout</a> operation.</p>
 <h4 id="input-schema">Input Schema<a class="headerlink" href="#input-schema" title="Permanent link">&para;</a></h4>
 <ul>
-<li><a href="../checkout/#create-checkout">Checkout</a> object.<ul>
+<li><code>checkout</code> (<a href="../checkout/#create-checkout">Checkout</a>): <strong>Required</strong>. Contains
+    the initial checkout session data and optional extensions.<ul>
 <li>Extensions (Optional):<ul>
 <li><code>dev.ucp.shopping.buyer_consent</code>: <a href="../buyer-consent/">Buyer Consent</a></li>
 <li><code>dev.ucp.shopping.fulfillment</code>: <a href="../fulfillment/">Fulfillment</a></li>
@@ -2096,7 +2097,7 @@ to enable version compatibility checking and capability negotiation.</p>
 <p>Maps to the <a href="../checkout/#get-checkout">Get Checkout</a> operation.</p>
 <h4 id="input-schema_1">Input Schema<a class="headerlink" href="#input-schema_1" title="Permanent link">&para;</a></h4>
 <ul>
-<li><code>id</code> (String): The ID of the checkout session.</li>
+<li><code>id</code> (String): <strong>Required</strong>. The ID of the checkout session.</li>
 </ul>
 <h4 id="output-schema_1">Output Schema<a class="headerlink" href="#output-schema_1" title="Permanent link">&para;</a></h4>
 <ul>
@@ -2106,8 +2107,9 @@ to enable version compatibility checking and capability negotiation.</p>
 <p>Maps to the <a href="../checkout/#update-checkout">Update Checkout</a> operation.</p>
 <h4 id="input-schema_2">Input Schema<a class="headerlink" href="#input-schema_2" title="Permanent link">&para;</a></h4>
 <ul>
-<li><code>id</code> (String): The ID of the checkout session to update.</li>
-<li><a href="../checkout/#update-checkout">Checkout</a> object.<ul>
+<li><code>id</code> (String): <strong>Required</strong>. The ID of the checkout session to update.</li>
+<li><code>checkout</code> (<a href="../checkout/#update-checkout">Checkout</a>): <strong>Required</strong>.
+    Contains the updated checkout session data.<ul>
 <li>Extensions (Optional):<ul>
 <li><code>dev.ucp.shopping.buyer_consent</code>: <a href="../buyer-consent/">Buyer Consent</a></li>
 <li><code>dev.ucp.shopping.fulfillment</code>: <a href="../fulfillment/">Fulfillment</a></li>
@@ -2314,9 +2316,9 @@ to enable version compatibility checking and capability negotiation.</p>
 <p>Maps to the <a href="../checkout/#complete-checkout">Complete Checkout</a> operation.</p>
 <h4 id="input-schema_3">Input Schema<a class="headerlink" href="#input-schema_3" title="Permanent link">&para;</a></h4>
 <ul>
-<li><code>id</code> (String): The ID of the checkout session.</li>
-<li><code>payment</code> (<a href="../checkout/#payment">Payment</a>, Optional): Payment instrument instance submitted
-    by the buyer.</li>
+<li><code>id</code> (String): <strong>Required</strong>. The ID of the checkout session.</li>
+<li><code>checkout</code> (<a href="../checkout/#complete-checkout">Checkout</a>): <strong>Required</strong>.
+    Contains payment credentials and other finalization data to execute the transaction.</li>
 <li><code>idempotency_key</code> (String, UUID): <strong>Required</strong>. Unique key for retry
     safety.</li>
 </ul>
