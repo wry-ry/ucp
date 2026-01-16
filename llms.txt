@@ -5,7 +5,6 @@
 
 ## Introduction
 
-- [Home](https://ucp.dev/index.md)
 - [Core Concepts](https://ucp.dev/documentation/core-concepts/index.md)
 
 ## UCP and AP2
@@ -14,7 +13,6 @@
 
 ## Playground
 
-- [Playground](https://ucp.dev/playground/index.md)
 
 ## Roadmap
 
