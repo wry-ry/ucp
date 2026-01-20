@@ -33,14 +33,13 @@ repos:
   #       args: [-w, -i, "2"] # Write changes, indent with 2 spaces
   # Python: Ruff
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.1.11 # Use the version matching your pyproject.toml
+    rev: v0.14.13
     hooks:
       # Run the linter
       - id: ruff
-        args: [--fix, --config=pyproject.toml]
+        args: [--fix]
       # Run the formatter
       - id: ruff-format
-        args: [--config=pyproject.toml]
   # Markdown: Markdownlint
   - repo: https://github.com/igorshubovych/markdownlint-cli
     rev: v0.38.0

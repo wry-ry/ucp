@@ -438,9 +438,9 @@ def process_openapi_schema(
       if is_shared:
         req_comp = f"{name}_request"
         schemas[req_comp] = {"$ref": f"{base_ref}_req.json"}
-        req_refs["create"] = req_refs["update"] = req_refs[
-          "complete"
-        ] = f"#/components/schemas/{req_comp}"
+        req_refs["create"] = req_refs["update"] = req_refs["complete"] = (
+          f"#/components/schemas/{req_comp}"
+        )
       else:
         create_comp = f"{name}_create_request"
         schemas[create_comp] = {"$ref": f"{base_ref}.create_req.json"}
