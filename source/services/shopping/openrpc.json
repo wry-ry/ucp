@@ -136,6 +136,11 @@
           "name": "checkout",
           "required": true,
           "schema": {"$ref": "../../schemas/shopping/checkout.json"}
+        },
+        {
+          "name": "idempotency_key",
+          "required": true,
+          "schema": {"type": "string", "format": "uuid"}
         }
       ],
       "result": {

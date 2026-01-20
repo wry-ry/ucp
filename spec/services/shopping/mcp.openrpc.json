@@ -171,6 +171,14 @@
           "schema": {
             "$ref": "../../schemas/shopping/checkout.complete_req.json"
           }
+        },
+        {
+          "name": "idempotency_key",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
         }
       ],
       "result": {
