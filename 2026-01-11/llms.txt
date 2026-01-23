@@ -1,0 +1,69 @@
+# Universal Commerce Protocol (UCP)
+
+> The Universal Commerce Protocol (UCP) is a solution for enabling gen AI agents to make payments on behalf of users, safely, securely, and in a decentralized and privacy protecting manner. This protocol is a part of the broader ecosystem, which includes agentic protocols like A2A and MCP, and encompasses the global nature of payments.
+
+
+## Introduction
+
+- [Home](https://wry-ry.github.io/ucp/2026-01-11/index.md)
+- [Core Concepts](https://wry-ry.github.io/ucp/2026-01-11/documentation/core-concepts/index.md)
+
+## UCP and AP2
+
+- [UCP and AP2](https://wry-ry.github.io/ucp/2026-01-11/documentation/ucp-and-ap2/index.md)
+
+## Playground
+
+- [Playground](https://wry-ry.github.io/ucp/2026-01-11/playground/index.md)
+
+## Roadmap
+
+- [Roadmap](https://wry-ry.github.io/ucp/2026-01-11/documentation/roadmap/index.md)
+
+## Specification Overview
+
+- [Overview](https://wry-ry.github.io/ucp/2026-01-11/specification/overview/index.md)
+
+## Checkout Capability
+
+- [Overview](https://wry-ry.github.io/ucp/2026-01-11/specification/checkout/index.md)
+- [HTTP/REST Binding](https://wry-ry.github.io/ucp/2026-01-11/specification/checkout-rest/index.md)
+- [MCP Binding](https://wry-ry.github.io/ucp/2026-01-11/specification/checkout-mcp/index.md)
+- [A2A Binding](https://wry-ry.github.io/ucp/2026-01-11/specification/checkout-a2a/index.md)
+
+## Checkout Extensions
+
+- [AP2 Mandates Extension](https://wry-ry.github.io/ucp/2026-01-11/specification/ap2-mandates/index.md)
+- [Buyer Consent Extension](https://wry-ry.github.io/ucp/2026-01-11/specification/buyer-consent/index.md)
+- [Discounts Extension](https://wry-ry.github.io/ucp/2026-01-11/specification/discount/index.md)
+- [EP Binding](https://wry-ry.github.io/ucp/2026-01-11/specification/embedded-checkout/index.md)
+- [Fulfillment Extension](https://wry-ry.github.io/ucp/2026-01-11/specification/fulfillment/index.md)
+
+## Order Capability
+
+- [Order Capability](https://wry-ry.github.io/ucp/2026-01-11/specification/order/index.md)
+
+## Identity Linking Capability
+
+- [Identity Linking Capability](https://wry-ry.github.io/ucp/2026-01-11/specification/identity-linking/index.md)
+
+## Payment Handlers
+
+- [Guide](https://wry-ry.github.io/ucp/2026-01-11/specification/payment-handler-guide/index.md)
+- [Template](https://wry-ry.github.io/ucp/2026-01-11/specification/payment-handler-template/index.md)
+- [Tokenization Guide](https://wry-ry.github.io/ucp/2026-01-11/specification/tokenization-guide/index.md)
+
+## Payment Handler Examples
+
+- [Business Tokenizer](https://wry-ry.github.io/ucp/2026-01-11/specification/examples/business-tokenizer-payment-handler/index.md)
+- [Platform Tokenizer](https://wry-ry.github.io/ucp/2026-01-11/specification/examples/platform-tokenizer-payment-handler/index.md)
+- [Encrypted Credential](https://wry-ry.github.io/ucp/2026-01-11/specification/examples/encrypted-credential-handler/index.md)
+
+## Schema Authoring
+
+- [Schema Authoring](https://wry-ry.github.io/ucp/2026-01-11/documentation/schema-authoring/index.md)
+
+## Reference
+
+- [Reference](https://wry-ry.github.io/ucp/2026-01-11/specification/reference/index.md)
+
