@@ -21,13 +21,6 @@ on:
     branches:
       - main
       - 'release/**'
-    paths:
-      - ".github/workflows/docs.yml"
-      - "requirements-docs.txt"
-      - "mkdocs.yml"
-      - "main.py"
-      - "docs/**"
-      - "spec/**"
   pull_request:
     branches:
       - main
@@ -124,3 +117,19 @@ jobs:
           # Deploy this version, tag it as 'latest', and set it as the default site root
           mike deploy --push --update-aliases $VERSION_NAME latest
           mike set-default --push latest
+
+      - name: Create GitHub Release and Tag
+        if: startsWith(github.ref, 'refs/heads/release/')
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION_NAME=${GITHUB_REF#refs/heads/release/}
+
+          # Create Release (This implicitly creates the git tag)
+          # The '|| true' ensures the workflow doesn't fail if you
+          # push updates to this branch later (re-running the build).
+          gh release create "$VERSION_NAME" \
+            --title "Release $VERSION_NAME" \
+            --generate-notes \
+            --target "$GITHUB_REF_NAME" \
+            || echo "Release $VERSION_NAME already exists, skipping creation."
