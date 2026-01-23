@@ -18,6 +18,7 @@ on:
   push:
     branches:
       - main
+      - 'release/**'
     paths:
       - ".github/workflows/docs.yml"
       - "requirements-docs.txt"
@@ -112,10 +113,11 @@ jobs:
         run: |
           mike deploy --push draft
 
-      - name: Deploy versioned docs for tagged releases
-        if: startsWith(github.ref, 'refs/tags/')
+      - name: Deploy release version
+        if: startsWith(github.ref, 'refs/heads/release/')
         run: |
-          TAG_NAME=${GITHUB_REF#refs/tags/}
-          mike delete latest --push
-          mike deploy --push --update-aliases $TAG_NAME latest
-          mike set-default --push latest
+          # Extract the date (e.g., release/2026-01-11 -> 2026-01-11)
+          VERSION_NAME=${GITHUB_REF#refs/heads/release/}
+
+          # Deploy this version
+          mike deploy --push $VERSION_NAME
