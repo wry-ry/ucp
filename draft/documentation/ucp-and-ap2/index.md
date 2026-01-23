@@ -24,6 +24,6 @@ UCP is fully compatible with [Agent Payments Protocol (AP2)](https://ap2-protoco
 
 **Dependencies:** Checkout capability
 
-[See here for full AP2 mandates extension](https://wry-ry.github.io/ucp/draft/specification/ap2-mandates/index.md)
+[See here for full AP2 mandates extension](https://ucp.dev/draft/specification/ap2-mandates/index.md)
 
 [Learn more about AP2](https://ap2-protocol.org)

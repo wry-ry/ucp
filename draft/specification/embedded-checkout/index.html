@@ -11,7 +11,7 @@
       
       
       
-        <link rel="canonical" href="https://wry-ry.github.io/ucp/draft/specification/embedded-checkout/">
+        <link rel="canonical" href="https://ucp.dev/draft/specification/embedded-checkout/">
       
       
         <link rel="prev" href="../checkout-a2a/">
@@ -142,7 +142,7 @@
         <meta  property="og:description"  content="The Universal Commerce Protocol (UCP) is a solution for enabling gen AI agents to make payments on behalf of users, safely, securely, and in a decentralized and privacy protecting manner. This protocol is a part of the broader ecosystem, which includes agentic protocols like A2A and MCP, and encompasses the global nature of payments.
 " >
       
-        <meta  property="og:image"  content="https://wry-ry.github.io/ucp/draft/assets/images/social/specification/embedded-checkout.png" >
+        <meta  property="og:image"  content="https://ucp.dev/draft/assets/images/social/specification/embedded-checkout.png" >
       
         <meta  property="og:image:type"  content="image/png" >
       
@@ -150,7 +150,7 @@
       
         <meta  property="og:image:height"  content="630" >
       
-        <meta  property="og:url"  content="https://wry-ry.github.io/ucp/draft/specification/embedded-checkout/" >
+        <meta  property="og:url"  content="https://ucp.dev/draft/specification/embedded-checkout/" >
       
         <meta  name="twitter:card"  content="summary_large_image" >
       
@@ -159,7 +159,7 @@
         <meta  name="twitter:description"  content="The Universal Commerce Protocol (UCP) is a solution for enabling gen AI agents to make payments on behalf of users, safely, securely, and in a decentralized and privacy protecting manner. This protocol is a part of the broader ecosystem, which includes agentic protocols like A2A and MCP, and encompasses the global nature of payments.
 " >
       
-        <meta  name="twitter:image"  content="https://wry-ry.github.io/ucp/draft/assets/images/social/specification/embedded-checkout.png" >
+        <meta  name="twitter:image"  content="https://ucp.dev/draft/assets/images/social/specification/embedded-checkout.png" >
       
     
     
@@ -3704,7 +3704,7 @@ rather than attempting to merge the new data with existing state.</p>
 </span></code></pre></div>
 <h3 id="address-format">Address Format<a class="headerlink" href="#address-format" title="Permanent link">&para;</a></h3>
 <p>The address object uses the UCP
-<a href="/ucp/draft/specification/checkout/#postal-address">PostalAddress</a> format:</p>
+<a href="/draft/specification/checkout/#postal-address">PostalAddress</a> format:</p>
 <table>
 <thead>
 <tr>
@@ -3891,7 +3891,7 @@ line items, totals, and buyer information.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">ucp</td>
-<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#ucp-response-checkout">UCP Response Checkout</a></td>
+<td style="text-align: left;"><a href="/draft/specification/checkout/#ucp-response-checkout">UCP Response Checkout</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;"></td>
 </tr>
@@ -3903,13 +3903,13 @@ line items, totals, and buyer information.</p>
 </tr>
 <tr>
 <td style="text-align: left;">line_items</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#line-item-response">Line Item Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/draft/specification/checkout/#line-item-response">Line Item Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">List of line items being checked out.</td>
 </tr>
 <tr>
 <td style="text-align: left;">buyer</td>
-<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#buyer">Buyer</a></td>
+<td style="text-align: left;"><a href="/draft/specification/checkout/#buyer">Buyer</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Representation of the buyer.</td>
 </tr>
@@ -3927,19 +3927,19 @@ line items, totals, and buyer information.</p>
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#total-response">Total Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/draft/specification/checkout/#total-response">Total Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Different cart totals.</td>
 </tr>
 <tr>
 <td style="text-align: left;">messages</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#message">Message</a>]</td>
+<td style="text-align: left;">Array[<a href="/draft/specification/checkout/#message">Message</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">List of messages with error and info about the checkout session state.</td>
 </tr>
 <tr>
 <td style="text-align: left;">links</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#link">Link</a>]</td>
+<td style="text-align: left;">Array[<a href="/draft/specification/checkout/#link">Link</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Links to be displayed by the platform (Privacy Policy, TOS). Mandatory for legal compliance.</td>
 </tr>
@@ -3957,13 +3957,13 @@ line items, totals, and buyer information.</p>
 </tr>
 <tr>
 <td style="text-align: left;">payment</td>
-<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#payment-response">Payment Response</a></td>
+<td style="text-align: left;"><a href="/draft/specification/checkout/#payment-response">Payment Response</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;"></td>
 </tr>
 <tr>
 <td style="text-align: left;">order</td>
-<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#order-confirmation">Order Confirmation</a></td>
+<td style="text-align: left;"><a href="/draft/specification/checkout/#order-confirmation">Order Confirmation</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Details about an order created for this checkout session.</td>
 </tr>
@@ -3984,7 +3984,7 @@ confirmation details.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">ucp</td>
-<td style="text-align: left;"><a href="/ucp/draft/specification/order/#ucp-response-order">UCP Response Order</a></td>
+<td style="text-align: left;"><a href="/draft/specification/order/#ucp-response-order">UCP Response Order</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;"></td>
 </tr>
@@ -4008,7 +4008,7 @@ confirmation details.</p>
 </tr>
 <tr>
 <td style="text-align: left;">line_items</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/order/#order-line-item">Order Line Item</a>]</td>
+<td style="text-align: left;">Array[<a href="/draft/specification/order/#order-line-item">Order Line Item</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Immutable line items — source of truth for what was ordered.</td>
 </tr>
@@ -4020,13 +4020,13 @@ confirmation details.</p>
 </tr>
 <tr>
 <td style="text-align: left;">adjustments</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/order/#adjustment">Adjustment</a>]</td>
+<td style="text-align: left;">Array[<a href="/draft/specification/order/#adjustment">Adjustment</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Append-only event log of money movements (refunds, returns, credits, disputes, cancellations, etc.) that exist independently of fulfillment.</td>
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/order/#total-response">Total Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/draft/specification/order/#total-response">Total Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Different totals for the order.</td>
 </tr>
@@ -4045,7 +4045,7 @@ confirmation details.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">handlers</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/embedded-checkout/#payment-handler-response">Payment Handler Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/draft/specification/embedded-checkout/#payment-handler-response">Payment Handler Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Processing configurations that define how payment instruments can be collected. Each handler specifies a tokenization or payment collection strategy.</td>
 </tr>
@@ -4057,7 +4057,7 @@ confirmation details.</p>
 </tr>
 <tr>
 <td style="text-align: left;">instruments</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/embedded-checkout/#payment-instrument">Payment Instrument</a>]</td>
+<td style="text-align: left;">Array[<a href="/draft/specification/embedded-checkout/#payment-instrument">Payment Instrument</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">The payment instruments available for this payment. Each instrument is associated with a specific handler via the handler_id field. Handlers can extend the base payment_instrument schema to add handler-specific fields.</td>
 </tr>
@@ -4066,7 +4066,7 @@ confirmation details.</p>
 <h3 id="payment-instrument">Payment Instrument<a class="headerlink" href="#payment-instrument" title="Permanent link">&para;</a></h3>
 <p>Represents a specific method of payment (e.g., a specific credit card, bank
 account, or wallet credential) available to the buyer.</p>
-<p>This object MUST be one of the following types: <a href="/ucp/draft/specification/embedded-checkout/#card-payment-instrument">Card Payment Instrument</a>.</p>
+<p>This object MUST be one of the following types: <a href="/draft/specification/embedded-checkout/#card-payment-instrument">Card Payment Instrument</a>.</p>
 <h3 id="payment-handler-response">Payment Handler Response<a class="headerlink" href="#payment-handler-response" title="Permanent link">&para;</a></h3>
 <p>Represents the processor or wallet provider responsible for authenticating and
 processing a specific payment instrument (e.g., Google Pay, Stripe, or a Bank
