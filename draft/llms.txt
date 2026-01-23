@@ -5,65 +5,65 @@
 
 ## Introduction
 
-- [Home](https://ucp.dev/draft/index.md)
-- [Core Concepts](https://ucp.dev/draft/documentation/core-concepts/index.md)
+- [Home](https://wry-ry.github.io/ucp/draft/index.md)
+- [Core Concepts](https://wry-ry.github.io/ucp/draft/documentation/core-concepts/index.md)
 
 ## UCP and AP2
 
-- [UCP and AP2](https://ucp.dev/draft/documentation/ucp-and-ap2/index.md)
+- [UCP and AP2](https://wry-ry.github.io/ucp/draft/documentation/ucp-and-ap2/index.md)
 
 ## Playground
 
-- [Playground](https://ucp.dev/draft/playground/index.md)
+- [Playground](https://wry-ry.github.io/ucp/draft/playground/index.md)
 
 ## Roadmap
 
-- [Roadmap](https://ucp.dev/draft/documentation/roadmap/index.md)
+- [Roadmap](https://wry-ry.github.io/ucp/draft/documentation/roadmap/index.md)
 
 ## Specification Overview
 
-- [Overview](https://ucp.dev/draft/specification/overview/index.md)
+- [Overview](https://wry-ry.github.io/ucp/draft/specification/overview/index.md)
 
 ## Checkout Capability
 
-- [Overview](https://ucp.dev/draft/specification/checkout/index.md)
-- [HTTP/REST Binding](https://ucp.dev/draft/specification/checkout-rest/index.md)
-- [MCP Binding](https://ucp.dev/draft/specification/checkout-mcp/index.md)
-- [A2A Binding](https://ucp.dev/draft/specification/checkout-a2a/index.md)
+- [Overview](https://wry-ry.github.io/ucp/draft/specification/checkout/index.md)
+- [HTTP/REST Binding](https://wry-ry.github.io/ucp/draft/specification/checkout-rest/index.md)
+- [MCP Binding](https://wry-ry.github.io/ucp/draft/specification/checkout-mcp/index.md)
+- [A2A Binding](https://wry-ry.github.io/ucp/draft/specification/checkout-a2a/index.md)
 
 ## Checkout Extensions
 
-- [AP2 Mandates Extension](https://ucp.dev/draft/specification/ap2-mandates/index.md)
-- [Buyer Consent Extension](https://ucp.dev/draft/specification/buyer-consent/index.md)
-- [Discounts Extension](https://ucp.dev/draft/specification/discount/index.md)
-- [EP Binding](https://ucp.dev/draft/specification/embedded-checkout/index.md)
-- [Fulfillment Extension](https://ucp.dev/draft/specification/fulfillment/index.md)
+- [AP2 Mandates Extension](https://wry-ry.github.io/ucp/draft/specification/ap2-mandates/index.md)
+- [Buyer Consent Extension](https://wry-ry.github.io/ucp/draft/specification/buyer-consent/index.md)
+- [Discounts Extension](https://wry-ry.github.io/ucp/draft/specification/discount/index.md)
+- [EP Binding](https://wry-ry.github.io/ucp/draft/specification/embedded-checkout/index.md)
+- [Fulfillment Extension](https://wry-ry.github.io/ucp/draft/specification/fulfillment/index.md)
 
 ## Order Capability
 
-- [Order Capability](https://ucp.dev/draft/specification/order/index.md)
+- [Order Capability](https://wry-ry.github.io/ucp/draft/specification/order/index.md)
 
 ## Identity Linking Capability
 
-- [Identity Linking Capability](https://ucp.dev/draft/specification/identity-linking/index.md)
+- [Identity Linking Capability](https://wry-ry.github.io/ucp/draft/specification/identity-linking/index.md)
 
 ## Payment Handlers
 
-- [Guide](https://ucp.dev/draft/specification/payment-handler-guide/index.md)
-- [Template](https://ucp.dev/draft/specification/payment-handler-template/index.md)
-- [Tokenization Guide](https://ucp.dev/draft/specification/tokenization-guide/index.md)
+- [Guide](https://wry-ry.github.io/ucp/draft/specification/payment-handler-guide/index.md)
+- [Template](https://wry-ry.github.io/ucp/draft/specification/payment-handler-template/index.md)
+- [Tokenization Guide](https://wry-ry.github.io/ucp/draft/specification/tokenization-guide/index.md)
 
 ## Payment Handler Examples
 
-- [Business Tokenizer](https://ucp.dev/draft/specification/examples/business-tokenizer-payment-handler/index.md)
-- [Platform Tokenizer](https://ucp.dev/draft/specification/examples/platform-tokenizer-payment-handler/index.md)
-- [Encrypted Credential](https://ucp.dev/draft/specification/examples/encrypted-credential-handler/index.md)
+- [Business Tokenizer](https://wry-ry.github.io/ucp/draft/specification/examples/business-tokenizer-payment-handler/index.md)
+- [Platform Tokenizer](https://wry-ry.github.io/ucp/draft/specification/examples/platform-tokenizer-payment-handler/index.md)
+- [Encrypted Credential](https://wry-ry.github.io/ucp/draft/specification/examples/encrypted-credential-handler/index.md)
 
 ## Schema Authoring
 
-- [Schema Authoring](https://ucp.dev/draft/documentation/schema-authoring/index.md)
+- [Schema Authoring](https://wry-ry.github.io/ucp/draft/documentation/schema-authoring/index.md)
 
 ## Reference
 
-- [Reference](https://ucp.dev/draft/specification/reference/index.md)
+- [Reference](https://wry-ry.github.io/ucp/draft/specification/reference/index.md)
 

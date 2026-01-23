@@ -1,6 +1,6 @@
 # Checkout Capability - MCP Binding
 
-This document specifies the Model Context Protocol (MCP) binding for the [Checkout Capability](https://ucp.dev/draft/specification/checkout/index.md).
+This document specifies the Model Context Protocol (MCP) binding for the [Checkout Capability](https://wry-ry.github.io/ucp/draft/specification/checkout/index.md).
 
 ## Protocol Fundamentals
 
@@ -75,30 +75,30 @@ MCP tools separate resource identification from payload data:
 - **Responses:** All responses include `checkout.id` as part of the full resource state.
 - **Create:** The `create_checkout` operation does not require an `id` in the request, and the response includes the newly assigned `checkout.id`.
 
-| Tool                | Operation                                                                            | Description                |
-| ------------------- | ------------------------------------------------------------------------------------ | -------------------------- |
-| `create_checkout`   | [Create Checkout](https://ucp.dev/draft/specification/checkout/#create-checkout)     | Create a checkout session. |
-| `get_checkout`      | [Get Checkout](https://ucp.dev/draft/specification/checkout/#get-checkout)           | Get a checkout session.    |
-| `update_checkout`   | [Update Checkout](https://ucp.dev/draft/specification/checkout/#update-checkout)     | Update a checkout session. |
-| `complete_checkout` | [Complete Checkout](https://ucp.dev/draft/specification/checkout/#complete-checkout) | Place the order.           |
-| `cancel_checkout`   | [Cancel Checkout](https://ucp.dev/draft/specification/checkout/#cancel-checkout)     | Cancel a checkout session. |
+| Tool                | Operation                                                                                         | Description                |
+| ------------------- | ------------------------------------------------------------------------------------------------- | -------------------------- |
+| `create_checkout`   | [Create Checkout](https://wry-ry.github.io/ucp/draft/specification/checkout/#create-checkout)     | Create a checkout session. |
+| `get_checkout`      | [Get Checkout](https://wry-ry.github.io/ucp/draft/specification/checkout/#get-checkout)           | Get a checkout session.    |
+| `update_checkout`   | [Update Checkout](https://wry-ry.github.io/ucp/draft/specification/checkout/#update-checkout)     | Update a checkout session. |
+| `complete_checkout` | [Complete Checkout](https://wry-ry.github.io/ucp/draft/specification/checkout/#complete-checkout) | Place the order.           |
+| `cancel_checkout`   | [Cancel Checkout](https://wry-ry.github.io/ucp/draft/specification/checkout/#cancel-checkout)     | Cancel a checkout session. |
 
 ### `create_checkout`
 
-Maps to the [Create Checkout](https://ucp.dev/draft/specification/checkout/#create-checkout) operation.
+Maps to the [Create Checkout](https://wry-ry.github.io/ucp/draft/specification/checkout/#create-checkout) operation.
 
 #### Input Schema
 
-- [Checkout](https://ucp.dev/draft/specification/checkout/#create-checkout) object.
+- [Checkout](https://wry-ry.github.io/ucp/draft/specification/checkout/#create-checkout) object.
   - Extensions (Optional):
-    - `dev.ucp.shopping.buyer_consent`: [Buyer Consent](https://ucp.dev/draft/specification/buyer-consent/index.md)
-    - `dev.ucp.shopping.fulfillment`: [Fulfillment](https://ucp.dev/draft/specification/fulfillment/index.md)
-    - `dev.ucp.shopping.discount`: [Discount](https://ucp.dev/draft/specification/discount/index.md)
-    - `dev.ucp.shopping.ap2_mandate`: [AP2 Mandates](https://ucp.dev/draft/specification/ap2-mandates/index.md)
+    - `dev.ucp.shopping.buyer_consent`: [Buyer Consent](https://wry-ry.github.io/ucp/draft/specification/buyer-consent/index.md)
+    - `dev.ucp.shopping.fulfillment`: [Fulfillment](https://wry-ry.github.io/ucp/draft/specification/fulfillment/index.md)
+    - `dev.ucp.shopping.discount`: [Discount](https://wry-ry.github.io/ucp/draft/specification/discount/index.md)
+    - `dev.ucp.shopping.ap2_mandate`: [AP2 Mandates](https://wry-ry.github.io/ucp/draft/specification/ap2-mandates/index.md)
 
 #### Output Schema
 
-- [Checkout](https://ucp.dev/draft/specification/checkout/#create-checkout) object.
+- [Checkout](https://wry-ry.github.io/ucp/draft/specification/checkout/#create-checkout) object.
 
 #### Example
 
@@ -289,7 +289,7 @@ Maps to the [Create Checkout](https://ucp.dev/draft/specification/checkout/#crea
 
 ### `get_checkout`
 
-Maps to the [Get Checkout](https://ucp.dev/draft/specification/checkout/#get-checkout) operation.
+Maps to the [Get Checkout](https://wry-ry.github.io/ucp/draft/specification/checkout/#get-checkout) operation.
 
 #### Input Schema
 
@@ -297,25 +297,25 @@ Maps to the [Get Checkout](https://ucp.dev/draft/specification/checkout/#get-che
 
 #### Output Schema
 
-- [Checkout](https://ucp.dev/draft/specification/checkout/#get-checkout) object.
+- [Checkout](https://wry-ry.github.io/ucp/draft/specification/checkout/#get-checkout) object.
 
 ### `update_checkout`
 
-Maps to the [Update Checkout](https://ucp.dev/draft/specification/checkout/#update-checkout) operation.
+Maps to the [Update Checkout](https://wry-ry.github.io/ucp/draft/specification/checkout/#update-checkout) operation.
 
 #### Input Schema
 
 - `id` (String): The ID of the checkout session to update.
-- [Checkout](https://ucp.dev/draft/specification/checkout/#update-checkout) object.
+- [Checkout](https://wry-ry.github.io/ucp/draft/specification/checkout/#update-checkout) object.
   - Extensions (Optional):
-    - `dev.ucp.shopping.buyer_consent`: [Buyer Consent](https://ucp.dev/draft/specification/buyer-consent/index.md)
-    - `dev.ucp.shopping.fulfillment`: [Fulfillment](https://ucp.dev/draft/specification/fulfillment/index.md)
-    - `dev.ucp.shopping.discount`: [Discount](https://ucp.dev/draft/specification/discount/index.md)
-    - `dev.ucp.shopping.ap2_mandate`: [AP2 Mandates](https://ucp.dev/draft/specification/ap2-mandates/index.md)
+    - `dev.ucp.shopping.buyer_consent`: [Buyer Consent](https://wry-ry.github.io/ucp/draft/specification/buyer-consent/index.md)
+    - `dev.ucp.shopping.fulfillment`: [Fulfillment](https://wry-ry.github.io/ucp/draft/specification/fulfillment/index.md)
+    - `dev.ucp.shopping.discount`: [Discount](https://wry-ry.github.io/ucp/draft/specification/discount/index.md)
+    - `dev.ucp.shopping.ap2_mandate`: [AP2 Mandates](https://wry-ry.github.io/ucp/draft/specification/ap2-mandates/index.md)
 
 #### Output Schema
 
-- [Checkout](https://ucp.dev/draft/specification/checkout/#update-checkout) object.
+- [Checkout](https://wry-ry.github.io/ucp/draft/specification/checkout/#update-checkout) object.
 
 #### Example
 
@@ -504,21 +504,21 @@ Maps to the [Update Checkout](https://ucp.dev/draft/specification/checkout/#upda
 
 ### `complete_checkout`
 
-Maps to the [Complete Checkout](https://ucp.dev/draft/specification/checkout/#complete-checkout) operation.
+Maps to the [Complete Checkout](https://wry-ry.github.io/ucp/draft/specification/checkout/#complete-checkout) operation.
 
 #### Input Schema
 
 - `id` (String): The ID of the checkout session.
-- `payment` ([Payment](https://ucp.dev/draft/specification/checkout/#payment), Optional): Payment instrument instance submitted by the buyer.
+- `payment` ([Payment](https://wry-ry.github.io/ucp/draft/specification/checkout/#payment), Optional): Payment instrument instance submitted by the buyer.
 - `idempotency_key` (String, UUID): **Required**. Unique key for retry safety.
 
 #### Output Schema
 
-- [Checkout](https://ucp.dev/draft/specification/checkout/#complete-checkout) object, containing a partial `order` that holds only `id` and `permalink_url`.
+- [Checkout](https://wry-ry.github.io/ucp/draft/specification/checkout/#complete-checkout) object, containing a partial `order` that holds only `id` and `permalink_url`.
 
 ### `cancel_checkout`
 
-Maps to the [Cancel Checkout](https://ucp.dev/draft/specification/checkout/#cancel-checkout) operation.
+Maps to the [Cancel Checkout](https://wry-ry.github.io/ucp/draft/specification/checkout/#cancel-checkout) operation.
 
 #### Input Schema
 
@@ -527,11 +527,11 @@ Maps to the [Cancel Checkout](https://ucp.dev/draft/specification/checkout/#canc
 
 #### Output Schema
 
-- [Checkout](https://ucp.dev/draft/specification/checkout/#cancel-checkout) object with `status: canceled`.
+- [Checkout](https://wry-ry.github.io/ucp/draft/specification/checkout/#cancel-checkout) object with `status: canceled`.
 
 ## Error Handling
 
-Error responses follow JSON-RPC 2.0 format while using the UCP error structure defined in the [Core Specification](https://ucp.dev/draft/specification/overview/index.md). The UCP error object is embedded in the JSON-RPC error's `data` field:
+Error responses follow JSON-RPC 2.0 format while using the UCP error structure defined in the [Core Specification](https://wry-ry.github.io/ucp/draft/specification/overview/index.md). The UCP error object is embedded in the JSON-RPC error's `data` field:
 
 ```json
 {

@@ -8,11 +8,11 @@ This guide is for **implementers building tokenization payment handlers**. It de
 
 We offer a range of examples to utilize forms of tokenization in UCP:
 
-| Example                                                                                                            | Use Case                                            |
-| ------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------- |
-| [Business Tokenizer](https://ucp.dev/draft/specification/examples/business-tokenizer-payment-handler/index.md)     | Business runs their own tokenization service        |
-| [Platform Tokenizer](https://ucp.dev/draft/specification/examples/platform-tokenizer-payment-handler/index.md)     | Platform tokenizes credentials for businesses/PSPs  |
-| [Encrypted Credential Handler](https://ucp.dev/draft/specification/examples/encrypted-credential-handler/index.md) | Platform encrypts credentials instead of tokenizing |
+| Example                                                                                                                         | Use Case                                            |
+| ------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
+| [Business Tokenizer](https://wry-ry.github.io/ucp/draft/specification/examples/business-tokenizer-payment-handler/index.md)     | Business runs their own tokenization service        |
+| [Platform Tokenizer](https://wry-ry.github.io/ucp/draft/specification/examples/platform-tokenizer-payment-handler/index.md)     | Platform tokenizes credentials for businesses/PSPs  |
+| [Encrypted Credential Handler](https://wry-ry.github.io/ucp/draft/specification/examples/encrypted-credential-handler/index.md) | Platform encrypts credentials instead of tokenizing |
 
 ______________________________________________________________________
 
@@ -242,5 +242,5 @@ ______________________________________________________________________
 
 ## See Also
 
-- **[Encrypted Credential Handler](https://ucp.dev/draft/specification/examples/encrypted-credential-handler/index.md)** — Alternative pattern using encryption instead of tokenize/detokenize round-trips
-- **[AP2 Mandates Extension](https://ucp.dev/draft/specification/ap2-mandates/index.md)** — Add cryptographic proof of checkout agreement for PSP verification
+- **[Encrypted Credential Handler](https://wry-ry.github.io/ucp/draft/specification/examples/encrypted-credential-handler/index.md)** — Alternative pattern using encryption instead of tokenize/detokenize round-trips
+- **[AP2 Mandates Extension](https://wry-ry.github.io/ucp/draft/specification/ap2-mandates/index.md)** — Add cryptographic proof of checkout agreement for PSP verification
