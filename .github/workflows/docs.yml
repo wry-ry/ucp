@@ -15,7 +15,7 @@
 name: Docs Build and Deploy
 
 on:
-  workflow_dispatch: 
+  workflow_dispatch:
 
   push:
     branches:
@@ -121,5 +121,6 @@ jobs:
           # Extract the date (e.g., release/2026-01-11 -> 2026-01-11)
           VERSION_NAME=${GITHUB_REF#refs/heads/release/}
 
-          # Deploy this version
-          mike deploy --push $VERSION_NAME
+          # Deploy this version, tag it as 'latest', and set it as the default site root
+          mike deploy --push --update-aliases $VERSION_NAME latest
+          mike set-default --push latest
