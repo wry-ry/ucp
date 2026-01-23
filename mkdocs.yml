@@ -14,7 +14,6 @@
 
 
 site_name: Universal Commerce Protocol (UCP)
-site_url: https://ucp.dev/  # Required for the llmstxt plugin to work.
 site_description: >
   The Universal Commerce Protocol (UCP) is a solution for enabling gen AI agents to make payments on
   behalf of users, safely, securely, and in a decentralized and privacy protecting manner.
