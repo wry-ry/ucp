@@ -16,13 +16,6 @@
 
 <!-- markdownlint-disable-file MD041 -->
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UCP Playground</title>
-
 <style>
 /* ============================================
    Design System & Reset
@@ -182,8 +175,6 @@ select, input {
 .callout { background: var(--success-bg); border: 1px solid var(--success); color: #0d652d; padding: 12px; border-radius: 8px; margin-top: 16px; font-size: 0.9rem; }
 .badge { background: #e8f0fe; color: var(--accent); padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; white-space: nowrap; flex-shrink: 0; }
 </style>
-</head>
-<body>
 
 <div class="container">
   <div class="sectionDescription">
@@ -1103,5 +1094,3 @@ if (document.readyState === 'loading') {
 window.addEventListener('popstate', startUcpPlayground);
 })();
 </script>
-</body>
-</html>
