@@ -1,3 +1,7 @@
+# Generated schema variants (legacy, no longer used)
+# Published schemas come from source/ with annotations intact
+/spec/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

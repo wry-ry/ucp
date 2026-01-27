@@ -23,7 +23,7 @@ set -e # Exit immediately if a command exits with a non-zero status.
 cd "$(dirname "$0")"
 
 # Configuration
-SCHEMA_DIR="../spec/"
+SCHEMA_DIR="../source/"
 
 # Check if uv is installed
 if ! command -v uv &>/dev/null; then

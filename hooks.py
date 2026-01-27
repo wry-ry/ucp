@@ -78,14 +78,17 @@ def _process_refs(data, current_file_dir):
 
 
 def on_post_build(config):
-  """Copy and process spec files into the site directory.
+  """Copy and process source files into the site directory.
 
-  For JSON files, it resolves $ref paths to absolute URLs and standardizes
-  response file names. Non-JSON files are copied as-is.
+  For JSON files, it resolves $ref paths to absolute URLs.
+  Non-JSON files are copied as-is.
+
+  Note: We publish source schemas with ucp_* annotations intact. Agents use
+  the ucp-schema tool to resolve annotations for specific operations.
   """
-  base_src_path = Path.cwd() / "spec"
+  base_src_path = Path.cwd() / "source"
   if not base_src_path.exists():
-    log.warning("Spec source directory not found: %s", base_src_path)
+    log.warning("Source directory not found: %s", base_src_path)
     return
 
   for src_file in base_src_path.rglob("*"):
@@ -106,15 +109,13 @@ def on_post_build(config):
       with src_file.open("r", encoding="utf-8") as f:
         data = json.load(f)
 
-      # Determine the final relative path for the destination
+      # Determine the final relative path for the destination from $id
       file_id = data.get("$id")
       prefix = "https://ucp.dev"
       if file_id and file_id.startswith(prefix):
         file_rel_path = file_id[len(prefix) :].lstrip("/")
       else:
-        file_rel_path = rel_path.replace("_resp.json", ".json").replace(
-          "_schema.json", ".json"
-        )
+        file_rel_path = rel_path
 
       # Process refs using the final path
       _process_refs(data, src_file.parent)
