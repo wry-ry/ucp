@@ -16,11 +16,9 @@
 """MkDocs hooks for UCP documentation.
 
 This module contains functions that are executed during the MkDocs build
-process.
-Currently, it includes a hook to copy specs files into the site directory
-after the build is complete.
-This makes the specs JSON files available in the website and programmatically
-accessible.
+process:
+- Copy source files into site directory with $ref resolution
+- Publish bundled schemas to /schemas/{version}/ for consumers
 """
 
 import json
@@ -29,6 +27,47 @@ import shutil
 from pathlib import Path
 
 log = logging.getLogger("mkdocs")
+
+# Directory containing capability schemas to publish (excludes types/ subdir)
+SCHEMAS_DIR = Path("source/schemas/shopping")
+
+
+def _publish_versioned_schemas(config):
+  """Publish source schemas to /schemas/.
+
+  Copies source schemas with ucp_* annotations intact and injects version.
+  Consumers use ucp-schema to resolve for their specific direction/operation.
+
+  Mike handles the doc version path (e.g., /2026-01-11/schemas/checkout.json).
+  """
+  version = config.get("extra", {}).get("ucp_version")
+  if not version:
+    log.warning("No ucp_version in mkdocs.yml extra config, skipping schemas")
+    return
+
+  output_dir = Path(config["site_dir"]) / "schemas"
+  output_dir.mkdir(parents=True, exist_ok=True)
+
+  # Copy all schemas recursively (includes types/ subdirectory)
+  for schema_file in SCHEMAS_DIR.rglob("*.json"):
+    try:
+      with schema_file.open("r", encoding="utf-8") as f:
+        data = json.load(f)
+
+      # Inject version
+      data.setdefault("ucp", {})["version"] = version
+
+      # Preserve directory structure
+      rel_path = schema_file.relative_to(SCHEMAS_DIR)
+      output_file = output_dir / rel_path
+      output_file.parent.mkdir(parents=True, exist_ok=True)
+
+      with output_file.open("w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+      log.info("Published schema: %s", output_file)
+
+    except (json.JSONDecodeError, OSError) as e:
+      log.error("Failed to process %s: %s", schema_file, e)
 
 
 def _process_refs(data, current_file_dir):
@@ -83,9 +122,12 @@ def on_post_build(config):
   For JSON files, it resolves $ref paths to absolute URLs.
   Non-JSON files are copied as-is.
 
-  Note: We publish source schemas with ucp_* annotations intact. Agents use
-  the ucp-schema tool to resolve annotations for specific operations.
+  Also publishes bundled schemas to /schemas/{version}/ for consumers.
   """
+  # Publish versioned schemas for consumers
+  _publish_versioned_schemas(config)
+
+  # Copy source files (with ucp_* annotations intact for agents)
   base_src_path = Path.cwd() / "source"
   if not base_src_path.exists():
     log.warning("Source directory not found: %s", base_src_path)

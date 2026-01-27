@@ -72,6 +72,7 @@ extra_css:
 
 #Global Constants
 extra:
+  ucp_version: "2026-01-11"
   ucp_url: https://ucp.dev
   analytics:
     provider: google
