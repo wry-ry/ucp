@@ -749,20 +749,20 @@ def define_env(env):
   def schema_fields(entity_name, spec_file_name):
     """Parse a standalone JSON Schema file and render a table.
 
-    Usage: {{ schema_fields('buyer') }}  (assumes .json extension)
+    Usage: {{ schema_fields('buyer', 'checkout') }}
 
-    Supports legacy _resp/_req suffixes for backward compatibility:
-    - 'cart_resp' -> resolves 'cart.json' with direction=response
-    - 'cart_create_req' -> resolves 'cart.json' with op=create
+    Suffixes control schema resolution direction:
+    - 'cart_resp' -> resolves cart.json as response schema
+    - 'cart_create_req' -> resolves cart.json as request schema (op=create)
+    - 'buyer' -> resolves buyer.json as response schema (default)
 
     Args:
     ----
-      entity_name: The name of the schema entity (e.g., 'buyer').
-      spec_file_name: The name of the spec file indicating where the dictionary
-        should be rendered (e.g., "checkout", "fulfillment").
+      entity_name: Schema name with optional suffix (e.g., 'cart_resp').
+      spec_file_name: Spec file for link generation (e.g., 'checkout').
 
     """
-    # Parse legacy naming convention: entity_resp or entity_op_req
+    # Parse suffix to determine resolution direction/operation
     direction = "response"
     operation = "read"
     base_name = entity_name
@@ -789,29 +789,23 @@ def define_env(env):
     context = {"io_type": direction, "operation_id": operation}
 
     for schemas_dir in schemas_dirs:
-      # Try base name first, then original name (backward compat)
-      for try_name in [base_name, entity_name]:
-        full_path = Path(schemas_dir) / (try_name + ".json")
-        if not full_path.exists():
-          continue
-        # Resolve WITHOUT bundling to preserve $refs for hyperlinks
-        resolved_schema = _resolve_schema(
-          full_path, direction, operation, bundle=False
+      full_path = Path(schemas_dir) / (base_name + ".json")
+      if not full_path.exists():
+        continue
+      # Resolve WITHOUT bundling to preserve $refs for hyperlinks
+      resolved_schema = _resolve_schema(
+        full_path, direction, operation, bundle=False
+      )
+      if resolved_schema:
+        return _render_table_from_schema(
+          resolved_schema, spec_file_name, context=context
         )
-        if resolved_schema:
-          return _render_table_from_schema(
-            resolved_schema, spec_file_name, context=context
-          )
-        # Fallback to raw JSON if ucp-schema fails
-        data = _load_json(full_path)
-        if data:
-          return _render_table_from_schema(
-            data, spec_file_name, context=context
-          )
+      # Fallback to raw JSON if ucp-schema fails
+      data = _load_json(full_path)
+      if data:
+        return _render_table_from_schema(data, spec_file_name, context=context)
 
-    return (
-      f"**Error:** Schema '{entity_name}' not found in any schema directory."
-    )
+    return f"**Error:** Schema '{base_name}' not found in any schema directory."
 
   @env.macro
   def extension_schema_fields(entity_name, spec_file_name):
