@@ -138,21 +138,20 @@ def on_post_build(config):
   ucp_version = config.get("extra", {}).get("ucp_version")
   if not ucp_version:
     log.warning("No ucp_version in mkdocs.yml extra config")
-    schema_version = None
     url_version = None
-  elif DATE_VERSION_PATTERN.match(ucp_version):
-    # Date version: use for both URL path and schema version field
-    url_version = ucp_version
-    schema_version = ucp_version
+    schema_version = None
   else:
-    # Non-date (e.g., 'draft'): URL uses literal, version field gets today
-    # This way $id matches deployed URL, version indicates publish date
+    # URL always uses configured version string (date or label like 'draft')
     url_version = ucp_version
-    schema_version = date.today().isoformat()
-    log.info(
-      f"Non-date version '{ucp_version}': schema version set to "
-      f"'{schema_version}'"
-    )
+    if DATE_VERSION_PATTERN.match(ucp_version):
+      schema_version = ucp_version
+    else:
+      # Non-date: $id matches deployed URL, version = publish date
+      schema_version = date.today().isoformat()
+      log.info(
+        f"Non-date version '{ucp_version}': schema version set to "
+        f"'{schema_version}'"
+      )
 
   base_src_path = Path.cwd() / "source"
   if not base_src_path.exists():
@@ -180,9 +179,8 @@ def on_post_build(config):
       # Determine output path from ORIGINAL $id (before version rewrite).
       # Mike deploys site/ to /{version}/, so we exclude version from path.
       file_id = data.get("$id")
-      prefix = "https://ucp.dev"
-      if file_id and file_id.startswith(prefix):
-        file_rel_path = file_id[len(prefix) :].lstrip("/")
+      if file_id and file_id.startswith("https://ucp.dev"):
+        file_rel_path = file_id.removeprefix("https://ucp.dev").lstrip("/")
       else:
         file_rel_path = rel_path
 

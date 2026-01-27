@@ -163,42 +163,8 @@ def define_env(env):
   schemas_dirs = SCHEMAS_DIRS
 
   def _resolve_with_ucp_schema(schema_path, direction, operation):
-    """Resolve a schema using ucp-schema CLI.
-
-    Args:
-    ----
-      schema_path: Path to the schema file.
-      direction: 'request' or 'response'.
-      operation: 'create', 'update', 'complete', or 'read'.
-
-    Returns:
-    -------
-      Resolved schema as dict, or None if resolution fails.
-
-    """
-    cache_key = f"{schema_path}:{direction}:{operation}"
-    if cache_key in _resolved_schema_cache:
-      return _resolved_schema_cache[cache_key]
-
-    dir_flag = "--request" if direction == "request" else "--response"
-    try:
-      result = subprocess.run(
-        ["ucp-schema", "resolve", schema_path, dir_flag, "--op", operation],
-        capture_output=True,
-        text=True,
-        check=False,
-      )
-      if result.returncode == 0:
-        data = json.loads(result.stdout)
-        _resolved_schema_cache[cache_key] = data
-        return data
-    except (
-      subprocess.SubprocessError,
-      json.JSONDecodeError,
-      FileNotFoundError,
-    ):
-      pass
-    return None
+    """Resolve a schema using ucp-schema CLI (delegates to module-level fn)."""
+    return _resolve_schema(schema_path, direction, operation, bundle=False)
 
   def _load_json_file(entity_name):
     """Try loading a JSON file from the configured directories."""
