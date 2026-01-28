@@ -4,6 +4,45 @@ This page provides a reference for all the capability data models and types used
 
 ## Capability Schemas
 
+### Cart Create Request
+
+| Name       | Type                                                                                          | Required | Description                                                                                                                                        |
+| ---------- | --------------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| line_items | Array\[[Line Item Create Request](/draft/specification/reference/#line-item-create-request)\] | **Yes**  | Cart line items. Same structure as checkout. Full replacement on update.                                                                           |
+| context    | [Context](/draft/specification/reference/#context)                                            | No       | Buyer signals for localization (country, region, postal_code). Merchant uses for pricing, availability, currency. Falls back to geo-IP if omitted. |
+| buyer      | [Buyer](/draft/specification/reference/#buyer)                                                | No       | Optional buyer information for personalized estimates.                                                                                             |
+
+______________________________________________________________________
+
+### Cart Update Request
+
+| Name       | Type                                                                                          | Required | Description                                                                                                                                        |
+| ---------- | --------------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id         | string                                                                                        | **Yes**  | Unique cart identifier.                                                                                                                            |
+| line_items | Array\[[Line Item Update Request](/draft/specification/reference/#line-item-update-request)\] | **Yes**  | Cart line items. Same structure as checkout. Full replacement on update.                                                                           |
+| context    | [Context](/draft/specification/reference/#context)                                            | No       | Buyer signals for localization (country, region, postal_code). Merchant uses for pricing, availability, currency. Falls back to geo-IP if omitted. |
+| buyer      | [Buyer](/draft/specification/reference/#buyer)                                                | No       | Optional buyer information for personalized estimates.                                                                                             |
+
+______________________________________________________________________
+
+### Cart Response
+
+| Name         | Type                                                                                 | Required | Description                                                                                                                                        |
+| ------------ | ------------------------------------------------------------------------------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ucp          | [UCP Response Cart Schema](/draft/specification/reference/#ucp-response-cart-schema) | **Yes**  | Protocol metadata for discovery profiles and responses. Uses slim schema pattern with context-specific required fields.                            |
+| id           | string                                                                               | **Yes**  | Unique cart identifier.                                                                                                                            |
+| line_items   | Array\[[Line Item Response](/draft/specification/reference/#line-item-response)\]    | **Yes**  | Cart line items. Same structure as checkout. Full replacement on update.                                                                           |
+| context      | [Context](/draft/specification/reference/#context)                                   | No       | Buyer signals for localization (country, region, postal_code). Merchant uses for pricing, availability, currency. Falls back to geo-IP if omitted. |
+| buyer        | [Buyer](/draft/specification/reference/#buyer)                                       | No       | Optional buyer information for personalized estimates.                                                                                             |
+| currency     | string                                                                               | **Yes**  | ISO 4217 currency code. Determined by merchant based on context or geo-IP.                                                                         |
+| totals       | Array\[[Total Response](/draft/specification/reference/#total-response)\]            | **Yes**  | Estimated cost breakdown. May be partial if shipping/tax not yet calculable.                                                                       |
+| messages     | Array\[[Message](/draft/specification/reference/#message)\]                          | No       | Validation messages, warnings, or informational notices.                                                                                           |
+| links        | Array\[[Link](/draft/specification/reference/#link)\]                                | No       | Optional merchant links (policies, FAQs).                                                                                                          |
+| checkout_url | string                                                                               | **Yes**  | URL to convert cart to checkout. Always provided by merchant. Enables sharing, recovery, and cart-to-checkout conversion.                          |
+| expires_at   | string                                                                               | No       | Cart expiry timestamp (RFC 3339). Optional.                                                                                                        |
+
+______________________________________________________________________
+
 ### Checkout Complete Request
 
 | Name    | Type                                               | Required | Description                                |
@@ -344,36 +383,36 @@ ______________________________________________________________________
 
 ### Item Complete Request
 
-| Name | Type   | Required | Description                                                                                                                                    |
-| ---- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| id   | string | **Yes**  | Should be recognized by both the Platform, and the Business. For Google it should match the id provided in the "id" field in the product feed. |
+| Name | Type   | Required | Description                                                                                                                                                                 |
+| ---- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id   | string | **Yes**  | The product identifier, often the SKU, required to resolve the product details associated with this line item. Should be recognized by both the Platform, and the Business. |
 
 ______________________________________________________________________
 
 ### Item Create Request
 
-| Name | Type   | Required | Description                                                                                                                                    |
-| ---- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| id   | string | **Yes**  | Should be recognized by both the Platform, and the Business. For Google it should match the id provided in the "id" field in the product feed. |
+| Name | Type   | Required | Description                                                                                                                                                                 |
+| ---- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id   | string | **Yes**  | The product identifier, often the SKU, required to resolve the product details associated with this line item. Should be recognized by both the Platform, and the Business. |
 
 ______________________________________________________________________
 
 ### Item Update Request
 
-| Name | Type   | Required | Description                                                                                                                                    |
-| ---- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| id   | string | **Yes**  | Should be recognized by both the Platform, and the Business. For Google it should match the id provided in the "id" field in the product feed. |
+| Name | Type   | Required | Description                                                                                                                                                                 |
+| ---- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id   | string | **Yes**  | The product identifier, often the SKU, required to resolve the product details associated with this line item. Should be recognized by both the Platform, and the Business. |
 
 ______________________________________________________________________
 
 ### Item Response
 
-| Name      | Type    | Required | Description                                                                                                                                    |
-| --------- | ------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| id        | string  | **Yes**  | Should be recognized by both the Platform, and the Business. For Google it should match the id provided in the "id" field in the product feed. |
-| title     | string  | **Yes**  | Product title.                                                                                                                                 |
-| price     | integer | **Yes**  | Unit price in minor (cents) currency units.                                                                                                    |
-| image_url | string  | No       | Product image URI.                                                                                                                             |
+| Name      | Type    | Required | Description                                                                                                                                                                 |
+| --------- | ------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id        | string  | **Yes**  | The product identifier, often the SKU, required to resolve the product details associated with this line item. Should be recognized by both the Platform, and the Business. |
+| title     | string  | **Yes**  | Product title.                                                                                                                                                              |
+| price     | integer | **Yes**  | Unit price in minor (cents) currency units.                                                                                                                                 |
+| image_url | string  | No       | Product image URI.                                                                                                                                                          |
 
 ______________________________________________________________________
 
