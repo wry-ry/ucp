@@ -39,12 +39,7 @@ The consent extension extends the **buyer object** within checkout:
 
 ### Consent Object
 
-| Name         | Type    | Required | Description                                       |
-| ------------ | ------- | -------- | ------------------------------------------------- |
-| analytics    | boolean | No       | Consent for analytics and performance tracking.   |
-| preferences  | boolean | No       | Consent for storing user preferences.             |
-| marketing    | boolean | No       | Consent for marketing communications.             |
-| sale_of_data | boolean | No       | Consent for selling data to third parties (CCPA). |
+**Error:** Schema file 'buyer_consent_resp.json' not found in any schema directory.
 
 ## Usage
 

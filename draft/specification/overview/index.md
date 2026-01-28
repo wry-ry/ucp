@@ -126,7 +126,7 @@ A **capability** is a feature within a service. It declares what functionality i
 
 #### Capability Definition
 
-**Error:** Definition '#/$defs/discovery' not found in 'spec/schemas/capability.json'
+**Error:** Definition '#/$defs/discovery' not found in 'source/schemas/capability.json'
 
 #### Extensions
 
