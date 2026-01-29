@@ -485,8 +485,6 @@ UCP is fully compatible with [Agent Payments Protocol (AP2)](https://ap2-protoco
 [Learn more about AP2](https://ap2-protocol.org)
 # Playground
 
-UCP Playground
-
 # UCP Playground
 
 Walk through a complete UCP checkout flow step-by-step. This interactive demo runs entirely in the browser, simulating payloads and validating against real UCP schemas at each stage.
@@ -573,7 +571,39 @@ Minted Instrument
 
 ← Back Next Step →
 
-## 
+## 7. Complete Checkout
+
+Submit the minted instrument to finalize the transaction and create an order.
+
+Request Finalize
+
+Response (Order Created)
+
+**Success!** Order ID: created.
+
+← Back Next Step →
+
+## 8. Webhook Simulation
+
+Simulate a backend event (e.g., shipping center update) triggering a webhook push to the Agent.
+
+### Trigger Event
+
+This action runs on the Business server and pushes data to the Platform's webhook URL.
+
+Simulate "Shipped" Event
+
+Webhook Payload (POST) Push Notification
+
+```
+// Waiting for event trigger...
+```
+
+← Back
+
+About this demo
+
+This playground is a simulation running entirely in your browser. It uses mocked logic to demonstrate the UCP protocol flow and isn't intended as a reference for production code. For real-world implementation examples and best practices, please check out our [samples on GitHub](https://github.com/Universal-Commerce-Protocol/samples).
 # Roadmap
 
 # Roadmap
@@ -605,8 +635,6 @@ The future of commerce cannot be built in a vacuum. We invite businesses, develo
 # Specification Overview
 
 # Universal Commerce Protocol (UCP) Official Specification
-
-**Version:** `2026-01-11`
 
 ## Overarching guidelines
 
@@ -736,20 +764,42 @@ A **capability** is a feature within a service. It declares what functionality i
 
 #### Extensions
 
-An **extension** is an optional module that augments another capability. Extensions use the `extends` field to declare their parent:
+An **extension** is an optional module that augments another capability. Extensions use the `extends` field to declare their parent(s):
 
 ```json
 {
   "dev.ucp.shopping.fulfillment": [
     {
-      "version": "2026-01-11",
-      "spec": "https://ucp.dev/specification/fulfillment",
-      "schema": "https://ucp.dev/schemas/shopping/fulfillment.json",
+      "version": "2026-01-23",
+      "spec": "https://ucp.dev/2026-01-23/specification/fulfillment",
+      "schema": "https://ucp.dev/2026-01-23/schemas/shopping/fulfillment.json",
       "extends": "dev.ucp.shopping.checkout"
     }
   ]
 }
 ```
+
+##### Multi-Parent Extensions
+
+Extensions **MAY** extend multiple parent capabilities by using an array:
+
+```json
+{
+  "dev.ucp.shopping.discount": [
+    {
+      "version": "2026-01-23",
+      "spec": "https://ucp.dev/2026-01-23/specification/discount",
+      "schema": "https://ucp.dev/2026-01-23/schemas/shopping/discount.json",
+      "extends": ["dev.ucp.shopping.checkout", "dev.ucp.shopping.cart"]
+    }
+  ]
+}
+```
+
+When an extension declares multiple parents:
+
+- The extension **MAY** define different fields for each capability it extends (e.g., `loyalty_earned` for checkout, `loyalty_preview` for cart)
+- See [Intersection Algorithm](#intersection-algorithm) for negotiation rules
 
 Extensions can be:
 
@@ -768,13 +818,14 @@ Extensions can add new fields and modify shared structures (e.g., discounts modi
 
 #### Extension Schema Pattern
 
-Extension schemas define composed types using `allOf`. An example is as follows:
+Extension schemas define composed types using `allOf`. The `$defs` key **MUST** use the full parent capability name (reverse-domain format) to enable deterministic schema resolution:
 
 ```json
 {
   "$defs": {
     "discounts_object": { ... },
-    "checkout": {
+    "dev.ucp.shopping.checkout": {
+      "title": "Checkout with Discount",
       "allOf": [
         {"$ref": "checkout.json"},
         {
@@ -791,7 +842,29 @@ Extension schemas define composed types using `allOf`. An example is as follows:
 }
 ```
 
-Composed type names **MUST** use the pattern: `{capability-name}.{TypeName}`
+**Requirements:**
+
+- Extension schemas **MUST** have a `$defs` entry for each parent declared in `extends`
+- The `$defs` key **MUST** match the parent's full capability name exactly
+
+This convention ensures:
+
+- **Self-documenting**: The schema declares exactly which parents it extends
+- **Deterministic resolution**: The `extends` value maps directly to the `$defs` key
+- **Verifiable**: Build-time checks can confirm each `extends` entry has a matching `$defs` key
+
+#### Schema Resolution Convention
+
+To validate payloads, implementations resolve extension schemas as follows:
+
+1. Determine the root capability from the operation (e.g., checkout operations use `dev.ucp.shopping.checkout`)
+1. For each active extension, resolve and apply its `$defs[{root_capability}]`
+
+**Example:** A checkout response includes the discount extension.
+
+- Root capability: `dev.ucp.shopping.checkout`
+- Extension schema: `discount.json`
+- Resolve: `discount.json#/$defs/dev.ucp.shopping.checkout`
 
 #### Resolution Flow
 
@@ -1048,24 +1121,125 @@ Content-Type: application/json
 The capability intersection algorithm determines which capabilities are active for a session:
 
 1. **Compute intersection**: For each business capability, include it in the result if a platform capability with the same `name` exists.
-1. **Prune orphaned extensions**: Remove any capability where `extends` is set but the parent capability is not in the intersection.
+
+1. **Prune orphaned extensions**: Remove any capability where `extends` is set but **none** of its parent capabilities are in the intersection.
+
+   - For single-parent extensions (`extends: "string"`): parent must be present
+   - For multi-parent extensions (`extends: ["a", "b"]`): at least one parent must be present
+
 1. **Repeat pruning**: Continue step 2 until no more capabilities are removed (handles transitive extension chains).
 
 The result is the set of capabilities both parties support, with extension dependencies satisfied.
 
 #### Error Handling
 
-If negotiation fails, businesses **MUST** return an error response:
+UCP negotiation can fail in two ways:
+
+1. **Discovery failure**: The business cannot fetch or parse the platform's profile.
+1. **Negotiation failure**: The provided profile is valid but capability intersection is empty or versions are incompatible.
+
+These failure types require different handling:
+
+- **Discovery failure** → transport error with optional `continue_url`
+- **Negotiation failure** → UCP response with optional `continue_url`
+
+##### Error Codes
+
+| Code                        | Description                                          | REST | MCP    |
+| --------------------------- | ---------------------------------------------------- | ---- | ------ |
+| `INVALID_PROFILE_URL`       | Profile URL is malformed, missing, or unresolvable   | 400  | error  |
+| `PROFILE_UNREACHABLE`       | Resolved URL but fetch failed (timeout, non-2xx)     | 424  | error  |
+| `PROFILE_MALFORMED`         | Fetched content is not valid JSON or violates schema | 422  | error  |
+| `CAPABILITIES_INCOMPATIBLE` | No compatible capabilities in intersection           | 200  | result |
+| `VERSION_UNSUPPORTED`       | Platform's UCP version is not supported              | 200  | result |
+
+##### The `continue_url` Field
+
+When UCP negotiation fails, `continue_url` provides a fallback web experience. Businesses **SHOULD** provide the most contextually relevant URL:
+
+- For checkout operations: link to the cart or checkout page
+- For catalog operations: link to the product or search results
+- As a fallback: link to the storefront homepage
+
+This enables graceful degradation—agents can redirect buyers to complete their task through the standard web interface.
+
+##### Transport Bindings
+
+**Discovery Failure (424):**
+
+```http
+HTTP/1.1 424 Failed Dependency
+Content-Type: application/json
+
+{
+  "code": "PROFILE_UNREACHABLE",
+  "content": "Unable to fetch agent profile: connection timeout",
+  "continue_url": "https://merchant.com/cart"
+}
+```
+
+**Negotiation Failure (200):**
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "ucp": {
+    "version": "2026-01-11",
+    "capabilities": {}
+  },
+  "messages": [
+    {
+      "type": "error",
+      "code": "VERSION_UNSUPPORTED",
+      "content": "Platform UCP version 2024-01-01 is not supported",
+      "severity": "requires_buyer_input"
+    }
+  ],
+  "continue_url": "https://merchant.com/cart"
+}
+```
+
+**Discovery Failure (JSON-RPC error):**
 
 ```json
 {
-  "status": "requires_escalation",
-  "messages": [{
-    "type": "error",
-    "code": "version_unsupported",
-    "message": "Version 2026-01-11 is not supported.",
-    "severity": "requires_buyer_input"
-  }]
+  "jsonrpc": "2.0",
+  "id": 1,
+  "error": {
+    "code": -32001,
+    "message": "UCP discovery failed",
+    "data": {
+      "code": "PROFILE_UNREACHABLE",
+      "content": "Unable to fetch agent profile: connection timeout",
+      "continue_url": "https://merchant.com/cart"
+    }
+  }
+}
+```
+
+**Negotiation Failure (JSON-RPC result):**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "ucp": {
+      "version": "2026-01-11",
+      "capabilities": {}
+    },
+    "messages": [
+      {
+        "type": "error",
+        "code": "VERSION_UNSUPPORTED",
+        "content": "Platform UCP version 2024-01-01 is not supported",
+        "severity": "requires_buyer_input"
+      }
+    ],
+    "continue_url": "https://merchant.com/cart"
+  }
 }
 ```
 
@@ -1096,6 +1270,33 @@ The `capabilities` registry in responses indicates active capabilities:
   ... other fields
 }
 ```
+
+#### Response Capability Selection
+
+Businesses **MUST** include in `ucp.capabilities` only the capabilities that are:
+
+1. In the negotiated intersection for this session, AND
+1. Relevant to this response's operation type
+
+**Root Capability Relevance:**
+
+A root capability is relevant if it matches the operation type:
+
+- `create_checkout` / `update_checkout` / `complete_checkout` → `dev.ucp.shopping.checkout`
+- `create_cart` / `update_cart` → `dev.ucp.shopping.cart`
+- Order webhooks → `dev.ucp.shopping.order`
+
+**Extension Relevance:**
+
+An extension is relevant if **any** of its `extends` values matches a relevant root capability.
+
+**Selection Examples:**
+
+| Response Type | Includes                        | Does NOT Include             |
+| ------------- | ------------------------------- | ---------------------------- |
+| Checkout      | checkout, discount, fulfillment | cart, order                  |
+| Cart          | cart, discount                  | checkout, fulfillment, order |
+| Order         | order                           | checkout, cart, discount     |
 
 ## Payment Architecture
 
@@ -1620,7 +1821,7 @@ Version unsupported error:
   "messages": [{
     "type": "error",
     "code": "version_unsupported",
-    "message": "Version 2026-01-12 is not supported. This business implements version 2026-01-11.",
+    "content": "Version 2026-01-12 is not supported. This business implements version 2026-01-11.",
     "severity": "requires_buyer_input"
   }]
 }
@@ -1684,13 +1885,11 @@ Capabilities outside the `dev.ucp.*` namespace version fully independently. Vend
 | **Payment Service Provider**      | PSP     | The financial infrastructure provider that processes payments, authorizations, and settlements on behalf of the business.                                 |
 | **Platform**                      | -       | The consumer-facing surface (AI agent, app, website) acting on behalf of the user to discover businesses and facilitate commerce.                         |
 | **Verifiable Digital Credential** | VDC     | An Issuer-signed credential (set of claims) whose authenticity can be verified cryptographically. Used in UCP for secure payment authorizations.          |
-| **Verifiable Presentation**       | VP      | A presentation of one or more VDCs that includes a cryptographic proof of binding, used to prove authorization to a business or PSP.                      |
 # Checkout Capability
 
 # Checkout Capability
 
 - **Capability Name:** `dev.ucp.shopping.checkout`
-- **Version:** `2026-01-11`
 
 ## Overview
 
@@ -1976,6 +2175,7 @@ Context signals are provisional hints. Businesses SHOULD use these values when a
 | address_country | string | No       | The country. Recommended to be in 2-letter ISO 3166-1 alpha-2 format, for example "US". For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as "SGP" or a full country name such as "Singapore" can also be used. Optional hint for market context (currency, availability, pricing)—higher-resolution data (e.g., shipping address) supersedes this value. |
 | address_region  | string | No       | The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division. Optional hint for progressive localization—higher-resolution data (e.g., shipping address) supersedes this value.                                                                                                             |
 | postal_code     | string | No       | The postal code. For example, 94043. Optional hint for regional refinement—higher-resolution data (e.g., shipping address) supersedes this value.                                                                                                                                                                                                                                   |
+| intent          | string | No       | Background context describing buyer's intent (e.g., 'looking for a gift under $50', 'need something durable for outdoor use'). Informs relevance, recommendations, and personalization.                                                                                                                                                                                             |
 
 ### Fulfillment Option
 
@@ -3318,27 +3518,48 @@ UCP uses standard HTTP status codes to indicate the success or failure of an API
 | `400 Bad Request`           | The request was invalid or cannot be served.                                       |
 | `401 Unauthorized`          | Authentication is required and has failed or has not been provided.                |
 | `403 Forbidden`             | The request is authenticated but the user does not have the necessary permissions. |
-| `404 Not Found`             | The requested resource could not be found.                                         |
 | `409 Conflict`              | The request could not be completed due to a conflict (e.g., idempotent key reuse). |
+| `422 Unprocessable Entity`  | The profile content is malformed (discovery failure).                              |
+| `424 Failed Dependency`     | The profile URL is valid but fetch failed (discovery failure).                     |
 | `429 Too Many Requests`     | Rate limit exceeded.                                                               |
 | `503 Service Unavailable`   | Temporary unavailability.                                                          |
 | `500 Internal Server Error` | An unexpected condition was encountered on the server.                             |
 
 ### Error Responses
 
-Error responses follow the standard UCP error structure:
+See the [Core Specification](https://ucp.dev/draft/specification/overview/#error-handling) for negotiation error handling (discovery failures, negotiation failures).
+
+#### Business Outcomes
+
+Business outcomes (including errors like unavailable merchandise) are returned with HTTP 200 and the UCP envelope containing `messages`:
 
 ```json
 {
-  "status": "requires_escalation",
+  "ucp": {
+    "version": "2026-01-11",
+    "capabilities": {
+      "dev.ucp.shopping.checkout": [{"version": "2026-01-11"}]
+    }
+  },
+  "id": "checkout_abc123",
+  "status": "incomplete",
+  "line_items": [
+    {
+      "id": "item_456",
+      "quantity": 100,
+      "available_quantity": 12
+    }
+  ],
   "messages": [
     {
       "type": "error",
-      "code": "invalid_cart_items",
-      "content": "One or more cart items are invalid",
+      "code": "INSUFFICIENT_STOCK",
+      "content": "Requested 100 units but only 12 available",
       "severity": "requires_buyer_input",
+      "path": "$.line_items[0].quantity"
     }
-  ]
+  ],
+  "continue_url": "https://merchant.com/checkout/checkout_abc123"
 }
 ```
 
@@ -3887,28 +4108,42 @@ Maps to the [Cancel Checkout](https://ucp.dev/draft/specification/checkout/#canc
 
 ## Error Handling
 
-Error responses follow JSON-RPC 2.0 format while using the UCP error structure defined in the [Core Specification](https://ucp.dev/draft/specification/overview/index.md). The UCP error object is embedded in the JSON-RPC error's `data` field:
+See the [Core Specification](https://ucp.dev/draft/specification/overview/#error-handling) for negotiation error handling (discovery failures, negotiation failures).
+
+### Business Outcomes
+
+Business outcomes (including errors like unavailable merchandise) are returned as JSON-RPC `result` with the UCP envelope and `messages`:
 
 ```json
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "error": {
-    "code": -32603,
-    "message": "Internal error",
-    "data": {
-      "status": "error",
-      "errors": [
-        {
-          "code": "MERCHANDISE_NOT_AVAILABLE",
-          "message": "One or more cart items are not available",
-          "severity": "requires_buyer_input",
-          "details": {
-            "invalid_items": ["sku_999"]
-          }
-        }
-      ]
-    }
+  "result": {
+    "ucp": {
+      "version": "2026-01-11",
+      "capabilities": {
+        "dev.ucp.shopping.checkout": [{"version": "2026-01-11"}]
+      }
+    },
+    "id": "checkout_abc123",
+    "status": "incomplete",
+    "line_items": [
+      {
+        "id": "item_456",
+        "quantity": 100,
+        "available_quantity": 12
+      }
+    ],
+    "messages": [
+      {
+        "type": "error",
+        "code": "INSUFFICIENT_STOCK",
+        "content": "Requested 100 units but only 12 available",
+        "severity": "requires_buyer_input",
+        "path": "$.line_items[0].quantity"
+      }
+    ],
+    "continue_url": "https://merchant.com/checkout/checkout_abc123"
   }
 }
 ```
@@ -3919,7 +4154,8 @@ A conforming MCP transport implementation **MUST**:
 
 1. Implement JSON-RPC 2.0 protocol correctly.
 1. Provide all core checkout tools defined in this specification.
-1. Handle errors with UCP-specific error codes embedded in the JSON-RPC error object.
+1. Return negotiation failures per the [Core Specification](https://ucp.dev/draft/specification/overview/#error-handling).
+1. Return business outcomes as JSON-RPC `result` with UCP envelope and `messages` array.
 1. Validate tool inputs against UCP schemas.
 1. Support HTTP transport with streaming.
 
@@ -4287,8 +4523,6 @@ When the user confirms the payment on a platform, the user signed checkout and p
 
 # AP2 Mandates Extension
 
-**Version:** `2026-01-11`
-
 ## Overview
 
 The AP2 Mandates extension enables the secure exchange of user intents and authorizations using **Verifiable Digital Credentials**. It extends the standard Shopping Service Checkout capability to support the **[AP2 Protocol](https://ap2-protocol.org/)**.
@@ -4462,22 +4696,7 @@ Once the `dev.ucp.shopping.ap2_mandate` capability is negotiated, the session is
 
 The platform initiates the session. The business returns the `Checkout` object with `ap2.merchant_authorization` embedded in the response body.
 
-| Name         | Type          | Required | Description                                                                                                                                                                                                                                                     |
-| ------------ | ------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ucp          | any           | **Yes**  | UCP metadata for checkout responses.                                                                                                                                                                                                                            |
-| id           | string        | **Yes**  | Unique identifier of the checkout session.                                                                                                                                                                                                                      |
-| line_items   | Array[object] | **Yes**  | List of line items being checked out.                                                                                                                                                                                                                           |
-| buyer        | object        | No       | Representation of the buyer.                                                                                                                                                                                                                                    |
-| status       | string        | **Yes**  | Checkout state indicating the current phase and required action. See Checkout Status lifecycle documentation for state transition details. **Enum:** `incomplete`, `requires_escalation`, `ready_for_complete`, `complete_in_progress`, `completed`, `canceled` |
-| currency     | string        | **Yes**  | ISO 4217 currency code reflecting the merchant's market determination. Derived from address, context, and geo IP—buyers provide signals, merchants determine currency.                                                                                          |
-| totals       | Array[object] | **Yes**  | Different cart totals.                                                                                                                                                                                                                                          |
-| messages     | Array[object] | No       | List of messages with error and info about the checkout session state.                                                                                                                                                                                          |
-| links        | Array[object] | **Yes**  | Links to be displayed by the platform (Privacy Policy, TOS). Mandatory for legal compliance.                                                                                                                                                                    |
-| expires_at   | string        | No       | RFC 3339 expiry timestamp. Default TTL is 6 hours from creation if not sent.                                                                                                                                                                                    |
-| continue_url | string        | No       | URL for checkout handoff and session recovery. MUST be provided when status is requires_escalation. See specification for format and availability requirements.                                                                                                 |
-| payment      | object        | No       | Payment configuration containing handlers.                                                                                                                                                                                                                      |
-| order        | object        | No       | Details about an order created for this checkout session.                                                                                                                                                                                                       |
-| ap2          | any           | No       |                                                                                                                                                                                                                                                                 |
+**Error:** Definition '#/$defs/checkout' not found in 'source/schemas/shopping/ap2_mandate.json'
 
 **Example Response:**
 
@@ -4672,11 +4891,8 @@ Error codes specific to AP2 mandate verification.
 | `mandate_expired`                | The mandate `exp` timestamp has passed.                           |
 | `mandate_scope_mismatch`         | The mandate is bound to a different checkout.                     |
 | `merchant_authorization_invalid` | The business authorization signature could not be verified.       |
-| `merchant_authorization_missing` | AP2 negotiated but response lacks `ap2.merchant_authorization`.   |
 
 # Buyer Consent Extension
-
-**Version:** `2026-01-11`
 
 ## Overview
 
@@ -4787,11 +5003,8 @@ POST /checkouts
 1. **Legal compliance** remains the business's responsibility
 1. **Platforms should not** assume consent without explicit user action
 1. **Default behavior** when consent is not provided is business-specific
-1. **Consent states** should align with actual user choices, not platform defaults
 
 # Discount Extension
-
-**Version:** `2026-01-11`
 
 ## Overview
 
@@ -5177,7 +5390,7 @@ Multiple discounts applied with full allocation breakdown:
 
 With this data, an agent can explain:
 
-> "Your T-Shirt ($60) got $12 off from the 20% summer sale, plus $3 from your loyalty reward (split proportionally). Total savings on this item: $15."
+> "Your T-Shirt ($60) got $12 off from the 20% summer sale, plus $3 from your
 
 # Checkout Capability - EP Binding
 
@@ -6342,8 +6555,6 @@ Represents the processor or wallet provider responsible for authenticating and p
 
 # Fulfillment Extension
 
-**Version:** `2026-01-11`
-
 ## Overview
 
 The fulfillment extension enables businesses to advertise support for physical goods fulfillment (shipping, pickup, etc).
@@ -6994,7 +7205,7 @@ If an incomplete checkout already exists for the given `cart_id`, the business M
 When checkout is initialized via `cart_id`, the cart and checkout sessions SHOULD be linked for the duration of the checkout.
 
 - **During active checkout** — Business SHOULD maintain the cart and reflect relevant checkout modifications (quantity changes, item removals) back to the cart. This supports back-to-storefront flows when buyers transition between checkout and storefront.
-- **After checkout completion** — Business MAY clear the cart based on TTL, completion of the checkout, or other business logic. Subsequent operations on a cleared cart ID return 404; the platform can start a new session with `create_cart`.
+- **After checkout completion** — Business MAY clear the cart based on TTL, completion of the checkout, or other business logic. Subsequent operations on a cleared cart ID return `NOT_FOUND`; the platform can start a new session with `create_cart`.
 
 ## Guidelines
 
@@ -7003,7 +7214,7 @@ When checkout is initialized via `cart_id`, the cart and checkout sessions SHOUL
 - **MAY** use carts for pre-purchase exploration and session persistence.
 - **SHOULD** convert cart to checkout when user expresses purchase intent.
 - **MAY** display `continue_url` for handoff to business UI.
-- **SHOULD** handle 404 gracefully when cart expires or is canceled.
+- **SHOULD** handle `NOT_FOUND` gracefully when cart expires or is canceled.
 
 ### Business
 
@@ -7051,7 +7262,7 @@ Creates a new cart session with line items and optional buyer/context informatio
 
 ### Get Cart
 
-Retrieves the latest state of a cart session. Returns 404 if the cart does not exist, has expired, or was canceled.
+Retrieves the latest state of a cart session. Returns `NOT_FOUND` if the cart does not exist, has expired, or was canceled.
 
 - [REST Binding](https://ucp.dev/draft/specification/cart-rest/#get-cart)
 - [MCP Binding](https://ucp.dev/draft/specification/cart-mcp/#get_cart)
@@ -7065,7 +7276,7 @@ Performs a full replacement of the cart session. The platform **MUST** send the 
 
 ### Cancel Cart
 
-Cancels a cart session. Business MUST return the cart state before deletion. Subsequent operations for this cart ID SHOULD return 404.
+Cancels a cart session. Business MUST return the cart state before deletion. Subsequent operations for this cart ID SHOULD return `NOT_FOUND`.
 
 - [REST Binding](https://ucp.dev/draft/specification/cart-rest/#cancel-cart)
 - [MCP Binding](https://ucp.dev/draft/specification/cart-mcp/#cancel_cart)
@@ -7110,6 +7321,7 @@ Cart reuses the same entity schemas as [Checkout](https://ucp.dev/draft/specific
 | address_country | string | No       | The country. Recommended to be in 2-letter ISO 3166-1 alpha-2 format, for example "US". For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as "SGP" or a full country name such as "Singapore" can also be used. Optional hint for market context (currency, availability, pricing)—higher-resolution data (e.g., shipping address) supersedes this value. |
 | address_region  | string | No       | The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division. Optional hint for progressive localization—higher-resolution data (e.g., shipping address) supersedes this value.                                                                                                             |
 | postal_code     | string | No       | The postal code. For example, 94043. Optional hint for regional refinement—higher-resolution data (e.g., shipping address) supersedes this value.                                                                                                                                                                                                                                   |
+| intent          | string | No       | Background context describing buyer's intent (e.g., 'looking for a gift under $50', 'need something durable for outdoor use'). Informs relevance, recommendations, and personalization.                                                                                                                                                                                             |
 
 ### Total
 
@@ -7406,8 +7618,29 @@ Content-Type: application/json
 }
 ```
 
-```text
-HTTP/1.1 404 Not Found
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "ucp": {
+    "version": "2026-01-15",
+    "capabilities": [
+      {
+        "name": "dev.ucp.shopping.cart",
+        "version": "2026-01-15"
+      }
+    ]
+  },
+  "messages": [
+    {
+      "type": "error",
+      "code": "NOT_FOUND",
+      "content": "Cart not found or has expired"
+    }
+  ],
+  "continue_url": "https://merchant.com/"
+}
 ```
 
 ### Update Cart
@@ -7636,37 +7869,37 @@ The following headers are defined for the HTTP binding and apply to all operatio
 | `400 Bad Request`           | The request was invalid or cannot be served.                                       |
 | `401 Unauthorized`          | Authentication is required and has failed or has not been provided.                |
 | `403 Forbidden`             | The request is authenticated but the user does not have the necessary permissions. |
-| `404 Not Found`             | The cart does not exist, has expired, or was canceled.                             |
 | `409 Conflict`              | The request could not be completed due to a conflict (e.g., idempotent key reuse). |
+| `422 Unprocessable Entity`  | The profile content is malformed (discovery failure).                              |
+| `424 Failed Dependency`     | The profile URL is valid but fetch failed (discovery failure).                     |
 | `429 Too Many Requests`     | Rate limit exceeded.                                                               |
 | `500 Internal Server Error` | An unexpected condition was encountered on the server.                             |
 | `503 Service Unavailable`   | Temporary unavailability.                                                          |
 
 ### Error Responses
 
-Transport errors (404, 500, etc.) are signaled via HTTP status code. The response body is optional.
+See the [Core Specification](https://ucp.dev/draft/specification/overview/#error-handling) for negotiation error handling (discovery failures, negotiation failures).
 
-Validation errors return HTTP 200 with the cart containing a `messages` array:
+#### Business Outcomes
+
+Business outcomes (including not found and validation errors) are returned with HTTP 200 and the UCP envelope containing `messages`:
 
 ```json
-HTTP/1.1 200 OK
-Content-Type: application/json
-
 {
-  "ucp": { ... },
-  "id": "cart_abc123",
-  "line_items": [ ... ],
-  "currency": "USD",
-  "totals": [ ... ],
+  "ucp": {
+    "version": "2026-01-11",
+    "capabilities": {
+      "dev.ucp.shopping.cart": [{"version": "2026-01-11"}]
+    }
+  },
   "messages": [
     {
       "type": "error",
-      "code": "invalid_quantity",
-      "path": "$.line_items[0].quantity",
-      "content": "Quantity must be at least 1"
+      "code": "NOT_FOUND",
+      "content": "Cart not found or has expired"
     }
   ],
-  "continue_url": "https://business.example.com/checkout?cart=cart_abc123"
+  "continue_url": "https://merchant.com/"
 }
 ```
 
@@ -7971,9 +8204,24 @@ Maps to the [Get Cart](https://ucp.dev/draft/specification/cart/#get-cart) opera
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "error": {
-    "code": -32602,
-    "message": "Invalid params: cart not found"
+  "result": {
+    "ucp": {
+      "version": "2026-01-15",
+      "capabilities": [
+        {
+          "name": "dev.ucp.shopping.cart",
+          "version": "2026-01-15"
+        }
+      ]
+    },
+    "messages": [
+      {
+        "type": "error",
+        "code": "NOT_FOUND",
+        "content": "Cart not found or has expired"
+      }
+    ],
+    "continue_url": "https://merchant.com/"
   }
 }
 ```
@@ -8203,44 +8451,31 @@ Maps to the [Cancel Cart](https://ucp.dev/draft/specification/cart/#cancel-cart)
 
 ## Error Handling
 
-Error responses follow JSON-RPC 2.0 format.
+See the [Core Specification](https://ucp.dev/draft/specification/overview/#error-handling) for negotiation error handling (discovery failures, negotiation failures).
 
-### Not Found (-32602)
+### Business Outcomes
 
-Returned when cart does not exist, has expired, or was canceled:
-
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "error": {
-    "code": -32602,
-    "message": "Invalid params: cart not found"
-  }
-}
-```
-
-### Validation Errors
-
-Validation errors are returned in the cart's `messages` array. The operation succeeds and returns the cart state with messages indicating issues:
+Business outcomes (including not found and validation errors) are returned as JSON-RPC `result` with the UCP envelope and `messages`:
 
 ```json
 {
   "jsonrpc": "2.0",
   "id": 1,
   "result": {
-    "ucp": { ... },
-    "id": "cart_abc123",
-    "line_items": [ ... ],
+    "ucp": {
+      "version": "2026-01-11",
+      "capabilities": {
+        "dev.ucp.shopping.cart": [{"version": "2026-01-11"}]
+      }
+    },
     "messages": [
       {
         "type": "error",
-        "code": "invalid_quantity",
-        "path": "$.line_items[0].quantity",
-        "content": "Quantity must be at least 1"
+        "code": "NOT_FOUND",
+        "content": "Cart not found or has expired"
       }
     ],
-    ...
+    "continue_url": "https://merchant.com/"
   }
 }
 ```
@@ -8251,7 +8486,8 @@ A conforming MCP transport implementation **MUST**:
 
 1. Implement JSON-RPC 2.0 protocol correctly.
 1. Provide all core cart tools defined in this specification.
-1. Handle errors with appropriate JSON-RPC error codes.
+1. Return negotiation failures per the [Core Specification](https://ucp.dev/draft/specification/overview/#error-handling).
+1. Return business outcomes as JSON-RPC `result` with UCP envelope and `messages` array.
 1. Validate tool inputs against UCP schemas.
 1. Support HTTP transport with streaming.
 # Order Capability
@@ -8259,7 +8495,6 @@ A conforming MCP transport implementation **MUST**:
 # Order Capability
 
 - **Capability Name:** `dev.ucp.shopping.order`
-- **Version:** `2026-01-11`
 
 ## Overview
 
@@ -8648,7 +8883,6 @@ The `signing_keys` array supports multiple keys to enable zero-downtime rotation
 # Identity Linking Capability
 
 - **Capability Name:** `dev.ucp.common.identity_linking`
-- **Version:** `2026-01-11`
 
 ## Overview
 
@@ -8743,8 +8977,6 @@ Example of [metadata](https://datatracker.ietf.org/doc/html/rfc8414#section-2) s
 # Payment Handlers
 
 # Payment Handler Specification Guide
-
-**Version:** `2026-01-11`
 
 ## Introduction
 
@@ -9942,7 +10174,6 @@ When publishing your handler, your specification document **MUST** include:
 
 ```markdown
 **Handler Name:** `com.acme.tokenization_payment`
-**Version:** `2026-01-11`
 **OpenAPI:** [Tokenization API](https://ucp.dev/handlers/tokenization/openapi.json)
 
 | Environment | Base URL                           |
@@ -10003,7 +10234,6 @@ ______________________________________________________________________
 # Processor Tokenizer Payment Handler
 
 - **Handler Name:** `com.example.processor_tokenizer`
-- **Version:** `2026-01-11`
 - **Type:** Payment Handler Example
 
 ## Introduction
@@ -10257,7 +10487,6 @@ ______________________________________________________________________
 # Platform Tokenizer Payment Handler
 
 - **Handler Name:** `com.example.platform_tokenizer`
-- **Version:** `2026-01-11`
 - **Type:** Payment Handler Example
 
 ## Introduction
@@ -10674,7 +10903,6 @@ ______________________________________________________________________
 # Encrypted Credential Handler
 
 - **Handler Name:** `com.example.encrypted_credential`
-- **Version:** `2026-01-11`
 - **Type:** Payment Handler Example
 
 ## Introduction
@@ -11273,22 +11501,22 @@ ______________________________________________________________________
 
 ### Checkout
 
-| Name         | Type                                                                                         | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| ------------ | -------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ucp          | [UCP Response Checkout Schema](/draft/specification/reference/#ucp-response-checkout-schema) | **Yes**  | Protocol metadata for discovery profiles and responses. Uses slim schema pattern with context-specific required fields.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| id           | string                                                                                       | **Yes**  | Unique identifier of the checkout session.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| line_items   | Array\[[Line Item](/draft/specification/reference/#line-item)\]                              | **Yes**  | List of line items being checked out.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| buyer        | [Buyer](/draft/specification/reference/#buyer)                                               | No       | Representation of the buyer.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| context      | [Context](/draft/specification/reference/#context)                                           | No       | Provisional buyer signals for relevance and localization: product availability, pricing, currency, tax, shipping, payment methods, and eligibility (e.g., student or affiliation discounts). Businesses SHOULD use these values when authoritative data (e.g., address) is absent, and MAY ignore unsupported values without returning errors. Context can be disclosed progressively—coarse signals early, finer resolution as the session progresses. Higher-resolution data (shipping address, billing address) supersedes context. Platforms SHOULD progressively enhance context throughout the buyer journey. |
-| status       | string                                                                                       | **Yes**  | Checkout state indicating the current phase and required action. See Checkout Status lifecycle documentation for state transition details. **Enum:** `incomplete`, `requires_escalation`, `ready_for_complete`, `complete_in_progress`, `completed`, `canceled`                                                                                                                                                                                                                                                                                                                                                     |
-| currency     | string                                                                                       | **Yes**  | ISO 4217 currency code reflecting the merchant's market determination. Derived from address, context, and geo IP—buyers provide signals, merchants determine currency.                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| totals       | Array\[[Total](/draft/specification/reference/#total)\]                                      | **Yes**  | Different cart totals.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| messages     | Array\[[Message](/draft/specification/reference/#message)\]                                  | No       | List of messages with error and info about the checkout session state.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| links        | Array\[[Link](/draft/specification/reference/#link)\]                                        | **Yes**  | Links to be displayed by the platform (Privacy Policy, TOS). Mandatory for legal compliance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| expires_at   | string                                                                                       | No       | RFC 3339 expiry timestamp. Default TTL is 6 hours from creation if not sent.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| continue_url | string                                                                                       | No       | URL for checkout handoff and session recovery. MUST be provided when status is requires_escalation. See specification for format and availability requirements.                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| payment      | [Payment](/draft/specification/reference/#payment)                                           | No       | Payment configuration containing handlers.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| order        | [Order Confirmation](/draft/specification/reference/#order-confirmation)                     | No       | Details about an order created for this checkout session.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| Name         | Type                                                                                         | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ------------ | -------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ucp          | [UCP Response Checkout Schema](/draft/specification/reference/#ucp-response-checkout-schema) | **Yes**  | Protocol metadata for discovery profiles and responses. Uses slim schema pattern with context-specific required fields.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| id           | string                                                                                       | **Yes**  | Unique identifier of the checkout session.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| line_items   | Array\[[Line Item](/draft/specification/reference/#line-item)\]                              | **Yes**  | List of line items being checked out.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| buyer        | [Buyer](/draft/specification/reference/#buyer)                                               | No       | Representation of the buyer.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| context      | [Context](/draft/specification/reference/#context)                                           | No       | Provisional buyer signals for relevance and localization: product availability, pricing, currency, tax, shipping, payment methods, and eligibility (e.g., student or affiliation discounts). Businesses SHOULD use these values when authoritative data (e.g., address) is absent, and MAY ignore unsupported values without returning errors. Context SHOULD be non-identifying and can be disclosed progressively—coarse signals early, finer resolution as the session progresses. Higher-resolution data (shipping address, billing address) supersedes context. Platforms SHOULD progressively enhance context throughout the buyer journey. |
+| status       | string                                                                                       | **Yes**  | Checkout state indicating the current phase and required action. See Checkout Status lifecycle documentation for state transition details. **Enum:** `incomplete`, `requires_escalation`, `ready_for_complete`, `complete_in_progress`, `completed`, `canceled`                                                                                                                                                                                                                                                                                                                                                                                   |
+| currency     | string                                                                                       | **Yes**  | ISO 4217 currency code reflecting the merchant's market determination. Derived from address, context, and geo IP—buyers provide signals, merchants determine currency.                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| totals       | Array\[[Total](/draft/specification/reference/#total)\]                                      | **Yes**  | Different cart totals.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| messages     | Array\[[Message](/draft/specification/reference/#message)\]                                  | No       | List of messages with error and info about the checkout session state.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| links        | Array\[[Link](/draft/specification/reference/#link)\]                                        | **Yes**  | Links to be displayed by the platform (Privacy Policy, TOS). Mandatory for legal compliance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| expires_at   | string                                                                                       | No       | RFC 3339 expiry timestamp. Default TTL is 6 hours from creation if not sent.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| continue_url | string                                                                                       | No       | URL for checkout handoff and session recovery. MUST be provided when status is requires_escalation. See specification for format and availability requirements.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| payment      | [Payment](/draft/specification/reference/#payment)                                           | No       | Payment configuration containing handlers.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| order        | [Order Confirmation](/draft/specification/reference/#order-confirmation)                     | No       | Details about an order created for this checkout session.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 
 ______________________________________________________________________
 
@@ -11407,6 +11635,7 @@ ______________________________________________________________________
 | address_country | string | No       | The country. Recommended to be in 2-letter ISO 3166-1 alpha-2 format, for example "US". For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as "SGP" or a full country name such as "Singapore" can also be used. Optional hint for market context (currency, availability, pricing)—higher-resolution data (e.g., shipping address) supersedes this value. |
 | address_region  | string | No       | The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division. Optional hint for progressive localization—higher-resolution data (e.g., shipping address) supersedes this value.                                                                                                             |
 | postal_code     | string | No       | The postal code. For example, 94043. Optional hint for regional refinement—higher-resolution data (e.g., shipping address) supersedes this value.                                                                                                                                                                                                                                   |
+| intent          | string | No       | Background context describing buyer's intent (e.g., 'looking for a gift under $50', 'need something durable for outdoor use'). Informs relevance, recommendations, and personalization.                                                                                                                                                                                             |
 
 ______________________________________________________________________
 

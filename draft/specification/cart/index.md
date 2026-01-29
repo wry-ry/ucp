@@ -52,7 +52,7 @@ If an incomplete checkout already exists for the given `cart_id`, the business M
 When checkout is initialized via `cart_id`, the cart and checkout sessions SHOULD be linked for the duration of the checkout.
 
 - **During active checkout** — Business SHOULD maintain the cart and reflect relevant checkout modifications (quantity changes, item removals) back to the cart. This supports back-to-storefront flows when buyers transition between checkout and storefront.
-- **After checkout completion** — Business MAY clear the cart based on TTL, completion of the checkout, or other business logic. Subsequent operations on a cleared cart ID return 404; the platform can start a new session with `create_cart`.
+- **After checkout completion** — Business MAY clear the cart based on TTL, completion of the checkout, or other business logic. Subsequent operations on a cleared cart ID return `NOT_FOUND`; the platform can start a new session with `create_cart`.
 
 ## Guidelines
 
@@ -61,7 +61,7 @@ When checkout is initialized via `cart_id`, the cart and checkout sessions SHOUL
 - **MAY** use carts for pre-purchase exploration and session persistence.
 - **SHOULD** convert cart to checkout when user expresses purchase intent.
 - **MAY** display `continue_url` for handoff to business UI.
-- **SHOULD** handle 404 gracefully when cart expires or is canceled.
+- **SHOULD** handle `NOT_FOUND` gracefully when cart expires or is canceled.
 
 ### Business
 
@@ -109,7 +109,7 @@ Creates a new cart session with line items and optional buyer/context informatio
 
 ### Get Cart
 
-Retrieves the latest state of a cart session. Returns 404 if the cart does not exist, has expired, or was canceled.
+Retrieves the latest state of a cart session. Returns `NOT_FOUND` if the cart does not exist, has expired, or was canceled.
 
 - [REST Binding](https://ucp.dev/draft/specification/cart-rest/#get-cart)
 - [MCP Binding](https://ucp.dev/draft/specification/cart-mcp/#get_cart)
@@ -123,7 +123,7 @@ Performs a full replacement of the cart session. The platform **MUST** send the 
 
 ### Cancel Cart
 
-Cancels a cart session. Business MUST return the cart state before deletion. Subsequent operations for this cart ID SHOULD return 404.
+Cancels a cart session. Business MUST return the cart state before deletion. Subsequent operations for this cart ID SHOULD return `NOT_FOUND`.
 
 - [REST Binding](https://ucp.dev/draft/specification/cart-rest/#cancel-cart)
 - [MCP Binding](https://ucp.dev/draft/specification/cart-mcp/#cancel_cart)
@@ -168,6 +168,7 @@ Cart reuses the same entity schemas as [Checkout](https://ucp.dev/draft/specific
 | address_country | string | No       | The country. Recommended to be in 2-letter ISO 3166-1 alpha-2 format, for example "US". For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as "SGP" or a full country name such as "Singapore" can also be used. Optional hint for market context (currency, availability, pricing)—higher-resolution data (e.g., shipping address) supersedes this value. |
 | address_region  | string | No       | The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division. Optional hint for progressive localization—higher-resolution data (e.g., shipping address) supersedes this value.                                                                                                             |
 | postal_code     | string | No       | The postal code. For example, 94043. Optional hint for regional refinement—higher-resolution data (e.g., shipping address) supersedes this value.                                                                                                                                                                                                                                   |
+| intent          | string | No       | Background context describing buyer's intent (e.g., 'looking for a gift under $50', 'need something durable for outdoor use'). Informs relevance, recommendations, and personalization.                                                                                                                                                                                             |
 
 ### Total
 

@@ -2,7 +2,6 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://ucp.dev/draft/schemas/shopping/cart.json",
   "name": "dev.ucp.shopping.cart",
-  "version": "2026-01-28",
   "title": "Cart",
   "description": "Shopping cart with estimated pricing before checkout. Lightweight pre-purchase exploration with no payment info or complex status states. Cart exists (200) or doesn't (404).",
   "$defs": {
@@ -119,5 +118,6 @@
       "description": "Cart expiry timestamp (RFC 3339). Optional.",
       "ucp_request": "omit"
     }
-  }
+  },
+  "version": "2026-01-29"
 }

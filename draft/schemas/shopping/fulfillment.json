@@ -2,7 +2,6 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://ucp.dev/draft/schemas/shopping/fulfillment.json",
   "name": "dev.ucp.shopping.fulfillment",
-  "version": "2026-01-28",
   "title": "Fulfillment Extension",
   "description": "Extends Checkout with fulfillment support using methods, destinations, and groups.",
   "$defs": {
@@ -21,7 +20,7 @@
     "fulfillment": {
       "$ref": "https://ucp.dev/draft/schemas/shopping/types/fulfillment.json"
     },
-    "checkout": {
+    "dev.ucp.shopping.checkout": {
       "title": "Checkout with Fulfillment",
       "description": "Checkout extended with hierarchical fulfillment.",
       "allOf": [
@@ -139,5 +138,6 @@
         }
       }
     ]
-  }
+  },
+  "version": "2026-01-29"
 }
