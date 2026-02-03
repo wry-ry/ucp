@@ -2,7 +2,7 @@
 
 *File*: `specification/reference.md`
 
-*RuntimeError*: Failed to resolve '' (in file: specification/reference.md). Ensure ucp-schema is installed: `cargo install ucp-schema`
+*ValueError*: Invalid entity name format for def: capability.json (in file: specification/reference.md)
 
 ```text
 Traceback (most recent call last):
@@ -13,19 +13,19 @@ Traceback (most recent call last):
     self.environment.handle_exception()
   File "/home/runner/work/ucp/ucp/.venv/lib/python3.12/site-packages/jinja2/environment.py", line 942, in handle_exception
     raise rewrite_traceback_stack(source=source)
-  File "<template>", line 43, in top-level template code
-  File "/home/runner/work/ucp/ucp/main.py", line 801, in extension_schema_fields
+  File "<template>", line 73, in top-level template code
+  File "/home/runner/work/ucp/ucp/main.py", line 840, in extension_schema_fields
     return _read_schema_from_defs(entity_name, spec_file_name)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ucp/ucp/main.py", line 706, in _read_schema_from_defs
+  File "/home/runner/work/ucp/ucp/main.py", line 745, in _read_schema_from_defs
     return _render_table_from_schema(
            ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ucp/ucp/main.py", line 573, in _render_table_from_schema
+  File "/home/runner/work/ucp/ucp/main.py", line 610, in _render_table_from_schema
     _render_embedded_table(
-  File "/home/runner/work/ucp/ucp/main.py", line 462, in _render_embedded_table
-    embedded_data = _render_table_from_ref(
-                    ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ucp/ucp/main.py", line 417, in _render_table_from_ref
-    raise RuntimeError(
-RuntimeError: Failed to resolve '' (in file: specification/reference.md). Ensure ucp-schema is installed: `cargo install ucp-schema`
+  File "/home/runner/work/ucp/ucp/main.py", line 489, in _render_embedded_table
+    return _read_schema_from_defs(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/ucp/ucp/main.py", line 724, in _read_schema_from_defs
+    raise ValueError(f"Invalid entity name format for def: {entity_name}{get_error_context()}")
+ValueError: Invalid entity name format for def: capability.json (in file: specification/reference.md)
 ```
