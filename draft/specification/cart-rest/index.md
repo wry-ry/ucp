@@ -68,7 +68,11 @@ All REST endpoints **MUST** be served over HTTPS with minimum TLS version 1.3.
 
 #### Input Schema
 
-**Error:** Schema 'cart.create' not found in any schema directory.
+| Name       | Type                                                       | Required | Description                                                                                                                                        |
+| ---------- | ---------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| line_items | Array\[[Line Item](/draft/specification/cart/#line-item)\] | **Yes**  | Cart line items. Same structure as checkout. Full replacement on update.                                                                           |
+| context    | [Context](/draft/specification/cart/#context)              | No       | Buyer signals for localization (country, region, postal_code). Merchant uses for pricing, availability, currency. Falls back to geo-IP if omitted. |
+| buyer      | [Buyer](/draft/specification/cart/#buyer)                  | No       | Optional buyer information for personalized estimates.                                                                                             |
 
 #### Output Schema
 
@@ -271,7 +275,12 @@ Content-Type: application/json
 
 - `id` (String, required): The cart session ID (path parameter).
 
-**Error:** Schema 'cart.update' not found in any schema directory.
+| Name       | Type                                                       | Required | Description                                                                                                                                        |
+| ---------- | ---------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id         | string                                                     | **Yes**  | Unique cart identifier.                                                                                                                            |
+| line_items | Array\[[Line Item](/draft/specification/cart/#line-item)\] | **Yes**  | Cart line items. Same structure as checkout. Full replacement on update.                                                                           |
+| context    | [Context](/draft/specification/cart/#context)              | No       | Buyer signals for localization (country, region, postal_code). Merchant uses for pricing, availability, currency. Falls back to geo-IP if omitted. |
+| buyer      | [Buyer](/draft/specification/cart/#buyer)                  | No       | Optional buyer information for personalized estimates.                                                                                             |
 
 #### Output Schema
 

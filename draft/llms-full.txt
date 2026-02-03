@@ -285,15 +285,21 @@ Ant International
 
 Best Buy
 
+Block
+
 Carrefour
 
 Chewy
 
 Commerce
 
+Fiserv
+
 Flipkart
 
 Gap
+
+Klarna
 
 Kroger
 
@@ -310,6 +316,8 @@ Salesforce
 Sephora
 
 Shopee
+
+Splitit
 
 Stripe
 
@@ -331,15 +339,21 @@ Ant International
 
 Best Buy
 
+Block
+
 Carrefour
 
 Chewy
 
 Commerce
 
+Fiserv
+
 Flipkart
 
 Gap
+
+Klarna
 
 Kroger
 
@@ -356,6 +370,8 @@ Salesforce
 Sephora
 
 Shopee
+
+Splitit
 
 Stripe
 
@@ -760,7 +776,14 @@ A **capability** is a feature within a service. It declares what functionality i
 
 #### Capability Definition
 
-**Error:** Definition '#/$defs/discovery' not found in 'source/schemas/capability.json'
+| Name    | Type    | Required | Description                                                                                                                     |
+| ------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| version | string  | No       | Entity version in YYYY-MM-DD format.                                                                                            |
+| spec    | string  | **Yes**  | URL to human-readable specification document.                                                                                   |
+| schema  | string  | **Yes**  | URL to JSON Schema defining this entity's structure and payloads.                                                               |
+| id      | string  | No       | Unique identifier for this entity instance. Used to disambiguate when multiple instances exist.                                 |
+| config  | object  | No       | Entity-specific configuration. Structure defined by each entity's schema.                                                       |
+| extends | OneOf[] | No       | Parent capability(s) this extends. Present for extensions, absent for root capabilities. Use array for multi-parent extensions. |
 
 #### Extensions
 
@@ -2179,17 +2202,29 @@ Context signals are provisional hints. Businesses SHOULD use these values when a
 
 ### Fulfillment Option
 
-**Error:** Schema file 'fulfillment_resp.json' not found in any schema directory.
+| Name                      | Type          | Required | Description                                                                |
+| ------------------------- | ------------- | -------- | -------------------------------------------------------------------------- |
+| id                        | string        | **Yes**  | Unique fulfillment option identifier.                                      |
+| title                     | string        | **Yes**  | Short label (e.g., 'Express Shipping', 'Curbside Pickup').                 |
+| description               | string        | No       | Complete context for buyer decision (e.g., 'Arrives Dec 12-15 via FedEx'). |
+| carrier                   | string        | No       | Carrier name (for shipping).                                               |
+| earliest_fulfillment_time | string        | No       | Earliest fulfillment date.                                                 |
+| latest_fulfillment_time   | string        | No       | Latest fulfillment date.                                                   |
+| totals                    | Array[object] | **Yes**  | Fulfillment option totals breakdown.                                       |
 
 ### Item
 
 #### Item Create Request
 
-**Error:** Schema 'types/item.create' not found in any schema directory.
+| Name | Type   | Required | Description                                                                                                                                                                 |
+| ---- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id   | string | **Yes**  | The product identifier, often the SKU, required to resolve the product details associated with this line item. Should be recognized by both the Platform, and the Business. |
 
 #### Item Update Request
 
-**Error:** Schema 'types/item.update' not found in any schema directory.
+| Name | Type   | Required | Description                                                                                                                                                                 |
+| ---- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id   | string | **Yes**  | The product identifier, often the SKU, required to resolve the product details associated with this line item. Should be recognized by both the Platform, and the Business. |
 
 #### Item Response
 
@@ -2204,11 +2239,19 @@ Context signals are provisional hints. Businesses SHOULD use these values when a
 
 #### Line Item Create Request
 
-**Error:** Schema 'types/line_item.create' not found in any schema directory.
+| Name     | Type                                        | Required | Description                           |
+| -------- | ------------------------------------------- | -------- | ------------------------------------- |
+| item     | [Item](/draft/specification/checkout/#item) | **Yes**  |                                       |
+| quantity | integer                                     | **Yes**  | Quantity of the item being purchased. |
 
 #### Line Item Update Request
 
-**Error:** Schema 'types/line_item.update' not found in any schema directory.
+| Name      | Type                                        | Required | Description                                            |
+| --------- | ------------------------------------------- | -------- | ------------------------------------------------------ |
+| id        | string                                      | No       |                                                        |
+| item      | [Item](/draft/specification/checkout/#item) | **Yes**  |                                                        |
+| quantity  | integer                                     | **Yes**  | Quantity of the item being purchased.                  |
+| parent_id | string                                      | No       | Parent line item identifier for any nested structures. |
 
 #### Line Item Response
 
@@ -4696,7 +4739,22 @@ Once the `dev.ucp.shopping.ap2_mandate` capability is negotiated, the session is
 
 The platform initiates the session. The business returns the `Checkout` object with `ap2.merchant_authorization` embedded in the response body.
 
-**Error:** Definition '#/$defs/checkout' not found in 'source/schemas/shopping/ap2_mandate.json'
+| Name         | Type          | Required | Description                                                                                                                                                                                                                                                     |
+| ------------ | ------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ucp          | any           | **Yes**  | UCP metadata for checkout responses.                                                                                                                                                                                                                            |
+| id           | string        | **Yes**  | Unique identifier of the checkout session.                                                                                                                                                                                                                      |
+| line_items   | Array[object] | **Yes**  | List of line items being checked out.                                                                                                                                                                                                                           |
+| buyer        | object        | No       | Representation of the buyer.                                                                                                                                                                                                                                    |
+| status       | string        | **Yes**  | Checkout state indicating the current phase and required action. See Checkout Status lifecycle documentation for state transition details. **Enum:** `incomplete`, `requires_escalation`, `ready_for_complete`, `complete_in_progress`, `completed`, `canceled` |
+| currency     | string        | **Yes**  | ISO 4217 currency code reflecting the merchant's market determination. Derived from address, context, and geo IP—buyers provide signals, merchants determine currency.                                                                                          |
+| totals       | Array[object] | **Yes**  | Different cart totals.                                                                                                                                                                                                                                          |
+| messages     | Array[object] | No       | List of messages with error and info about the checkout session state.                                                                                                                                                                                          |
+| links        | Array[object] | **Yes**  | Links to be displayed by the platform (Privacy Policy, TOS). Mandatory for legal compliance.                                                                                                                                                                    |
+| expires_at   | string        | No       | RFC 3339 expiry timestamp. Default TTL is 6 hours from creation if not sent.                                                                                                                                                                                    |
+| continue_url | string        | No       | URL for checkout handoff and session recovery. MUST be provided when status is requires_escalation. See specification for format and availability requirements.                                                                                                 |
+| payment      | object        | No       | Payment configuration containing handlers.                                                                                                                                                                                                                      |
+| order        | object        | No       | Details about an order created for this checkout session.                                                                                                                                                                                                       |
+| ap2          | any           | No       |                                                                                                                                                                                                                                                                 |
 
 **Example Response:**
 
@@ -4931,7 +4989,12 @@ The consent extension extends the **buyer object** within checkout:
 
 ### Consent Object
 
-**Error:** Schema file 'buyer_consent_resp.json' not found in any schema directory.
+| Name         | Type    | Required | Description                                       |
+| ------------ | ------- | -------- | ------------------------------------------------- |
+| analytics    | boolean | No       | Consent for analytics and performance tracking.   |
+| preferences  | boolean | No       | Consent for storing user preferences.             |
+| marketing    | boolean | No       | Consent for marketing communications.             |
+| sale_of_data | boolean | No       | Consent for selling data to third parties (CCPA). |
 
 ## Usage
 
@@ -5049,15 +5112,29 @@ When this capability is active, checkout is extended with a `discounts` object.
 
 ### Discounts Object
 
-**Error:** Schema file 'discount_resp.json' not found in any schema directory.
+| Name    | Type                                                                         | Required | Description                                                                                                |
+| ------- | ---------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------- |
+| codes   | Array[string]                                                                | No       | Discount codes to apply. Case-insensitive. Replaces previously submitted codes. Send empty array to clear. |
+| applied | Array\[[Applied Discount](/draft/specification/discount/#applied-discount)\] | No       | Discounts successfully applied (code-based and automatic).                                                 |
 
 ### Applied Discount
 
-**Error:** Schema file 'discount_resp.json' not found in any schema directory.
+| Name        | Type                                                             | Required | Description                                                                                                                      |
+| ----------- | ---------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| code        | string                                                           | No       | The discount code. Omitted for automatic discounts.                                                                              |
+| title       | string                                                           | **Yes**  | Human-readable discount name (e.g., 'Summer Sale 20% Off').                                                                      |
+| amount      | integer                                                          | **Yes**  | Total discount amount in minor (cents) currency units.                                                                           |
+| automatic   | boolean                                                          | No       | True if applied automatically by merchant rules (no code required).                                                              |
+| method      | string                                                           | No       | Allocation method. 'each' = applied independently per item. 'across' = split proportionally by value. **Enum:** `each`, `across` |
+| priority    | integer                                                          | No       | Stacking order for discount calculation. Lower numbers applied first (1 = first).                                                |
+| allocations | Array\[[Allocation](/draft/specification/discount/#allocation)\] | No       | Breakdown of where this discount was allocated. Sum of allocation amounts equals total amount.                                   |
 
 ### Allocation
 
-**Error:** Schema file 'discount_resp.json' not found in any schema directory.
+| Name   | Type    | Required | Description                                                                       |
+| ------ | ------- | -------- | --------------------------------------------------------------------------------- |
+| path   | string  | **Yes**  | JSONPath to the allocation target (e.g., '$.line_items[0]', '$.totals.shipping'). |
+| amount | integer | **Yes**  | Amount allocated to this target in minor (cents) currency units.                  |
 
 ## Allocation Details
 
@@ -7289,11 +7366,19 @@ Cart reuses the same entity schemas as [Checkout](https://ucp.dev/draft/specific
 
 #### Line Item Create Request
 
-**Error:** Schema 'types/line_item.create' not found in any schema directory.
+| Name     | Type                                        | Required | Description                           |
+| -------- | ------------------------------------------- | -------- | ------------------------------------- |
+| item     | [Item](/draft/specification/checkout/#item) | **Yes**  |                                       |
+| quantity | integer                                     | **Yes**  | Quantity of the item being purchased. |
 
 #### Line Item Update Request
 
-**Error:** Schema 'types/line_item.update' not found in any schema directory.
+| Name      | Type                                        | Required | Description                                            |
+| --------- | ------------------------------------------- | -------- | ------------------------------------------------------ |
+| id        | string                                      | No       |                                                        |
+| item      | [Item](/draft/specification/checkout/#item) | **Yes**  |                                                        |
+| quantity  | integer                                     | **Yes**  | Quantity of the item being purchased.                  |
+| parent_id | string                                      | No       | Parent line item identifier for any nested structures. |
 
 #### Line Item Response
 
@@ -7446,7 +7531,11 @@ All REST endpoints **MUST** be served over HTTPS with minimum TLS version 1.3.
 
 #### Input Schema
 
-**Error:** Schema 'cart.create' not found in any schema directory.
+| Name       | Type                                                       | Required | Description                                                                                                                                        |
+| ---------- | ---------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| line_items | Array\[[Line Item](/draft/specification/cart/#line-item)\] | **Yes**  | Cart line items. Same structure as checkout. Full replacement on update.                                                                           |
+| context    | [Context](/draft/specification/cart/#context)              | No       | Buyer signals for localization (country, region, postal_code). Merchant uses for pricing, availability, currency. Falls back to geo-IP if omitted. |
+| buyer      | [Buyer](/draft/specification/cart/#buyer)                  | No       | Optional buyer information for personalized estimates.                                                                                             |
 
 #### Output Schema
 
@@ -7649,7 +7738,12 @@ Content-Type: application/json
 
 - `id` (String, required): The cart session ID (path parameter).
 
-**Error:** Schema 'cart.update' not found in any schema directory.
+| Name       | Type                                                       | Required | Description                                                                                                                                        |
+| ---------- | ---------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id         | string                                                     | **Yes**  | Unique cart identifier.                                                                                                                            |
+| line_items | Array\[[Line Item](/draft/specification/cart/#line-item)\] | **Yes**  | Cart line items. Same structure as checkout. Full replacement on update.                                                                           |
+| context    | [Context](/draft/specification/cart/#context)              | No       | Buyer signals for localization (country, region, postal_code). Merchant uses for pricing, availability, currency. Falls back to geo-IP if omitted. |
+| buyer      | [Buyer](/draft/specification/cart/#buyer)                  | No       | Optional buyer information for personalized estimates.                                                                                             |
 
 #### Output Schema
 
@@ -8005,7 +8099,11 @@ Maps to the [Create Cart](https://ucp.dev/draft/specification/cart/#create-cart)
 
 #### Input Schema
 
-**Error:** Schema 'cart.create' not found in any schema directory.
+| Name       | Type                                                       | Required | Description                                                                                                                                        |
+| ---------- | ---------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| line_items | Array\[[Line Item](/draft/specification/cart/#line-item)\] | **Yes**  | Cart line items. Same structure as checkout. Full replacement on update.                                                                           |
+| context    | [Context](/draft/specification/cart/#context)              | No       | Buyer signals for localization (country, region, postal_code). Merchant uses for pricing, availability, currency. Falls back to geo-IP if omitted. |
+| buyer      | [Buyer](/draft/specification/cart/#buyer)                  | No       | Optional buyer information for personalized estimates.                                                                                             |
 
 #### Output Schema
 
@@ -8234,7 +8332,12 @@ Maps to the [Update Cart](https://ucp.dev/draft/specification/cart/#update-cart)
 
 - `id` (String, required): The ID of the cart session to update.
 
-**Error:** Schema 'cart.update' not found in any schema directory.
+| Name       | Type                                                       | Required | Description                                                                                                                                        |
+| ---------- | ---------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id         | string                                                     | **Yes**  | Unique cart identifier.                                                                                                                            |
+| line_items | Array\[[Line Item](/draft/specification/cart/#line-item)\] | **Yes**  | Cart line items. Same structure as checkout. Full replacement on update.                                                                           |
+| context    | [Context](/draft/specification/cart/#context)              | No       | Buyer signals for localization (country, region, postal_code). Merchant uses for pricing, availability, currency. Falls back to geo-IP if omitted. |
+| buyer      | [Buyer](/draft/specification/cart/#buyer)                  | No       | Optional buyer information for personalized estimates.                                                                                             |
 
 #### Output Schema
 
@@ -12213,7 +12316,14 @@ This object describes a single capability or extension. It appears in the `capab
 
 As seen in discovery profiles.
 
-**Error:** Definition '#/$defs/discovery' not found in 'source/schemas/capability.json'
+| Name    | Type    | Required | Description                                                                                                                     |
+| ------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| version | string  | No       | Entity version in YYYY-MM-DD format.                                                                                            |
+| spec    | string  | **Yes**  | URL to human-readable specification document.                                                                                   |
+| schema  | string  | **Yes**  | URL to JSON Schema defining this entity's structure and payloads.                                                               |
+| id      | string  | No       | Unique identifier for this entity instance. Used to disambiguate when multiple instances exist.                                 |
+| config  | object  | No       | Entity-specific configuration. Structure defined by each entity's schema.                                                       |
+| extends | OneOf[] | No       | Parent capability(s) this extends. Present for extensions, absent for root capabilities. Use array for multi-parent extensions. |
 
 #### Capability (Response)
 

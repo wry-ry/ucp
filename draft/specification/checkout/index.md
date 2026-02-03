@@ -290,17 +290,29 @@ Context signals are provisional hints. Businesses SHOULD use these values when a
 
 ### Fulfillment Option
 
-**Error:** Schema file 'fulfillment_resp.json' not found in any schema directory.
+| Name                      | Type          | Required | Description                                                                |
+| ------------------------- | ------------- | -------- | -------------------------------------------------------------------------- |
+| id                        | string        | **Yes**  | Unique fulfillment option identifier.                                      |
+| title                     | string        | **Yes**  | Short label (e.g., 'Express Shipping', 'Curbside Pickup').                 |
+| description               | string        | No       | Complete context for buyer decision (e.g., 'Arrives Dec 12-15 via FedEx'). |
+| carrier                   | string        | No       | Carrier name (for shipping).                                               |
+| earliest_fulfillment_time | string        | No       | Earliest fulfillment date.                                                 |
+| latest_fulfillment_time   | string        | No       | Latest fulfillment date.                                                   |
+| totals                    | Array[object] | **Yes**  | Fulfillment option totals breakdown.                                       |
 
 ### Item
 
 #### Item Create Request
 
-**Error:** Schema 'types/item.create' not found in any schema directory.
+| Name | Type   | Required | Description                                                                                                                                                                 |
+| ---- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id   | string | **Yes**  | The product identifier, often the SKU, required to resolve the product details associated with this line item. Should be recognized by both the Platform, and the Business. |
 
 #### Item Update Request
 
-**Error:** Schema 'types/item.update' not found in any schema directory.
+| Name | Type   | Required | Description                                                                                                                                                                 |
+| ---- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id   | string | **Yes**  | The product identifier, often the SKU, required to resolve the product details associated with this line item. Should be recognized by both the Platform, and the Business. |
 
 #### Item Response
 
@@ -315,11 +327,19 @@ Context signals are provisional hints. Businesses SHOULD use these values when a
 
 #### Line Item Create Request
 
-**Error:** Schema 'types/line_item.create' not found in any schema directory.
+| Name     | Type                                        | Required | Description                           |
+| -------- | ------------------------------------------- | -------- | ------------------------------------- |
+| item     | [Item](/draft/specification/checkout/#item) | **Yes**  |                                       |
+| quantity | integer                                     | **Yes**  | Quantity of the item being purchased. |
 
 #### Line Item Update Request
 
-**Error:** Schema 'types/line_item.update' not found in any schema directory.
+| Name      | Type                                        | Required | Description                                            |
+| --------- | ------------------------------------------- | -------- | ------------------------------------------------------ |
+| id        | string                                      | No       |                                                        |
+| item      | [Item](/draft/specification/checkout/#item) | **Yes**  |                                                        |
+| quantity  | integer                                     | **Yes**  | Quantity of the item being purchased.                  |
+| parent_id | string                                      | No       | Parent line item identifier for any nested structures. |
 
 #### Line Item Response
 
