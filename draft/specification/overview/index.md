@@ -99,7 +99,7 @@ The `endpoint` field provides the base URL for API calls. OpenAPI paths are appe
 {
   "version": "2026-01-11",
   "transport": "rest",
-  "schema": "https://ucp.dev/services/shopping/rest.openapi.json",
+  "schema": "https://ucp.dev/services/shopping/openapi.json",
   "endpoint": "https://business.example.com/api/v2"
 }
 ```
@@ -264,7 +264,7 @@ Businesses publish their profile at `/.well-known/ucp`. An example:
           "spec": "https://ucp.dev/specification/overview",
           "transport": "rest",
           "endpoint": "https://business.example.com/ucp/v1",
-          "schema": "https://ucp.dev/services/shopping/rest.openapi.json"
+          "schema": "https://ucp.dev/services/shopping/openapi.json"
         },
         {
           "version": "2026-01-11",
@@ -362,7 +362,7 @@ Platform profiles are similar and include signing keys for capabilities requirin
           "version": "2026-01-11",
           "spec": "https://ucp.dev/specification/overview",
           "transport": "rest",
-          "schema": "https://ucp.dev/services/shopping/rest.openapi.json"
+          "schema": "https://ucp.dev/services/shopping/openapi.json"
         }
       ]
     },
