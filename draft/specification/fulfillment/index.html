@@ -1609,7 +1609,7 @@
 <p><em>File</em>: <code>specification/fulfillment.md</code></p>
 <p><em>RuntimeError</em>: Error loading extension 'fulfillment_resp': [Errno 2] No such file or directory: 'source/schemas/shopping/fulfillment_resp.json' (in file: specification/fulfillment.md)</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Traceback (most recent call last):
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  File &quot;/home/runner/work/ucp/ucp/main.py&quot;, line 954, in extension_fields
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  File &quot;/home/runner/work/ucp/ucp/main.py&quot;, line 980, in extension_fields
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    with full_path.open(encoding=&quot;utf-8&quot;) as f:
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  File &quot;/usr/lib/python3.12/pathlib.py&quot;, line 1015, in open
@@ -1628,7 +1628,7 @@
 </span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>  File &quot;/home/runner/work/ucp/ucp/.venv/lib/python3.12/site-packages/jinja2/environment.py&quot;, line 942, in handle_exception
 </span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    raise rewrite_traceback_stack(source=source)
 </span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>  File &quot;&lt;template&gt;&quot;, line 55, in top-level template code
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>  File &quot;/home/runner/work/ucp/ucp/main.py&quot;, line 972, in extension_fields
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>  File &quot;/home/runner/work/ucp/ucp/main.py&quot;, line 998, in extension_fields
 </span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    raise RuntimeError(f&quot;Error loading extension &#39;{entity_name}&#39;: {e}{get_error_context()}&quot;)
 </span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>RuntimeError: Error loading extension &#39;fulfillment_resp&#39;: [Errno 2] No such file or directory: &#39;source/schemas/shopping/fulfillment_resp.json&#39; (in file: specification/fulfillment.md)
 </span></code></pre></div>
