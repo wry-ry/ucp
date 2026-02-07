@@ -70,14 +70,11 @@ copyright: Copyright 2026 UCP Authors. Licensed under the <a href="https://githu
 extra_css:
   - stylesheets/custom.css
 
-# Custom Javascript
-extra_javascript:
-  - javascripts/consent-patch.js
-
 #Global Constants
 extra:
   ucp_version: "draft"
   ucp_url: https://ucp.dev
+  scope: "/"
   analytics:
     provider: google
     # cSpell:disable
