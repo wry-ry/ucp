@@ -28,8 +28,9 @@ echo "Using Mike: $(which mike)"
 echo "=== Setup ==="
 rm -rf "$OUTPUT_DIR"
 
-# Save current config to inject into historical builds
+# Save current config and assets to inject into historical builds
 cp mkdocs-spec.yml /tmp/ucp-mkdocs-spec.yml
+cp docs/stylesheets/custom.css /tmp/ucp-custom.css
 
 echo "=== Syncing Release Branches ==="
 git fetch origin
@@ -43,7 +44,7 @@ EXTRACT_LIST="draft latest versions.json"
 
 for branch in $RELEASE_BRANCHES; do
     version=$(echo "$branch" | sed 's/release\///')
-    echo ">>> Rebuilding Version: $version (from $branch) using CURRENT config"
+    echo ">>> Rebuilding Version: $version (from $branch) using CURRENT config & CSS"
     EXTRACT_LIST="$EXTRACT_LIST $version"
     
     rm -rf "$WORKTREE_DIR"
@@ -52,10 +53,14 @@ for branch in $RELEASE_BRANCHES; do
     
     pushd "$WORKTREE_DIR" > /dev/null
     
-    # 1. Use Modern Config
+    # 1. Inject Modern CSS
+    mkdir -p docs/stylesheets
+    cp /tmp/ucp-custom.css docs/stylesheets/custom.css
+    
+    # 2. Use Modern Config
     cp /tmp/ucp-mkdocs-spec.yml mkdocs-spec.yml
     
-    # 2. Deploy
+    # 3. Deploy
     # mike will now use the mkdocs in PATH (which is the root venv)
     mike deploy -F mkdocs-spec.yml "$version"
     
