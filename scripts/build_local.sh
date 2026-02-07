@@ -48,6 +48,41 @@ else
     echo "Warning: No dated version found to alias as 'latest'."
 fi
 
+echo "=== Injecting Consent Patch into Historical Versions ==="
+# Inject the consent-patch.js script into all HTML files of extracted versions.
+# This allows old versions to participate in shared consent during local preview.
+# We skip 'draft' and 'latest' if they are new builds that already include it via mkdocs.yml,
+# but injecting it twice is harmless (just redundant) or we can check.
+# Since historical versions (e.g. 2026-01-11) DEFINITELY lack it, we target everything in ALL_VERSIONS.
+
+INJECTION_SCRIPT='<script src="/latest/javascripts/consent-patch.js"></script>'
+
+for ver in $ALL_VERSIONS; do
+    if [ -d "$OUTPUT_DIR/$ver" ]; then
+        echo "Injecting consent patch into $ver..."
+        # Using python to append before </body> tag for cross-platform compatibility
+        # We walk all HTML files
+        find "$OUTPUT_DIR/$ver" -name "*.html" -print0 | xargs -0 python3 -c "
+import sys
+import os
+
+script_tag = '$INJECTION_SCRIPT'
+for filepath in sys.argv[1:]:
+    with open(filepath, 'r', encoding='utf-8') as f:
+        content = f.read()
+    
+    # Avoid double injection if already present
+    if 'consent-patch.js' in content:
+        continue
+        
+    if '</body>' in content:
+        new_content = content.replace('</body>', script_tag + '\n</body>')
+        with open(filepath, 'w', encoding='utf-8') as f:
+            f.write(new_content)
+"
+    fi
+done
+
 echo "=== Build Complete! ==="
 echo "You can now view the site at: http://localhost:8000/"
 echo "Run this command to serve:"
