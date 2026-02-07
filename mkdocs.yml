@@ -28,7 +28,35 @@ nav:
   - Home: index.md
   - Core Concepts: documentation/core-concepts.md
   - Playground: playground.md
-  - Specification: /specification/latest/
+  - Specification:
+    - Overview: /latest/specification/overview/
+    - Checkout Capability:
+      - Overview: /latest/specification/checkout/
+      - HTTP/REST Binding: /latest/specification/checkout-rest/
+      - MCP Binding: /latest/specification/checkout-mcp/
+      - A2A Binding: /latest/specification/checkout-a2a/
+      - EP Binding: /latest/specification/embedded-checkout/
+      - AP2 Mandates Extension: /latest/specification/ap2-mandates/
+      - Buyer Consent Extension: /latest/specification/buyer-consent/
+      - Discounts Extension: /latest/specification/discount/
+      - Fulfillment Extension: /latest/specification/fulfillment/
+    - Cart Capability:
+      - Overview: /latest/specification/cart/
+      - HTTP/REST Binding: /latest/specification/cart-rest/
+      - MCP Binding: /latest/specification/cart-mcp/
+    - Order Capability: /latest/specification/order/
+    - Identity Linking Capability: /latest/specification/identity-linking/
+    - Payment Handlers:
+      - Guide: /latest/specification/payment-handler-guide/
+      - Template: /latest/specification/payment-handler-template/
+      - Tokenization Guide: /latest/specification/tokenization-guide/
+      - Examples:
+        - Processor Tokenizer: /latest/specification/examples/processor-tokenizer-payment-handler/
+        - Platform Tokenizer: /latest/specification/examples/platform-tokenizer-payment-handler/
+        - Encrypted Credential: /latest/specification/examples/encrypted-credential-handler/
+    - Schema Authoring: documentation/schema-authoring.md
+    - Reference: /latest/specification/reference/
+    - Versioning: /latest/specification/versioning/
   - UCP and AP2: documentation/ucp-and-ap2.md
   - Roadmap: documentation/roadmap.md
 
@@ -41,6 +69,10 @@ copyright: Copyright 2026 UCP Authors. Licensed under the <a href="https://githu
 # Custom CSS
 extra_css:
   - stylesheets/custom.css
+
+# Custom Javascript
+extra_javascript:
+  - javascripts/consent-patch.js
 
 #Global Constants
 extra:
@@ -58,6 +90,7 @@ extra:
       as to measure the effectiveness of our documentation and whether users
       find what they're searching for. With your consent, you're helping us to
       make our documentation better.
+  # Version dropdown removed for Root site (unversioned)
 
 # Configuration
 theme:

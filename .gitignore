@@ -213,4 +213,5 @@ gradle-app.setting
 ### Gradle Patch ###
 # Java heap dump
 *.hprof
-/site-specification
+/site-specification/
+/local_preview/
