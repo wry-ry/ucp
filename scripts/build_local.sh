@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# Ensure we are running from the project root (parent of scripts/)
+cd "$(dirname "$0")/.."
+
 # Configuration
 ROOT_CONFIG="mkdocs.yml"
 SPEC_CONFIG="mkdocs-spec.yml"
