@@ -25,11 +25,15 @@ edit_uri: edit/main/docs/
 
 # Navigation
 nav:
-  - Home: /
-  - Core Concepts: /documentation/core-concepts/
-  - Playground: /playground/
+  - Overview:
+    - Home: /
+    - Core Concepts: /documentation/core-concepts/
+    - UCP and AP2: /documentation/ucp-and-ap2/
+    - Roadmap: /documentation/roadmap/
+    - Schema Authoring: /documentation/schema-authoring/
   - Specification:
     - Overview: specification/overview.md
+    - Playground: playground.md
     - Checkout Capability:
       - Overview: specification/checkout.md
       - HTTP/REST Binding: specification/checkout-rest.md
@@ -54,11 +58,8 @@ nav:
         - Processor Tokenizer: specification/examples/processor-tokenizer-payment-handler.md
         - Platform Tokenizer: specification/examples/platform-tokenizer-payment-handler.md
         - Encrypted Credential: specification/examples/encrypted-credential-handler.md
-    - Schema Authoring: /documentation/schema-authoring/
     - Reference: specification/reference.md
     - Versioning: specification/versioning.md
-  - UCP and AP2: /documentation/ucp-and-ap2/
-  - Roadmap: /documentation/roadmap/
 
 repo_name: UCP on GitHub # Override repo name to be shorter on site header.
 repo_url: https://github.com/Universal-Commerce-Protocol/ucp
@@ -136,6 +137,8 @@ theme:
     - navigation.path
     - navigation.top
     - navigation.tracking
+    - navigation.tabs
+    # - navigation.tabs.sticky # Optional, keeps tabs visible
     - toc.follow
 
 # Extensions

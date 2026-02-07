@@ -28,9 +28,8 @@ echo "Using Mike: $(which mike)"
 echo "=== Setup ==="
 rm -rf "$OUTPUT_DIR"
 
-# Save current config and assets
+# Save current config to inject into historical builds
 cp mkdocs-spec.yml /tmp/ucp-mkdocs-spec.yml
-cp docs/javascripts/consent-patch.js /tmp/ucp-consent-patch.js
 
 echo "=== Syncing Release Branches ==="
 git fetch origin
@@ -53,14 +52,10 @@ for branch in $RELEASE_BRANCHES; do
     
     pushd "$WORKTREE_DIR" > /dev/null
     
-    # 1. Install Modern Assets
-    mkdir -p docs/javascripts
-    cp /tmp/ucp-consent-patch.js docs/javascripts/consent-patch.js
-    
-    # 2. Use Modern Config
+    # 1. Use Modern Config
     cp /tmp/ucp-mkdocs-spec.yml mkdocs-spec.yml
     
-    # 3. Deploy
+    # 2. Deploy
     # mike will now use the mkdocs in PATH (which is the root venv)
     mike deploy -F mkdocs-spec.yml "$version"
     
