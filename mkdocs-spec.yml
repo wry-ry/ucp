@@ -13,44 +13,54 @@
 #   limitations under the License.
 
 
-site_name: UCP Specification
-site_url: https://ucp.dev/specification/
-site_description: Technical specification for the Universal Commerce Protocol.
+site_name: Universal Commerce Protocol (UCP)
+site_url: https://ucp.dev/  # Required for the llmstxt plugin to work.
+site_description: >
+  The Universal Commerce Protocol (UCP) is a solution for enabling gen AI agents to make payments on
+  behalf of users, safely, securely, and in a decentralized and privacy protecting manner.
+  This protocol is a part of the broader ecosystem, which includes agentic protocols like A2A and
+  MCP, and encompasses the global nature of payments.
 site_dir: site-specification
 edit_uri: edit/main/docs/
 
 # Navigation
 nav:
-  - Overview: specification/overview.md
-  - Checkout Capability:
-    - Overview: specification/checkout.md
-    - HTTP/REST Binding: specification/checkout-rest.md
-    - MCP Binding: specification/checkout-mcp.md
-    - A2A Binding: specification/checkout-a2a.md
-    - EP Binding: specification/embedded-checkout.md
-    - AP2 Mandates Extension: specification/ap2-mandates.md
-    - Buyer Consent Extension: specification/buyer-consent.md
-    - Discounts Extension: specification/discount.md
-    - Fulfillment Extension: specification/fulfillment.md
-  - Cart Capability:
-    - Overview: specification/cart.md
-    - HTTP/REST Binding: specification/cart-rest.md
-    - MCP Binding: specification/cart-mcp.md
-  - Order Capability: specification/order.md
-  - Identity Linking Capability: specification/identity-linking.md
-  - Payment Handlers:
-    - Guide: specification/payment-handler-guide.md
-    - Template: specification/payment-handler-template.md
-    - Tokenization Guide: specification/tokenization-guide.md
-    - Examples:
-      - Processor Tokenizer: specification/examples/processor-tokenizer-payment-handler.md
-      - Platform Tokenizer: specification/examples/platform-tokenizer-payment-handler.md
-      - Encrypted Credential: specification/examples/encrypted-credential-handler.md
-  - Schema Authoring: documentation/schema-authoring.md
-  - Reference: specification/reference.md
-  - Versioning: specification/versioning.md
+  - Home: /
+  - Core Concepts: /documentation/core-concepts/
+  - Playground: /playground/
+  - Specification:
+    - Overview: specification/overview.md
+    - Checkout Capability:
+      - Overview: specification/checkout.md
+      - HTTP/REST Binding: specification/checkout-rest.md
+      - MCP Binding: specification/checkout-mcp.md
+      - A2A Binding: specification/checkout-a2a.md
+      - EP Binding: specification/embedded-checkout.md
+      - AP2 Mandates Extension: specification/ap2-mandates.md
+      - Buyer Consent Extension: specification/buyer-consent.md
+      - Discounts Extension: specification/discount.md
+      - Fulfillment Extension: specification/fulfillment.md
+    - Cart Capability:
+      - Overview: specification/cart.md
+      - HTTP/REST Binding: specification/cart-rest.md
+      - MCP Binding: specification/cart-mcp.md
+    - Order Capability: specification/order.md
+    - Identity Linking Capability: specification/identity-linking.md
+    - Payment Handlers:
+      - Guide: specification/payment-handler-guide.md
+      - Template: specification/payment-handler-template.md
+      - Tokenization Guide: specification/tokenization-guide.md
+      - Examples:
+        - Processor Tokenizer: specification/examples/processor-tokenizer-payment-handler.md
+        - Platform Tokenizer: specification/examples/platform-tokenizer-payment-handler.md
+        - Encrypted Credential: specification/examples/encrypted-credential-handler.md
+    - Schema Authoring: /documentation/schema-authoring/
+    - Reference: specification/reference.md
+    - Versioning: specification/versioning.md
+  - UCP and AP2: /documentation/ucp-and-ap2/
+  - Roadmap: /documentation/roadmap/
 
-repo_name: UCP on GitHub
+repo_name: UCP on GitHub # Override repo name to be shorter on site header.
 repo_url: https://github.com/Universal-Commerce-Protocol/ucp
 
 # Copyright
@@ -59,6 +69,10 @@ copyright: Copyright 2026 UCP Authors. Licensed under the <a href="https://githu
 # Custom CSS
 extra_css:
   - stylesheets/custom.css
+
+# Custom Javascript
+extra_javascript:
+  - javascripts/consent-patch.js
 
 #Global Constants
 extra:
@@ -177,6 +191,15 @@ plugins:
   - llmstxt:
       full_output: llms-full.txt
       sections:
+        Introduction:
+          - index.md
+          - documentation/core-concepts.md
+        UCP and AP2:
+          - documentation/ucp-and-ap2.md
+        Playground:
+          - playground.md
+        Roadmap:
+          - documentation/roadmap.md
         Specification Overview:
           - specification/overview.md
         Checkout Capability:
