@@ -33,10 +33,20 @@
         // Current Path Key
         var path = window.location.pathname.replace(/index\.html$/, "");
         if (!path.endsWith("/")) path += "/";
+        
         var currentKey = (path === "/") ? "/.__consent" : path + "." + "__consent";
 
         if (localStorage.getItem(currentKey) !== foundVal) {
           localStorage.setItem(currentKey, foundVal);
+        }
+        
+        // Force hide banner if we have consent
+        // This handles cases where the theme script ran first and showed the banner
+        var banner = document.querySelector('[data-md-component="consent"]');
+        if (banner && !banner.hidden) {
+            banner.hidden = true;
+            // Also force style in case hidden attribute is not enough or overridden
+            if (banner.style) banner.style.display = 'none';
         }
       }
     } catch (e) {
