@@ -304,14 +304,14 @@ ______________________________________________________________________
 
 ### Message Error
 
-| Name         | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| ------------ | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| type         | string | **Yes**  | **Constant = error**. Message type discriminator.                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| code         | string | **Yes**  | Error code. Possible values include: missing, invalid, out_of_stock, payment_declined, requires_sign_in, requires_3ds, requires_identity_linking. Freeform codes also allowed.                                                                                                                                                                                                                                                                                                                                 |
-| path         | string | No       | RFC 9535 JSONPath to the component the message refers to (e.g., $.items[1]).                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| content_type | string | No       | Content format, default = plain. **Enum:** `plain`, `markdown`                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| content      | string | **Yes**  | Human-readable message.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| severity     | string | **Yes**  | Declares who resolves this error. 'recoverable': agent can fix via API. 'requires_buyer_input': merchant requires information their API doesn't support collecting programmatically (checkout incomplete). 'requires_buyer_review': buyer must authorize before order placement due to policy, regulatory, or entitlement rules (checkout complete). Errors with 'requires\_*' severity contribute to 'status: requires_escalation'.* *Enum:*\* `recoverable`, `requires_buyer_input`, `requires_buyer_review` |
+| Name         | Type                                                     | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| ------------ | -------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| type         | string                                                   | **Yes**  | **Constant = error**. Message type discriminator.                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| code         | [Error Code](/draft/specification/reference/#error-code) | **Yes**  | Error code identifying the type of error. Standard errors are defined in specification (see examples), and have standardized semantics; freeform codes are permitted.                                                                                                                                                                                                                                                                                                                                          |
+| path         | string                                                   | No       | RFC 9535 JSONPath to the component the message refers to (e.g., $.items[1]).                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| content_type | string                                                   | No       | Content format, default = plain. **Enum:** `plain`, `markdown`                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| content      | string                                                   | **Yes**  | Human-readable message.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| severity     | string                                                   | **Yes**  | Declares who resolves this error. 'recoverable': agent can fix via API. 'requires_buyer_input': merchant requires information their API doesn't support collecting programmatically (checkout incomplete). 'requires_buyer_review': buyer must authorize before order placement due to policy, regulatory, or entitlement rules (checkout complete). Errors with 'requires\_*' severity contribute to 'status: requires_escalation'.* *Enum:*\* `recoverable`, `requires_buyer_input`, `requires_buyer_review` |
 
 ______________________________________________________________________
 
@@ -690,43 +690,55 @@ The following schemas define the structure of UCP metadata used in discovery and
 
 The top-level structure of a platform profile document (hosted at a URI advertised by the platform).
 
-| Name                                                                                        | Type | Required | Description |
-| ------------------------------------------------------------------------------------------- | ---- | -------- | ----------- |
-| **Error:** Failed to resolve ''. Ensure ucp-schema is installed: `cargo install ucp-schema` |      |          |             |
-| services                                                                                    | any  | **Yes**  |             |
-| capabilities                                                                                | any  | No       |             |
-| payment_handlers                                                                            | any  | **Yes**  |             |
+| Name             | Type   | Required | Description                                            |
+| ---------------- | ------ | -------- | ------------------------------------------------------ |
+| version          | string | **Yes**  | UCP version in YYYY-MM-DD format.                      |
+| services         | object | No       | Service registry keyed by reverse-domain name.         |
+| capabilities     | object | No       | Capability registry keyed by reverse-domain name.      |
+| payment_handlers | object | No       | Payment handler registry keyed by reverse-domain name. |
+| services         | any    | **Yes**  |                                                        |
+| capabilities     | any    | No       |                                                        |
+| payment_handlers | any    | **Yes**  |                                                        |
 
 ### Business Discovery Profile
 
 The top-level structure of a business discovery document (`/.well-known/ucp`).
 
-| Name                                                                                        | Type | Required | Description |
-| ------------------------------------------------------------------------------------------- | ---- | -------- | ----------- |
-| **Error:** Failed to resolve ''. Ensure ucp-schema is installed: `cargo install ucp-schema` |      |          |             |
-| services                                                                                    | any  | **Yes**  |             |
-| capabilities                                                                                | any  | No       |             |
-| payment_handlers                                                                            | any  | **Yes**  |             |
+| Name             | Type   | Required | Description                                            |
+| ---------------- | ------ | -------- | ------------------------------------------------------ |
+| version          | string | **Yes**  | UCP version in YYYY-MM-DD format.                      |
+| services         | object | No       | Service registry keyed by reverse-domain name.         |
+| capabilities     | object | No       | Capability registry keyed by reverse-domain name.      |
+| payment_handlers | object | No       | Payment handler registry keyed by reverse-domain name. |
+| services         | any    | **Yes**  |                                                        |
+| capabilities     | any    | No       |                                                        |
+| payment_handlers | any    | **Yes**  |                                                        |
 
 ### Checkout Response Metadata
 
 The `ucp` object included in checkout responses.
 
-| Name                                                                                        | Type | Required | Description |
-| ------------------------------------------------------------------------------------------- | ---- | -------- | ----------- |
-| **Error:** Failed to resolve ''. Ensure ucp-schema is installed: `cargo install ucp-schema` |      |          |             |
-| services                                                                                    | any  | No       |             |
-| capabilities                                                                                | any  | No       |             |
-| payment_handlers                                                                            | any  | **Yes**  |             |
+| Name             | Type   | Required | Description                                            |
+| ---------------- | ------ | -------- | ------------------------------------------------------ |
+| version          | string | **Yes**  | UCP version in YYYY-MM-DD format.                      |
+| services         | object | No       | Service registry keyed by reverse-domain name.         |
+| capabilities     | object | No       | Capability registry keyed by reverse-domain name.      |
+| payment_handlers | object | No       | Payment handler registry keyed by reverse-domain name. |
+| services         | any    | No       |                                                        |
+| capabilities     | any    | No       |                                                        |
+| payment_handlers | any    | **Yes**  |                                                        |
 
 ### Order Response Metadata
 
 The `ucp` object included in order responses or events.
 
-| Name                                                                                        | Type | Required | Description |
-| ------------------------------------------------------------------------------------------- | ---- | -------- | ----------- |
-| **Error:** Failed to resolve ''. Ensure ucp-schema is installed: `cargo install ucp-schema` |      |          |             |
-| capabilities                                                                                | any  | No       |             |
+| Name             | Type   | Required | Description                                            |
+| ---------------- | ------ | -------- | ------------------------------------------------------ |
+| version          | string | **Yes**  | UCP version in YYYY-MM-DD format.                      |
+| services         | object | No       | Service registry keyed by reverse-domain name.         |
+| capabilities     | object | No       | Capability registry keyed by reverse-domain name.      |
+| payment_handlers | object | No       | Payment handler registry keyed by reverse-domain name. |
+| capabilities     | any    | No       |                                                        |
 
 ### Capability
 
@@ -736,12 +748,24 @@ This object describes a single capability or extension. It appears in the `capab
 
 As seen in discovery profiles.
 
-**Error:** Definition '#/$defs/discovery' not found in 'source/schemas/capability.json'
+| Name    | Type    | Required | Description                                                                                                                     |
+| ------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| version | string  | No       | Entity version in YYYY-MM-DD format.                                                                                            |
+| spec    | string  | **Yes**  | URL to human-readable specification document.                                                                                   |
+| schema  | string  | **Yes**  | URL to JSON Schema defining this entity's structure and payloads.                                                               |
+| id      | string  | No       | Unique identifier for this entity instance. Used to disambiguate when multiple instances exist.                                 |
+| config  | object  | No       | Entity-specific configuration. Structure defined by each entity's schema.                                                       |
+| extends | OneOf[] | No       | Parent capability(s) this extends. Present for extensions, absent for root capabilities. Use array for multi-parent extensions. |
 
 #### Capability (Response)
 
 As seen in response messages.
 
-| Name                                                                                        | Type | Required | Description |
-| ------------------------------------------------------------------------------------------- | ---- | -------- | ----------- |
-| **Error:** Failed to resolve ''. Ensure ucp-schema is installed: `cargo install ucp-schema` |      |          |             |
+| Name    | Type    | Required | Description                                                                                                                     |
+| ------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| version | string  | **Yes**  | Entity version in YYYY-MM-DD format.                                                                                            |
+| spec    | string  | No       | URL to human-readable specification document.                                                                                   |
+| schema  | string  | No       | URL to JSON Schema defining this entity's structure and payloads.                                                               |
+| id      | string  | No       | Unique identifier for this entity instance. Used to disambiguate when multiple instances exist.                                 |
+| config  | object  | No       | Entity-specific configuration. Structure defined by each entity's schema.                                                       |
+| extends | OneOf[] | No       | Parent capability(s) this extends. Present for extensions, absent for root capabilities. Use array for multi-parent extensions. |
