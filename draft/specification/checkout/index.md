@@ -410,29 +410,17 @@ Context signals are provisional hints. Businesses SHOULD use these values when a
 
 ### Fulfillment Option
 
-| Name                      | Type          | Required | Description                                                                |
-| ------------------------- | ------------- | -------- | -------------------------------------------------------------------------- |
-| id                        | string        | **Yes**  | Unique fulfillment option identifier.                                      |
-| title                     | string        | **Yes**  | Short label (e.g., 'Express Shipping', 'Curbside Pickup').                 |
-| description               | string        | No       | Complete context for buyer decision (e.g., 'Arrives Dec 12-15 via FedEx'). |
-| carrier                   | string        | No       | Carrier name (for shipping).                                               |
-| earliest_fulfillment_time | string        | No       | Earliest fulfillment date.                                                 |
-| latest_fulfillment_time   | string        | No       | Latest fulfillment date.                                                   |
-| totals                    | Array[object] | **Yes**  | Fulfillment option totals breakdown.                                       |
+**Error:** Schema file 'fulfillment_resp.json' not found in any schema directory.
 
 ### Item
 
 #### Item Create Request
 
-| Name | Type   | Required | Description                                                                                                                                                                 |
-| ---- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| id   | string | **Yes**  | The product identifier, often the SKU, required to resolve the product details associated with this line item. Should be recognized by both the Platform, and the Business. |
+**Error:** Schema 'types/item.create' not found in any schema directory.
 
 #### Item Update Request
 
-| Name | Type   | Required | Description                                                                                                                                                                 |
-| ---- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| id   | string | **Yes**  | The product identifier, often the SKU, required to resolve the product details associated with this line item. Should be recognized by both the Platform, and the Business. |
+**Error:** Schema 'types/item.update' not found in any schema directory.
 
 #### Item Response
 
@@ -447,19 +435,11 @@ Context signals are provisional hints. Businesses SHOULD use these values when a
 
 #### Line Item Create Request
 
-| Name     | Type                                        | Required | Description                           |
-| -------- | ------------------------------------------- | -------- | ------------------------------------- |
-| item     | [Item](/draft/specification/checkout/#item) | **Yes**  |                                       |
-| quantity | integer                                     | **Yes**  | Quantity of the item being purchased. |
+**Error:** Schema 'types/line_item.create' not found in any schema directory.
 
 #### Line Item Update Request
 
-| Name      | Type                                        | Required | Description                                            |
-| --------- | ------------------------------------------- | -------- | ------------------------------------------------------ |
-| id        | string                                      | No       |                                                        |
-| item      | [Item](/draft/specification/checkout/#item) | **Yes**  |                                                        |
-| quantity  | integer                                     | **Yes**  | Quantity of the item being purchased.                  |
-| parent_id | string                                      | No       | Parent line item identifier for any nested structures. |
+**Error:** Schema 'types/line_item.update' not found in any schema directory.
 
 #### Line Item Response
 
@@ -567,14 +547,9 @@ This object MUST be one of the following types: [Message Error](/draft/specifica
 
 ### Response
 
-| Name    | Type    | Required | Description                                                                                                                     |
-| ------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| version | string  | **Yes**  | Entity version in YYYY-MM-DD format.                                                                                            |
-| spec    | string  | No       | URL to human-readable specification document.                                                                                   |
-| schema  | string  | No       | URL to JSON Schema defining this entity's structure and payloads.                                                               |
-| id      | string  | No       | Unique identifier for this entity instance. Used to disambiguate when multiple instances exist.                                 |
-| config  | object  | No       | Entity-specific configuration. Structure defined by each entity's schema.                                                       |
-| extends | OneOf[] | No       | Parent capability(s) this extends. Present for extensions, absent for root capabilities. Use array for multi-parent extensions. |
+| Name                                                                                        | Type | Required | Description |
+| ------------------------------------------------------------------------------------------- | ---- | -------- | ----------- |
+| **Error:** Failed to resolve ''. Ensure ucp-schema is installed: `cargo install ucp-schema` |      |          |             |
 
 ### Total
 
@@ -588,15 +563,12 @@ This object MUST be one of the following types: [Message Error](/draft/specifica
 
 ### UCP Response Checkout
 
-| Name             | Type   | Required | Description                                            |
-| ---------------- | ------ | -------- | ------------------------------------------------------ |
-| version          | string | **Yes**  | UCP version in YYYY-MM-DD format.                      |
-| services         | object | No       | Service registry keyed by reverse-domain name.         |
-| capabilities     | object | No       | Capability registry keyed by reverse-domain name.      |
-| payment_handlers | object | No       | Payment handler registry keyed by reverse-domain name. |
-| services         | any    | No       |                                                        |
-| capabilities     | any    | No       |                                                        |
-| payment_handlers | any    | **Yes**  |                                                        |
+| Name                                                                                        | Type | Required | Description |
+| ------------------------------------------------------------------------------------------- | ---- | -------- | ----------- |
+| **Error:** Failed to resolve ''. Ensure ucp-schema is installed: `cargo install ucp-schema` |      |          |             |
+| services                                                                                    | any  | No       |             |
+| capabilities                                                                                | any  | No       |             |
+| payment_handlers                                                                            | any  | **Yes**  |             |
 
 ### Order Confirmation
 

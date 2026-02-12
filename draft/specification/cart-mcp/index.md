@@ -90,11 +90,7 @@ Maps to the [Create Cart](https://ucp.dev/draft/specification/cart/#create-cart)
 
 #### Input Schema
 
-| Name       | Type                                                       | Required | Description                                                                                                                                        |
-| ---------- | ---------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| line_items | Array\[[Line Item](/draft/specification/cart/#line-item)\] | **Yes**  | Cart line items. Same structure as checkout. Full replacement on update.                                                                           |
-| context    | [Context](/draft/specification/cart/#context)              | No       | Buyer signals for localization (country, region, postal_code). Merchant uses for pricing, availability, currency. Falls back to geo-IP if omitted. |
-| buyer      | [Buyer](/draft/specification/cart/#buyer)                  | No       | Optional buyer information for personalized estimates.                                                                                             |
+**Error:** Schema 'cart.create' not found in any schema directory.
 
 #### Output Schema
 
@@ -358,12 +354,7 @@ Maps to the [Update Cart](https://ucp.dev/draft/specification/cart/#update-cart)
 
 - `id` (String, required): The ID of the cart session to update.
 
-| Name       | Type                                                       | Required | Description                                                                                                                                        |
-| ---------- | ---------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| id         | string                                                     | **Yes**  | Unique cart identifier.                                                                                                                            |
-| line_items | Array\[[Line Item](/draft/specification/cart/#line-item)\] | **Yes**  | Cart line items. Same structure as checkout. Full replacement on update.                                                                           |
-| context    | [Context](/draft/specification/cart/#context)              | No       | Buyer signals for localization (country, region, postal_code). Merchant uses for pricing, availability, currency. Falls back to geo-IP if omitted. |
-| buyer      | [Buyer](/draft/specification/cart/#buyer)                  | No       | Optional buyer information for personalized estimates.                                                                                             |
+**Error:** Schema 'cart.update' not found in any schema directory.
 
 #### Output Schema
 

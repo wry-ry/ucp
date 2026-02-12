@@ -136,19 +136,11 @@ Cart reuses the same entity schemas as [Checkout](https://ucp.dev/draft/specific
 
 #### Line Item Create Request
 
-| Name     | Type                                        | Required | Description                           |
-| -------- | ------------------------------------------- | -------- | ------------------------------------- |
-| item     | [Item](/draft/specification/checkout/#item) | **Yes**  |                                       |
-| quantity | integer                                     | **Yes**  | Quantity of the item being purchased. |
+**Error:** Schema 'types/line_item.create' not found in any schema directory.
 
 #### Line Item Update Request
 
-| Name      | Type                                        | Required | Description                                            |
-| --------- | ------------------------------------------- | -------- | ------------------------------------------------------ |
-| id        | string                                      | No       |                                                        |
-| item      | [Item](/draft/specification/checkout/#item) | **Yes**  |                                                        |
-| quantity  | integer                                     | **Yes**  | Quantity of the item being purchased.                  |
-| parent_id | string                                      | No       | Parent line item identifier for any nested structures. |
+**Error:** Schema 'types/line_item.update' not found in any schema directory.
 
 #### Line Item Response
 
