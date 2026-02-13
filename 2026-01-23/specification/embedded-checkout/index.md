@@ -54,21 +54,21 @@ When a business advertises the `embedded` transport in their `/.well-known/ucp` 
     "services": {
         "dev.ucp.shopping": [
             {
-                "version": "2026-01-11",
+                "version": "2026-01-23",
                 "transport": "rest",
-                "schema": "https://ucp.dev/services/shopping/rest.openapi.json",
+                "schema": "https://ucp.dev/2026-01-23/services/shopping/rest.openapi.json",
                 "endpoint": "https://merchant.example.com/ucp/v1"
             },
             {
-                "version": "2026-01-11",
+                "version": "2026-01-23",
                 "transport": "mcp",
-                "schema": "https://ucp.dev/services/shopping/mcp.openrpc.json",
+                "schema": "https://ucp.dev/2026-01-23/services/shopping/mcp.openrpc.json",
                 "endpoint": "https://merchant.example.com/ucp/mcp"
             },
             {
-                "version": "2026-01-11",
+                "version": "2026-01-23",
                 "transport": "embedded",
-                "schema": "https://ucp.dev/services/shopping/embedded.openrpc.json"
+                "schema": "https://ucp.dev/2026-01-23/services/shopping/embedded.openrpc.json"
             }
         ]
     }
@@ -89,11 +89,11 @@ Service-level discovery declares that a business supports ECP, but does not guar
     "status": "open",
     "continue_url": "https://merchant.example.com/checkout/abc123",
     "ucp": {
-        "version": "2026-01-11",
+        "version": "2026-01-23",
         "services": {
             "dev.ucp.shopping": [
                 {
-                    "version": "2026-01-11",
+                    "version": "2026-01-23",
                     "transport": "embedded",
                     "config": {
                         "delegate": ["payment.credential", "fulfillment.address_change"]
@@ -1136,9 +1136,7 @@ The object returned upon successful completion of a checkout, containing confirm
 
 ### Payment
 
-| Name        | Type                                                                                                             | Required | Description                                                                                                                                                                                                                |
-| ----------- | ---------------------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| instruments | Array\[[Selected Payment Instrument](/2026-01-23/specification/embedded-checkout/#selected-payment-instrument)\] | No       | The payment instruments available for this payment. Each instrument is associated with a specific handler via the handler_id field. Handlers can extend the base payment_instrument schema to add handler-specific fields. |
+**Error:** Schema 'payment_resp' not found in any schema directory.
 
 ### Payment Instrument
 
@@ -1157,4 +1155,4 @@ Represents a specific method of payment (e.g., a specific credit card, bank acco
 
 Represents the processor or wallet provider responsible for authenticating and processing a specific payment instrument (e.g., Google Pay, Stripe, or a Bank App).
 
-*No properties defined.*
+**Error:** Schema 'payment_handler_resp' not found in any schema directory.

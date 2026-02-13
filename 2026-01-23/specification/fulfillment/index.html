@@ -17,7 +17,7 @@
         <link rel="prev" href="../discount/">
       
       
-        <link rel="next" href="../cart/">
+        <link rel="next" href="../order/">
       
       
       <link rel="icon" href="../../assets/favicon.png">
@@ -427,8 +427,6 @@
   
     
     
-      
-        
       
         
       
@@ -1114,129 +1112,6 @@
   
   
   
-    
-    
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Cart Capability
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_3">
-            <span class="md-nav__icon md-icon"></span>
-            Cart Capability
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../cart/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Overview
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../cart-rest/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    HTTP/REST Binding
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../cart-mcp/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    MCP Binding
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
     <li class="md-nav__item">
       <a href="../order/" class="md-nav__link">
         
@@ -1302,10 +1177,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
         
           
-          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
             
   
   
@@ -1318,8 +1193,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_6">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
             <span class="md-nav__icon md-icon"></span>
             Payment Handlers
           </label>
@@ -1417,10 +1292,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5_4" >
         
           
-          <label class="md-nav__link" for="__nav_4_6_4" id="__nav_4_6_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4_5_4" id="__nav_4_5_4_label" tabindex="0">
             
   
   
@@ -1433,8 +1308,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_6_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_6_4">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5_4">
             <span class="md-nav__icon md-icon"></span>
             Examples
           </label>
@@ -2040,7 +1915,24 @@ goods fulfillment (shipping, pickup, etc).</p>
 requiring fulfillment (e.g., digital goods) do not need to be assigned to a
 method.</p>
 <h3 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h3>
-<p><strong>Error loading extension 'fulfillment_resp':</strong> [Errno 2] No such file or directory: 'source/schemas/shopping/fulfillment_resp.json'</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">fulfillment</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/fulfillment/#fulfillment">Fulfillment</a></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Fulfillment details.</td>
+</tr>
+</tbody>
+</table>
 <h3 id="entities">Entities<a class="headerlink" href="#entities" title="Permanent link">&para;</a></h3>
 <h4 id="fulfillment">Fulfillment<a class="headerlink" href="#fulfillment" title="Permanent link">&para;</a></h4>
 <table>
@@ -2055,13 +1947,13 @@ method.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">methods</td>
-<td style="text-align: left;">Array[<a href="/2026-01-23/specification/fulfillment/#fulfillment-method">Fulfillment Method</a>]</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/fulfillment/#fulfillment-method-response">Fulfillment Method Response</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Fulfillment methods for cart items.</td>
 </tr>
 <tr>
 <td style="text-align: left;">available_methods</td>
-<td style="text-align: left;">Array[<a href="/2026-01-23/specification/fulfillment/#fulfillment-available-method">Fulfillment Available Method</a>]</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/fulfillment/#fulfillment-available-method-response">Fulfillment Available Method Response</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Inventory availability hints.</td>
 </tr>
@@ -2098,7 +1990,7 @@ method.</p>
 </tr>
 <tr>
 <td style="text-align: left;">destinations</td>
-<td style="text-align: left;">Array[<a href="/2026-01-23/specification/fulfillment/#fulfillment-destination">Fulfillment Destination</a>]</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/fulfillment/#fulfillment-destination-response">Fulfillment Destination Response</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Available destinations. For shipping: addresses. For pickup: retail locations.</td>
 </tr>
@@ -2110,14 +2002,14 @@ method.</p>
 </tr>
 <tr>
 <td style="text-align: left;">groups</td>
-<td style="text-align: left;">Array[<a href="/2026-01-23/specification/fulfillment/#fulfillment-group">Fulfillment Group</a>]</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/fulfillment/#fulfillment-group-response">Fulfillment Group Response</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Fulfillment groups for selecting options. Agent sets selected_option_id on groups to choose shipping method.</td>
 </tr>
 </tbody>
 </table>
 <h4 id="fulfillment-destination-response">Fulfillment Destination Response<a class="headerlink" href="#fulfillment-destination-response" title="Permanent link">&para;</a></h4>
-<p>This object MUST be one of the following types: <a href="/2026-01-23/specification/fulfillment/#shipping-destination">Shipping Destination</a>, <a href="/2026-01-23/specification/fulfillment/#retail-location">Retail Location</a>.</p>
+<p>This object MUST be one of the following types: <a href="/2026-01-23/specification/fulfillment/#shipping-destination-response">Shipping Destination Response</a>, <a href="/2026-01-23/specification/fulfillment/#retail-location-response">Retail Location Response</a>.</p>
 <h4 id="shipping-destination-response">Shipping Destination Response<a class="headerlink" href="#shipping-destination-response" title="Permanent link">&para;</a></h4>
 <table>
 <thead>
@@ -2247,7 +2139,7 @@ method.</p>
 </tr>
 <tr>
 <td style="text-align: left;">options</td>
-<td style="text-align: left;">Array[<a href="/2026-01-23/specification/fulfillment/#fulfillment-option">Fulfillment Option</a>]</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/fulfillment/#fulfillment-option-response">Fulfillment Option Response</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Available fulfillment options for this group.</td>
 </tr>
@@ -2308,7 +2200,7 @@ method.</p>
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;">Array[<a href="/2026-01-23/specification/fulfillment/#total">Total</a>]</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/fulfillment/#total-response">Total Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Fulfillment option totals breakdown.</td>
 </tr>
@@ -2660,10 +2552,10 @@ single-group responses. The response shape is always
 <code>methods[].groups[]</code>—the difference is whether <code>groups.length</code> can exceed 1
 within each method.</p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">// Default: single group per method</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="p">{</span><span class="w"> </span><span class="nt">&quot;dev.ucp.shopping.fulfillment&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-01-11&quot;</span><span class="p">}]</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="p">{</span><span class="w"> </span><span class="nt">&quot;dev.ucp.shopping.fulfillment&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-01-23&quot;</span><span class="p">}]</span><span class="w"> </span><span class="p">}</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1">// Opt-in: business MAY return multiple groups per method</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">{</span><span class="w"> </span><span class="nt">&quot;dev.ucp.shopping.fulfillment&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-01-11&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;config&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;supports_multi_group&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">}}]</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">{</span><span class="w"> </span><span class="nt">&quot;dev.ucp.shopping.fulfillment&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-01-23&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;config&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;supports_multi_group&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">}}]</span><span class="w"> </span><span class="p">}</span>
 </span></code></pre></div>
 <h3 id="business-profile">Business Profile<a class="headerlink" href="#business-profile" title="Permanent link">&para;</a></h3>
 <p>Businesses declare what fulfillment configurations they support using
@@ -2696,7 +2588,7 @@ within each method.</p>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">&quot;capabilities&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">&quot;dev.ucp.shopping.fulfillment&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">      </span><span class="p">{</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">        </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-01-11&quot;</span><span class="p">,</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">        </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-01-23&quot;</span><span class="p">,</span>
 </span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">        </span><span class="nt">&quot;config&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">          </span><span class="nt">&quot;allows_multi_destination&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">            </span><span class="nt">&quot;shipping&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
@@ -3017,13 +2909,13 @@ same type, each with its own destination.</p>
         
         
           
-          <a href="../cart/" class="md-footer__link md-footer__link--next" aria-label="Next: Overview">
+          <a href="../order/" class="md-footer__link md-footer__link--next" aria-label="Next: Order Capability">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Overview
+                Order Capability
               </div>
             </div>
             <div class="md-footer__button md-icon">

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://ucp.dev/draft/schemas/shopping/types/item.json",
-  "title": "Item",
+  "$id": "https://ucp.dev/schemas/shopping/types/item.json",
+  "title": "Item Response",
   "type": "object",
   "required": [
     "id",
@@ -11,24 +11,21 @@
   "properties": {
     "id": {
       "type": "string",
-      "description": "The product identifier, often the SKU, required to resolve the product details associated with this line item. Should be recognized by both the Platform, and the Business."
+      "description": "Should be recognized by both the Platform, and the Business. For Google it should match the id provided in the \"id\" field in the product feed."
     },
     "title": {
       "type": "string",
-      "description": "Product title.",
-      "ucp_request": "omit"
+      "description": "Product title."
     },
     "price": {
       "type": "integer",
       "description": "Unit price in minor (cents) currency units.",
-      "minimum": 0,
-      "ucp_request": "omit"
+      "minimum": 0
     },
     "image_url": {
       "type": "string",
       "description": "Product image URI.",
-      "format": "uri",
-      "ucp_request": "omit"
+      "format": "uri"
     }
   }
 }
