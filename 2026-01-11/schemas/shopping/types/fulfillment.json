@@ -1,9 +1,10 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://ucp.dev/schemas/shopping/types/fulfillment.json",
-  "title": "Fulfillment Response",
+  "title": "Fulfillment",
   "description": "Container for fulfillment methods and availability.",
   "type": "object",
+  "ucp_shared_request": true,
   "properties": {
     "methods": {
       "type": "array",
@@ -17,7 +18,8 @@
       "description": "Inventory availability hints.",
       "items": {
         "$ref": "https://ucp.dev/schemas/shopping/types/fulfillment_available_method.json"
-      }
+      },
+      "ucp_request": "omit"
     }
   }
 }

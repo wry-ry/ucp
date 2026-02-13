@@ -13,7 +13,7 @@
       "type": "object",
       "description": "Service definitions keyed by reverse-domain service name.",
       "additionalProperties": {
-        "$ref": "https://ucp.dev/services/service.json"
+        "$ref": "https://ucp.dev/schemas/service.json"
       }
     },
     "discovery_profile": {
@@ -27,10 +27,10 @@
       ],
       "properties": {
         "version": {
-          "$ref": "https://ucp.dev/schemas/ucp.json#/$defs/version"
+          "$ref": "#/$defs/version"
         },
         "services": {
-          "$ref": "https://ucp.dev/schemas/ucp.json#/$defs/services"
+          "$ref": "#/$defs/services"
         },
         "capabilities": {
           "type": "array",
@@ -51,7 +51,7 @@
       ],
       "properties": {
         "version": {
-          "$ref": "https://ucp.dev/schemas/ucp.json#/$defs/version"
+          "$ref": "#/$defs/version"
         },
         "capabilities": {
           "type": "array",
@@ -72,7 +72,7 @@
       ],
       "properties": {
         "version": {
-          "$ref": "https://ucp.dev/schemas/ucp.json#/$defs/version"
+          "$ref": "#/$defs/version"
         },
         "capabilities": {
           "type": "array",

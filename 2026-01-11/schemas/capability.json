@@ -42,7 +42,7 @@
       "description": "Full capability declaration for discovery profiles. Includes spec/schema URLs for agent fetching.",
       "allOf": [
         {
-          "$ref": "https://ucp.dev/schemas/capability.json#/$defs/base"
+          "$ref": "#/$defs/base"
         },
         {
           "required": [
@@ -59,7 +59,7 @@
       "description": "Capability reference in responses. Only name/version required to confirm active capabilities.",
       "allOf": [
         {
-          "$ref": "https://ucp.dev/schemas/capability.json#/$defs/base"
+          "$ref": "#/$defs/base"
         },
         {
           "required": [

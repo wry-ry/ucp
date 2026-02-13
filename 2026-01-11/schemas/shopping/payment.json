@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://ucp.dev/schemas/shopping/payment.json",
-  "title": "Payment Response",
+  "title": "Payment",
   "description": "Payment configuration containing handlers.",
   "type": "object",
   "required": [
@@ -13,7 +13,8 @@
       "items": {
         "$ref": "https://ucp.dev/schemas/shopping/types/payment_handler.json"
       },
-      "description": "Processing configurations that define how payment instruments can be collected. Each handler specifies a tokenization or payment collection strategy."
+      "description": "Processing configurations that define how payment instruments can be collected. Each handler specifies a tokenization or payment collection strategy.",
+      "ucp_request": "omit"
     },
     "selected_instrument_id": {
       "type": "string",
