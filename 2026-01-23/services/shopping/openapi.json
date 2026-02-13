@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "UCP Shopping Service",
-    "version": "2026-01-11",
+    "version": "2026-01-23",
     "description": "Canonical REST interface for UCP Shopping service. Schema references are logical pointers - actual payload shape is determined by negotiated capabilities.\n\n**Endpoint Resolution:** This spec defines operations only. The base URL MUST be obtained from the merchant's discovery profile at `/.well-known/ucp` under `services[\"dev.ucp.shopping\"][transport=rest].endpoint`. The `{endpoint}` server variable below is a placeholder for tooling compatibility."
   },
   "servers": [
@@ -60,7 +60,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/checkout_create_request"
+                "$ref": "#/components/schemas/checkout"
               }
             }
           }
@@ -76,7 +76,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/checkout_response"
+                  "$ref": "#/components/schemas/checkout"
                 }
               }
             }
@@ -134,7 +134,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/checkout_response"
+                  "$ref": "#/components/schemas/checkout"
                 }
               }
             }
@@ -182,7 +182,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/checkout_update_request"
+                "$ref": "#/components/schemas/checkout"
               }
             }
           }
@@ -198,7 +198,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/checkout_response"
+                  "$ref": "#/components/schemas/checkout"
                 }
               }
             }
@@ -255,7 +255,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/checkout_complete_request"
+                    "$ref": "#/components/schemas/checkout"
                   },
                   {
                     "title": "Risk Signals",
@@ -284,7 +284,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/checkout_response"
+                  "$ref": "#/components/schemas/checkout"
                 }
               }
             }
@@ -345,7 +345,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/checkout_response"
+                  "$ref": "#/components/schemas/checkout"
                 }
               }
             }
@@ -537,6 +537,9 @@
       }
     },
     "schemas": {
+      "checkout": {
+        "$ref": "https://ucp.dev/schemas/shopping/checkout.json"
+      },
       "order": {
         "$ref": "https://ucp.dev/schemas/shopping/order.json"
       },
@@ -545,18 +548,6 @@
       },
       "ucp": {
         "$ref": "https://ucp.dev/schemas/ucp.json"
-      },
-      "checkout_response": {
-        "$ref": "https://ucp.dev/schemas/shopping/checkout.json"
-      },
-      "checkout_create_request": {
-        "$ref": "https://ucp.dev/schemas/shopping/checkout.create_req.json"
-      },
-      "checkout_update_request": {
-        "$ref": "https://ucp.dev/schemas/shopping/checkout.update_req.json"
-      },
-      "checkout_complete_request": {
-        "$ref": "https://ucp.dev/schemas/shopping/checkout.complete_req.json"
       }
     }
   }

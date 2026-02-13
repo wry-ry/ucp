@@ -3,7 +3,7 @@
   "$id": "https://ucp.dev/schemas/shopping/fulfillment.json",
   "name": "dev.ucp.shopping.fulfillment",
   "version": "2026-01-11",
-  "title": "Fulfillment Extension Response",
+  "title": "Fulfillment Extension",
   "description": "Extends Checkout with fulfillment support using methods, destinations, and groups.",
   "$defs": {
     "fulfillment_option": {
@@ -22,7 +22,7 @@
       "$ref": "https://ucp.dev/schemas/shopping/types/fulfillment.json"
     },
     "checkout": {
-      "title": "Checkout with Fulfillment Response",
+      "title": "Checkout with Fulfillment",
       "description": "Checkout extended with hierarchical fulfillment.",
       "allOf": [
         {
@@ -33,7 +33,12 @@
           "properties": {
             "fulfillment": {
               "$ref": "#/$defs/fulfillment",
-              "description": "Fulfillment details."
+              "description": "Fulfillment details.",
+              "ucp_request": {
+                "create": "optional",
+                "update": "optional",
+                "complete": "omit"
+              }
             }
           }
         }
@@ -41,7 +46,7 @@
     },
     "dev.ucp.shopping.fulfillment": {
       "platform_schema": {
-        "title": "Fulfillment Capability (Platform) Response",
+        "title": "Fulfillment Capability (Platform)",
         "description": "Platform-level fulfillment capability configuration",
         "allOf": [
           {
@@ -58,7 +63,7 @@
         ]
       },
       "business_schema": {
-        "title": "Fulfillment Capability (Business) Response",
+        "title": "Fulfillment Capability (Business)",
         "description": "Business-level fulfillment capability configuration",
         "allOf": [
           {

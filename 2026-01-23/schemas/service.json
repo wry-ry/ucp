@@ -53,28 +53,42 @@
                 "transport": {
                   "const": "rest"
                 }
-              }
+              },
+              "required": [
+                "schema",
+                "endpoint"
+              ]
             },
             {
               "properties": {
                 "transport": {
                   "const": "mcp"
                 }
-              }
+              },
+              "required": [
+                "schema",
+                "endpoint"
+              ]
             },
             {
               "properties": {
                 "transport": {
                   "const": "a2a"
                 }
-              }
+              },
+              "required": [
+                "endpoint"
+              ]
             },
             {
               "properties": {
                 "transport": {
                   "const": "embedded"
                 }
-              }
+              },
+              "required": [
+                "schema"
+              ]
             }
           ]
         }
@@ -94,21 +108,30 @@
                 "transport": {
                   "const": "rest"
                 }
-              }
+              },
+              "required": [
+                "endpoint"
+              ]
             },
             {
               "properties": {
                 "transport": {
                   "const": "mcp"
                 }
-              }
+              },
+              "required": [
+                "endpoint"
+              ]
             },
             {
               "properties": {
                 "transport": {
                   "const": "a2a"
                 }
-              }
+              },
+              "required": [
+                "endpoint"
+              ]
             },
             {
               "properties": {
