@@ -11,7 +11,7 @@
       
       
       
-        <link rel="canonical" href="https://wry-ry.github.io/ucp/2026-01-11/specification/versioning/">
+        <link rel="canonical" href="https://ucp.dev/2026-01-11/specification/versioning/">
       
       
         <link rel="prev" href="../reference/">
@@ -142,7 +142,7 @@
         <meta  property="og:description"  content="The Universal Commerce Protocol (UCP) is a solution for enabling gen AI agents to make payments on behalf of users, safely, securely, and in a decentralized and privacy protecting manner. This protocol is a part of the broader ecosystem, which includes agentic protocols like A2A and MCP, and encompasses the global nature of payments.
 " >
       
-        <meta  property="og:image"  content="https://wry-ry.github.io/ucp/2026-01-11/assets/images/social/specification/versioning.png" >
+        <meta  property="og:image"  content="https://ucp.dev/2026-01-11/assets/images/social/specification/versioning.png" >
       
         <meta  property="og:image:type"  content="image/png" >
       
@@ -150,7 +150,7 @@
       
         <meta  property="og:image:height"  content="630" >
       
-        <meta  property="og:url"  content="https://wry-ry.github.io/ucp/2026-01-11/specification/versioning/" >
+        <meta  property="og:url"  content="https://ucp.dev/2026-01-11/specification/versioning/" >
       
         <meta  name="twitter:card"  content="summary_large_image" >
       
@@ -159,7 +159,7 @@
         <meta  name="twitter:description"  content="The Universal Commerce Protocol (UCP) is a solution for enabling gen AI agents to make payments on behalf of users, safely, securely, and in a decentralized and privacy protecting manner. This protocol is a part of the broader ecosystem, which includes agentic protocols like A2A and MCP, and encompasses the global nature of payments.
 " >
       
-        <meta  name="twitter:image"  content="https://wry-ry.github.io/ucp/2026-01-11/assets/images/social/specification/versioning.png" >
+        <meta  name="twitter:image"  content="https://ucp.dev/2026-01-11/assets/images/social/specification/versioning.png" >
       
     
     
@@ -1291,26 +1291,25 @@
 
 
 <h1 id="versioning">Versioning<a class="headerlink" href="#versioning" title="Permanent link">&para;</a></h1>
-<p>UCP uses string-based version identifiers following the format YYYY-MM-DD, to
+<p>UCP uses date-based version identifiers following the format YYYY-MM-DD, to
 indicate the last date backwards incompatible changes were made.</p>
-<p>We will use long-lived release branches to manage specific versions of the spec
-while keeping active development moving forward on main.</p>
+<p>New development occurs on the <code>main</code> branch. We will maintain long-lived
+branches for all supported releases of the spec.</p>
 <ul>
 <li>When the Tech Council approves a new version of UCP, we will cut a
-  new branch named release/YYYY-MM-DD directly from the current state of main.<ul>
+  new branch named <code>release/YYYY-MM-DD</code> directly from the current state of
+  <code>main</code>.<ul>
 <li>We will implement a code freeze on the release branch the moment a
-  release/YYYY-MM-DD branch is cut. Only critical bug fixes should move
-  during this window, and they should be applied to the release branch
-  first, then flowed back.</li>
-<li>Critical fixes discovered during the release candidate phase should be
-  applied based on the nature of the issue: they can either be implemented
-  on the release branch first, then merged back into main to ensure the
-  development line stays updated. Or, they could be developed on main and
-  cherry-picked into the release branch to ensure both lines remain synced.</li>
+  <code>release/YYYY-MM-DD branch</code> is cut. Only critical bug fixes should move
+  during this window.</li>
+<li>Critical issues discovered after cutting a release branch should be fixed
+  in one of two ways:</li>
+<li>The fix is made on the release branch and merged to <code>main</code>.</li>
+<li>The fix is made on <code>main</code> and cherry-picked to the release branch.</li>
 </ul>
 </li>
-<li>Once finalized, we will merge the release branch into main and tag it (e.g
-  git tag -a vYYYY-MM-DD).  We will use a GitHub Action to detect the new Tag
+<li>Once finalized, we will merge the release branch into <code>main</code> and tag it (e.g.
+  <code>git tag -a vYYYY-MM-DD</code>).  We will use a GitHub Action to detect the new Tag
   and automatically generate a release notes draft and upload artifacts.</li>
 <li>Unlike temporary feature branches, release/YYYY-MM-DD branches are long-lived
   and correspond to specific versions of the spec for historical reference and

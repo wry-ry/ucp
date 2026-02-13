@@ -298,7 +298,7 @@ ______________________________________________________________________
 
 Handler specifications **SHOULD** use the standard template structure. Sections marked **[REQUIRED]** **MUST** be present; sections marked **[CONDITIONAL]** are required only when applicable.
 
-**→ [Payment Handler Template](https://wry-ry.github.io/ucp/2026-01-11/specification/payment-handler-template/index.md)**
+**→ [Payment Handler Template](https://ucp.dev/2026-01-11/specification/payment-handler-template/index.md)**
 
 ## Conformance Checklist for Spec Authors
 
@@ -390,16 +390,16 @@ Follow these guidelines to create high-quality, maintainable handler specificati
 
 ### Maintainability
 
-| Practice                        | Description                                                                                                                                                        |
-| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Host schemas at stable URLs** | Schema URLs should not change; use versioned paths if needed.                                                                                                      |
-| **Fail gracefully**             | Define clear error responses for common failure scenarios.                                                                                                         |
-| **Link to examples**            | Reference existing handler specs and the [Tokenization Guide](https://wry-ry.github.io/ucp/2026-01-11/specification/tokenization-guide/index.md) for common flows. |
+| Practice                        | Description                                                                                                                                           |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Host schemas at stable URLs** | Schema URLs should not change; use versioned paths if needed.                                                                                         |
+| **Fail gracefully**             | Define clear error responses for common failure scenarios.                                                                                            |
+| **Link to examples**            | Reference existing handler specs and the [Tokenization Guide](https://ucp.dev/2026-01-11/specification/tokenization-guide/index.md) for common flows. |
 
 ______________________________________________________________________
 
 ## See Also
 
-- **[Tokenization Guide](https://wry-ry.github.io/ucp/2026-01-11/specification/tokenization-guide/index.md)** — Guide for building tokenization payment handlers
+- **[Tokenization Guide](https://ucp.dev/2026-01-11/specification/tokenization-guide/index.md)** — Guide for building tokenization payment handlers
 - **[Google Pay Handler](https://developers.google.com/merchant/ucp/guides/google-pay-payment-handler)** — Handler for Google Pay integration
 - **[Shop Pay Handler](https://shopify.dev/docs/agents/checkout/shop-pay-handler)** — Handler for Shop Pay integration
