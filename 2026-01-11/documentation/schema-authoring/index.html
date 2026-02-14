@@ -14,10 +14,6 @@
         <link rel="canonical" href="https://ucp.dev/2026-01-11/documentation/schema-authoring/">
       
       
-        <link rel="prev" href="../../specification/examples/encrypted-credential-handler/">
-      
-      
-        <link rel="next" href="../../specification/reference/">
       
       
       <link rel="icon" href="../../assets/favicon.png">
@@ -25,7 +21,7 @@
     
     
       
-        <title>Schema Authoring - Universal Commerce Protocol (UCP)</title>
+        <title>Schema authoring - Universal Commerce Protocol (UCP)</title>
       
     
     
@@ -137,7 +133,7 @@
       
         <meta  property="og:type"  content="website" >
       
-        <meta  property="og:title"  content="Schema Authoring - Universal Commerce Protocol (UCP)" >
+        <meta  property="og:title"  content="Schema authoring - Universal Commerce Protocol (UCP)" >
       
         <meta  property="og:description"  content="The Universal Commerce Protocol (UCP) is a solution for enabling gen AI agents to make payments on behalf of users, safely, securely, and in a decentralized and privacy protecting manner. This protocol is a part of the broader ecosystem, which includes agentic protocols like A2A and MCP, and encompasses the global nature of payments.
 " >
@@ -154,7 +150,7 @@
       
         <meta  name="twitter:card"  content="summary_large_image" >
       
-        <meta  name="twitter:title"  content="Schema Authoring - Universal Commerce Protocol (UCP)" >
+        <meta  name="twitter:title"  content="Schema authoring - Universal Commerce Protocol (UCP)" >
       
         <meta  name="twitter:description"  content="The Universal Commerce Protocol (UCP) is a solution for enabling gen AI agents to make payments on behalf of users, safely, securely, and in a decentralized and privacy protecting manner. This protocol is a part of the broader ecosystem, which includes agentic protocols like A2A and MCP, and encompasses the global nature of payments.
 " >
@@ -219,7 +215,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Schema Authoring
+              Schema authoring
             
           </span>
         </div>
@@ -358,12 +354,10 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
+      <li class="md-tabs__item">
         <a href="../../specification/overview/" class="md-tabs__link">
           
   
@@ -508,14 +502,10 @@
       
   
   
-    
   
   
-  
     
     
-      
-        
       
         
       
@@ -535,20 +525,17 @@
     
     
       
-        
-        
-      
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
             
   
   
@@ -561,7 +548,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Specification
@@ -1171,233 +1158,6 @@
                 
   
   
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Schema Authoring
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    Schema Authoring
-    
-  </span>
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#schema-metadata-fields" class="md-nav__link">
-    <span class="md-ellipsis">
-      Schema Metadata Fields
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#self-describing-schemas" class="md-nav__link">
-    <span class="md-ellipsis">
-      Self-Describing Schemas
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Self-Describing Schemas">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#why-self-describing" class="md-nav__link">
-    <span class="md-ellipsis">
-      Why self-describing?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#why-both-id-and-name" class="md-nav__link">
-    <span class="md-ellipsis">
-      Why both $id and name?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#the-name-field" class="md-nav__link">
-    <span class="md-ellipsis">
-      The name field
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#the-version-field" class="md-nav__link">
-    <span class="md-ellipsis">
-      The version field
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#schema-categories" class="md-nav__link">
-    <span class="md-ellipsis">
-      Schema Categories
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Schema Categories">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#capability-schemas" class="md-nav__link">
-    <span class="md-ellipsis">
-      Capability Schemas
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#component-schemas" class="md-nav__link">
-    <span class="md-ellipsis">
-      Component Schemas
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#type-schemas" class="md-nav__link">
-    <span class="md-ellipsis">
-      Type Schemas
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#meta-schemas" class="md-nav__link">
-    <span class="md-ellipsis">
-      Meta Schemas
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#versioning-strategy" class="md-nav__link">
-    <span class="md-ellipsis">
-      Versioning Strategy
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Versioning Strategy">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#ucp-capabilities-devucp" class="md-nav__link">
-    <span class="md-ellipsis">
-      UCP Capabilities (dev.ucp.*)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#vendor-capabilities-comvendor" class="md-nav__link">
-    <span class="md-ellipsis">
-      Vendor Capabilities (com.{vendor}.*)
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#example-capability-schema" class="md-nav__link">
-    <span class="md-ellipsis">
-      Example: Capability Schema
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#example-type-schema" class="md-nav__link">
-    <span class="md-ellipsis">
-      Example: Type Schema
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
   
   
     <li class="md-nav__item">
@@ -1987,44 +1747,6 @@ capabilities <strong>MAY</strong> version independently when needed.</p>
       
         <footer class="md-footer">
   
-    
-      
-      <nav class="md-footer__inner md-grid" aria-label="Footer" >
-        
-          
-          <a href="../../specification/examples/encrypted-credential-handler/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Encrypted Credential">
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
-            </div>
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              <div class="md-ellipsis">
-                Encrypted Credential
-              </div>
-            </div>
-          </a>
-        
-        
-          
-          <a href="../../specification/reference/" class="md-footer__link md-footer__link--next" aria-label="Next: Reference">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              <div class="md-ellipsis">
-                Reference
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
     
   
   <div class="md-footer-meta md-typeset">
