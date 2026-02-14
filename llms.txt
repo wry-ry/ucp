@@ -5,63 +5,21 @@
 
 ## Introduction
 
+- [Home](https://ucp.dev/index.md)
 - [Core Concepts](https://ucp.dev/documentation/core-concepts/index.md)
 
 ## UCP and AP2
 
 - [UCP and AP2](https://ucp.dev/documentation/ucp-and-ap2/index.md)
 
-## Playground
-
-
 ## Roadmap
 
 - [Roadmap](https://ucp.dev/documentation/roadmap/index.md)
-
-## Specification Overview
-
-- [Overview](https://ucp.dev/specification/overview/index.md)
-
-## Checkout Capability
-
-- [Overview](https://ucp.dev/specification/checkout/index.md)
-- [HTTP/REST Binding](https://ucp.dev/specification/checkout-rest/index.md)
-- [MCP Binding](https://ucp.dev/specification/checkout-mcp/index.md)
-- [A2A Binding](https://ucp.dev/specification/checkout-a2a/index.md)
-
-## Checkout Extensions
-
-- [AP2 Mandates Extension](https://ucp.dev/specification/ap2-mandates/index.md)
-- [Buyer Consent Extension](https://ucp.dev/specification/buyer-consent/index.md)
-- [Discounts Extension](https://ucp.dev/specification/discount/index.md)
-- [EP Binding](https://ucp.dev/specification/embedded-checkout/index.md)
-- [Fulfillment Extension](https://ucp.dev/specification/fulfillment/index.md)
-
-## Order Capability
-
-- [Order Capability](https://ucp.dev/specification/order/index.md)
-
-## Identity Linking Capability
-
-- [Identity Linking Capability](https://ucp.dev/specification/identity-linking/index.md)
-
-## Payment Handlers
-
-- [Guide](https://ucp.dev/specification/payment-handler-guide/index.md)
-- [Template](https://ucp.dev/specification/payment-handler-template/index.md)
-- [Tokenization Guide](https://ucp.dev/specification/tokenization-guide/index.md)
-
-## Payment Handler Examples
-
-- [Business Tokenizer](https://ucp.dev/specification/examples/business-tokenizer-payment-handler/index.md)
-- [Platform Tokenizer](https://ucp.dev/specification/examples/platform-tokenizer-payment-handler/index.md)
-- [Encrypted Credential](https://ucp.dev/specification/examples/encrypted-credential-handler/index.md)
 
 ## Schema Authoring
 
 - [Schema Authoring](https://ucp.dev/documentation/schema-authoring/index.md)
 
-## Reference
+## Versioning
 
-- [Reference](https://ucp.dev/specification/reference/index.md)
 

@@ -1,9 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://ucp.dev/schemas/shopping/discount.json",
+  "$id": "https://ucp.dev/draft/schemas/shopping/discount.json",
   "name": "dev.ucp.shopping.discount",
-  "version": "2026-01-11",
-  "title": "Discount Extension Response",
+  "title": "Discount Extension",
   "description": "Extends Checkout with discount code support, enabling agents to apply promotional, loyalty, referral, and other discount codes.",
   "$defs": {
     "allocation": {
@@ -67,7 +66,7 @@
         "allocations": {
           "type": "array",
           "items": {
-            "$ref": "https://ucp.dev/schemas/shopping/discount.json#/$defs/allocation"
+            "$ref": "#/$defs/allocation"
           },
           "description": "Breakdown of where this discount was allocated. Sum of allocation amounts equals total amount."
         }
@@ -88,28 +87,34 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "https://ucp.dev/schemas/shopping/discount.json#/$defs/applied_discount"
+            "$ref": "#/$defs/applied_discount"
           },
           "description": "Discounts successfully applied (code-based and automatic)."
         }
       }
     },
-    "checkout": {
-      "title": "Checkout with Discount Response",
+    "dev.ucp.shopping.checkout": {
+      "title": "Checkout with Discount",
       "description": "Checkout extended with discount capability.",
       "allOf": [
         {
-          "$ref": "https://ucp.dev/schemas/shopping/checkout.json"
+          "$ref": "https://ucp.dev/draft/schemas/shopping/checkout.json"
         },
         {
           "type": "object",
           "properties": {
             "discounts": {
-              "$ref": "https://ucp.dev/schemas/shopping/discount.json#/$defs/discounts_object"
+              "$ref": "#/$defs/discounts_object",
+              "ucp_request": {
+                "create": "optional",
+                "update": "optional",
+                "complete": "omit"
+              }
             }
           }
         }
       ]
     }
-  }
+  },
+  "version": "2026-02-14"
 }
