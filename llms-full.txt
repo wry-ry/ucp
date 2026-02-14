@@ -413,7 +413,7 @@ Contribute your feedback and code to the public repository
 
 The Universal Commerce Protocol (UCP) is an open standard designed to facilitate communication and interoperability between diverse commerce entities. In a fragmented landscape where consumer surfaces/platforms, businesses, payment providers, and identity providers operate on different systems, UCP provides a standardized common language and functional primitives.
 
-This document provides the detailed technical specification for UCP. For a complete definition of all data models and schemas, see the [Schema Reference](https://ucp.dev/documentation/specification/reference.md).
+This document provides the detailed technical specification for UCP. For a complete definition of all data models and schemas, see the [Schema Reference](/ucp/latest/specification/reference.md).
 
 Its primary goal is to enable:
 
@@ -499,7 +499,7 @@ UCP is fully compatible with [Agent Payments Protocol (AP2)](https://ap2-protoco
 
 **Dependencies:** Checkout capability
 
-[See here for full AP2 mandates extension](https://ucp.dev/documentation/specification/ap2-mandates.md)
+[See here for full AP2 mandates extension](/ucp/latest/specification/ap2-mandates.md)
 
 [Learn more about AP2](https://ap2-protocol.org)
 
@@ -610,7 +610,7 @@ Define payment handler configurations in `ucp.payment_handlers{}` registries.
 
 Examples: `com.google.pay`, `dev.shopify.shop_pay`, `dev.ucp.processor_tokenizer`
 
-**→ See [Payment Handler Guide](https://ucp.dev/documentation/specification/payment-handler-guide.md)** for detailed guidance on handler structure, config/instrument/credential schemas, and the full specification template.
+**→ See [Payment Handler Guide](/ucp/latest/specification/payment-handler-guide.md)** for detailed guidance on handler structure, config/instrument/credential schemas, and the full specification template.
 
 ### Component Schemas
 
@@ -829,5 +829,3 @@ New development occurs on the `main` branch. We will maintain long-lived branche
 
 - Breaking changes should include `!` in the PR title
 - Timing: We will announce the breaking change in Discussions 2 weeks before the change is merged.
-# Specification
-
