@@ -10,6 +10,7 @@
 - [UCP and AP2](https://ucp.dev/documentation/ucp-and-ap2/index.md)
 - [Roadmap](https://ucp.dev/documentation/roadmap/index.md)
 - [Schema Authoring](https://ucp.dev/documentation/schema-authoring/index.md)
+- [Versioning](https://ucp.dev/versioning/index.md)
 
 ## Specification
 
