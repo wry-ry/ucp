@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // console.log("Move Version Selector: Loaded");
     var header = document.querySelector(".md-header");
     if (!header) return;
 
@@ -8,31 +7,22 @@ document.addEventListener("DOMContentLoaded", function() {
         var select = header.querySelector(".md-select");
         if (!select) return;
 
-        // Find its container (md-header__option)
         var container = select.closest(".md-header__option");
-        
-        // If not in an option container, use select itself (though usually it is wrapped)
         var target = container || select;
 
-        // Check if it's the Palette selector
+        // Check if palette
         if (container && container.getAttribute("data-md-component") === "palette") {
-            // This is palette, ignore
-            // Look for another select?
-            // If there are multiple selects, querySelector might return palette first.
-            // Let's iterate all selects.
-            return;
-        }
-        
-        // Better search: find all selects and pick the one that isn't palette
-        var selects = header.querySelectorAll(".md-select");
-        target = null;
-        for (var i = 0; i < selects.length; i++) {
-            var s = selects[i];
-            var c = s.closest(".md-header__option");
-            if (!c || c.getAttribute("data-md-component") !== "palette") {
-                target = c || s;
-                break;
-            }
+             // Look for other selects
+             var selects = header.querySelectorAll(".md-select");
+             target = null;
+             for (var i = 0; i < selects.length; i++) {
+                 var s = selects[i];
+                 var c = s.closest(".md-header__option");
+                 if (!c || c.getAttribute("data-md-component") !== "palette") {
+                     target = c || s;
+                     break;
+                 }
+             }
         }
         
         if (!target) return;
@@ -41,19 +31,25 @@ document.addEventListener("DOMContentLoaded", function() {
         var headerInner = document.querySelector(".md-header__inner");
         
         if (searchButton && headerInner) {
-             // Move only if not already before searchButton
+             // Move if not already before searchButton
              if (target.nextElementSibling !== searchButton) {
-                 // console.log("Move Version Selector: Moving...");
+                 // Move it
                  headerInner.insertBefore(target, searchButton);
+                 
+                 // Apply styles to ensure visibility
                  target.style.marginRight = "8px";
+                 target.style.display = "flex"; // md-header__option is flex usually
+                 target.style.visibility = "visible";
+                 target.style.opacity = "1";
+                 
+                 // Force z-index if needed?
+                 target.style.position = "relative";
+                 target.style.zIndex = "10";
              }
         }
     }
 
-    // Try immediately
     moveSelector();
-
-    // Observe changes in header
     var observer = new MutationObserver(moveSelector);
     observer.observe(header, { childList: true, subtree: true });
 });
