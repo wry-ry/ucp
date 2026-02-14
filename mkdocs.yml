@@ -25,9 +25,13 @@ edit_uri: edit/main/docs/
 
 # Navigation
 nav:
-  - Home: index.md
-  - Core Concepts: documentation/core-concepts.md
-  - Playground: playground.md
+  - Overview:
+    - Home: index.md
+    - Core Concepts: documentation/core-concepts.md
+    - UCP and AP2: documentation/ucp-and-ap2.md
+    - Roadmap: documentation/roadmap.md
+    - Schema Authoring: documentation/schema-authoring.md
+    - Versioning: versioning.md
   - Specification:
     - Overview: specification/overview.md
     - Checkout Capability:
@@ -55,11 +59,8 @@ nav:
         - Platform Tokenizer: specification/examples/platform-tokenizer-payment-handler.md
         - Encrypted Credential: specification/examples/encrypted-credential-handler.md
     - Signatures: specification/signatures.md
-    - Versioning: specification/versioning.md
-    - Authoring: documentation/schema-authoring.md
     - Reference: specification/reference.md
-  - UCP and AP2: documentation/ucp-and-ap2.md
-  - Roadmap: documentation/roadmap.md
+    - Playground: specification/playground.md
 
 repo_name: UCP on GitHub # Override repo name to be shorter on site header.
 repo_url: https://github.com/Universal-Commerce-Protocol/ucp
@@ -130,12 +131,14 @@ theme:
     - content.tooltips
     # - navigation.expand
     - navigation.footer
-    - navigation.indexes
+    # - navigation.indexes
     - navigation.instant
     - navigation.instant.progress
-    - navigation.path
+    # - navigation.path
     - navigation.top
     - navigation.tracking
+    - navigation.tabs
+    # - navigation.tabs.sticky # Optional, keeps tabs visible
     - toc.follow
 
 # Extensions
@@ -188,16 +191,14 @@ plugins:
   - llmstxt:
       full_output: llms-full.txt
       sections:
-        Introduction:
+        Overview:
           - index.md
           - documentation/core-concepts.md
-        UCP and AP2:
           - documentation/ucp-and-ap2.md
-        Playground:
-          - playground.md
-        Roadmap:
           - documentation/roadmap.md
-        Specification Overview:
+          - documentation/schema-authoring.md
+          - versioning.md
+        Specification:
           - specification/overview.md
         Message Signatures:
           - specification/signatures.md
@@ -206,29 +207,21 @@ plugins:
           - specification/checkout-rest.md
           - specification/checkout-mcp.md
           - specification/checkout-a2a.md
-        Checkout Extensions:
+          - specification/embedded-checkout.md
           - specification/ap2-mandates.md
           - specification/buyer-consent.md
           - specification/discount.md
-          - specification/embedded-checkout.md
           - specification/fulfillment.md
-        Cart Capability:
           - specification/cart.md
           - specification/cart-rest.md
           - specification/cart-mcp.md
-        Order Capability:
           - specification/order.md
-        Identity Linking Capability:
           - specification/identity-linking.md
-        Payment Handlers:
           - specification/payment-handler-guide.md
           - specification/payment-handler-template.md
           - specification/tokenization-guide.md
-        Payment Handler Examples:
           - specification/examples/processor-tokenizer-payment-handler.md
           - specification/examples/platform-tokenizer-payment-handler.md
           - specification/examples/encrypted-credential-handler.md
-        Schema Authoring:
-          - documentation/schema-authoring.md
-        Reference:
           - specification/reference.md
+          - specification/playground.md
