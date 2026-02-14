@@ -3,7 +3,7 @@
 > The Universal Commerce Protocol (UCP) is a solution for enabling gen AI agents to make payments on behalf of users, safely, securely, and in a decentralized and privacy protecting manner. This protocol is a part of the broader ecosystem, which includes agentic protocols like A2A and MCP, and encompasses the global nature of payments.
 
 
-# Introduction
+# Overview
 
 # Universal Commerce Protocol
 
@@ -472,7 +472,6 @@ UCP revolves around three fundamental constructs that define how entities intera
   - *Examples:* Discounts (extends Checkout), AP2 Mandates (extends Checkout).
 - **Services:** The lower-level communication layers used to exchange data. UCP is transport-agnostic but defines specific bindings for interoperability.
   - *Examples:* REST API (primary), MCP (Model Context Protocol), A2A (Agent2Agent).
-# UCP and AP2
 
 # UCP and AP2
 
@@ -503,7 +502,6 @@ UCP is fully compatible with [Agent Payments Protocol (AP2)](https://ap2-protoco
 [See here for full AP2 mandates extension](https://ucp.dev/documentation/specification/ap2-mandates.md)
 
 [Learn more about AP2](https://ap2-protocol.org)
-# Roadmap
 
 # Roadmap
 
@@ -531,7 +529,6 @@ We are building a scalable ecosystem that is inclusive of all business sizes and
 The future of commerce cannot be built in a vacuum. We invite businesses, developers, and payment providers to join us in refining these specifications. Your feedback on our early builds helps us shape the standards that will power the next generation of global commerce.
 
 [Become a UCP contributor](https://github.com/Universal-Commerce-Protocol/ucp?tab=contributing-ov-file)
-# Schema Authoring
 
 # Schema Authoring Guide
 
@@ -813,5 +810,5 @@ Key points:
 - **Top-level `name` and `version`** make the schema self-describing
 - **`$defs` variants** enable validation in different contexts
 - **Payload properties** define the actual checkout response structure
-# Versioning
+# Specification
 
