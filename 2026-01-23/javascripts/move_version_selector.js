@@ -1,26 +1,34 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Find the version selector container
-    // It is usually a .md-header__option that contains a .md-select
-    var options = document.querySelectorAll(".md-header__option");
-    var versionOption = null;
-    
-    options.forEach(function(opt) {
-        if (opt.querySelector(".md-select") && !opt.hasAttribute("data-md-component")) {
-            // The Palette has data-md-component="palette"
-            // The Version selector usually has no data-md-component on the option wrapper
-            versionOption = opt;
-        }
-    });
+    var header = document.querySelector(".md-header");
+    if (!header) return;
 
-    if (versionOption) {
+    function moveSelector() {
+        // Look for the option containing md-select (but not palette)
+        var options = document.querySelectorAll(".md-header__option");
+        var versionContainer = null;
+        
+        options.forEach(function(opt) {
+            if (opt.querySelector(".md-select") && !opt.hasAttribute("data-md-component")) {
+                versionContainer = opt;
+            }
+        });
+
         var searchButton = document.querySelector("label[for='__search']");
         var headerInner = document.querySelector(".md-header__inner");
         
-        if (searchButton && headerInner) {
-            // Move versionOption before searchButton
-            headerInner.insertBefore(versionOption, searchButton);
-            // Add margin for spacing
-            versionOption.style.marginRight = "8px";
+        if (versionContainer && searchButton && headerInner) {
+             // Move only if not already before searchButton
+             if (versionContainer.nextElementSibling !== searchButton) {
+                 headerInner.insertBefore(versionContainer, searchButton);
+                 versionContainer.style.marginRight = "8px";
+             }
         }
     }
+
+    // Try immediately
+    moveSelector();
+
+    // Observe changes in header (e.g. mike injecting the selector)
+    var observer = new MutationObserver(moveSelector);
+    observer.observe(header, { childList: true, subtree: true });
 });
