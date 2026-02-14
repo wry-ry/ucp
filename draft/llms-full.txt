@@ -413,7 +413,7 @@ Contribute your feedback and code to the public repository
 
 The Universal Commerce Protocol (UCP) is an open standard designed to facilitate communication and interoperability between diverse commerce entities. In a fragmented landscape where consumer surfaces/platforms, businesses, payment providers, and identity providers operate on different systems, UCP provides a standardized common language and functional primitives.
 
-This document provides the detailed technical specification for UCP. For a complete definition of all data models and schemas, see the [Schema Reference](https://ucp.dev/draft/specification/reference/index.md).
+This document provides the detailed technical specification for UCP. For a complete definition of all data models and schemas, see the [Schema Reference](https://ucp.dev/draft/documentation/specification/reference.md).
 
 Its primary goal is to enable:
 
@@ -500,7 +500,7 @@ UCP is fully compatible with [Agent Payments Protocol (AP2)](https://ap2-protoco
 
 **Dependencies:** Checkout capability
 
-[See here for full AP2 mandates extension](https://ucp.dev/draft/specification/ap2-mandates/index.md)
+[See here for full AP2 mandates extension](https://ucp.dev/draft/documentation/specification/ap2-mandates.md)
 
 [Learn more about AP2](https://ap2-protocol.org)
 # Roadmap
@@ -613,7 +613,7 @@ Define payment handler configurations in `ucp.payment_handlers{}` registries.
 
 Examples: `com.google.pay`, `dev.shopify.shop_pay`, `dev.ucp.processor_tokenizer`
 
-**→ See [Payment Handler Guide](https://ucp.dev/draft/specification/payment-handler-guide/index.md)** for detailed guidance on handler structure, config/instrument/credential schemas, and the full specification template.
+**→ See [Payment Handler Guide](https://ucp.dev/draft/documentation/specification/payment-handler-guide.md)** for detailed guidance on handler structure, config/instrument/credential schemas, and the full specification template.
 
 ### Component Schemas
 
