@@ -9873,7 +9873,6 @@ ______________________________________________________________________
 
 - **Identity Schema:** `https://ucp.dev/schemas/shopping/types/payment_identity.json`
 - **Instrument Schema:** `https://ucp.dev/schemas/shopping/types/card_payment_instrument.json`
-# Schema Authoring
 
 # Schema Authoring Guide
 

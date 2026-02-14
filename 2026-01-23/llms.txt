@@ -58,10 +58,7 @@
 - [Processor Tokenizer](https://ucp.dev/2026-01-23/specification/examples/processor-tokenizer-payment-handler/index.md)
 - [Platform Tokenizer](https://ucp.dev/2026-01-23/specification/examples/platform-tokenizer-payment-handler/index.md)
 - [Encrypted Credential](https://ucp.dev/2026-01-23/specification/examples/encrypted-credential-handler/index.md)
-
-## Schema Authoring
-
-- [Schema Authoring](https://ucp.dev/2026-01-23/documentation/schema-authoring/index.md)
+- [Schema authoring](https://ucp.dev/2026-01-23/documentation/schema-authoring/index.md)
 
 ## Reference
 
