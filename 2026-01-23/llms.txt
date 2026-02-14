@@ -6,19 +6,15 @@
 ## Introduction
 
 - [Home](https://ucp.dev/2026-01-23/index.md)
-- [Core Concepts](https://ucp.dev/2026-01-23/documentation/core-concepts/index.md)
 
 ## UCP and AP2
 
-- [UCP and AP2](https://ucp.dev/2026-01-23/documentation/ucp-and-ap2/index.md)
 
 ## Playground
 
-- [Playground](https://ucp.dev/2026-01-23/playground/index.md)
 
 ## Roadmap
 
-- [Roadmap](https://ucp.dev/2026-01-23/documentation/roadmap/index.md)
 
 ## Specification Overview
 
@@ -58,7 +54,6 @@
 - [Processor Tokenizer](https://ucp.dev/2026-01-23/specification/examples/processor-tokenizer-payment-handler/index.md)
 - [Platform Tokenizer](https://ucp.dev/2026-01-23/specification/examples/platform-tokenizer-payment-handler/index.md)
 - [Encrypted Credential](https://ucp.dev/2026-01-23/specification/examples/encrypted-credential-handler/index.md)
-- [Schema authoring](https://ucp.dev/2026-01-23/documentation/schema-authoring/index.md)
 
 ## Reference
 
