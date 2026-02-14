@@ -6,19 +6,15 @@
 ## Introduction
 
 - [Home](https://ucp.dev/draft/index.md)
-- [Core Concepts](https://ucp.dev/draft/documentation/core-concepts/index.md)
 
 ## UCP and AP2
 
-- [UCP and AP2](https://ucp.dev/draft/documentation/ucp-and-ap2/index.md)
 
 ## Roadmap
 
-- [Roadmap](https://ucp.dev/draft/documentation/roadmap/index.md)
 
 ## Schema Authoring
 
-- [Schema Authoring](https://ucp.dev/draft/documentation/schema-authoring/index.md)
 
 ## Versioning
 
