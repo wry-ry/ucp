@@ -3,32 +3,53 @@ document.addEventListener("DOMContentLoaded", function() {
     if (!header) return;
 
     function moveSelector() {
-        // Look for the option containing md-select (but not palette)
-        var options = document.querySelectorAll(".md-header__option");
-        var versionContainer = null;
+        // Find .md-select
+        var select = header.querySelector(".md-select");
+        if (!select) return;
+
+        var container = select.closest(".md-header__option");
+        var target = container || select;
+
+        // Check if palette
+        if (container && container.getAttribute("data-md-component") === "palette") {
+             // Look for other selects
+             var selects = header.querySelectorAll(".md-select");
+             target = null;
+             for (var i = 0; i < selects.length; i++) {
+                 var s = selects[i];
+                 var c = s.closest(".md-header__option");
+                 if (!c || c.getAttribute("data-md-component") !== "palette") {
+                     target = c || s;
+                     break;
+                 }
+             }
+        }
         
-        options.forEach(function(opt) {
-            if (opt.querySelector(".md-select") && !opt.hasAttribute("data-md-component")) {
-                versionContainer = opt;
-            }
-        });
+        if (!target) return;
 
         var searchButton = document.querySelector("label[for='__search']");
         var headerInner = document.querySelector(".md-header__inner");
         
-        if (versionContainer && searchButton && headerInner) {
-             // Move only if not already before searchButton
-             if (versionContainer.nextElementSibling !== searchButton) {
-                 headerInner.insertBefore(versionContainer, searchButton);
-                 versionContainer.style.marginRight = "8px";
+        if (searchButton && headerInner) {
+             // Move if not already before searchButton
+             if (target.nextElementSibling !== searchButton) {
+                 // Move it
+                 headerInner.insertBefore(target, searchButton);
+                 
+                 // Apply styles to ensure visibility
+                 target.style.marginRight = "8px";
+                 target.style.display = "flex"; // md-header__option is flex usually
+                 target.style.visibility = "visible";
+                 target.style.opacity = "1";
+                 
+                 // Force z-index if needed?
+                 target.style.position = "relative";
+                 target.style.zIndex = "10";
              }
         }
     }
 
-    // Try immediately
     moveSelector();
-
-    // Observe changes in header (e.g. mike injecting the selector)
     var observer = new MutationObserver(moveSelector);
     observer.observe(header, { childList: true, subtree: true });
 });
