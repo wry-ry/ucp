@@ -5,7 +5,6 @@
 
 ## Overview
 
-- [Home](https://ucp.dev/draft/index.md)
 
 ## Specification
 
