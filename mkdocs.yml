@@ -88,6 +88,7 @@ extra:
       as to measure the effectiveness of our documentation and whether users
       find what they're searching for. With your consent, you're helping us to
       make our documentation better.
+  scope: /
   version:
     provider: mike
 
@@ -138,7 +139,7 @@ theme:
     - navigation.top
     - navigation.tracking
     - navigation.tabs
-    # - navigation.tabs.sticky # Optional, keeps tabs visible
+    - navigation.tabs.sticky
     - toc.follow
 
 # Extensions

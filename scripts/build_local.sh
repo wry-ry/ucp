@@ -50,6 +50,9 @@ for branch in $RELEASE_BRANCHES; do
 
 	pushd "$WORKTREE_DIR" >/dev/null
 
+	# Copy latest hooks from project root (main) to ensure consistent build logic
+	cp "$PROJECT_ROOT/hooks.py" .
+
 	# Deploy
 	# mike will now use the mkdocs in PATH (which is the root venv)
 	export DOCS_MODE=spec

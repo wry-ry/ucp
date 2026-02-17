@@ -214,6 +214,7 @@ def on_files(files, config):
         f.src_path.startswith("specification/")
         or f.src_path.startswith("assets/")
         or f.src_path.startswith("stylesheets/")
+        or f.src_path == "index.md"
       ):
         new_files.append(f)
     elif mode == "root" and not f.src_path.startswith("specification/"):
@@ -280,6 +281,16 @@ def on_post_build(config):
             "<!doctype html>"
             f'<meta http-equiv="refresh" content="0; url={target}">'
           )
+
+    # Redirect index.html to specification/overview/
+    index_file = site_dir / "index.html"
+    index_target = "specification/overview/"
+    index_file.parent.mkdir(parents=True, exist_ok=True)
+    with Path.open(index_file, "w") as f:
+      f.write(
+        "<!doctype html>"
+        f'<meta http-equiv="refresh" content="0; url={index_target}">'
+      )
 
   # --- Existing Logic ---
   ucp_version = config.get("extra", {}).get("ucp_version")
