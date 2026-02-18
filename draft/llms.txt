@@ -6,6 +6,13 @@
 ## Specification
 
 - [Overview](https://ucp.dev/draft/specification/overview/index.md)
+
+## Message Signatures
+
+- [Signatures](https://ucp.dev/draft/specification/signatures/index.md)
+
+## Checkout Capability
+
 - [Overview](https://ucp.dev/draft/specification/checkout/index.md)
 - [HTTP/REST Binding](https://ucp.dev/draft/specification/checkout-rest/index.md)
 - [MCP Binding](https://ucp.dev/draft/specification/checkout-mcp/index.md)
