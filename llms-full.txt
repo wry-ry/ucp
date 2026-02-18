@@ -829,3 +829,7 @@ New development occurs on the `main` branch. We will maintain long-lived branche
 
 - Breaking changes should include `!` in the PR title
 - Timing: We will announce the breaking change in Discussions 2 weeks before the change is merged.
+# Message Signatures
+
+# Checkout Capability
+
