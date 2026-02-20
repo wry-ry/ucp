@@ -12,9 +12,3 @@
 - [Schema Authoring](https://ucp.dev/documentation/schema-authoring/index.md)
 - [Versioning](https://ucp.dev/versioning/index.md)
 
-## Message Signatures
-
-
-## Checkout Capability
-
-
