@@ -185,9 +185,17 @@ def on_config(config):
     llms_conf = llms_plugin.config
     if "sections" in llms_conf:
       if mode == "root":
-        # Remove Specification section from llmstxt
-        if "Specification" in llms_conf["sections"]:
-          del llms_conf["sections"]["Specification"]
+        # Remove any section containing specification/ files
+        sections_to_remove = []
+        for section_name, pages in llms_conf["sections"].items():
+          # pages is a list of strings (file paths)
+          if any(p.startswith("specification/") for p in pages):
+            sections_to_remove.append(section_name)
+
+        for section_name in sections_to_remove:
+          if section_name in llms_conf["sections"]:
+            del llms_conf["sections"][section_name]
+
       elif mode == "spec" and "Overview" in llms_conf["sections"]:
         # Remove Overview section from llmstxt
         del llms_conf["sections"]["Overview"]
