@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://ucp.dev/schemas/shopping/types/line_item.json",
+  "$id": "https://ucp.dev/2026-01-23/schemas/shopping/types/line_item.json",
   "title": "Line Item",
   "type": "object",
   "description": "Line item object. Expected to use the currency of the parent object.",
@@ -19,7 +19,7 @@
       }
     },
     "item": {
-      "$ref": "https://ucp.dev/schemas/shopping/types/item.json"
+      "$ref": "https://ucp.dev/2026-01-23/schemas/shopping/types/item.json"
     },
     "quantity": {
       "type": "integer",
@@ -29,7 +29,7 @@
     "totals": {
       "type": "array",
       "items": {
-        "$ref": "https://ucp.dev/schemas/shopping/types/total.json"
+        "$ref": "https://ucp.dev/2026-01-23/schemas/shopping/types/total.json"
       },
       "description": "Line item totals breakdown.",
       "ucp_request": "omit"

@@ -538,16 +538,16 @@
     },
     "schemas": {
       "checkout": {
-        "$ref": "https://ucp.dev/schemas/shopping/checkout.json"
+        "$ref": "https://ucp.dev/2026-01-23/schemas/shopping/checkout.json"
       },
       "order": {
-        "$ref": "https://ucp.dev/schemas/shopping/order.json"
+        "$ref": "https://ucp.dev/2026-01-23/schemas/shopping/order.json"
       },
       "payment": {
-        "$ref": "https://ucp.dev/schemas/shopping/payment.json"
+        "$ref": "https://ucp.dev/2026-01-23/schemas/shopping/payment.json"
       },
       "ucp": {
-        "$ref": "https://ucp.dev/schemas/ucp.json"
+        "$ref": "https://ucp.dev/2026-01-23/schemas/ucp.json"
       }
     }
   }

@@ -1,13 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://ucp.dev/schemas/service.json",
+  "$id": "https://ucp.dev/2026-01-23/schemas/service.json",
   "title": "UCP Service",
   "description": "Service binding for a specific transport. Each transport binding is a separate entry in the service array.",
   "$defs": {
     "base": {
       "allOf": [
         {
-          "$ref": "https://ucp.dev/schemas/ucp.json#/$defs/entity"
+          "$ref": "https://ucp.dev/2026-01-23/schemas/ucp.json#/$defs/entity"
         },
         {
           "type": "object",
@@ -139,7 +139,7 @@
                   "const": "embedded"
                 },
                 "config": {
-                  "$ref": "https://ucp.dev/schemas/transports/embedded_config.json"
+                  "$ref": "https://ucp.dev/2026-01-23/schemas/transports/embedded_config.json"
                 }
               }
             }
@@ -183,7 +183,7 @@
                   "const": "embedded"
                 },
                 "config": {
-                  "$ref": "https://ucp.dev/schemas/transports/embedded_config.json"
+                  "$ref": "https://ucp.dev/2026-01-23/schemas/transports/embedded_config.json"
                 }
               }
             }

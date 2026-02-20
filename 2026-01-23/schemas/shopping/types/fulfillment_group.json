@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://ucp.dev/schemas/shopping/types/fulfillment_group.json",
+  "$id": "https://ucp.dev/2026-01-23/schemas/shopping/types/fulfillment_group.json",
   "title": "Fulfillment Group",
   "description": "A merchant-generated package/group of line items with fulfillment options.",
   "type": "object",
@@ -30,7 +30,7 @@
       "type": "array",
       "description": "Available fulfillment options for this group.",
       "items": {
-        "$ref": "https://ucp.dev/schemas/shopping/types/fulfillment_option.json"
+        "$ref": "https://ucp.dev/2026-01-23/schemas/shopping/types/fulfillment_option.json"
       },
       "ucp_request": "omit"
     },

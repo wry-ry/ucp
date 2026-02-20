@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://ucp.dev/schemas/shopping/checkout.json",
+  "$id": "https://ucp.dev/2026-01-23/schemas/shopping/checkout.json",
   "name": "dev.ucp.shopping.checkout",
-  "version": "2026-01-11",
+  "version": "2026-01-23",
   "title": "Checkout",
   "description": "Base checkout schema. Extensions compose onto this using allOf.",
   "type": "object",
@@ -18,7 +18,7 @@
   "additionalProperties": true,
   "properties": {
     "ucp": {
-      "$ref": "https://ucp.dev/schemas/ucp.json#/$defs/response_checkout_schema",
+      "$ref": "https://ucp.dev/2026-01-23/schemas/ucp.json#/$defs/response_checkout_schema",
       "ucp_request": "omit"
     },
     "id": {
@@ -33,7 +33,7 @@
     "line_items": {
       "type": "array",
       "items": {
-        "$ref": "https://ucp.dev/schemas/shopping/types/line_item.json"
+        "$ref": "https://ucp.dev/2026-01-23/schemas/shopping/types/line_item.json"
       },
       "description": "List of line items being checked out.",
       "ucp_request": {
@@ -43,7 +43,7 @@
       }
     },
     "buyer": {
-      "$ref": "https://ucp.dev/schemas/shopping/types/buyer.json",
+      "$ref": "https://ucp.dev/2026-01-23/schemas/shopping/types/buyer.json",
       "description": "Representation of the buyer.",
       "ucp_request": {
         "create": "optional",
@@ -52,7 +52,7 @@
       }
     },
     "context": {
-      "$ref": "https://ucp.dev/schemas/shopping/types/context.json",
+      "$ref": "https://ucp.dev/2026-01-23/schemas/shopping/types/context.json",
       "ucp_request": {
         "create": "optional",
         "update": "optional",
@@ -85,7 +85,7 @@
     "totals": {
       "type": "array",
       "items": {
-        "$ref": "https://ucp.dev/schemas/shopping/types/total.json"
+        "$ref": "https://ucp.dev/2026-01-23/schemas/shopping/types/total.json"
       },
       "description": "Different cart totals.",
       "ucp_request": "omit"
@@ -93,7 +93,7 @@
     "messages": {
       "type": "array",
       "items": {
-        "$ref": "https://ucp.dev/schemas/shopping/types/message.json"
+        "$ref": "https://ucp.dev/2026-01-23/schemas/shopping/types/message.json"
       },
       "description": "List of messages with error and info about the checkout session state.",
       "ucp_request": "omit"
@@ -101,7 +101,7 @@
     "links": {
       "type": "array",
       "items": {
-        "$ref": "https://ucp.dev/schemas/shopping/types/link.json"
+        "$ref": "https://ucp.dev/2026-01-23/schemas/shopping/types/link.json"
       },
       "description": "Links to be displayed by the platform (Privacy Policy, TOS). Mandatory for legal compliance.",
       "ucp_request": "omit"
@@ -119,7 +119,7 @@
       "ucp_request": "omit"
     },
     "payment": {
-      "$ref": "https://ucp.dev/schemas/shopping/payment.json",
+      "$ref": "https://ucp.dev/2026-01-23/schemas/shopping/payment.json",
       "ucp_request": {
         "create": "optional",
         "update": "optional",
@@ -127,7 +127,7 @@
       }
     },
     "order": {
-      "$ref": "https://ucp.dev/schemas/shopping/types/order_confirmation.json",
+      "$ref": "https://ucp.dev/2026-01-23/schemas/shopping/types/order_confirmation.json",
       "description": "Details about an order created for this checkout session.",
       "ucp_request": "omit"
     }

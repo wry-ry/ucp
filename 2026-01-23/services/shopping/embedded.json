@@ -44,7 +44,7 @@
               }
             },
             "checkout": {
-              "$ref": "https://ucp.dev/schemas/shopping/checkout.json",
+              "$ref": "https://ucp.dev/2026-01-23/schemas/shopping/checkout.json",
               "description": "Initial checkout state with host-provided data (saved instruments, addresses)."
             }
           }
@@ -60,7 +60,7 @@
           "name": "checkout",
           "required": true,
           "schema": {
-            "$ref": "https://ucp.dev/schemas/shopping/checkout.json",
+            "$ref": "https://ucp.dev/2026-01-23/schemas/shopping/checkout.json",
             "description": "Current checkout state."
           }
         }
@@ -75,7 +75,7 @@
           "name": "checkout",
           "required": true,
           "schema": {
-            "$ref": "https://ucp.dev/schemas/shopping/checkout.json",
+            "$ref": "https://ucp.dev/2026-01-23/schemas/shopping/checkout.json",
             "description": "Final checkout state."
           }
         }
@@ -90,7 +90,7 @@
           "name": "checkout",
           "required": true,
           "schema": {
-            "$ref": "https://ucp.dev/schemas/shopping/checkout.json",
+            "$ref": "https://ucp.dev/2026-01-23/schemas/shopping/checkout.json",
             "description": "Current checkout state with updated messages."
           }
         }
@@ -105,7 +105,7 @@
           "name": "checkout",
           "required": true,
           "schema": {
-            "$ref": "https://ucp.dev/schemas/shopping/checkout.json",
+            "$ref": "https://ucp.dev/2026-01-23/schemas/shopping/checkout.json",
             "description": "Current checkout state with updated line items."
           }
         }
@@ -120,7 +120,7 @@
           "name": "checkout",
           "required": true,
           "schema": {
-            "$ref": "https://ucp.dev/schemas/shopping/checkout.json",
+            "$ref": "https://ucp.dev/2026-01-23/schemas/shopping/checkout.json",
             "description": "Current checkout state with updated buyer."
           }
         }
@@ -135,7 +135,7 @@
           "name": "checkout",
           "required": true,
           "schema": {
-            "$ref": "https://ucp.dev/schemas/shopping/checkout.json",
+            "$ref": "https://ucp.dev/2026-01-23/schemas/shopping/checkout.json",
             "description": "Current checkout state with updated payment."
           }
         }
@@ -150,7 +150,7 @@
           "name": "checkout",
           "required": true,
           "schema": {
-            "$ref": "https://ucp.dev/schemas/shopping/checkout.json",
+            "$ref": "https://ucp.dev/2026-01-23/schemas/shopping/checkout.json",
             "description": "Current checkout state."
           }
         }
@@ -178,7 +178,7 @@
                     "instruments": {
                       "type": "array",
                       "items": {
-                        "$ref": "https://ucp.dev/schemas/shopping/types/payment_instrument.json#/$defs/selected_payment_instrument"
+                        "$ref": "https://ucp.dev/2026-01-23/schemas/shopping/types/payment_instrument.json#/$defs/selected_payment_instrument"
                       },
                       "description": "Available payment instruments after selection."
                     }
@@ -199,7 +199,7 @@
           "name": "checkout",
           "required": true,
           "schema": {
-            "$ref": "https://ucp.dev/schemas/shopping/checkout.json",
+            "$ref": "https://ucp.dev/2026-01-23/schemas/shopping/checkout.json",
             "description": "Current checkout state with selected instrument."
           }
         }
@@ -223,7 +223,7 @@
                     "instruments": {
                       "type": "array",
                       "items": {
-                        "$ref": "https://ucp.dev/schemas/shopping/types/payment_instrument.json#/$defs/selected_payment_instrument"
+                        "$ref": "https://ucp.dev/2026-01-23/schemas/shopping/types/payment_instrument.json#/$defs/selected_payment_instrument"
                       },
                       "description": "Payment instruments with credential populated on selected instrument."
                     }
