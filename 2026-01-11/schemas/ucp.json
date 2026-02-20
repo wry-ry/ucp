@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://ucp.dev/schemas/ucp.json",
+  "$id": "https://ucp.dev/2026-01-11/schemas/ucp.json",
   "title": "UCP Metadata",
   "description": "Protocol metadata for discovery profiles and responses. Uses slim schema pattern with context-specific required fields.",
   "$defs": {
@@ -13,7 +13,7 @@
       "type": "object",
       "description": "Service definitions keyed by reverse-domain service name.",
       "additionalProperties": {
-        "$ref": "https://ucp.dev/schemas/service.json"
+        "$ref": "https://ucp.dev/2026-01-11/schemas/service.json"
       }
     },
     "discovery_profile": {
@@ -36,7 +36,7 @@
           "type": "array",
           "description": "Supported capabilities and extensions.",
           "items": {
-            "$ref": "https://ucp.dev/schemas/capability.json#/$defs/discovery"
+            "$ref": "https://ucp.dev/2026-01-11/schemas/capability.json#/$defs/discovery"
           }
         }
       }
@@ -57,7 +57,7 @@
           "type": "array",
           "description": "Active capabilities for this response.",
           "items": {
-            "$ref": "https://ucp.dev/schemas/capability.json#/$defs/response"
+            "$ref": "https://ucp.dev/2026-01-11/schemas/capability.json#/$defs/response"
           }
         }
       }
@@ -78,7 +78,7 @@
           "type": "array",
           "description": "Active capabilities for this response.",
           "items": {
-            "$ref": "https://ucp.dev/schemas/capability.json#/$defs/response"
+            "$ref": "https://ucp.dev/2026-01-11/schemas/capability.json#/$defs/response"
           }
         }
       }

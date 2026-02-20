@@ -1,32 +1,32 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://ucp.dev/schemas/shopping/fulfillment.json",
+  "$id": "https://ucp.dev/2026-01-11/schemas/shopping/fulfillment.json",
   "name": "dev.ucp.shopping.fulfillment",
   "version": "2026-01-11",
   "title": "Fulfillment Extension",
   "description": "Extends Checkout with fulfillment support using methods, destinations, and groups.",
   "$defs": {
     "fulfillment_option": {
-      "$ref": "https://ucp.dev/schemas/shopping/types/fulfillment_option.json"
+      "$ref": "https://ucp.dev/2026-01-11/schemas/shopping/types/fulfillment_option.json"
     },
     "fulfillment_group": {
-      "$ref": "https://ucp.dev/schemas/shopping/types/fulfillment_group.json"
+      "$ref": "https://ucp.dev/2026-01-11/schemas/shopping/types/fulfillment_group.json"
     },
     "fulfillment_method": {
-      "$ref": "https://ucp.dev/schemas/shopping/types/fulfillment_method.json"
+      "$ref": "https://ucp.dev/2026-01-11/schemas/shopping/types/fulfillment_method.json"
     },
     "fulfillment_available_method": {
-      "$ref": "https://ucp.dev/schemas/shopping/types/fulfillment_available_method.json"
+      "$ref": "https://ucp.dev/2026-01-11/schemas/shopping/types/fulfillment_available_method.json"
     },
     "fulfillment": {
-      "$ref": "https://ucp.dev/schemas/shopping/types/fulfillment.json"
+      "$ref": "https://ucp.dev/2026-01-11/schemas/shopping/types/fulfillment.json"
     },
     "checkout": {
       "title": "Checkout with Fulfillment",
       "description": "Checkout extended with hierarchical fulfillment.",
       "allOf": [
         {
-          "$ref": "https://ucp.dev/schemas/shopping/checkout.json"
+          "$ref": "https://ucp.dev/2026-01-11/schemas/shopping/checkout.json"
         },
         {
           "type": "object",
@@ -55,7 +55,7 @@
             "name": "checkout",
             "required": true,
             "schema": {
-              "$ref": "https://ucp.dev/schemas/shopping/checkout.json",
+              "$ref": "https://ucp.dev/2026-01-11/schemas/shopping/checkout.json",
               "description": "Current checkout state with updated fulfillment."
             }
           }
@@ -70,7 +70,7 @@
             "name": "checkout",
             "required": true,
             "schema": {
-              "$ref": "https://ucp.dev/schemas/shopping/checkout.json",
+              "$ref": "https://ucp.dev/2026-01-11/schemas/shopping/checkout.json",
               "description": "Current checkout state with fulfillment context."
             }
           }
@@ -89,7 +89,7 @@
                 "description": "Partial checkout update with fulfillment address selection.",
                 "properties": {
                   "fulfillment": {
-                    "$ref": "https://ucp.dev/schemas/shopping/types/fulfillment.json",
+                    "$ref": "https://ucp.dev/2026-01-11/schemas/shopping/types/fulfillment.json",
                     "description": "Fulfillment with updated destinations and selected_destination_id."
                   }
                 }

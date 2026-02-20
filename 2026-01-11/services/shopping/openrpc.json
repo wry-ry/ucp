@@ -27,14 +27,14 @@
           "name": "checkout",
           "required": true,
           "schema": {
-            "$ref": "https://ucp.dev/schemas/shopping/checkout.json"
+            "$ref": "https://ucp.dev/2026-01-11/schemas/shopping/checkout.json"
           }
         }
       ],
       "result": {
         "name": "checkout",
         "schema": {
-          "$ref": "https://ucp.dev/schemas/shopping/checkout.json"
+          "$ref": "https://ucp.dev/2026-01-11/schemas/shopping/checkout.json"
         }
       }
     },
@@ -53,7 +53,7 @@
       "result": {
         "name": "checkout",
         "schema": {
-          "$ref": "https://ucp.dev/schemas/shopping/checkout.json"
+          "$ref": "https://ucp.dev/2026-01-11/schemas/shopping/checkout.json"
         }
       }
     },
@@ -72,14 +72,14 @@
           "name": "checkout",
           "required": true,
           "schema": {
-            "$ref": "https://ucp.dev/schemas/shopping/checkout.json"
+            "$ref": "https://ucp.dev/2026-01-11/schemas/shopping/checkout.json"
           }
         }
       ],
       "result": {
         "name": "checkout",
         "schema": {
-          "$ref": "https://ucp.dev/schemas/shopping/checkout.json"
+          "$ref": "https://ucp.dev/2026-01-11/schemas/shopping/checkout.json"
         }
       }
     },
@@ -98,7 +98,7 @@
           "name": "payment",
           "required": false,
           "schema": {
-            "$ref": "https://ucp.dev/schemas/shopping/payment.json"
+            "$ref": "https://ucp.dev/2026-01-11/schemas/shopping/payment.json"
           }
         },
         {
@@ -113,7 +113,7 @@
       "result": {
         "name": "checkout",
         "schema": {
-          "$ref": "https://ucp.dev/schemas/shopping/checkout.json"
+          "$ref": "https://ucp.dev/2026-01-11/schemas/shopping/checkout.json"
         }
       }
     },
@@ -140,7 +140,7 @@
       "result": {
         "name": "checkout",
         "schema": {
-          "$ref": "https://ucp.dev/schemas/shopping/checkout.json"
+          "$ref": "https://ucp.dev/2026-01-11/schemas/shopping/checkout.json"
         }
       }
     }

@@ -538,19 +538,19 @@
     },
     "schemas": {
       "checkout": {
-        "$ref": "https://ucp.dev/schemas/shopping/checkout.json"
+        "$ref": "https://ucp.dev/2026-01-11/schemas/shopping/checkout.json"
       },
       "order": {
-        "$ref": "https://ucp.dev/schemas/shopping/order.json"
+        "$ref": "https://ucp.dev/2026-01-11/schemas/shopping/order.json"
       },
       "payment": {
-        "$ref": "https://ucp.dev/schemas/shopping/payment.json"
+        "$ref": "https://ucp.dev/2026-01-11/schemas/shopping/payment.json"
       },
       "payment_data": {
-        "$ref": "https://ucp.dev/schemas/shopping/payment_data.json"
+        "$ref": "https://ucp.dev/2026-01-11/schemas/shopping/payment_data.json"
       },
       "ucp": {
-        "$ref": "https://ucp.dev/schemas/ucp.json"
+        "$ref": "https://ucp.dev/2026-01-11/schemas/ucp.json"
       }
     }
   }

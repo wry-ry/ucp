@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://ucp.dev/schemas/discovery/profile.json",
+  "$id": "https://ucp.dev/2026-01-11/schemas/discovery/profile.json",
   "title": "UCP Discovery Profile",
   "description": "Schema for UCP discovery profile returned from /.well-known/ucp.",
   "type": "object",
@@ -10,7 +10,7 @@
   ],
   "properties": {
     "ucp": {
-      "$ref": "https://ucp.dev/schemas/ucp.json#/$defs/discovery_profile"
+      "$ref": "https://ucp.dev/2026-01-11/schemas/ucp.json#/$defs/discovery_profile"
     },
     "payment": {
       "type": "object",
@@ -20,7 +20,7 @@
           "type": "array",
           "description": "Payment handler definitions that describe how instruments can be collected",
           "items": {
-            "$ref": "https://ucp.dev/schemas/shopping/types/payment_handler.json"
+            "$ref": "https://ucp.dev/2026-01-11/schemas/shopping/types/payment_handler.json"
           }
         }
       }

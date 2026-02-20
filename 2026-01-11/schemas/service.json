@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://ucp.dev/schemas/service.json",
+  "$id": "https://ucp.dev/2026-01-11/schemas/service.json",
   "title": "UCP Service",
   "description": "Schema for UCP service definitions. A service defines the API surface for a vertical (shopping, common, etc.) with transport bindings.",
   "type": "object",
@@ -11,7 +11,7 @@
   ],
   "properties": {
     "version": {
-      "$ref": "https://ucp.dev/schemas/ucp.json#/$defs/version",
+      "$ref": "https://ucp.dev/2026-01-11/schemas/ucp.json#/$defs/version",
       "description": "Service version in YYYY-MM-DD format."
     },
     "spec": {
