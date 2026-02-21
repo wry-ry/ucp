@@ -1,7 +1,5 @@
 # Fulfillment Extension
 
-**Version:** `2026-01-11`
-
 ## Overview
 
 The fulfillment extension enables businesses to advertise support for physical goods fulfillment (shipping, pickup, etc).
