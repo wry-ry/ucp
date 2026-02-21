@@ -7,8 +7,6 @@
 
 # Universal Commerce Protocol (UCP) Official Specification
 
-**Version:** `2026-01-11`
-
 ## Overarching guidelines
 
 The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**, **SHOULD**, **SHOULD NOT**, **RECOMMENDED**, **MAY**, and **OPTIONAL** in this document are to be interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119.html) and [RFC 8174](https://www.rfc-editor.org/rfc/rfc8174.html).
@@ -1018,7 +1016,6 @@ Capabilities outside the `dev.ucp.*` namespace version fully independently. Vend
 # Checkout Capability
 
 - **Capability Name:** `dev.ucp.shopping.checkout`
-- **Version:** `2026-01-11`
 
 ## Overview
 
@@ -4931,8 +4928,6 @@ Represents the processor or wallet provider responsible for authenticating and p
 
 # AP2 Mandates Extension
 
-**Version:** `2026-01-11`
-
 ## Overview
 
 The AP2 Mandates extension enables the secure exchange of user intents and authorizations using **Verifiable Digital Credentials**. It extends the standard Shopping Service Checkout capability to support the **[AP2 Protocol](https://ap2-protocol.org/)**.
@@ -5311,8 +5306,6 @@ Error codes specific to AP2 mandate verification.
 
 # Buyer Consent Extension
 
-**Version:** `2026-01-11`
-
 ## Overview
 
 The Buyer Consent extension enables platforms to transmit buyer consent choices to businesses regarding data usage and communication preferences. It allows buyers to communicate their consent status for various categories, such as analytics, marketing, and data sales, helping businesses comply with privacy regulations like CCPA and GDPR.
@@ -5429,8 +5422,6 @@ POST /checkouts
 1. **Consent states** should align with actual user choices, not platform defaults
 
 # Discount Extension
-
-**Version:** `2026-01-11`
 
 ## Overview
 
@@ -5832,8 +5823,6 @@ With this data, an agent can explain:
 > "Your T-Shirt ($60) got $12 off from the 20% summer sale, plus $3 from your loyalty reward (split proportionally). Total savings on this item: $15."
 
 # Fulfillment Extension
-
-**Version:** `2026-01-11`
 
 ## Overview
 
@@ -6434,7 +6423,6 @@ Shirt ships to mom (US), pants ship to grandma (Hong Kong). Two methods of the s
 # Order Capability
 
 - **Capability Name:** `dev.ucp.shopping.order`
-- **Version:** `2026-01-11`
 
 ## Overview
 
@@ -6844,7 +6832,6 @@ The `signing_keys` array supports multiple keys to enable zero-downtime rotation
 # Identity Linking Capability
 
 - **Capability Name:** `dev.ucp.common.identity_linking`
-- **Version:** `2026-01-11`
 
 ## Overview
 
@@ -6938,8 +6925,6 @@ Example of [metadata](https://datatracker.ietf.org/doc/html/rfc8414#section-2) s
 ```
 
 # Payment Handler Specification Guide
-
-**Version:** `2026-01-11`
 
 ## Introduction
 
@@ -7346,7 +7331,6 @@ ______________________________________________________________________
 # {Handler Name} Payment Handler
 
 - **Handler Name:** `{reverse-dns.name}`
-- **Version:** `{YYYY-MM-DD}`
 
 ## Introduction
 
@@ -7773,7 +7757,6 @@ When publishing your handler, your specification document **MUST** include:
 
 ```markdown
 **Handler Name:** `com.acme.tokenization_payment`
-**Version:** `2026-01-11`
 **OpenAPI:** [Tokenization API](https://ucp.dev/handlers/tokenization/openapi.json)
 
 | Environment | Base URL |
@@ -7833,7 +7816,6 @@ ______________________________________________________________________
 # Processor Tokenizer Payment Handler
 
 - **Handler Name:** `com.example.processor_tokenizer`
-- **Version:** `2026-01-11`
 - **Type:** Payment Handler Example
 
 ## Introduction
@@ -8042,7 +8024,6 @@ ______________________________________________________________________
 # Platform Tokenizer Payment Handler
 
 - **Handler Name:** `com.example.platform_tokenizer`
-- **Version:** `2026-01-11`
 - **Type:** Payment Handler Example
 
 ## Introduction
@@ -8385,7 +8366,6 @@ ______________________________________________________________________
 # Encrypted Credential Handler
 
 - **Handler Name:** `com.example.encrypted_credential`
-- **Version:** `2026-01-11`
 - **Type:** Payment Handler Example
 
 ## Introduction

@@ -1,7 +1,5 @@
 # Buyer Consent Extension
 
-**Version:** `2026-01-11`
-
 ## Overview
 
 The Buyer Consent extension enables platforms to transmit buyer consent choices to businesses regarding data usage and communication preferences. It allows buyers to communicate their consent status for various categories, such as analytics, marketing, and data sales, helping businesses comply with privacy regulations like CCPA and GDPR.

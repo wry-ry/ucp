@@ -1,7 +1,5 @@
 # Discount Extension
 
-**Version:** `2026-01-11`
-
 ## Overview
 
 Discount extension allows businesses to indicate that they support discount codes on checkout sessions, and specifies how the discount codes are to be shared between the platform and the business.
