@@ -144,6 +144,20 @@ def on_config(config):
   """Adjust configuration based on DOCS_MODE."""
   mode = os.environ.get("DOCS_MODE", "root")
 
+  # Update site_url from environment if set (e.g. for forks/CI)
+  # This ensures plugins like mkdocs-site-urls use the correct base URL.
+  site_url_env = os.environ.get("SITE_URL")
+  if site_url_env:
+    current_site_url = config.get("site_url", "/")
+    # Replace default domain with the env var, preserving version suffix
+    if "https://ucp.dev/" in current_site_url:
+      config["site_url"] = current_site_url.replace(
+        "https://ucp.dev/", site_url_env
+      )
+      log.info(
+        f"Updated site_url to {config['site_url']} based on SITE_URL env var"
+      )
+
   # Calculate base path for links (e.g. / or /ucp/)
   site_url = os.environ.get("SITE_URL", config.get("site_url", "/"))
   base_path = urlparse(site_url).path
