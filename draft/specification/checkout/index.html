@@ -11,7 +11,7 @@
       
       
       
-        <link rel="canonical" href="https://ucp.dev/draft/specification/checkout/">
+        <link rel="canonical" href="https://wry-ry.github.io/ucp/draft/specification/checkout/">
       
       
         <link rel="prev" href="../overview/">
@@ -142,16 +142,16 @@
 <meta property="og:title" content="Overview - Universal Commerce Protocol (UCP)" />
 <meta property="og:description" content="The Universal Commerce Protocol (UCP) is a solution for enabling gen AI agents to make payments on behalf of users, safely, securely, and in a decentralized and privacy protecting manner. This protocol is a part of the broader ecosystem, which includes agentic protocols like A2A and MCP, and encompasses the global nature of payments.
 " />
-<meta property="og:image" content="https://ucp.dev/draft/assets/images/social/specification/checkout.png" />
+<meta property="og:image" content="https://wry-ry.github.io/ucp/draft/assets/images/social/specification/checkout.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:url" content="https://ucp.dev/draft/specification/checkout/" />
+<meta property="og:url" content="https://wry-ry.github.io/ucp/draft/specification/checkout/" />
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:title" content="Overview - Universal Commerce Protocol (UCP)" />
 <meta property="twitter:description" content="The Universal Commerce Protocol (UCP) is a solution for enabling gen AI agents to make payments on behalf of users, safely, securely, and in a decentralized and privacy protecting manner. This protocol is a part of the broader ecosystem, which includes agentic protocols like A2A and MCP, and encompasses the global nature of payments.
 " />
-<meta property="twitter:image" content="https://ucp.dev/draft/assets/images/social/specification/checkout.png" />
+<meta property="twitter:image" content="https://wry-ry.github.io/ucp/draft/assets/images/social/specification/checkout.png" />
 </head>
   
   
@@ -2783,7 +2783,7 @@ extension is supported.</p>
 <p>The business remains the Merchant of Record (MoR), and they don't need to become
 PCI DSS compliant to accept card payments through this Capability.</p>
 <h3 id="flow-overview">Flow overview<a class="headerlink" href="#flow-overview" title="Permanent link">&para;</a></h3>
-<p><img alt="High-level checkout flow sequence diagram" src="/draft/specification/images/ucp-checkout-flow.png" /></p>
+<p><img alt="High-level checkout flow sequence diagram" src="/ucp/draft/specification/images/ucp-checkout-flow.png" /></p>
 <h3 id="payments">Payments<a class="headerlink" href="#payments" title="Permanent link">&para;</a></h3>
 <p>Payment handlers are discovered from the business's UCP profile at
 <code>/.well-known/ucp</code> and checkout.ucp.payment_handlers. The handlers define
@@ -3067,7 +3067,7 @@ redirect to the checkout UI or renders the checkout page directly.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">ucp</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#ucp-response-checkout-schema">UCP Response Checkout Schema</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#ucp-response-checkout-schema">UCP Response Checkout Schema</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Protocol metadata for discovery profiles and responses. Uses slim schema pattern with context-specific required fields.</td>
 </tr>
@@ -3079,13 +3079,13 @@ redirect to the checkout UI or renders the checkout page directly.</p>
 </tr>
 <tr>
 <td style="text-align: left;">line_items</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/checkout/#line-item-response">Line Item Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#line-item-response">Line Item Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">List of line items being checked out.</td>
 </tr>
 <tr>
 <td style="text-align: left;">buyer</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#buyer">Buyer</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#buyer">Buyer</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Representation of the buyer.</td>
 </tr>
@@ -3103,19 +3103,19 @@ redirect to the checkout UI or renders the checkout page directly.</p>
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/checkout/#total-response">Total Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#total-response">Total Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Different cart totals.</td>
 </tr>
 <tr>
 <td style="text-align: left;">messages</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/checkout/#message">Message</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#message">Message</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">List of messages with error and info about the checkout session state.</td>
 </tr>
 <tr>
 <td style="text-align: left;">links</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/checkout/#link">Link</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#link">Link</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Links to be displayed by the platform (Privacy Policy, TOS). Mandatory for legal compliance.</td>
 </tr>
@@ -3133,13 +3133,13 @@ redirect to the checkout UI or renders the checkout page directly.</p>
 </tr>
 <tr>
 <td style="text-align: left;">payment</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#payment">Payment</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#payment">Payment</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Payment configuration containing handlers.</td>
 </tr>
 <tr>
 <td style="text-align: left;">order</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#order-confirmation">Order Confirmation</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#order-confirmation">Order Confirmation</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Details about an order created for this checkout session.</td>
 </tr>
@@ -3196,25 +3196,25 @@ product data (price/title etc.) provided by the business through the feeds
 <tbody>
 <tr>
 <td style="text-align: left;">line_items</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/checkout/#line-item">Line Item</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#line-item">Line Item</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">List of line items being checked out.</td>
 </tr>
 <tr>
 <td style="text-align: left;">buyer</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#buyer">Buyer</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#buyer">Buyer</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Representation of the buyer.</td>
 </tr>
 <tr>
 <td style="text-align: left;">context</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#context">Context</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#context">Context</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Provisional buyer signals for relevance and localization: product availability, pricing, currency, tax, shipping, payment methods, and eligibility (e.g., student or affiliation discounts). Businesses SHOULD use these values when authoritative data (e.g., address) is absent, and MAY ignore unsupported values without returning errors. Context SHOULD be non-identifying and can be disclosed progressively—coarse signals early, finer resolution as the session progresses. Higher-resolution data (shipping address, billing address) supersedes context. Platforms SHOULD progressively enhance context throughout the buyer journey.</td>
 </tr>
 <tr>
 <td style="text-align: left;">payment</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#payment">Payment</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#payment">Payment</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Payment configuration containing handlers.</td>
 </tr>
@@ -3233,7 +3233,7 @@ product data (price/title etc.) provided by the business through the feeds
 <tbody>
 <tr>
 <td style="text-align: left;">ucp</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#ucp-response-checkout-schema">UCP Response Checkout Schema</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#ucp-response-checkout-schema">UCP Response Checkout Schema</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Protocol metadata for discovery profiles and responses. Uses slim schema pattern with context-specific required fields.</td>
 </tr>
@@ -3245,13 +3245,13 @@ product data (price/title etc.) provided by the business through the feeds
 </tr>
 <tr>
 <td style="text-align: left;">line_items</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/checkout/#line-item-response">Line Item Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#line-item-response">Line Item Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">List of line items being checked out.</td>
 </tr>
 <tr>
 <td style="text-align: left;">buyer</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#buyer">Buyer</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#buyer">Buyer</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Representation of the buyer.</td>
 </tr>
@@ -3269,19 +3269,19 @@ product data (price/title etc.) provided by the business through the feeds
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/checkout/#total-response">Total Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#total-response">Total Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Different cart totals.</td>
 </tr>
 <tr>
 <td style="text-align: left;">messages</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/checkout/#message">Message</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#message">Message</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">List of messages with error and info about the checkout session state.</td>
 </tr>
 <tr>
 <td style="text-align: left;">links</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/checkout/#link">Link</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#link">Link</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Links to be displayed by the platform (Privacy Policy, TOS). Mandatory for legal compliance.</td>
 </tr>
@@ -3299,13 +3299,13 @@ product data (price/title etc.) provided by the business through the feeds
 </tr>
 <tr>
 <td style="text-align: left;">payment</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#payment">Payment</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#payment">Payment</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Payment configuration containing handlers.</td>
 </tr>
 <tr>
 <td style="text-align: left;">order</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#order-confirmation">Order Confirmation</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#order-confirmation">Order Confirmation</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Details about an order created for this checkout session.</td>
 </tr>
@@ -3351,7 +3351,7 @@ time of checkout session creation.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">ucp</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#ucp-response-checkout-schema">UCP Response Checkout Schema</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#ucp-response-checkout-schema">UCP Response Checkout Schema</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Protocol metadata for discovery profiles and responses. Uses slim schema pattern with context-specific required fields.</td>
 </tr>
@@ -3363,13 +3363,13 @@ time of checkout session creation.</p>
 </tr>
 <tr>
 <td style="text-align: left;">line_items</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/checkout/#line-item-response">Line Item Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#line-item-response">Line Item Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">List of line items being checked out.</td>
 </tr>
 <tr>
 <td style="text-align: left;">buyer</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#buyer">Buyer</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#buyer">Buyer</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Representation of the buyer.</td>
 </tr>
@@ -3387,19 +3387,19 @@ time of checkout session creation.</p>
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/checkout/#total-response">Total Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#total-response">Total Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Different cart totals.</td>
 </tr>
 <tr>
 <td style="text-align: left;">messages</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/checkout/#message">Message</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#message">Message</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">List of messages with error and info about the checkout session state.</td>
 </tr>
 <tr>
 <td style="text-align: left;">links</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/checkout/#link">Link</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#link">Link</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Links to be displayed by the platform (Privacy Policy, TOS). Mandatory for legal compliance.</td>
 </tr>
@@ -3417,13 +3417,13 @@ time of checkout session creation.</p>
 </tr>
 <tr>
 <td style="text-align: left;">payment</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#payment">Payment</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#payment">Payment</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Payment configuration containing handlers.</td>
 </tr>
 <tr>
 <td style="text-align: left;">order</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#order-confirmation">Order Confirmation</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#order-confirmation">Order Confirmation</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Details about an order created for this checkout session.</td>
 </tr>
@@ -3459,25 +3459,25 @@ will replace the existing checkout session state on the business side.</p>
 </tr>
 <tr>
 <td style="text-align: left;">line_items</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/checkout/#line-item">Line Item</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#line-item">Line Item</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">List of line items being checked out.</td>
 </tr>
 <tr>
 <td style="text-align: left;">buyer</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#buyer">Buyer</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#buyer">Buyer</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Representation of the buyer.</td>
 </tr>
 <tr>
 <td style="text-align: left;">context</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#context">Context</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#context">Context</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Provisional buyer signals for relevance and localization: product availability, pricing, currency, tax, shipping, payment methods, and eligibility (e.g., student or affiliation discounts). Businesses SHOULD use these values when authoritative data (e.g., address) is absent, and MAY ignore unsupported values without returning errors. Context SHOULD be non-identifying and can be disclosed progressively—coarse signals early, finer resolution as the session progresses. Higher-resolution data (shipping address, billing address) supersedes context. Platforms SHOULD progressively enhance context throughout the buyer journey.</td>
 </tr>
 <tr>
 <td style="text-align: left;">payment</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#payment">Payment</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#payment">Payment</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Payment configuration containing handlers.</td>
 </tr>
@@ -3496,7 +3496,7 @@ will replace the existing checkout session state on the business side.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">ucp</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#ucp-response-checkout-schema">UCP Response Checkout Schema</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#ucp-response-checkout-schema">UCP Response Checkout Schema</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Protocol metadata for discovery profiles and responses. Uses slim schema pattern with context-specific required fields.</td>
 </tr>
@@ -3508,13 +3508,13 @@ will replace the existing checkout session state on the business side.</p>
 </tr>
 <tr>
 <td style="text-align: left;">line_items</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/checkout/#line-item-response">Line Item Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#line-item-response">Line Item Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">List of line items being checked out.</td>
 </tr>
 <tr>
 <td style="text-align: left;">buyer</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#buyer">Buyer</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#buyer">Buyer</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Representation of the buyer.</td>
 </tr>
@@ -3532,19 +3532,19 @@ will replace the existing checkout session state on the business side.</p>
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/checkout/#total-response">Total Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#total-response">Total Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Different cart totals.</td>
 </tr>
 <tr>
 <td style="text-align: left;">messages</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/checkout/#message">Message</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#message">Message</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">List of messages with error and info about the checkout session state.</td>
 </tr>
 <tr>
 <td style="text-align: left;">links</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/checkout/#link">Link</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#link">Link</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Links to be displayed by the platform (Privacy Policy, TOS). Mandatory for legal compliance.</td>
 </tr>
@@ -3562,13 +3562,13 @@ will replace the existing checkout session state on the business side.</p>
 </tr>
 <tr>
 <td style="text-align: left;">payment</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#payment">Payment</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#payment">Payment</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Payment configuration containing handlers.</td>
 </tr>
 <tr>
 <td style="text-align: left;">order</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#order-confirmation">Order Confirmation</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#order-confirmation">Order Confirmation</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Details about an order created for this checkout session.</td>
 </tr>
@@ -3604,7 +3604,7 @@ as the order, and its associated items, moves through the supply chain.</p>
 </tr>
 <tr>
 <td style="text-align: left;">payment</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#payment">Payment</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#payment">Payment</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Payment configuration containing handlers.</td>
 </tr>
@@ -3629,7 +3629,7 @@ as the order, and its associated items, moves through the supply chain.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">ucp</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#ucp-response-checkout-schema">UCP Response Checkout Schema</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#ucp-response-checkout-schema">UCP Response Checkout Schema</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Protocol metadata for discovery profiles and responses. Uses slim schema pattern with context-specific required fields.</td>
 </tr>
@@ -3641,13 +3641,13 @@ as the order, and its associated items, moves through the supply chain.</p>
 </tr>
 <tr>
 <td style="text-align: left;">line_items</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/checkout/#line-item-response">Line Item Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#line-item-response">Line Item Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">List of line items being checked out.</td>
 </tr>
 <tr>
 <td style="text-align: left;">buyer</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#buyer">Buyer</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#buyer">Buyer</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Representation of the buyer.</td>
 </tr>
@@ -3665,19 +3665,19 @@ as the order, and its associated items, moves through the supply chain.</p>
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/checkout/#total-response">Total Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#total-response">Total Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Different cart totals.</td>
 </tr>
 <tr>
 <td style="text-align: left;">messages</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/checkout/#message">Message</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#message">Message</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">List of messages with error and info about the checkout session state.</td>
 </tr>
 <tr>
 <td style="text-align: left;">links</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/checkout/#link">Link</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#link">Link</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Links to be displayed by the platform (Privacy Policy, TOS). Mandatory for legal compliance.</td>
 </tr>
@@ -3695,13 +3695,13 @@ as the order, and its associated items, moves through the supply chain.</p>
 </tr>
 <tr>
 <td style="text-align: left;">payment</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#payment">Payment</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#payment">Payment</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Payment configuration containing handlers.</td>
 </tr>
 <tr>
 <td style="text-align: left;">order</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#order-confirmation">Order Confirmation</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#order-confirmation">Order Confirmation</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Details about an order created for this checkout session.</td>
 </tr>
@@ -3745,7 +3745,7 @@ that is not equal to <code>completed</code> or <code>canceled</code> <strong>SHO
 <tbody>
 <tr>
 <td style="text-align: left;">ucp</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#ucp-response-checkout-schema">UCP Response Checkout Schema</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#ucp-response-checkout-schema">UCP Response Checkout Schema</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Protocol metadata for discovery profiles and responses. Uses slim schema pattern with context-specific required fields.</td>
 </tr>
@@ -3757,13 +3757,13 @@ that is not equal to <code>completed</code> or <code>canceled</code> <strong>SHO
 </tr>
 <tr>
 <td style="text-align: left;">line_items</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/checkout/#line-item-response">Line Item Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#line-item-response">Line Item Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">List of line items being checked out.</td>
 </tr>
 <tr>
 <td style="text-align: left;">buyer</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#buyer">Buyer</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#buyer">Buyer</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Representation of the buyer.</td>
 </tr>
@@ -3781,19 +3781,19 @@ that is not equal to <code>completed</code> or <code>canceled</code> <strong>SHO
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/checkout/#total-response">Total Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#total-response">Total Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Different cart totals.</td>
 </tr>
 <tr>
 <td style="text-align: left;">messages</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/checkout/#message">Message</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#message">Message</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">List of messages with error and info about the checkout session state.</td>
 </tr>
 <tr>
 <td style="text-align: left;">links</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/checkout/#link">Link</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#link">Link</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Links to be displayed by the platform (Privacy Policy, TOS). Mandatory for legal compliance.</td>
 </tr>
@@ -3811,13 +3811,13 @@ that is not equal to <code>completed</code> or <code>canceled</code> <strong>SHO
 </tr>
 <tr>
 <td style="text-align: left;">payment</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#payment">Payment</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#payment">Payment</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Payment configuration containing handlers.</td>
 </tr>
 <tr>
 <td style="text-align: left;">order</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#order-confirmation">Order Confirmation</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#order-confirmation">Order Confirmation</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Details about an order created for this checkout session.</td>
 </tr>
@@ -4056,7 +4056,7 @@ require explicit validation and error feedback.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">item</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#item">Item</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#item">Item</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;"></td>
 </tr>
@@ -4087,7 +4087,7 @@ require explicit validation and error feedback.</p>
 </tr>
 <tr>
 <td style="text-align: left;">item</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#item">Item</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#item">Item</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;"></td>
 </tr>
@@ -4124,7 +4124,7 @@ require explicit validation and error feedback.</p>
 </tr>
 <tr>
 <td style="text-align: left;">item</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#item">Item</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#item">Item</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;"></td>
 </tr>
@@ -4136,7 +4136,7 @@ require explicit validation and error feedback.</p>
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/checkout/#total">Total</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#total">Total</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Line item totals breakdown.</td>
 </tr>
@@ -4216,7 +4216,7 @@ following are the recommended well-known types:</p>
 <strong>SHOULD</strong> handle unknown types gracefully by displaying them using the <code>title</code>
 field or omitting them.</p>
 <h3 id="message">Message<a class="headerlink" href="#message" title="Permanent link">&para;</a></h3>
-<p>This object MUST be one of the following types: <a href="/draft/specification/checkout/#message-error">Message Error</a>, <a href="/draft/specification/checkout/#message-warning">Message Warning</a>, <a href="/draft/specification/checkout/#message-info">Message Info</a>.</p>
+<p>This object MUST be one of the following types: <a href="/ucp/draft/specification/checkout/#message-error">Message Error</a>, <a href="/ucp/draft/specification/checkout/#message-warning">Message Warning</a>, <a href="/ucp/draft/specification/checkout/#message-info">Message Info</a>.</p>
 <h3 id="message-error">Message Error<a class="headerlink" href="#message-error" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -4236,7 +4236,7 @@ field or omitting them.</p>
 </tr>
 <tr>
 <td style="text-align: left;">code</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#error-code">Error Code</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#error-code">Error Code</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Error code identifying the type of error. Standard errors are defined in specification (see examples), and have standardized semantics; freeform codes are permitted.</td>
 </tr>
@@ -4365,7 +4365,7 @@ field or omitting them.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">instruments</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/checkout/#selected-payment-instrument">Selected Payment Instrument</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#selected-payment-instrument">Selected Payment Instrument</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">The payment instruments available for this payment. Each instrument is associated with a specific handler via the handler_id field. Handlers can extend the base payment_instrument schema to add handler-specific fields.</td>
 </tr>
@@ -4402,13 +4402,13 @@ field or omitting them.</p>
 </tr>
 <tr>
 <td style="text-align: left;">billing_address</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#postal-address">Postal Address</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#postal-address">Postal Address</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">The billing address associated with this payment method.</td>
 </tr>
 <tr>
 <td style="text-align: left;">credential</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#payment-credential">Payment Credential</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#payment-credential">Payment Credential</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">The base definition for any payment credential. Handlers define specific credential types.</td>
 </tr>

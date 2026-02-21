@@ -11,7 +11,7 @@
       
       
       
-        <link rel="canonical" href="https://ucp.dev/draft/specification/cart/">
+        <link rel="canonical" href="https://wry-ry.github.io/ucp/draft/specification/cart/">
       
       
         <link rel="prev" href="../fulfillment/">
@@ -142,16 +142,16 @@
 <meta property="og:title" content="Overview - Universal Commerce Protocol (UCP)" />
 <meta property="og:description" content="The Universal Commerce Protocol (UCP) is a solution for enabling gen AI agents to make payments on behalf of users, safely, securely, and in a decentralized and privacy protecting manner. This protocol is a part of the broader ecosystem, which includes agentic protocols like A2A and MCP, and encompasses the global nature of payments.
 " />
-<meta property="og:image" content="https://ucp.dev/draft/assets/images/social/specification/cart.png" />
+<meta property="og:image" content="https://wry-ry.github.io/ucp/draft/assets/images/social/specification/cart.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:url" content="https://ucp.dev/draft/specification/cart/" />
+<meta property="og:url" content="https://wry-ry.github.io/ucp/draft/specification/cart/" />
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:title" content="Overview - Universal Commerce Protocol (UCP)" />
 <meta property="twitter:description" content="The Universal Commerce Protocol (UCP) is a solution for enabling gen AI agents to make payments on behalf of users, safely, securely, and in a decentralized and privacy protecting manner. This protocol is a part of the broader ecosystem, which includes agentic protocols like A2A and MCP, and encompasses the global nature of payments.
 " />
-<meta property="twitter:image" content="https://ucp.dev/draft/assets/images/social/specification/cart.png" />
+<meta property="twitter:image" content="https://wry-ry.github.io/ucp/draft/assets/images/social/specification/cart.png" />
 </head>
   
   
@@ -2231,7 +2231,7 @@ SHOULD be linked for the duration of the checkout.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">ucp</td>
-<td style="text-align: left;"><a href="/draft/specification/cart/#ucp-response-cart-schema">UCP Response Cart Schema</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/cart/#ucp-response-cart-schema">UCP Response Cart Schema</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Protocol metadata for discovery profiles and responses. Uses slim schema pattern with context-specific required fields.</td>
 </tr>
@@ -2243,19 +2243,19 @@ SHOULD be linked for the duration of the checkout.</p>
 </tr>
 <tr>
 <td style="text-align: left;">line_items</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/cart/#line-item-response">Line Item Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/cart/#line-item-response">Line Item Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Cart line items. Same structure as checkout. Full replacement on update.</td>
 </tr>
 <tr>
 <td style="text-align: left;">context</td>
-<td style="text-align: left;"><a href="/draft/specification/cart/#context">Context</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/cart/#context">Context</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Buyer signals for localization (country, region, postal_code). Merchant uses for pricing, availability, currency. Falls back to geo-IP if omitted.</td>
 </tr>
 <tr>
 <td style="text-align: left;">buyer</td>
-<td style="text-align: left;"><a href="/draft/specification/cart/#buyer">Buyer</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/cart/#buyer">Buyer</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Optional buyer information for personalized estimates.</td>
 </tr>
@@ -2267,19 +2267,19 @@ SHOULD be linked for the duration of the checkout.</p>
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/cart/#total-response">Total Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/cart/#total-response">Total Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Estimated cost breakdown. May be partial if shipping/tax not yet calculable.</td>
 </tr>
 <tr>
 <td style="text-align: left;">messages</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/cart/#message">Message</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/cart/#message">Message</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Validation messages, warnings, or informational notices.</td>
 </tr>
 <tr>
 <td style="text-align: left;">links</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/cart/#link">Link</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/cart/#link">Link</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Optional merchant links (policies, FAQs).</td>
 </tr>
@@ -2371,7 +2371,7 @@ consistent data structures when converting a cart to a checkout session.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">item</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#item">Item</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#item">Item</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;"></td>
 </tr>
@@ -2402,7 +2402,7 @@ consistent data structures when converting a cart to a checkout session.</p>
 </tr>
 <tr>
 <td style="text-align: left;">item</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#item">Item</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#item">Item</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;"></td>
 </tr>
@@ -2439,7 +2439,7 @@ consistent data structures when converting a cart to a checkout session.</p>
 </tr>
 <tr>
 <td style="text-align: left;">item</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#item">Item</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#item">Item</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;"></td>
 </tr>
@@ -2451,7 +2451,7 @@ consistent data structures when converting a cart to a checkout session.</p>
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/checkout/#total">Total</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#total">Total</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Line item totals breakdown.</td>
 </tr>
@@ -2571,7 +2571,7 @@ consistent data structures when converting a cart to a checkout session.</p>
 <p>Taxes MAY be included where calculable. Platforms SHOULD assume cart totals
 are estimates; accurate taxes are computed at checkout.</p>
 <h3 id="message">Message<a class="headerlink" href="#message" title="Permanent link">&para;</a></h3>
-<p>This object MUST be one of the following types: <a href="/draft/specification/checkout/#message-error">Message Error</a>, <a href="/draft/specification/checkout/#message-warning">Message Warning</a>, <a href="/draft/specification/checkout/#message-info">Message Info</a>.</p>
+<p>This object MUST be one of the following types: <a href="/ucp/draft/specification/checkout/#message-error">Message Error</a>, <a href="/ucp/draft/specification/checkout/#message-warning">Message Warning</a>, <a href="/ucp/draft/specification/checkout/#message-info">Message Info</a>.</p>
 <h4 id="message-error">Message Error<a class="headerlink" href="#message-error" title="Permanent link">&para;</a></h4>
 <table>
 <thead>
@@ -2591,7 +2591,7 @@ are estimates; accurate taxes are computed at checkout.</p>
 </tr>
 <tr>
 <td style="text-align: left;">code</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#error-code">Error Code</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#error-code">Error Code</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Error code identifying the type of error. Standard errors are defined in specification (see examples), and have standardized semantics; freeform codes are permitted.</td>
 </tr>

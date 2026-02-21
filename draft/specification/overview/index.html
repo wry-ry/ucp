@@ -11,7 +11,7 @@
       
       
       
-        <link rel="canonical" href="https://ucp.dev/draft/specification/overview/">
+        <link rel="canonical" href="https://wry-ry.github.io/ucp/draft/specification/overview/">
       
       
       
@@ -140,16 +140,16 @@
 <meta property="og:title" content="Overview - Universal Commerce Protocol (UCP)" />
 <meta property="og:description" content="The Universal Commerce Protocol (UCP) is a solution for enabling gen AI agents to make payments on behalf of users, safely, securely, and in a decentralized and privacy protecting manner. This protocol is a part of the broader ecosystem, which includes agentic protocols like A2A and MCP, and encompasses the global nature of payments.
 " />
-<meta property="og:image" content="https://ucp.dev/draft/assets/images/social/specification/overview.png" />
+<meta property="og:image" content="https://wry-ry.github.io/ucp/draft/assets/images/social/specification/overview.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:url" content="https://ucp.dev/draft/specification/overview/" />
+<meta property="og:url" content="https://wry-ry.github.io/ucp/draft/specification/overview/" />
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:title" content="Overview - Universal Commerce Protocol (UCP)" />
 <meta property="twitter:description" content="The Universal Commerce Protocol (UCP) is a solution for enabling gen AI agents to make payments on behalf of users, safely, securely, and in a decentralized and privacy protecting manner. This protocol is a part of the broader ecosystem, which includes agentic protocols like A2A and MCP, and encompasses the global nature of payments.
 " />
-<meta property="twitter:image" content="https://ucp.dev/draft/assets/images/social/specification/overview.png" />
+<meta property="twitter:image" content="https://wry-ry.github.io/ucp/draft/assets/images/social/specification/overview.png" />
 </head>
   
   
@@ -5090,7 +5090,7 @@ splits responsibilities as follows:</p>
 <h3 id="payment-in-the-checkout-lifecycle">Payment in the Checkout Lifecycle<a class="headerlink" href="#payment-in-the-checkout-lifecycle" title="Permanent link">&para;</a></h3>
 <p>When payment is required, the payment process follows a standard 3-step lifecycle
 within UCP: <strong>Negotiation</strong>, <strong>Acquisition</strong>, and <strong>Completion</strong>.</p>
-<p><img alt="High-level payment flow sequence diagram" src="/draft/specification/images/ucp-payment-flow.png" /></p>
+<p><img alt="High-level payment flow sequence diagram" src="/ucp/draft/specification/images/ucp-payment-flow.png" /></p>
 <ol>
 <li><strong>Negotiation (Business → Platform):</strong> The business advertises available payment handlers in their UCP profile. This tells the platform <em>how</em> to pay (e.g., "Use this specific payment credential provider endpoint with this public key").</li>
 <li><strong>Acquisition (Platform ↔ Payment Credential Provider):</strong> The platform executes the handler's logic. This happens client-side or agent-side, directly with the payment credential provider (e.g., exchanging credentials for a network token). The business is not involved, ensuring raw data never touches the business's frontend API.</li>
@@ -5590,7 +5590,7 @@ version <strong>SHOULD</strong> handle requests from platforms using that versio
 </div>
 </div>
 <h3 id="version-negotiation">Version Negotiation<a class="headerlink" href="#version-negotiation" title="Permanent link">&para;</a></h3>
-<p><img alt="High-level resolution flow sequence diagram" src="/draft/specification/images/ucp-discovery-negotiation.png" /></p>
+<p><img alt="High-level resolution flow sequence diagram" src="/ucp/draft/specification/images/ucp-discovery-negotiation.png" /></p>
 <p>Businesses <strong>MUST</strong> validate the platform's version and determine compatibility:</p>
 <ol>
 <li>Platform declares version via profile referenced in request</li>

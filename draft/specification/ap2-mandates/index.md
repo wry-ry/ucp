@@ -270,9 +270,9 @@ The business trusts the Credential Issuer (Bank) and verifies the user's Key Bin
 
 Once the mandates are generated, the platform submits them in the completion request:
 
-| Name             | Type                                                                    | Required | Description                                      |
-| ---------------- | ----------------------------------------------------------------------- | -------- | ------------------------------------------------ |
-| checkout_mandate | [Checkout Mandate](/draft/specification/ap2-mandates/#checkout-mandate) | No       | SD-JWT+kb proving user authorized this checkout. |
+| Name             | Type                                                                        | Required | Description                                      |
+| ---------------- | --------------------------------------------------------------------------- | -------- | ------------------------------------------------ |
+| checkout_mandate | [Checkout Mandate](/ucp/draft/specification/ap2-mandates/#checkout-mandate) | No       | SD-JWT+kb proving user authorized this checkout. |
 
 ```json
 {
@@ -356,9 +356,9 @@ JWS Detached Content signature (RFC 7515 Appendix F) over the checkout response 
 
 The `ap2` object included in checkout responses.
 
-| Name                   | Type                                                                                | Required | Description                                                |
-| ---------------------- | ----------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------- |
-| merchant_authorization | [Merchant Authorization](/draft/specification/ap2-mandates/#merchant-authorization) | No       | Merchant's signature proving checkout terms are authentic. |
+| Name                   | Type                                                                                    | Required | Description                                                |
+| ---------------------- | --------------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------- |
+| merchant_authorization | [Merchant Authorization](/ucp/draft/specification/ap2-mandates/#merchant-authorization) | No       | Merchant's signature proving checkout terms are authentic. |
 
 ### Checkout Mandate
 
@@ -370,9 +370,9 @@ SD-JWT+kb credential in `ap2.checkout_mandate`. Proving user authorization for t
 
 The `ap2` object included in COMPLETE checkout requests.
 
-| Name             | Type                                                                    | Required | Description                                      |
-| ---------------- | ----------------------------------------------------------------------- | -------- | ------------------------------------------------ |
-| checkout_mandate | [Checkout Mandate](/draft/specification/ap2-mandates/#checkout-mandate) | No       | SD-JWT+kb proving user authorized this checkout. |
+| Name             | Type                                                                        | Required | Description                                      |
+| ---------------- | --------------------------------------------------------------------------- | -------- | ------------------------------------------------ |
+| checkout_mandate | [Checkout Mandate](/ucp/draft/specification/ap2-mandates/#checkout-mandate) | No       | SD-JWT+kb proving user authorized this checkout. |
 
 ### Error Codes
 

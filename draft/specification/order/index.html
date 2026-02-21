@@ -11,7 +11,7 @@
       
       
       
-        <link rel="canonical" href="https://ucp.dev/draft/specification/order/">
+        <link rel="canonical" href="https://wry-ry.github.io/ucp/draft/specification/order/">
       
       
         <link rel="prev" href="../cart-mcp/">
@@ -142,16 +142,16 @@
 <meta property="og:title" content="Order Capability - Universal Commerce Protocol (UCP)" />
 <meta property="og:description" content="The Universal Commerce Protocol (UCP) is a solution for enabling gen AI agents to make payments on behalf of users, safely, securely, and in a decentralized and privacy protecting manner. This protocol is a part of the broader ecosystem, which includes agentic protocols like A2A and MCP, and encompasses the global nature of payments.
 " />
-<meta property="og:image" content="https://ucp.dev/draft/assets/images/social/specification/order.png" />
+<meta property="og:image" content="https://wry-ry.github.io/ucp/draft/assets/images/social/specification/order.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:url" content="https://ucp.dev/draft/specification/order/" />
+<meta property="og:url" content="https://wry-ry.github.io/ucp/draft/specification/order/" />
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:title" content="Order Capability - Universal Commerce Protocol (UCP)" />
 <meta property="twitter:description" content="The Universal Commerce Protocol (UCP) is a solution for enabling gen AI agents to make payments on behalf of users, safely, securely, and in a decentralized and privacy protecting manner. This protocol is a part of the broader ecosystem, which includes agentic protocols like A2A and MCP, and encompasses the global nature of payments.
 " />
-<meta property="twitter:image" content="https://ucp.dev/draft/assets/images/social/specification/order.png" />
+<meta property="twitter:image" content="https://wry-ry.github.io/ucp/draft/assets/images/social/specification/order.png" />
 </head>
   
   
@@ -2299,7 +2299,7 @@ fulfillment:</p>
 <tbody>
 <tr>
 <td style="text-align: left;">ucp</td>
-<td style="text-align: left;"><a href="/draft/specification/order/#ucp-response-order-schema">UCP Response Order Schema</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/order/#ucp-response-order-schema">UCP Response Order Schema</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Protocol metadata for discovery profiles and responses. Uses slim schema pattern with context-specific required fields.</td>
 </tr>
@@ -2323,7 +2323,7 @@ fulfillment:</p>
 </tr>
 <tr>
 <td style="text-align: left;">line_items</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/order/#order-line-item">Order Line Item</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/order/#order-line-item">Order Line Item</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Immutable line items — source of truth for what was ordered.</td>
 </tr>
@@ -2335,13 +2335,13 @@ fulfillment:</p>
 </tr>
 <tr>
 <td style="text-align: left;">adjustments</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/order/#adjustment">Adjustment</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/order/#adjustment">Adjustment</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Append-only event log of money movements (refunds, returns, credits, disputes, cancellations, etc.) that exist independently of fulfillment.</td>
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/order/#total-response">Total Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/order/#total-response">Total Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Different totals for the order.</td>
 </tr>
@@ -2368,7 +2368,7 @@ Status and quantity counts should reflect the event logs.</p>
 </tr>
 <tr>
 <td style="text-align: left;">item</td>
-<td style="text-align: left;"><a href="/draft/specification/order/#item">Item</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/order/#item">Item</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Product data (id, title, price, image_url).</td>
 </tr>
@@ -2380,7 +2380,7 @@ Status and quantity counts should reflect the event logs.</p>
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/order/#total">Total</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/order/#total">Total</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Line item totals breakdown.</td>
 </tr>
@@ -2443,7 +2443,7 @@ split, merged, or adjusted post-order.</p>
 </tr>
 <tr>
 <td style="text-align: left;">destination</td>
-<td style="text-align: left;"><a href="/draft/specification/order/#postal-address">Postal Address</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/order/#postal-address">Postal Address</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Delivery destination address.</td>
 </tr>
@@ -2718,7 +2718,7 @@ during partner onboarding. The URL format is platform-specific.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">ucp</td>
-<td style="text-align: left;"><a href="/draft/specification/order/#ucp-response-order-schema">UCP Response Order Schema</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/order/#ucp-response-order-schema">UCP Response Order Schema</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Protocol metadata for discovery profiles and responses. Uses slim schema pattern with context-specific required fields.</td>
 </tr>
@@ -2742,7 +2742,7 @@ during partner onboarding. The URL format is platform-specific.</p>
 </tr>
 <tr>
 <td style="text-align: left;">line_items</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/order/#order-line-item">Order Line Item</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/order/#order-line-item">Order Line Item</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Immutable line items — source of truth for what was ordered.</td>
 </tr>
@@ -2754,13 +2754,13 @@ during partner onboarding. The URL format is platform-specific.</p>
 </tr>
 <tr>
 <td style="text-align: left;">adjustments</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/order/#adjustment">Adjustment</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/order/#adjustment">Adjustment</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Append-only event log of money movements (refunds, returns, credits, disputes, cancellations, etc.) that exist independently of fulfillment.</td>
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/order/#total">Total</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/order/#total">Total</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Different totals for the order.</td>
 </tr>
@@ -2791,7 +2791,7 @@ during partner onboarding. The URL format is platform-specific.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">ucp</td>
-<td style="text-align: left;"><a href="/draft/specification/order/#ucp">Ucp</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/order/#ucp">Ucp</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;"></td>
 </tr>

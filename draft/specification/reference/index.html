@@ -11,7 +11,7 @@
       
       
       
-        <link rel="canonical" href="https://ucp.dev/draft/specification/reference/">
+        <link rel="canonical" href="https://wry-ry.github.io/ucp/draft/specification/reference/">
       
       
         <link rel="prev" href="../signatures/">
@@ -142,16 +142,16 @@
 <meta property="og:title" content="Reference - Universal Commerce Protocol (UCP)" />
 <meta property="og:description" content="The Universal Commerce Protocol (UCP) is a solution for enabling gen AI agents to make payments on behalf of users, safely, securely, and in a decentralized and privacy protecting manner. This protocol is a part of the broader ecosystem, which includes agentic protocols like A2A and MCP, and encompasses the global nature of payments.
 " />
-<meta property="og:image" content="https://ucp.dev/draft/assets/images/social/specification/reference.png" />
+<meta property="og:image" content="https://wry-ry.github.io/ucp/draft/assets/images/social/specification/reference.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:url" content="https://ucp.dev/draft/specification/reference/" />
+<meta property="og:url" content="https://wry-ry.github.io/ucp/draft/specification/reference/" />
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:title" content="Reference - Universal Commerce Protocol (UCP)" />
 <meta property="twitter:description" content="The Universal Commerce Protocol (UCP) is a solution for enabling gen AI agents to make payments on behalf of users, safely, securely, and in a decentralized and privacy protecting manner. This protocol is a part of the broader ecosystem, which includes agentic protocols like A2A and MCP, and encompasses the global nature of payments.
 " />
-<meta property="twitter:image" content="https://ucp.dev/draft/assets/images/social/specification/reference.png" />
+<meta property="twitter:image" content="https://wry-ry.github.io/ucp/draft/assets/images/social/specification/reference.png" />
 </head>
   
   
@@ -3247,7 +3247,7 @@ within the UCP.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">ucp</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#ucp-response-cart-schema">UCP Response Cart Schema</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#ucp-response-cart-schema">UCP Response Cart Schema</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Protocol metadata for discovery profiles and responses. Uses slim schema pattern with context-specific required fields.</td>
 </tr>
@@ -3259,19 +3259,19 @@ within the UCP.</p>
 </tr>
 <tr>
 <td style="text-align: left;">line_items</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/reference/#line-item">Line Item</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#line-item">Line Item</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Cart line items. Same structure as checkout. Full replacement on update.</td>
 </tr>
 <tr>
 <td style="text-align: left;">context</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#context">Context</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#context">Context</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Buyer signals for localization (country, region, postal_code). Merchant uses for pricing, availability, currency. Falls back to geo-IP if omitted.</td>
 </tr>
 <tr>
 <td style="text-align: left;">buyer</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#buyer">Buyer</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#buyer">Buyer</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Optional buyer information for personalized estimates.</td>
 </tr>
@@ -3283,19 +3283,19 @@ within the UCP.</p>
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/reference/#total">Total</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#total">Total</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Estimated cost breakdown. May be partial if shipping/tax not yet calculable.</td>
 </tr>
 <tr>
 <td style="text-align: left;">messages</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/reference/#message">Message</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#message">Message</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Validation messages, warnings, or informational notices.</td>
 </tr>
 <tr>
 <td style="text-align: left;">links</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/reference/#link">Link</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#link">Link</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Optional merchant links (policies, FAQs).</td>
 </tr>
@@ -3327,7 +3327,7 @@ within the UCP.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">ucp</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#ucp-response-checkout-schema">UCP Response Checkout Schema</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#ucp-response-checkout-schema">UCP Response Checkout Schema</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Protocol metadata for discovery profiles and responses. Uses slim schema pattern with context-specific required fields.</td>
 </tr>
@@ -3339,19 +3339,19 @@ within the UCP.</p>
 </tr>
 <tr>
 <td style="text-align: left;">line_items</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/reference/#line-item">Line Item</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#line-item">Line Item</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">List of line items being checked out.</td>
 </tr>
 <tr>
 <td style="text-align: left;">buyer</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#buyer">Buyer</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#buyer">Buyer</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Representation of the buyer.</td>
 </tr>
 <tr>
 <td style="text-align: left;">context</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#context">Context</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#context">Context</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Provisional buyer signals for relevance and localization: product availability, pricing, currency, tax, shipping, payment methods, and eligibility (e.g., student or affiliation discounts). Businesses SHOULD use these values when authoritative data (e.g., address) is absent, and MAY ignore unsupported values without returning errors. Context SHOULD be non-identifying and can be disclosed progressively—coarse signals early, finer resolution as the session progresses. Higher-resolution data (shipping address, billing address) supersedes context. Platforms SHOULD progressively enhance context throughout the buyer journey.</td>
 </tr>
@@ -3369,19 +3369,19 @@ within the UCP.</p>
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/reference/#total">Total</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#total">Total</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Different cart totals.</td>
 </tr>
 <tr>
 <td style="text-align: left;">messages</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/reference/#message">Message</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#message">Message</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">List of messages with error and info about the checkout session state.</td>
 </tr>
 <tr>
 <td style="text-align: left;">links</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/reference/#link">Link</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#link">Link</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Links to be displayed by the platform (Privacy Policy, TOS). Mandatory for legal compliance.</td>
 </tr>
@@ -3399,13 +3399,13 @@ within the UCP.</p>
 </tr>
 <tr>
 <td style="text-align: left;">payment</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#payment">Payment</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#payment">Payment</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Payment configuration containing handlers.</td>
 </tr>
 <tr>
 <td style="text-align: left;">order</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#order-confirmation">Order Confirmation</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#order-confirmation">Order Confirmation</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Details about an order created for this checkout session.</td>
 </tr>
@@ -3425,7 +3425,7 @@ within the UCP.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">ucp</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#ucp-response-order-schema">UCP Response Order Schema</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#ucp-response-order-schema">UCP Response Order Schema</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Protocol metadata for discovery profiles and responses. Uses slim schema pattern with context-specific required fields.</td>
 </tr>
@@ -3449,7 +3449,7 @@ within the UCP.</p>
 </tr>
 <tr>
 <td style="text-align: left;">line_items</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/reference/#order-line-item">Order Line Item</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#order-line-item">Order Line Item</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Immutable line items — source of truth for what was ordered.</td>
 </tr>
@@ -3461,13 +3461,13 @@ within the UCP.</p>
 </tr>
 <tr>
 <td style="text-align: left;">adjustments</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/reference/#adjustment">Adjustment</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#adjustment">Adjustment</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Append-only event log of money movements (refunds, returns, credits, disputes, cancellations, etc.) that exist independently of fulfillment.</td>
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/reference/#total">Total</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#total">Total</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Different totals for the order.</td>
 </tr>
@@ -3487,7 +3487,7 @@ within the UCP.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">instruments</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/reference/#selected-payment-instrument">Selected Payment Instrument</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#selected-payment-instrument">Selected Payment Instrument</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">The payment instruments available for this payment. Each instrument is associated with a specific handler via the handler_id field. Handlers can extend the base payment_instrument schema to add handler-specific fields.</td>
 </tr>
@@ -3590,7 +3590,7 @@ within the UCP.</p>
 </tr>
 <tr>
 <td style="text-align: left;">identity</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#payment-identity">Payment Identity</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#payment-identity">Payment Identity</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">The participant this token is bound to. Required when acting on behalf of another participant (e.g., agent tokenizing for merchant). Omit when the authenticated caller is the binding target.</td>
 </tr>
@@ -3766,13 +3766,13 @@ within the UCP.</p>
 </tr>
 <tr>
 <td style="text-align: left;">billing_address</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#postal-address">Postal Address</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#postal-address">Postal Address</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">The billing address associated with this payment method.</td>
 </tr>
 <tr>
 <td style="text-align: left;">credential</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#payment-credential">Payment Credential</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#payment-credential">Payment Credential</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">The base definition for any payment credential. Handlers define specific credential types.</td>
 </tr>
@@ -3866,7 +3866,7 @@ within the UCP.</p>
 </tr>
 <tr>
 <td style="text-align: left;">destination</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#postal-address">Postal Address</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#postal-address">Postal Address</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Delivery destination address.</td>
 </tr>
@@ -3898,13 +3898,13 @@ within the UCP.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">methods</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/reference/#fulfillment-method">Fulfillment Method</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#fulfillment-method">Fulfillment Method</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Fulfillment methods for cart items.</td>
 </tr>
 <tr>
 <td style="text-align: left;">available_methods</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/reference/#fulfillment-available-method">Fulfillment Available Method</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#fulfillment-available-method">Fulfillment Available Method</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Inventory availability hints.</td>
 </tr>
@@ -3950,7 +3950,7 @@ within the UCP.</p>
 </table>
 <hr />
 <h3 id="fulfillment-destination">Fulfillment Destination<a class="headerlink" href="#fulfillment-destination" title="Permanent link">&para;</a></h3>
-<p>This object MUST be one of the following types: <a href="/draft/specification/reference/#shipping-destination">Shipping Destination</a>, <a href="/draft/specification/reference/#retail-location">Retail Location</a>.</p>
+<p>This object MUST be one of the following types: <a href="/ucp/draft/specification/reference/#shipping-destination">Shipping Destination</a>, <a href="/ucp/draft/specification/reference/#retail-location">Retail Location</a>.</p>
 <hr />
 <h3 id="fulfillment-event">Fulfillment Event<a class="headerlink" href="#fulfillment-event" title="Permanent link">&para;</a></h3>
 <table>
@@ -4039,7 +4039,7 @@ within the UCP.</p>
 </tr>
 <tr>
 <td style="text-align: left;">options</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/reference/#fulfillment-option">Fulfillment Option</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#fulfillment-option">Fulfillment Option</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Available fulfillment options for this group.</td>
 </tr>
@@ -4083,7 +4083,7 @@ within the UCP.</p>
 </tr>
 <tr>
 <td style="text-align: left;">destinations</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/reference/#fulfillment-destination">Fulfillment Destination</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#fulfillment-destination">Fulfillment Destination</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Available destinations. For shipping: addresses. For pickup: retail locations.</td>
 </tr>
@@ -4095,7 +4095,7 @@ within the UCP.</p>
 </tr>
 <tr>
 <td style="text-align: left;">groups</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/reference/#fulfillment-group">Fulfillment Group</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#fulfillment-group">Fulfillment Group</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Fulfillment groups for selecting options. Agent sets selected_option_id on groups to choose shipping method.</td>
 </tr>
@@ -4151,7 +4151,7 @@ within the UCP.</p>
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/reference/#total">Total</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#total">Total</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Fulfillment option totals breakdown.</td>
 </tr>
@@ -4215,7 +4215,7 @@ within the UCP.</p>
 </tr>
 <tr>
 <td style="text-align: left;">item</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#item">Item</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#item">Item</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;"></td>
 </tr>
@@ -4227,7 +4227,7 @@ within the UCP.</p>
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/reference/#total">Total</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#total">Total</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Line item totals breakdown.</td>
 </tr>
@@ -4299,7 +4299,7 @@ within the UCP.</p>
 </table>
 <hr />
 <h3 id="message">Message<a class="headerlink" href="#message" title="Permanent link">&para;</a></h3>
-<p>This object MUST be one of the following types: <a href="/draft/specification/reference/#message-error">Message Error</a>, <a href="/draft/specification/reference/#message-warning">Message Warning</a>, <a href="/draft/specification/reference/#message-info">Message Info</a>.</p>
+<p>This object MUST be one of the following types: <a href="/ucp/draft/specification/reference/#message-error">Message Error</a>, <a href="/ucp/draft/specification/reference/#message-warning">Message Warning</a>, <a href="/ucp/draft/specification/reference/#message-info">Message Info</a>.</p>
 <hr />
 <h3 id="message-error">Message Error<a class="headerlink" href="#message-error" title="Permanent link">&para;</a></h3>
 <table>
@@ -4320,7 +4320,7 @@ within the UCP.</p>
 </tr>
 <tr>
 <td style="text-align: left;">code</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#error-code">Error Code</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#error-code">Error Code</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Error code identifying the type of error. Standard errors are defined in specification (see examples), and have standardized semantics; freeform codes are permitted.</td>
 </tr>
@@ -4484,7 +4484,7 @@ within the UCP.</p>
 </tr>
 <tr>
 <td style="text-align: left;">item</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#item">Item</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#item">Item</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Product data (id, title, price, image_url).</td>
 </tr>
@@ -4496,7 +4496,7 @@ within the UCP.</p>
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/reference/#total">Total</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#total">Total</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Line item totals breakdown.</td>
 </tr>
@@ -4586,13 +4586,13 @@ within the UCP.</p>
 </tr>
 <tr>
 <td style="text-align: left;">billing_address</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#postal-address">Postal Address</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#postal-address">Postal Address</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">The billing address associated with this payment method.</td>
 </tr>
 <tr>
 <td style="text-align: left;">credential</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#payment-credential">Payment Credential</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#payment-credential">Payment Credential</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">The base definition for any payment credential. Handlers define specific credential types.</td>
 </tr>
@@ -4718,7 +4718,7 @@ within the UCP.</p>
 </tr>
 <tr>
 <td style="text-align: left;">address</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#postal-address">Postal Address</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#postal-address">Postal Address</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Physical address of the location.</td>
 </tr>
@@ -4884,7 +4884,7 @@ within the UCP.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">merchant_authorization</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#merchant-authorization">Merchant Authorization</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#merchant-authorization">Merchant Authorization</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Merchant's signature proving checkout terms are authentic.</td>
 </tr>
@@ -4903,7 +4903,7 @@ within the UCP.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">checkout_mandate</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#checkout-mandate">Checkout Mandate</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#checkout-mandate">Checkout Mandate</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">SD-JWT+kb proving user authorized this checkout.</td>
 </tr>
@@ -5085,7 +5085,7 @@ within the UCP.</p>
 </tr>
 <tr>
 <td style="text-align: left;">consent</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#consent">Consent</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#consent">Consent</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Consent tracking fields.</td>
 </tr>
@@ -5182,7 +5182,7 @@ within the UCP.</p>
 </tr>
 <tr>
 <td style="text-align: left;">buyer</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#buyer">Buyer</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#buyer">Buyer</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Buyer with consent tracking.</td>
 </tr>
@@ -5264,7 +5264,7 @@ within the UCP.</p>
 </tr>
 <tr>
 <td style="text-align: left;">allocations</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/reference/#allocation">Allocation</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#allocation">Allocation</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Breakdown of where this discount was allocated. Sum of allocation amounts equals total amount.</td>
 </tr>
@@ -5289,7 +5289,7 @@ within the UCP.</p>
 </tr>
 <tr>
 <td style="text-align: left;">applied</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/reference/#applied-discount">Applied Discount</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#applied-discount">Applied Discount</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Discounts successfully applied (code-based and automatic).</td>
 </tr>
@@ -5386,7 +5386,7 @@ within the UCP.</p>
 </tr>
 <tr>
 <td style="text-align: left;">discounts</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#discounts-object">Discounts Object</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#discounts-object">Discounts Object</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;"></td>
 </tr>
@@ -5688,7 +5688,7 @@ within the UCP.</p>
 </tr>
 <tr>
 <td style="text-align: left;">fulfillment</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#fulfillment">Fulfillment</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#fulfillment">Fulfillment</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Fulfillment details.</td>
 </tr>
