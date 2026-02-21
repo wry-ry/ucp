@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://ucp.dev/</loc>
+         <loc>https://wry-ry.github.io/ucp/</loc>
          <lastmod>2026-02-21</lastmod>
     </url>
     <url>
-         <loc>https://ucp.dev/versioning/</loc>
+         <loc>https://wry-ry.github.io/ucp/versioning/</loc>
          <lastmod>2026-02-21</lastmod>
     </url>
     <url>
-         <loc>https://ucp.dev/documentation/core-concepts/</loc>
+         <loc>https://wry-ry.github.io/ucp/documentation/core-concepts/</loc>
          <lastmod>2026-02-21</lastmod>
     </url>
     <url>
-         <loc>https://ucp.dev/documentation/roadmap/</loc>
+         <loc>https://wry-ry.github.io/ucp/documentation/roadmap/</loc>
          <lastmod>2026-02-21</lastmod>
     </url>
     <url>
-         <loc>https://ucp.dev/documentation/schema-authoring/</loc>
+         <loc>https://wry-ry.github.io/ucp/documentation/schema-authoring/</loc>
          <lastmod>2026-02-21</lastmod>
     </url>
     <url>
-         <loc>https://ucp.dev/documentation/ucp-and-ap2/</loc>
+         <loc>https://wry-ry.github.io/ucp/documentation/ucp-and-ap2/</loc>
          <lastmod>2026-02-21</lastmod>
     </url>
 </urlset>
