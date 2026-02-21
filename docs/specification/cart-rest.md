@@ -25,34 +25,41 @@ This document specifies the REST binding for the [Cart Capability](cart.md).
 Businesses advertise REST transport availability through their UCP profile at
 `/.well-known/ucp`.
 
+<!-- schema: source/discovery/profile_schema.json#/$defs/business_profile -->
 ```json
 {
   "ucp": {
     "version": "2026-01-15",
     "services": {
-      "dev.ucp.shopping": {
-        "version": "2026-01-15",
-        "spec": "https://ucp.dev/specification/overview",
-        "rest": {
+      "dev.ucp.shopping": [
+        {
+          "version": "2026-01-15",
+          "spec": "https://ucp.dev/specification/overview",
+          "transport": "rest",
           "schema": "https://ucp.dev/services/shopping/openapi.json",
           "endpoint": "https://business.example.com/ucp/v1"
         }
-      }
+      ]
     },
-    "capabilities": [
-      {
-        "name": "dev.ucp.shopping.checkout",
-        "version": "2026-01-11",
-        "spec": "https://ucp.dev/specification/checkout",
-        "schema": "https://ucp.dev/schemas/shopping/checkout.json"
-      },
-      {
-        "name": "dev.ucp.shopping.cart",
-        "version": "2026-01-15",
-        "spec": "https://ucp.dev/specification/cart",
-        "schema": "https://ucp.dev/schemas/shopping/cart.json"
-      }
-    ]
+    "capabilities": {
+      "dev.ucp.shopping.checkout": [
+        {
+          "version": "2026-01-11",
+          "spec": "https://ucp.dev/specification/checkout",
+          "schema": "https://ucp.dev/schemas/shopping/checkout.json"
+        }
+      ],
+      "dev.ucp.shopping.cart": [
+        {
+          "version": "2026-01-15",
+          "spec": "https://ucp.dev/specification/cart",
+          "schema": "https://ucp.dev/schemas/shopping/cart.json"
+        }
+      ]
+    },
+    "payment_handlers": {
+      "com.google.pay": [...]
+    }
   }
 }
 ```
@@ -98,6 +105,7 @@ All REST endpoints **MUST** be served over HTTPS with minimum TLS version 1.3.
 
 === "Request"
 
+    <!-- schema: shopping/cart.json op=create direction=request -->
     ```json
     POST /carts HTTP/1.1
     UCP-Agent: profile="https://platform.example/profile"
@@ -122,6 +130,7 @@ All REST endpoints **MUST** be served over HTTPS with minimum TLS version 1.3.
 
 === "Response"
 
+    <!-- schema: shopping/cart.json op=create direction=response -->
     ```json
     HTTP/1.1 201 Created
     Content-Type: application/json
@@ -129,16 +138,14 @@ All REST endpoints **MUST** be served over HTTPS with minimum TLS version 1.3.
     {
       "ucp": {
         "version": "2026-01-15",
-        "capabilities": [
-          {
-            "name": "dev.ucp.shopping.checkout",
-            "version": "2026-01-11"
-          },
-          {
-            "name": "dev.ucp.shopping.cart",
-            "version": "2026-01-15"
-          }
-        ]
+        "capabilities": {
+          "dev.ucp.shopping.checkout": [
+            { "version": "2026-01-11" }
+          ],
+          "dev.ucp.shopping.cart": [
+            { "version": "2026-01-15" }
+          ]
+        }
       },
       "id": "cart_abc123",
       "line_items": [
@@ -187,6 +194,7 @@ All REST endpoints **MUST** be served over HTTPS with minimum TLS version 1.3.
 
 === "Request"
 
+    <!-- schema: shopping/cart.json op=read direction=request body=empty -->
     ```json
     GET /carts/{id} HTTP/1.1
     UCP-Agent: profile="https://platform.example/profile"
@@ -194,6 +202,7 @@ All REST endpoints **MUST** be served over HTTPS with minimum TLS version 1.3.
 
 === "Response"
 
+    <!-- schema: shopping/cart.json op=read direction=response -->
     ```json
     HTTP/1.1 200 OK
     Content-Type: application/json
@@ -201,16 +210,14 @@ All REST endpoints **MUST** be served over HTTPS with minimum TLS version 1.3.
     {
       "ucp": {
         "version": "2026-01-15",
-        "capabilities": [
-          {
-            "name": "dev.ucp.shopping.checkout",
-            "version": "2026-01-11"
-          },
-          {
-            "name": "dev.ucp.shopping.cart",
-            "version": "2026-01-15"
-          }
-        ]
+        "capabilities": {
+          "dev.ucp.shopping.checkout": [
+            { "version": "2026-01-11" }
+          ],
+          "dev.ucp.shopping.cart": [
+            { "version": "2026-01-15" }
+          ]
+        }
       },
       "id": "cart_abc123",
       "line_items": [
@@ -246,6 +253,7 @@ All REST endpoints **MUST** be served over HTTPS with minimum TLS version 1.3.
 
 === "Not Found"
 
+    <!-- schema: shopping/cart.json op=read direction=response -->
     ```json
     HTTP/1.1 200 OK
     Content-Type: application/json
@@ -253,18 +261,22 @@ All REST endpoints **MUST** be served over HTTPS with minimum TLS version 1.3.
     {
       "ucp": {
         "version": "2026-01-15",
-        "capabilities": [
-          {
-            "name": "dev.ucp.shopping.cart",
-            "version": "2026-01-15"
-          }
-        ]
+        "capabilities": {
+          "dev.ucp.shopping.cart": [
+            { "version": "2026-01-15" }
+          ]
+        }
       },
+      "id": "cart_abc123",
+      "line_items": [],
+      "currency": "USD",
+      "totals": [],
       "messages": [
         {
           "type": "error",
           "code": "not_found",
-          "content": "Cart not found or has expired"
+          "content": "Cart not found or has expired",
+          "severity": "recoverable"
         }
       ],
       "continue_url": "https://merchant.com/"
@@ -287,6 +299,7 @@ All REST endpoints **MUST** be served over HTTPS with minimum TLS version 1.3.
 
 === "Request"
 
+    <!-- schema: shopping/cart.json op=update direction=request -->
     ```json
     PUT /carts/{id} HTTP/1.1
     UCP-Agent: profile="https://platform.example/profile"
@@ -320,6 +333,7 @@ All REST endpoints **MUST** be served over HTTPS with minimum TLS version 1.3.
 
 === "Response"
 
+    <!-- schema: shopping/cart.json op=update direction=response -->
     ```json
     HTTP/1.1 200 OK
     Content-Type: application/json
@@ -327,16 +341,14 @@ All REST endpoints **MUST** be served over HTTPS with minimum TLS version 1.3.
     {
       "ucp": {
         "version": "2026-01-15",
-        "capabilities": [
-          {
-            "name": "dev.ucp.shopping.checkout",
-            "version": "2026-01-11"
-          },
-          {
-            "name": "dev.ucp.shopping.cart",
-            "version": "2026-01-15"
-          }
-        ]
+        "capabilities": {
+          "dev.ucp.shopping.checkout": [
+            { "version": "2026-01-11" }
+          ],
+          "dev.ucp.shopping.cart": [
+            { "version": "2026-01-15" }
+          ]
+        }
       },
       "id": "cart_abc123",
       "line_items": [
@@ -397,6 +409,7 @@ All REST endpoints **MUST** be served over HTTPS with minimum TLS version 1.3.
 
 === "Request"
 
+    <!-- schema: shopping/cart.json op=delete direction=request body=empty -->
     ```json
     POST /carts/{id}/cancel HTTP/1.1
     UCP-Agent: profile="https://platform.example/profile"
@@ -407,6 +420,7 @@ All REST endpoints **MUST** be served over HTTPS with minimum TLS version 1.3.
 
 === "Response"
 
+    <!-- schema: shopping/cart.json op=delete direction=response -->
     ```json
     HTTP/1.1 200 OK
     Content-Type: application/json
@@ -414,16 +428,14 @@ All REST endpoints **MUST** be served over HTTPS with minimum TLS version 1.3.
     {
       "ucp": {
         "version": "2026-01-15",
-        "capabilities": [
-          {
-            "name": "dev.ucp.shopping.checkout",
-            "version": "2026-01-11"
-          },
-          {
-            "name": "dev.ucp.shopping.cart",
-            "version": "2026-01-15"
-          }
-        ]
+        "capabilities": {
+          "dev.ucp.shopping.checkout": [
+            { "version": "2026-01-11" }
+          ],
+          "dev.ucp.shopping.cart": [
+            { "version": "2026-01-15" }
+          ]
+        }
       },
       "id": "cart_abc123",
       "line_items": [
@@ -507,6 +519,7 @@ code registry and transport binding examples.
 Business outcomes (including not found and validation errors) are returned with
 HTTP 200 and the UCP envelope containing `messages`:
 
+<!-- schema: shopping/cart.json op=read direction=response -->
 ```json
 {
   "ucp": {
@@ -515,11 +528,16 @@ HTTP 200 and the UCP envelope containing `messages`:
       "dev.ucp.shopping.cart": [{"version": "2026-01-11"}]
     }
   },
+  "id": "cart_abc123",
+  "line_items": [],
+  "currency": "USD",
+  "totals": [],
   "messages": [
     {
       "type": "error",
       "code": "not_found",
-      "content": "Cart not found or has expired"
+      "content": "Cart not found or has expired",
+      "severity": "recoverable"
     }
   ],
   "continue_url": "https://merchant.com/"

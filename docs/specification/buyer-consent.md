@@ -34,8 +34,10 @@ operations.
 
 Businesses advertise consent support in their profile:
 
+<!-- schema: ucp.json#/$defs/base -->
 ```json
 {
+  "version": "2026-01-11",
   "capabilities": {
     "dev.ucp.shopping.buyer_consent": [
       {
@@ -67,6 +69,7 @@ The platform includes consent within the `buyer` object in checkout operations:
 
 ### Example: Create Checkout with Consent
 
+<!-- schema: shopping/checkout.json op=create direction=request -->
 ```json
 POST /checkouts
 
@@ -98,10 +101,12 @@ POST /checkouts
 
 ### Example: Checkout Response with Consent
 
+<!-- schema: shopping/checkout.json op=create direction=response -->
 ```json
 {
+  "ucp": { "version": "2026-01-11", "payment_handlers": {...} },
   "id": "checkout_456",
-  "status": "ready_for_payment",
+  "status": "incomplete",
   "currency": "USD",
   "buyer": {
     "email": "jane.doe@example.com",
