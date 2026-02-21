@@ -109,6 +109,7 @@ Status and quantity counts should reflect the event logs.
 
 **Quantity Structure:**
 
+<!-- schema: shopping/types/order_line_item.json#/properties/quantity -->
 ```json
 {
   "total": 3,      // Current total quantity
@@ -156,6 +157,7 @@ Examples: `refund`, `return`, `credit`, `price_adjustment`, `dispute`,
 
 ## Example
 
+<!-- schema: shopping/order.json op=read direction=response -->
 ```json
 {
   "ucp": {
@@ -277,6 +279,7 @@ platform's profile and uses it to send order lifecycle events.
 
 **Example:**
 
+<!-- schema: ucp.json#/$defs/base/properties/capabilities -->
 ```json
 {
   "dev.ucp.shopping.order": [
@@ -317,7 +320,22 @@ Content-Digest: sha-256=:X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=:
 Signature-Input: sig1=("@method" "@authority" "@path" "content-digest" "content-type");keyid="merchant-2026"
 Signature: sig1=:MEUCIQDTxNq8h7LGHpvVZQp1iHkFp9+3N8Mxk2zH1wK4YuVN8w...:
 
-{"id":"order_abc123","event_id":"evt_123","created_time":"2026-01-15T12:00:00Z",...}
+<!-- schema: shopping/order.json op=read direction=response -->
+```json
+{
+  "ucp": { "version": "2026-01-11", "capabilities": {...} },
+  "id": "order_abc123",
+  "checkout_id": "checkout_xyz789",
+  "permalink_url": "https://business.com/orders/abc123",
+  "event_id": "evt_123",
+  "created_time": "2026-01-15T12:00:00Z",
+  "status": "completed",
+  "currency": "USD",
+  "line_items": [...],
+  "fulfillment": {...},
+  "totals": [...],
+  "links": [...]
+}
 ```
 
 #### Signing (Business)
