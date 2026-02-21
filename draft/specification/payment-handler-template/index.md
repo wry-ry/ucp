@@ -1,7 +1,6 @@
 # {Handler Name} Payment Handler
 
 - **Handler Name:** `{reverse-dns.name}`
-- **Version:** `{YYYY-MM-DD}`
 
 ## Introduction
 

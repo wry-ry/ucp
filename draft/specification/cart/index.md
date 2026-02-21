@@ -1,7 +1,6 @@
 # Cart Capability
 
 - **Capability Name:** `dev.ucp.shopping.cart`
-- **Version:** `DRAFT`
 
 ## Overview
 

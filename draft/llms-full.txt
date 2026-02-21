@@ -7671,7 +7671,6 @@ Shirt ships to mom (US), pants ship to grandma (Hong Kong). Two methods of the s
 # Cart Capability
 
 - **Capability Name:** `dev.ucp.shopping.cart`
-- **Version:** `DRAFT`
 
 ## Overview
 
@@ -10380,7 +10379,6 @@ ______________________________________________________________________
 # {Handler Name} Payment Handler
 
 - **Handler Name:** `{reverse-dns.name}`
-- **Version:** `{YYYY-MM-DD}`
 
 ## Introduction
 
