@@ -181,6 +181,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#checkout-capability" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -583,6 +588,21 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -595,6 +615,550 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flow-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Flow overview
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#payments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fulfillment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fulfillment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checkout-status-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checkout Status Lifecycle
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#status-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Status Values
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Handling
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Handling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#error-processing-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Processing Algorithm
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#continue-url" class="md-nav__link">
+    <span class="md-ellipsis">
+      Continue URL
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Continue URL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#availability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Availability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Format
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Format">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#server-side-state-recommended" class="md-nav__link">
+    <span class="md-ellipsis">
+      Server-Side State (Recommended)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checkout-permalink" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checkout Permalink
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Guidelines
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Guidelines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      Platform
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#business" class="md-nav__link">
+    <span class="md-ellipsis">
+      Business
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capability-schema-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Capability Schema Definition
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-checkout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create Checkout
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-checkout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get Checkout
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-checkout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Update Checkout
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complete-checkout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Complete Checkout
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cancel-checkout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cancel Checkout
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transport-bindings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Transport Bindings
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Entities
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Entities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#buyer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Buyer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#context" class="md-nav__link">
+    <span class="md-ellipsis">
+      Context
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fulfillment-option" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fulfillment Option
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#item" class="md-nav__link">
+    <span class="md-ellipsis">
+      Item
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Item">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#item-create-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      Item Create Request
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#item-update-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      Item Update Request
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#item-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      Item Response
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#line-item" class="md-nav__link">
+    <span class="md-ellipsis">
+      Line Item
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Line Item">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#line-item-create-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      Line Item Create Request
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#line-item-update-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      Line Item Update Request
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#line-item-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      Line Item Response
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#link" class="md-nav__link">
+    <span class="md-ellipsis">
+      Link
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Link">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#well-known-link-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Well-Known Link Types
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#message" class="md-nav__link">
+    <span class="md-ellipsis">
+      Message
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#message-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      Message Error
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#message-info" class="md-nav__link">
+    <span class="md-ellipsis">
+      Message Info
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#message-warning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Message Warning
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#payment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#payment-instrument" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payment Instrument
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#payment-credential" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payment Credential
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#postal-address" class="md-nav__link">
+    <span class="md-ellipsis">
+      Postal Address
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response" class="md-nav__link">
+    <span class="md-ellipsis">
+      Response
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#total" class="md-nav__link">
+    <span class="md-ellipsis">
+      Total
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Total">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#total-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      Total Response
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ucp-response-checkout" class="md-nav__link">
+    <span class="md-ellipsis">
+      UCP Response Checkout
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#order-confirmation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Order Confirmation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1163,6 +1727,541 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flow-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Flow overview
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#payments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fulfillment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fulfillment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checkout-status-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checkout Status Lifecycle
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#status-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Status Values
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Handling
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Handling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#error-processing-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Processing Algorithm
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#continue-url" class="md-nav__link">
+    <span class="md-ellipsis">
+      Continue URL
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Continue URL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#availability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Availability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Format
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Format">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#server-side-state-recommended" class="md-nav__link">
+    <span class="md-ellipsis">
+      Server-Side State (Recommended)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checkout-permalink" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checkout Permalink
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Guidelines
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Guidelines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      Platform
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#business" class="md-nav__link">
+    <span class="md-ellipsis">
+      Business
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capability-schema-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Capability Schema Definition
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-checkout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create Checkout
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-checkout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get Checkout
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-checkout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Update Checkout
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complete-checkout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Complete Checkout
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cancel-checkout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cancel Checkout
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transport-bindings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Transport Bindings
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Entities
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Entities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#buyer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Buyer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#context" class="md-nav__link">
+    <span class="md-ellipsis">
+      Context
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fulfillment-option" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fulfillment Option
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#item" class="md-nav__link">
+    <span class="md-ellipsis">
+      Item
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Item">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#item-create-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      Item Create Request
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#item-update-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      Item Update Request
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#item-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      Item Response
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#line-item" class="md-nav__link">
+    <span class="md-ellipsis">
+      Line Item
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Line Item">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#line-item-create-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      Line Item Create Request
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#line-item-update-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      Line Item Update Request
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#line-item-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      Line Item Response
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#link" class="md-nav__link">
+    <span class="md-ellipsis">
+      Link
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Link">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#well-known-link-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Well-Known Link Types
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#message" class="md-nav__link">
+    <span class="md-ellipsis">
+      Message
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#message-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      Message Error
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#message-info" class="md-nav__link">
+    <span class="md-ellipsis">
+      Message Info
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#message-warning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Message Warning
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#payment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#payment-instrument" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payment Instrument
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#payment-credential" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payment Credential
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#postal-address" class="md-nav__link">
+    <span class="md-ellipsis">
+      Postal Address
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response" class="md-nav__link">
+    <span class="md-ellipsis">
+      Response
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#total" class="md-nav__link">
+    <span class="md-ellipsis">
+      Total
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Total">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#total-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      Total Response
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ucp-response-checkout" class="md-nav__link">
+    <span class="md-ellipsis">
+      UCP Response Checkout
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#order-confirmation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Order Confirmation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1181,9 +2280,1860 @@
   
 
 
-  <h1>Overview</h1>
+<!--
+   Copyright 2026 UCP Authors
 
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
 
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<h1 id="checkout-capability">Checkout Capability<a class="headerlink" href="#checkout-capability" title="Permanent link">&para;</a></h1>
+<ul>
+<li><strong>Capability Name:</strong> <code>dev.ucp.shopping.checkout</code></li>
+</ul>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>Allows platforms to facilitate checkout sessions. The checkout has to be
+finalized manually by the user through a trusted UI unless the AP2 Mandates
+extension is supported.</p>
+<p>The business remains the Merchant of Record (MoR), and they don't need to become
+PCI DSS compliant to accept card payments through this Capability.</p>
+<h3 id="flow-overview">Flow overview<a class="headerlink" href="#flow-overview" title="Permanent link">&para;</a></h3>
+<p><img alt="High-level checkout flow sequence diagram" src="/2026-01-23/specification/images/ucp-checkout-flow.png" /></p>
+<h3 id="payments">Payments<a class="headerlink" href="#payments" title="Permanent link">&para;</a></h3>
+<p>Payment handlers are discovered from the business's UCP profile at
+<code>/.well-known/ucp</code> and checkout.ucp.payment_handlers. The handlers define
+the processing specifications for collecting payment instruments
+(e.g., Google Pay, Shop Pay). When the buyer submits payment, the platform
+populates the <code>payment.instruments</code> array with the collected instrument data.</p>
+<p>The <code>payment</code> object is optional on checkout creation and may be omitted for
+use cases that don't require payment processing (e.g., quote generation, cart
+management).</p>
+<h3 id="fulfillment">Fulfillment<a class="headerlink" href="#fulfillment" title="Permanent link">&para;</a></h3>
+<p>Fulfillment is modelled as an extension in UCP to account for diverse use cases.</p>
+<p>Fulfillment is optional in the checkout object. This is done to enable a
+platform to perform checkout for digital goods without needing to furnish
+fulfillment details more relevant for physical goods.</p>
+<h3 id="checkout-status-lifecycle">Checkout Status Lifecycle<a class="headerlink" href="#checkout-status-lifecycle" title="Permanent link">&para;</a></h3>
+<p>The checkout <code>status</code> field indicates the current phase of the session and
+determines what action is required next. The business sets the status; the
+platform receives messages indicating what's needed to progress.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>┌────────────┐    ┌─────────────────────┐
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>│ incomplete │◀──▶│ requires_escalation │
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>└─────┬──────┘    │                     │
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>      │           │  (buyer handoff     │
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>      │           │   via continue_url) │
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>      │           └──────────┬──────────┘
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>      │                      │
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>      │ all info collected   │ continue_url
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>      ▼                      │
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>┌──────────────────┐         │
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>│ready_for_complete│         │
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>│                  │         │
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>│ (platform can    │         │
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>│ call Complete    │         │
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>│   Checkout).     │         │
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>└────────┬─────────┘         │
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>         │                   │
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>         │ Complete Checkout │
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>         ▼                   │
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>┌────────────────────┐       │
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>│complete_in_progress│       │
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>└─────────┬──────────┘       │
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>          │                  │
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>          └────────┬─────────┘
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>                   ▼
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>            ┌─────────────┐
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>            │  completed  │
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>            └─────────────┘
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>            ┌─────────────┐
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>            │  canceled   │  (session invalid/expired - can occur from any state)
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>            └─────────────┘
+</span></code></pre></div>
+<h3 id="status-values">Status Values<a class="headerlink" href="#status-values" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong><code>incomplete</code></strong>: Checkout session is missing required information or has
+    issues that need resolution. Platform should inspect <code>messages</code> array for
+    context and should attempt to resolve via Update Checkout.</p>
+</li>
+<li>
+<p><strong><code>requires_escalation</code></strong>: Checkout session requires information that
+    cannot be provided via API, or buyer input is required. Platform should
+    inspect <code>messages</code> to understand what's needed (see Error Handling below).
+    If any <code>recoverable</code> errors exist, resolve those first.
+    Then hand off to buyer via <code>continue_url</code>.</p>
+</li>
+<li>
+<p><strong><code>ready_for_complete</code></strong>: Checkout session has all necessary information
+    and platform can finalize programmatically. Platform can call
+    Complete Checkout.</p>
+</li>
+<li>
+<p><strong><code>complete_in_progress</code></strong>: Business is processing the Complete Checkout
+    request.</p>
+</li>
+<li>
+<p><strong><code>completed</code></strong>: Order placed successfully.</p>
+</li>
+<li>
+<p><strong><code>canceled</code></strong>: Checkout session is invalid or expired. Platform should
+    start a new checkout session if needed.</p>
+</li>
+</ul>
+<h3 id="error-handling">Error Handling<a class="headerlink" href="#error-handling" title="Permanent link">&para;</a></h3>
+<p>The <code>messages</code> array contains errors, warnings, and informational messages
+about the checkout state. Error messages include a <code>severity</code> field that
+declares <strong>who resolves the error</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Severity</th>
+<th style="text-align: left;">Meaning</th>
+<th style="text-align: left;">Platform Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>recoverable</code></td>
+<td style="text-align: left;">Platform can fix via API</td>
+<td style="text-align: left;">Resolve using Update Checkout</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>requires_buyer_input</code></td>
+<td style="text-align: left;">Business requires input not available via API</td>
+<td style="text-align: left;">Hand off via <code>continue_url</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>requires_buyer_review</code></td>
+<td style="text-align: left;">Buyer review and authorization is required</td>
+<td style="text-align: left;">Hand off via <code>continue_url</code></td>
+</tr>
+</tbody>
+</table>
+<p>Errors with <code>requires_*</code> severity contribute to <code>status: requires_escalation</code>.
+Both result in buyer handoff, but represent different checkout states.</p>
+<ul>
+<li><code>requires_buyer_input</code> means the checkout is <strong>incomplete</strong> — the business
+requires information their API doesn't support collecting programmatically.</li>
+<li><code>requires_buyer_review</code> means the checkout is <strong>complete</strong> — but policy,
+regulatory, or entitlement rules require buyer authorization before order
+placement (e.g., high-value order approval, first-purchase policy).</li>
+</ul>
+<h4 id="error-processing-algorithm">Error Processing Algorithm<a class="headerlink" href="#error-processing-algorithm" title="Permanent link">&para;</a></h4>
+<p>When status is <code>incomplete</code> or <code>requires_escalation</code>, platforms should process
+errors as a prioritized stack. The example below illustrates a checkout with
+three error types: a recoverable error (invalid phone), a buyer input
+requirement (delivery scheduling), and a review requirement (high-value order).
+The latter two require handoff and serve as explicit signals to the platform.
+Businesses <strong>SHOULD</strong> surface such messages as early as possible, and platforms
+<strong>SHOULD</strong> prioritize resolving recoverable errors before initiating handoff.</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;requires_escalation&quot;</span><span class="p">,</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">&quot;messages&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;error&quot;</span><span class="p">,</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">      </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;invalid_phone&quot;</span><span class="p">,</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">      </span><span class="nt">&quot;severity&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;recoverable&quot;</span><span class="p">,</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">      </span><span class="nt">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Phone number format is invalid&quot;</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;error&quot;</span><span class="p">,</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">      </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;schedule_delivery&quot;</span><span class="p">,</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">      </span><span class="nt">&quot;severity&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;requires_buyer_input&quot;</span><span class="p">,</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">      </span><span class="nt">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Select delivery window for your purchase&quot;</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;error&quot;</span><span class="p">,</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">      </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;high_value_order&quot;</span><span class="p">,</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">      </span><span class="nt">&quot;severity&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;requires_buyer_review&quot;</span><span class="p">,</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">      </span><span class="nt">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Orders over $500 require additional verification&quot;</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">  </span><span class="p">]</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Example error processing algorithm:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>GIVEN checkout with messages array
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>FILTER errors FROM messages WHERE type = &quot;error&quot;
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>PARTITION errors INTO
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>  recoverable           WHERE severity = &quot;recoverable&quot;
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>  requires_buyer_input  WHERE severity = &quot;requires_buyer_input&quot;
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>  requires_buyer_review WHERE severity = &quot;requires_buyer_review&quot;
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>IF recoverable is not empty
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>  FOR EACH error IN recoverable
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    ATTEMPT to fix error (e.g., reformat phone number)
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>  CALL Update Checkout
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>  RETURN and re-evaluate response
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>IF requires_buyer_input is not empty
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>  handoff_context = &quot;incomplete, additional input from buyer is required&quot;
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>ELSE IF requires_buyer_review is not empty
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>  handoff_context = &quot;ready for final review by the buyer&quot;
+</span></code></pre></div>
+<h2 id="continue-url">Continue URL<a class="headerlink" href="#continue-url" title="Permanent link">&para;</a></h2>
+<p>The <code>continue_url</code> field enables checkout handoff from platform to business UI,
+allowing the buyer to continue and finalize the checkout session.</p>
+<h3 id="availability">Availability<a class="headerlink" href="#availability" title="Permanent link">&para;</a></h3>
+<p>Businesses <strong>MUST</strong> provide <code>continue_url</code> when returning <code>status</code> =
+<code>requires_escalation</code>. For all other non-terminal statuses (<code>incomplete</code>,
+<code>ready_for_complete</code>, <code>complete_in_progress</code>), businesses <strong>SHOULD</strong> provide
+<code>continue_url</code>. For terminal states (<code>completed</code>, <code>canceled</code>), <code>continue_url</code>
+<strong>SHOULD</strong> be omitted.</p>
+<h3 id="format">Format<a class="headerlink" href="#format" title="Permanent link">&para;</a></h3>
+<p>The <code>continue_url</code> <strong>MUST</strong> be an absolute HTTPS URL and <strong>SHOULD</strong> preserve
+checkout state for seamless handoff. Businesses <strong>MAY</strong> implement state
+preservation using either approach:</p>
+<h4 id="server-side-state-recommended">Server-Side State (Recommended)<a class="headerlink" href="#server-side-state-recommended" title="Permanent link">&para;</a></h4>
+<p>An opaque URL backed by server-side checkout state:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>https://business.example.com/checkout-sessions/{checkout_id}
+</span></code></pre></div>
+<ul>
+<li>Server maintains checkout state tied to <code>checkout_id</code></li>
+<li>Simple, secure, recommended for most implementations</li>
+<li>URL lifetime typically tied to <code>expires_at</code></li>
+</ul>
+<h4 id="checkout-permalink">Checkout Permalink<a class="headerlink" href="#checkout-permalink" title="Permanent link">&para;</a></h4>
+<p>A stateless URL that encodes checkout state directly, allowing reconstruction
+without server-side persistence. Businesses <strong>SHOULD</strong> implement support for
+this format to facilitate checkout handoff and accelerated entry—for example, a
+platform can prefill checkout state when initiating a buy-now flow.</p>
+<blockquote>
+<p><strong>Note:</strong> Checkout permalinks are a REST-specific construct that extends the
+<a href="../checkout-rest/">REST transport binding</a>. Accessing a permalink returns a
+redirect to the checkout UI or renders the checkout page directly.</p>
+</blockquote>
+<h2 id="guidelines">Guidelines<a class="headerlink" href="#guidelines" title="Permanent link">&para;</a></h2>
+<p>(In addition to the overarching guidelines)</p>
+<h3 id="platform">Platform<a class="headerlink" href="#platform" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>MAY</strong> engage an agent to facilitate the checkout session (e.g. add items
+    to the checkout session, select fulfillment address). However, the
+    agent must hand over the checkout session to a trusted and
+    deterministic UI for the user to review the checkout details and place the
+    order.</li>
+<li><strong>MAY</strong> send the user from the trusted, deterministic UI back to the agent
+    at any time. For example, when the user decides to exit the checkout screen
+    to keep adding items to the cart.</li>
+<li><strong>MAY</strong> provide agent context when the platform indicates that the request
+    was done by an agent.</li>
+<li><strong>MUST</strong> use <code>continue_url</code> when checkout status is <code>requires_escalation</code>.</li>
+<li><strong>MAY</strong> use <code>continue_url</code> to hand off to business UI in other situations.</li>
+<li>When performing handoff, <strong>SHOULD</strong> prefer business-provided
+    <code>continue_url</code> over platform-constructed checkout permalinks.</li>
+</ul>
+<h3 id="business">Business<a class="headerlink" href="#business" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>MUST</strong> send a confirmation email after the checkout has been completed.</li>
+<li><strong>SHOULD</strong> provide accurate error messages.</li>
+<li>Logic handling the checkout sessions <strong>MUST</strong> be deterministic.</li>
+<li><strong>MUST</strong> provide <code>continue_url</code> when returning <code>status</code> =
+    <code>requires_escalation</code>.</li>
+<li><strong>MUST</strong> include at least one message with <code>severity: escalation</code> when
+    returning <code>status</code> = <code>requires_escalation</code>.</li>
+<li><strong>SHOULD</strong> provide <code>continue_url</code> in all non-terminal checkout responses.</li>
+<li>After a checkout session reaches the state "completed", it is considered
+    immutable.</li>
+</ul>
+<h2 id="capability-schema-definition">Capability Schema Definition<a class="headerlink" href="#capability-schema-definition" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">ucp</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#ucp-response-checkout-schema">UCP Response Checkout Schema</a></td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Protocol metadata for discovery profiles and responses. Uses slim schema pattern with context-specific required fields.</td>
+</tr>
+<tr>
+<td style="text-align: left;">id</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Unique identifier of the checkout session.</td>
+</tr>
+<tr>
+<td style="text-align: left;">line_items</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/checkout/#line-item-response">Line Item Response</a>]</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">List of line items being checked out.</td>
+</tr>
+<tr>
+<td style="text-align: left;">buyer</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#buyer">Buyer</a></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Representation of the buyer.</td>
+</tr>
+<tr>
+<td style="text-align: left;">status</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Checkout state indicating the current phase and required action. See Checkout Status lifecycle documentation for state transition details.<br><strong>Enum:</strong> <code>incomplete</code>, <code>requires_escalation</code>, <code>ready_for_complete</code>, <code>complete_in_progress</code>, <code>completed</code>, <code>canceled</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">currency</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">ISO 4217 currency code reflecting the merchant's market determination. Derived from address, context, and geo IP—buyers provide signals, merchants determine currency.</td>
+</tr>
+<tr>
+<td style="text-align: left;">totals</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/checkout/#total-response">Total Response</a>]</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Different cart totals.</td>
+</tr>
+<tr>
+<td style="text-align: left;">messages</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/checkout/#message">Message</a>]</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">List of messages with error and info about the checkout session state.</td>
+</tr>
+<tr>
+<td style="text-align: left;">links</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/checkout/#link">Link</a>]</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Links to be displayed by the platform (Privacy Policy, TOS). Mandatory for legal compliance.</td>
+</tr>
+<tr>
+<td style="text-align: left;">expires_at</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">RFC 3339 expiry timestamp. Default TTL is 6 hours from creation if not sent.</td>
+</tr>
+<tr>
+<td style="text-align: left;">continue_url</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">URL for checkout handoff and session recovery. MUST be provided when status is requires_escalation. See specification for format and availability requirements.</td>
+</tr>
+<tr>
+<td style="text-align: left;">payment</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#payment">Payment</a></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Payment configuration containing handlers.</td>
+</tr>
+<tr>
+<td style="text-align: left;">order</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#order-confirmation">Order Confirmation</a></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Details about an order created for this checkout session.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="operations">Operations<a class="headerlink" href="#operations" title="Permanent link">&para;</a></h2>
+<p>The Checkout capability defines the following logical operations.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Operation</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Create Checkout</strong></td>
+<td style="text-align: left;">Initiates a new checkout session. Called as soon as a user adds an item to a cart.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Get Checkout</strong></td>
+<td style="text-align: left;">Retrieves the current state of a checkout session.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Update Checkout</strong></td>
+<td style="text-align: left;">Updates a checkout session.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Complete Checkout</strong></td>
+<td style="text-align: left;">Finalizes the checkout and places the order.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Cancel Checkout</strong></td>
+<td style="text-align: left;">Cancels a checkout session.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="create-checkout">Create Checkout<a class="headerlink" href="#create-checkout" title="Permanent link">&para;</a></h3>
+<p>To be invoked by the platform when the user has expressed purchase intent
+(e.g., click on Buy) to initiate the checkout session with the item details.</p>
+<p><strong>Recommendation</strong>: To minimize discrepancies and a streamlined user experience,
+product data (price/title etc.) provided by the business through the feeds
+<strong>SHOULD</strong> match the actual attributes returned in the response.</p>
+<p><strong>Inputs</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">line_items</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/checkout/#line-item-create-request">Line Item Create Request</a>]</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">List of line items being checked out.</td>
+</tr>
+<tr>
+<td style="text-align: left;">buyer</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#buyer">Buyer</a></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Representation of the buyer.</td>
+</tr>
+<tr>
+<td style="text-align: left;">context</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#context">Context</a></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Provisional buyer signals for relevance and localization: product availability, pricing, currency, tax, shipping, payment methods, and eligibility (e.g., student or affiliation discounts). Businesses SHOULD use these values when authoritative data (e.g., address) is absent, and MAY ignore unsupported values without returning errors. Context can be disclosed progressively—coarse signals early, finer resolution as the session progresses. Higher-resolution data (shipping address, billing address) supersedes context. Platforms SHOULD progressively enhance context throughout the buyer journey.</td>
+</tr>
+<tr>
+<td style="text-align: left;">payment</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#payment">Payment</a></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Payment configuration containing handlers.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Output</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">ucp</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#ucp-response-checkout-schema">UCP Response Checkout Schema</a></td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Protocol metadata for discovery profiles and responses. Uses slim schema pattern with context-specific required fields.</td>
+</tr>
+<tr>
+<td style="text-align: left;">id</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Unique identifier of the checkout session.</td>
+</tr>
+<tr>
+<td style="text-align: left;">line_items</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/checkout/#line-item-response">Line Item Response</a>]</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">List of line items being checked out.</td>
+</tr>
+<tr>
+<td style="text-align: left;">buyer</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#buyer">Buyer</a></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Representation of the buyer.</td>
+</tr>
+<tr>
+<td style="text-align: left;">status</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Checkout state indicating the current phase and required action. See Checkout Status lifecycle documentation for state transition details.<br><strong>Enum:</strong> <code>incomplete</code>, <code>requires_escalation</code>, <code>ready_for_complete</code>, <code>complete_in_progress</code>, <code>completed</code>, <code>canceled</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">currency</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">ISO 4217 currency code reflecting the merchant's market determination. Derived from address, context, and geo IP—buyers provide signals, merchants determine currency.</td>
+</tr>
+<tr>
+<td style="text-align: left;">totals</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/checkout/#total-response">Total Response</a>]</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Different cart totals.</td>
+</tr>
+<tr>
+<td style="text-align: left;">messages</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/checkout/#message">Message</a>]</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">List of messages with error and info about the checkout session state.</td>
+</tr>
+<tr>
+<td style="text-align: left;">links</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/checkout/#link">Link</a>]</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Links to be displayed by the platform (Privacy Policy, TOS). Mandatory for legal compliance.</td>
+</tr>
+<tr>
+<td style="text-align: left;">expires_at</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">RFC 3339 expiry timestamp. Default TTL is 6 hours from creation if not sent.</td>
+</tr>
+<tr>
+<td style="text-align: left;">continue_url</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">URL for checkout handoff and session recovery. MUST be provided when status is requires_escalation. See specification for format and availability requirements.</td>
+</tr>
+<tr>
+<td style="text-align: left;">payment</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#payment">Payment</a></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Payment configuration containing handlers.</td>
+</tr>
+<tr>
+<td style="text-align: left;">order</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#order-confirmation">Order Confirmation</a></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Details about an order created for this checkout session.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="get-checkout">Get Checkout<a class="headerlink" href="#get-checkout" title="Permanent link">&para;</a></h3>
+<p>It provides the latest state of the checkout resource. After cancellation or
+completion it is up to the business on what to return (i.e this can be a long
+lived state or expire after a particular TTL - resulting in a 'not found'
+error). From the platform there is no specific enforcement for a TTL of the
+checkout.</p>
+<p>The platform will honor the TTL provided by the business via <code>expires_at</code> at the
+time of checkout session creation.</p>
+<p><strong>Inputs</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">id</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">The unique identifier of the checkout session.Defined in path.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Output</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">ucp</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#ucp-response-checkout-schema">UCP Response Checkout Schema</a></td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Protocol metadata for discovery profiles and responses. Uses slim schema pattern with context-specific required fields.</td>
+</tr>
+<tr>
+<td style="text-align: left;">id</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Unique identifier of the checkout session.</td>
+</tr>
+<tr>
+<td style="text-align: left;">line_items</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/checkout/#line-item-response">Line Item Response</a>]</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">List of line items being checked out.</td>
+</tr>
+<tr>
+<td style="text-align: left;">buyer</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#buyer">Buyer</a></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Representation of the buyer.</td>
+</tr>
+<tr>
+<td style="text-align: left;">status</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Checkout state indicating the current phase and required action. See Checkout Status lifecycle documentation for state transition details.<br><strong>Enum:</strong> <code>incomplete</code>, <code>requires_escalation</code>, <code>ready_for_complete</code>, <code>complete_in_progress</code>, <code>completed</code>, <code>canceled</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">currency</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">ISO 4217 currency code reflecting the merchant's market determination. Derived from address, context, and geo IP—buyers provide signals, merchants determine currency.</td>
+</tr>
+<tr>
+<td style="text-align: left;">totals</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/checkout/#total-response">Total Response</a>]</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Different cart totals.</td>
+</tr>
+<tr>
+<td style="text-align: left;">messages</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/checkout/#message">Message</a>]</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">List of messages with error and info about the checkout session state.</td>
+</tr>
+<tr>
+<td style="text-align: left;">links</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/checkout/#link">Link</a>]</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Links to be displayed by the platform (Privacy Policy, TOS). Mandatory for legal compliance.</td>
+</tr>
+<tr>
+<td style="text-align: left;">expires_at</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">RFC 3339 expiry timestamp. Default TTL is 6 hours from creation if not sent.</td>
+</tr>
+<tr>
+<td style="text-align: left;">continue_url</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">URL for checkout handoff and session recovery. MUST be provided when status is requires_escalation. See specification for format and availability requirements.</td>
+</tr>
+<tr>
+<td style="text-align: left;">payment</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#payment">Payment</a></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Payment configuration containing handlers.</td>
+</tr>
+<tr>
+<td style="text-align: left;">order</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#order-confirmation">Order Confirmation</a></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Details about an order created for this checkout session.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="update-checkout">Update Checkout<a class="headerlink" href="#update-checkout" title="Permanent link">&para;</a></h3>
+<p>Performs a full replacement of the checkout resource.
+The platform is <strong>REQUIRED</strong> to send the entire checkout resource containing any
+data updates to write-only data fields. The resource provided in the request
+will replace the existing checkout session state on the business side.</p>
+<p><strong>Inputs</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">id</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">The unique identifier of the checkout session.Defined in path.</td>
+</tr>
+<tr>
+<td style="text-align: left;">id</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Unique identifier of the checkout session.</td>
+</tr>
+<tr>
+<td style="text-align: left;">line_items</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/checkout/#line-item-update-request">Line Item Update Request</a>]</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">List of line items being checked out.</td>
+</tr>
+<tr>
+<td style="text-align: left;">buyer</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#buyer">Buyer</a></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Representation of the buyer.</td>
+</tr>
+<tr>
+<td style="text-align: left;">context</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#context">Context</a></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Provisional buyer signals for relevance and localization: product availability, pricing, currency, tax, shipping, payment methods, and eligibility (e.g., student or affiliation discounts). Businesses SHOULD use these values when authoritative data (e.g., address) is absent, and MAY ignore unsupported values without returning errors. Context can be disclosed progressively—coarse signals early, finer resolution as the session progresses. Higher-resolution data (shipping address, billing address) supersedes context. Platforms SHOULD progressively enhance context throughout the buyer journey.</td>
+</tr>
+<tr>
+<td style="text-align: left;">payment</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#payment">Payment</a></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Payment configuration containing handlers.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Output</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">ucp</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#ucp-response-checkout-schema">UCP Response Checkout Schema</a></td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Protocol metadata for discovery profiles and responses. Uses slim schema pattern with context-specific required fields.</td>
+</tr>
+<tr>
+<td style="text-align: left;">id</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Unique identifier of the checkout session.</td>
+</tr>
+<tr>
+<td style="text-align: left;">line_items</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/checkout/#line-item-response">Line Item Response</a>]</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">List of line items being checked out.</td>
+</tr>
+<tr>
+<td style="text-align: left;">buyer</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#buyer">Buyer</a></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Representation of the buyer.</td>
+</tr>
+<tr>
+<td style="text-align: left;">status</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Checkout state indicating the current phase and required action. See Checkout Status lifecycle documentation for state transition details.<br><strong>Enum:</strong> <code>incomplete</code>, <code>requires_escalation</code>, <code>ready_for_complete</code>, <code>complete_in_progress</code>, <code>completed</code>, <code>canceled</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">currency</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">ISO 4217 currency code reflecting the merchant's market determination. Derived from address, context, and geo IP—buyers provide signals, merchants determine currency.</td>
+</tr>
+<tr>
+<td style="text-align: left;">totals</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/checkout/#total-response">Total Response</a>]</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Different cart totals.</td>
+</tr>
+<tr>
+<td style="text-align: left;">messages</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/checkout/#message">Message</a>]</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">List of messages with error and info about the checkout session state.</td>
+</tr>
+<tr>
+<td style="text-align: left;">links</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/checkout/#link">Link</a>]</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Links to be displayed by the platform (Privacy Policy, TOS). Mandatory for legal compliance.</td>
+</tr>
+<tr>
+<td style="text-align: left;">expires_at</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">RFC 3339 expiry timestamp. Default TTL is 6 hours from creation if not sent.</td>
+</tr>
+<tr>
+<td style="text-align: left;">continue_url</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">URL for checkout handoff and session recovery. MUST be provided when status is requires_escalation. See specification for format and availability requirements.</td>
+</tr>
+<tr>
+<td style="text-align: left;">payment</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#payment">Payment</a></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Payment configuration containing handlers.</td>
+</tr>
+<tr>
+<td style="text-align: left;">order</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#order-confirmation">Order Confirmation</a></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Details about an order created for this checkout session.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="complete-checkout">Complete Checkout<a class="headerlink" href="#complete-checkout" title="Permanent link">&para;</a></h3>
+<p>This is the final checkout placement call. To be invoked when the user has
+committed to pay and place an order for the chosen items. The response of this
+call is the checkout object with the <code>order</code> field populated in it. The returned
+<code>order</code> provides necessary identifiers, such as <code>id</code> and <code>permalink_url</code>,
+that can be used to reference the full state of the placed order.
+At the time of order persistence, fields from <code>Checkout</code> <strong>MAY</strong> be used
+to construct the order representation (i.e. information like <code>line_items</code>,
+<code>fulfillment</code> will be used to create the initial order representation).</p>
+<p>After this call, other details will be updated through subsequent events
+as the order, and its associated items, moves through the supply chain.</p>
+<p><strong>Inputs</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">id</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">The unique identifier of the checkout session.Defined in path.</td>
+</tr>
+<tr>
+<td style="text-align: left;">payment</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#payment">Payment</a></td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Payment configuration containing handlers.</td>
+</tr>
+<tr>
+<td style="text-align: left;">risk_signals</td>
+<td style="text-align: left;">object</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Key-value pairs of risk signals.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Output</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">ucp</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#ucp-response-checkout-schema">UCP Response Checkout Schema</a></td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Protocol metadata for discovery profiles and responses. Uses slim schema pattern with context-specific required fields.</td>
+</tr>
+<tr>
+<td style="text-align: left;">id</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Unique identifier of the checkout session.</td>
+</tr>
+<tr>
+<td style="text-align: left;">line_items</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/checkout/#line-item-response">Line Item Response</a>]</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">List of line items being checked out.</td>
+</tr>
+<tr>
+<td style="text-align: left;">buyer</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#buyer">Buyer</a></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Representation of the buyer.</td>
+</tr>
+<tr>
+<td style="text-align: left;">status</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Checkout state indicating the current phase and required action. See Checkout Status lifecycle documentation for state transition details.<br><strong>Enum:</strong> <code>incomplete</code>, <code>requires_escalation</code>, <code>ready_for_complete</code>, <code>complete_in_progress</code>, <code>completed</code>, <code>canceled</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">currency</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">ISO 4217 currency code reflecting the merchant's market determination. Derived from address, context, and geo IP—buyers provide signals, merchants determine currency.</td>
+</tr>
+<tr>
+<td style="text-align: left;">totals</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/checkout/#total-response">Total Response</a>]</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Different cart totals.</td>
+</tr>
+<tr>
+<td style="text-align: left;">messages</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/checkout/#message">Message</a>]</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">List of messages with error and info about the checkout session state.</td>
+</tr>
+<tr>
+<td style="text-align: left;">links</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/checkout/#link">Link</a>]</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Links to be displayed by the platform (Privacy Policy, TOS). Mandatory for legal compliance.</td>
+</tr>
+<tr>
+<td style="text-align: left;">expires_at</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">RFC 3339 expiry timestamp. Default TTL is 6 hours from creation if not sent.</td>
+</tr>
+<tr>
+<td style="text-align: left;">continue_url</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">URL for checkout handoff and session recovery. MUST be provided when status is requires_escalation. See specification for format and availability requirements.</td>
+</tr>
+<tr>
+<td style="text-align: left;">payment</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#payment">Payment</a></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Payment configuration containing handlers.</td>
+</tr>
+<tr>
+<td style="text-align: left;">order</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#order-confirmation">Order Confirmation</a></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Details about an order created for this checkout session.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cancel-checkout">Cancel Checkout<a class="headerlink" href="#cancel-checkout" title="Permanent link">&para;</a></h3>
+<p>This operation will be used to cancel a checkout session, if it can be canceled.
+If the checkout session cannot be canceled (e.g. checkout session is
+already canceled or completed), then businesses <strong>SHOULD</strong> send back an error
+indicating the operation is not allowed. Any checkout session with a status
+that is not equal to <code>completed</code> or <code>canceled</code> <strong>SHOULD</strong> be cancelable.</p>
+<p><strong>Inputs</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">id</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">The unique identifier of the checkout session.Defined in path.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Output</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">ucp</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#ucp-response-checkout-schema">UCP Response Checkout Schema</a></td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Protocol metadata for discovery profiles and responses. Uses slim schema pattern with context-specific required fields.</td>
+</tr>
+<tr>
+<td style="text-align: left;">id</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Unique identifier of the checkout session.</td>
+</tr>
+<tr>
+<td style="text-align: left;">line_items</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/checkout/#line-item-response">Line Item Response</a>]</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">List of line items being checked out.</td>
+</tr>
+<tr>
+<td style="text-align: left;">buyer</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#buyer">Buyer</a></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Representation of the buyer.</td>
+</tr>
+<tr>
+<td style="text-align: left;">status</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Checkout state indicating the current phase and required action. See Checkout Status lifecycle documentation for state transition details.<br><strong>Enum:</strong> <code>incomplete</code>, <code>requires_escalation</code>, <code>ready_for_complete</code>, <code>complete_in_progress</code>, <code>completed</code>, <code>canceled</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">currency</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">ISO 4217 currency code reflecting the merchant's market determination. Derived from address, context, and geo IP—buyers provide signals, merchants determine currency.</td>
+</tr>
+<tr>
+<td style="text-align: left;">totals</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/checkout/#total-response">Total Response</a>]</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Different cart totals.</td>
+</tr>
+<tr>
+<td style="text-align: left;">messages</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/checkout/#message">Message</a>]</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">List of messages with error and info about the checkout session state.</td>
+</tr>
+<tr>
+<td style="text-align: left;">links</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/checkout/#link">Link</a>]</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Links to be displayed by the platform (Privacy Policy, TOS). Mandatory for legal compliance.</td>
+</tr>
+<tr>
+<td style="text-align: left;">expires_at</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">RFC 3339 expiry timestamp. Default TTL is 6 hours from creation if not sent.</td>
+</tr>
+<tr>
+<td style="text-align: left;">continue_url</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">URL for checkout handoff and session recovery. MUST be provided when status is requires_escalation. See specification for format and availability requirements.</td>
+</tr>
+<tr>
+<td style="text-align: left;">payment</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#payment">Payment</a></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Payment configuration containing handlers.</td>
+</tr>
+<tr>
+<td style="text-align: left;">order</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#order-confirmation">Order Confirmation</a></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Details about an order created for this checkout session.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="transport-bindings">Transport Bindings<a class="headerlink" href="#transport-bindings" title="Permanent link">&para;</a></h2>
+<p>The abstract operations above are bound to specific transport protocols as
+defined below:</p>
+<ul>
+<li><a href="../checkout-rest/">REST Binding</a>: RESTful API mapping using standard HTTP verbs and JSON payloads.</li>
+<li><a href="../checkout-mcp/">MCP Binding</a>: Model Context Protocol mapping for agentic interaction.</li>
+<li><a href="../checkout-a2a/">A2A Binding</a>: Agent-to-Agent Protocol mapping for agentic interactions.</li>
+<li><a href="../embedded-checkout/">Embedded Checkout Binding</a>: JSON-RPC for powering embedded checkout.</li>
+</ul>
+<h2 id="entities">Entities<a class="headerlink" href="#entities" title="Permanent link">&para;</a></h2>
+<h3 id="buyer">Buyer<a class="headerlink" href="#buyer" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">first_name</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">First name of the buyer.</td>
+</tr>
+<tr>
+<td style="text-align: left;">last_name</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Last name of the buyer.</td>
+</tr>
+<tr>
+<td style="text-align: left;">email</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Email of the buyer.</td>
+</tr>
+<tr>
+<td style="text-align: left;">phone_number</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">E.164 standard.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="context">Context<a class="headerlink" href="#context" title="Permanent link">&para;</a></h3>
+<p>Context signals are provisional hints. Businesses SHOULD use these values when
+authoritative data (e.g. address) is absent, and MAY ignore unsupported values
+without returning errors. This differs from authoritative selections which
+require explicit validation and error feedback.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">address_country</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">The country. Recommended to be in 2-letter ISO 3166-1 alpha-2 format, for example "US". For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as "SGP" or a full country name such as "Singapore" can also be used. Optional hint for market context (currency, availability, pricing)—higher-resolution data (e.g., shipping address) supersedes this value.</td>
+</tr>
+<tr>
+<td style="text-align: left;">address_region</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division. Optional hint for progressive localization—higher-resolution data (e.g., shipping address) supersedes this value.</td>
+</tr>
+<tr>
+<td style="text-align: left;">postal_code</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">The postal code. For example, 94043. Optional hint for regional refinement—higher-resolution data (e.g., shipping address) supersedes this value.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="fulfillment-option">Fulfillment Option<a class="headerlink" href="#fulfillment-option" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">id</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Unique fulfillment option identifier.</td>
+</tr>
+<tr>
+<td style="text-align: left;">title</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Short label (e.g., 'Express Shipping', 'Curbside Pickup').</td>
+</tr>
+<tr>
+<td style="text-align: left;">description</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Complete context for buyer decision (e.g., 'Arrives Dec 12-15 via FedEx').</td>
+</tr>
+<tr>
+<td style="text-align: left;">carrier</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Carrier name (for shipping).</td>
+</tr>
+<tr>
+<td style="text-align: left;">earliest_fulfillment_time</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Earliest fulfillment date.</td>
+</tr>
+<tr>
+<td style="text-align: left;">latest_fulfillment_time</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Latest fulfillment date.</td>
+</tr>
+<tr>
+<td style="text-align: left;">totals</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/checkout/#total-response">Total Response</a>]</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Fulfillment option totals breakdown.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="item">Item<a class="headerlink" href="#item" title="Permanent link">&para;</a></h3>
+<h4 id="item-create-request">Item Create Request<a class="headerlink" href="#item-create-request" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">id</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Should be recognized by both the Platform, and the Business. For Google it should match the id provided in the "id" field in the product feed.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="item-update-request">Item Update Request<a class="headerlink" href="#item-update-request" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">id</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Should be recognized by both the Platform, and the Business. For Google it should match the id provided in the "id" field in the product feed.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="item-response">Item Response<a class="headerlink" href="#item-response" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">id</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Should be recognized by both the Platform, and the Business. For Google it should match the id provided in the "id" field in the product feed.</td>
+</tr>
+<tr>
+<td style="text-align: left;">title</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Product title.</td>
+</tr>
+<tr>
+<td style="text-align: left;">price</td>
+<td style="text-align: left;">integer</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Unit price in minor (cents) currency units.</td>
+</tr>
+<tr>
+<td style="text-align: left;">image_url</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Product image URI.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="line-item">Line Item<a class="headerlink" href="#line-item" title="Permanent link">&para;</a></h3>
+<h4 id="line-item-create-request">Line Item Create Request<a class="headerlink" href="#line-item-create-request" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">item</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#item-create-request">Item Create Request</a></td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">quantity</td>
+<td style="text-align: left;">integer</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Quantity of the item being purchased.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="line-item-update-request">Line Item Update Request<a class="headerlink" href="#line-item-update-request" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">id</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">item</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#item-update-request">Item Update Request</a></td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">quantity</td>
+<td style="text-align: left;">integer</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Quantity of the item being purchased.</td>
+</tr>
+<tr>
+<td style="text-align: left;">parent_id</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Parent line item identifier for any nested structures.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="line-item-response">Line Item Response<a class="headerlink" href="#line-item-response" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">id</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">item</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#item-response">Item Response</a></td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">quantity</td>
+<td style="text-align: left;">integer</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Quantity of the item being purchased.</td>
+</tr>
+<tr>
+<td style="text-align: left;">totals</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/checkout/#total-response">Total Response</a>]</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Line item totals breakdown.</td>
+</tr>
+<tr>
+<td style="text-align: left;">parent_id</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Parent line item identifier for any nested structures.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="link">Link<a class="headerlink" href="#link" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">type</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Type of link. Well-known values: <code>privacy_policy</code>, <code>terms_of_service</code>, <code>refund_policy</code>, <code>shipping_policy</code>, <code>faq</code>. Consumers SHOULD handle unknown values gracefully by displaying them using the <code>title</code> field or omitting the link.</td>
+</tr>
+<tr>
+<td style="text-align: left;">url</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">The actual URL pointing to the content to be displayed.</td>
+</tr>
+<tr>
+<td style="text-align: left;">title</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Optional display text for the link. When provided, use this instead of generating from type.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="well-known-link-types">Well-Known Link Types<a class="headerlink" href="#well-known-link-types" title="Permanent link">&para;</a></h4>
+<p>Businesses <strong>SHOULD</strong> provide all relevant links for the transaction. The
+following are the recommended well-known types:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>privacy_policy</code></td>
+<td style="text-align: left;">Link to the business's privacy policy</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>terms_of_service</code></td>
+<td style="text-align: left;">Link to the business's terms of service</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>refund_policy</code></td>
+<td style="text-align: left;">Link to the business's refund policy</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>shipping_policy</code></td>
+<td style="text-align: left;">Link to the business's shipping policy</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>faq</code></td>
+<td style="text-align: left;">Link to the business's frequently asked questions</td>
+</tr>
+</tbody>
+</table>
+<p>Businesses <strong>MAY</strong> define custom types for domain-specific needs. Platforms
+<strong>SHOULD</strong> handle unknown types gracefully by displaying them using the <code>title</code>
+field or omitting them.</p>
+<h3 id="message">Message<a class="headerlink" href="#message" title="Permanent link">&para;</a></h3>
+<p>This object MUST be one of the following types: <a href="/2026-01-23/specification/checkout/#message-error">Message Error</a>, <a href="/2026-01-23/specification/checkout/#message-warning">Message Warning</a>, <a href="/2026-01-23/specification/checkout/#message-info">Message Info</a>.</p>
+<h3 id="message-error">Message Error<a class="headerlink" href="#message-error" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">type</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;"><strong>Constant = error</strong>. Message type discriminator.</td>
+</tr>
+<tr>
+<td style="text-align: left;">code</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Error code. Possible values include: missing, invalid, out_of_stock, payment_declined, requires_sign_in, requires_3ds, requires_identity_linking. Freeform codes also allowed.</td>
+</tr>
+<tr>
+<td style="text-align: left;">path</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">RFC 9535 JSONPath to the component the message refers to (e.g., $.items[1]).</td>
+</tr>
+<tr>
+<td style="text-align: left;">content_type</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Content format, default = plain.<br><strong>Enum:</strong> <code>plain</code>, <code>markdown</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">content</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Human-readable message.</td>
+</tr>
+<tr>
+<td style="text-align: left;">severity</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Declares who resolves this error. 'recoverable': agent can fix via API. 'requires_buyer_input': merchant requires information their API doesn't support collecting programmatically (checkout incomplete). 'requires_buyer_review': buyer must authorize before order placement due to policy, regulatory, or entitlement rules (checkout complete). Errors with 'requires_<em>' severity contribute to 'status: requires_escalation'.<br></em><em>Enum:</em>* <code>recoverable</code>, <code>requires_buyer_input</code>, <code>requires_buyer_review</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="message-info">Message Info<a class="headerlink" href="#message-info" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">type</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;"><strong>Constant = info</strong>. Message type discriminator.</td>
+</tr>
+<tr>
+<td style="text-align: left;">path</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">RFC 9535 JSONPath to the component the message refers to.</td>
+</tr>
+<tr>
+<td style="text-align: left;">code</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Info code for programmatic handling.</td>
+</tr>
+<tr>
+<td style="text-align: left;">content_type</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Content format, default = plain.<br><strong>Enum:</strong> <code>plain</code>, <code>markdown</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">content</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Human-readable message.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="message-warning">Message Warning<a class="headerlink" href="#message-warning" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">type</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;"><strong>Constant = warning</strong>. Message type discriminator.</td>
+</tr>
+<tr>
+<td style="text-align: left;">path</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">JSONPath (RFC 9535) to related field (e.g., $.line_items[0]).</td>
+</tr>
+<tr>
+<td style="text-align: left;">code</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Warning code. Machine-readable identifier for the warning type (e.g., final_sale, prop65, fulfillment_changed, age_restricted, etc.).</td>
+</tr>
+<tr>
+<td style="text-align: left;">content</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Human-readable warning message that MUST be displayed.</td>
+</tr>
+<tr>
+<td style="text-align: left;">content_type</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Content format, default = plain.<br><strong>Enum:</strong> <code>plain</code>, <code>markdown</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="payment">Payment<a class="headerlink" href="#payment" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">instruments</td>
+<td style="text-align: left;">Array[<a href="/2026-01-23/specification/checkout/#selected-payment-instrument">Selected Payment Instrument</a>]</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">The payment instruments available for this payment. Each instrument is associated with a specific handler via the handler_id field. Handlers can extend the base payment_instrument schema to add handler-specific fields.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="payment-instrument">Payment Instrument<a class="headerlink" href="#payment-instrument" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">id</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">A unique identifier for this instrument instance, assigned by the platform.</td>
+</tr>
+<tr>
+<td style="text-align: left;">handler_id</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">The unique identifier for the handler instance that produced this instrument. This corresponds to the 'id' field in the Payment Handler definition.</td>
+</tr>
+<tr>
+<td style="text-align: left;">type</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">The broad category of the instrument (e.g., 'card', 'tokenized_card'). Specific schemas will constrain this to a constant value.</td>
+</tr>
+<tr>
+<td style="text-align: left;">billing_address</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#postal-address">Postal Address</a></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">The billing address associated with this payment method.</td>
+</tr>
+<tr>
+<td style="text-align: left;">credential</td>
+<td style="text-align: left;"><a href="/2026-01-23/specification/checkout/#payment-credential">Payment Credential</a></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">The base definition for any payment credential. Handlers define specific credential types.</td>
+</tr>
+<tr>
+<td style="text-align: left;">display</td>
+<td style="text-align: left;">object</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Display information for this payment instrument. Each payment instrument schema defines its specific display properties, as outlined by the payment handler.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="payment-credential">Payment Credential<a class="headerlink" href="#payment-credential" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">type</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">The credential type discriminator. Specific schemas will constrain this to a constant value.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="postal-address">Postal Address<a class="headerlink" href="#postal-address" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">extended_address</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">An address extension such as an apartment number, C/O or alternative name.</td>
+</tr>
+<tr>
+<td style="text-align: left;">street_address</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">The street address.</td>
+</tr>
+<tr>
+<td style="text-align: left;">address_locality</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">The locality in which the street address is, and which is in the region. For example, Mountain View.</td>
+</tr>
+<tr>
+<td style="text-align: left;">address_region</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">The region in which the locality is, and which is in the country. Required for applicable countries (i.e. state in US, province in CA). For example, California or another appropriate first-level Administrative division.</td>
+</tr>
+<tr>
+<td style="text-align: left;">address_country</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">The country. Recommended to be in 2-letter ISO 3166-1 alpha-2 format, for example "US". For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as "SGP" or a full country name such as "Singapore" can also be used.</td>
+</tr>
+<tr>
+<td style="text-align: left;">postal_code</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">The postal code. For example, 94043.</td>
+</tr>
+<tr>
+<td style="text-align: left;">first_name</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Optional. First name of the contact associated with the address.</td>
+</tr>
+<tr>
+<td style="text-align: left;">last_name</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Optional. Last name of the contact associated with the address.</td>
+</tr>
+<tr>
+<td style="text-align: left;">phone_number</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Optional. Phone number of the contact associated with the address.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="response">Response<a class="headerlink" href="#response" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">version</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">UCP version in YYYY-MM-DD format.Entity version in YYYY-MM-DD format.</td>
+</tr>
+<tr>
+<td style="text-align: left;">spec</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">URL to human-readable specification document.</td>
+</tr>
+<tr>
+<td style="text-align: left;">schema</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">URL to JSON Schema defining this entity's structure and payloads.</td>
+</tr>
+<tr>
+<td style="text-align: left;">id</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Unique identifier for this entity instance. Used to disambiguate when multiple instances exist.</td>
+</tr>
+<tr>
+<td style="text-align: left;">config</td>
+<td style="text-align: left;">object</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Entity-specific configuration. Structure defined by each entity's schema.</td>
+</tr>
+<tr>
+<td style="text-align: left;">extends</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Parent capability this extends. Present for extensions, absent for root capabilities.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="total">Total<a class="headerlink" href="#total" title="Permanent link">&para;</a></h3>
+<h4 id="total-response">Total Response<a class="headerlink" href="#total-response" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">type</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Type of total categorization.<br><strong>Enum:</strong> <code>items_discount</code>, <code>subtotal</code>, <code>discount</code>, <code>fulfillment</code>, <code>tax</code>, <code>fee</code>, <code>total</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">display_text</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Text to display against the amount. Should reflect appropriate method (e.g., 'Shipping', 'Delivery').</td>
+</tr>
+<tr>
+<td style="text-align: left;">amount</td>
+<td style="text-align: left;">integer</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">If type == total, sums subtotal - discount + fulfillment + tax + fee. Should be &gt;= 0. Amount in minor (cents) currency units.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ucp-response-checkout">UCP Response Checkout<a class="headerlink" href="#ucp-response-checkout" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">version</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">UCP version in YYYY-MM-DD format.</td>
+</tr>
+<tr>
+<td style="text-align: left;">services</td>
+<td style="text-align: left;">any</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">capabilities</td>
+<td style="text-align: left;">any</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">payment_handlers</td>
+<td style="text-align: left;">any</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="order-confirmation">Order Confirmation<a class="headerlink" href="#order-confirmation" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">id</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Unique order identifier.</td>
+</tr>
+<tr>
+<td style="text-align: left;">permalink_url</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Permalink to access the order on merchant site.</td>
+</tr>
+</tbody>
+</table>
 
 
 

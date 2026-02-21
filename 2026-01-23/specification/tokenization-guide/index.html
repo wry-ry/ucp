@@ -181,6 +181,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#tokenization-guide" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -941,6 +946,21 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Tokenization Guide
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -953,6 +973,169 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Concepts
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#credential-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Credential Flow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#token-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Token Lifecycle
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#binding" class="md-nav__link">
+    <span class="md-ellipsis">
+      Binding
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openapi" class="md-nav__link">
+    <span class="md-ellipsis">
+      OpenAPI
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="OpenAPI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-tokenize" class="md-nav__link">
+    <span class="md-ellipsis">
+      POST /tokenize
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-detokenize" class="md-nav__link">
+    <span class="md-ellipsis">
+      POST /detokenize
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Requirements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#handler-specification-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Handler Specification Requirements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Handler Specification Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-specification-outline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Specification Outline
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conformance-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conformance Checklist
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      See Also
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1163,6 +1346,160 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Concepts
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#credential-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Credential Flow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#token-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Token Lifecycle
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#binding" class="md-nav__link">
+    <span class="md-ellipsis">
+      Binding
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openapi" class="md-nav__link">
+    <span class="md-ellipsis">
+      OpenAPI
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="OpenAPI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-tokenize" class="md-nav__link">
+    <span class="md-ellipsis">
+      POST /tokenize
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-detokenize" class="md-nav__link">
+    <span class="md-ellipsis">
+      POST /detokenize
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Requirements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#handler-specification-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Handler Specification Requirements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Handler Specification Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-specification-outline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Specification Outline
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conformance-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conformance Checklist
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      See Also
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1181,9 +1518,363 @@
   
 
 
-  <h1>Tokenization Guide</h1>
+<!--
+   Copyright 2026 UCP Authors
 
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
 
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<h1 id="tokenization-guide">Tokenization Guide<a class="headerlink" href="#tokenization-guide" title="Permanent link">&para;</a></h1>
+<p><strong>OpenAPI:</strong> <a href="https://ucp.dev/handlers/tokenization/openapi.json">Tokenization API</a></p>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>This guide is for <strong>implementers building tokenization payment handlers</strong>. It
+defines the shared API, security requirements, and conformance criteria that all
+tokenization handlers follow.</p>
+<p><strong>Note:</strong> While the examples in this guide use card credentials, tokenization
+patterns apply to <strong>any sensitive credential type</strong>—bank accounts, digital
+wallets, loyalty accounts, etc. Compliance requirements (e.g., PCI DSS for
+cards) vary by credential type.</p>
+<p>We offer a range of examples to utilize forms of tokenization in UCP:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Example</th>
+<th style="text-align: left;">Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../examples/processor-tokenizer-payment-handler/">Processor Tokenizer</a></td>
+<td style="text-align: left;">Business or PSP runs tokenization and processing</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="../examples/platform-tokenizer-payment-handler/">Platform Tokenizer</a></td>
+<td style="text-align: left;">Platform tokenizes credentials for businesses/PSPs</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="../examples/encrypted-credential-handler/">Encrypted Credential Handler</a></td>
+<td style="text-align: left;">Platform encrypts credentials instead of tokenizing</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="core-concepts">Core Concepts<a class="headerlink" href="#core-concepts" title="Permanent link">&para;</a></h2>
+<h3 id="credential-flow">Credential Flow<a class="headerlink" href="#credential-flow" title="Permanent link">&para;</a></h3>
+<p>Tokenization handlers transform credentials between source and checkout forms:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>┌─────────────────────────────────────────────────────────────────────────┐
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>│                     Tokenization Payment Flow                           │
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>├─────────────────────────────────────────────────────────────────────────┤
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>│                                                                         │
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│   Platform has:            Tokenizer            Business receives:      │
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>│   Source Credential  ──▶  /tokenize  ──▶         TokenCredential        │
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>│                                                                         │
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>│   ┌─────────────────┐                      ┌─────────────────────────┐  │
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>│   │ source_         │                      │ checkout_               │  │
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>│   │ credentials     │    What goes IN      │ credentials             │  │
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>│   │                 │◀───────────────      │                         │  │
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>│   │ • card/fpan     │                      │ What comes OUT          │  │
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>│   │ • card/dpan     │                ─────▶│ • token                 │  │
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>│   │                 │                      │                         │  │
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>│   └─────────────────┘                      └─────────────────────────┘  │
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>│                                                                         │
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>└─────────────────────────────────────────────────────────────────────────┘
+</span></code></pre></div>
+<p>Tokenization handlers accept source credentials (e.g., card with FPAN) and
+produce checkout credentials (e.g., tokens).</p>
+<h3 id="token-lifecycle">Token Lifecycle<a class="headerlink" href="#token-lifecycle" title="Permanent link">&para;</a></h3>
+<p>Tokens move through distinct phases. Your handler specification must document
+which lifecycle policy you use:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>┌──────────────┐    ┌──────────────┐    ┌──────────────┐    ┌──────────────┐
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>│  Generation  │───▶│   Storage    │───▶│ Detokenize   │───▶│ Invalidation │
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>│              │    │              │    │              │    │              │
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>│Platform calls│    │ Tokenizer    │    │ Business/PSP │    │ Token expires│
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>│ /tokenize    │    │ holds token  │    │ calls        │    │ or is used   │
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>│              │    │ → credential │    │ /detokenize  │    │              │
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>└──────────────┘    └──────────────┘    └──────────────┘    └──────────────┘
+</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Policy</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Single-use</strong></td>
+<td style="text-align: left;">Invalidated after first detokenization</td>
+<td style="text-align: left;">Most secure; recommended default</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>TTL-based</strong></td>
+<td style="text-align: left;">Expires after fixed duration (e.g., 15 min)</td>
+<td style="text-align: left;">Allows retries on transient failures</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Session-scoped</strong></td>
+<td style="text-align: left;">Valid for checkout session duration</td>
+<td style="text-align: left;">Complex flows with multiple processing attempts</td>
+</tr>
+</tbody>
+</table>
+<h3 id="binding">Binding<a class="headerlink" href="#binding" title="Permanent link">&para;</a></h3>
+<p>All tokenization requests require a <code>binding</code> object that ties the token to a
+specific context:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Field</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>checkout_id</code></td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">The checkout session this token is valid for</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>identity</code></td>
+<td style="text-align: left;">Conditional</td>
+<td style="text-align: left;">The participant identity to bind to; required when caller acts on behalf of another participant</td>
+</tr>
+</tbody>
+</table>
+<p>The tokenizer <strong>MUST</strong> verify binding matches on <code>/detokenize</code>. See <a href="https://ucp.dev/schemas/shopping/types/binding.json">Binding Schema</a>.</p>
+<hr />
+<h2 id="openapi">OpenAPI<a class="headerlink" href="#openapi" title="Permanent link">&para;</a></h2>
+<p>Tokenization handlers implement two endpoints. Your handler <strong>MAY</strong> implement
+one or both depending on your architecture. Or none, like our encrypted
+payload example, which defines its own mechanism to encrypt.</p>
+<h3 id="post-tokenize">POST /tokenize<a class="headerlink" href="#post-tokenize" title="Permanent link">&para;</a></h3>
+<p>Converts a raw credential into a token bound to a checkout and identity.</p>
+<p><strong>When to implement:</strong> Always, unless you are an agent generating tokens
+internally.</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="err">POST</span><span class="w"> </span><span class="err">/</span><span class="kc">t</span><span class="err">oke</span><span class="kc">n</span><span class="err">ize</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="err">Co</span><span class="kc">ntent</span><span class="mi">-</span><span class="err">Type</span><span class="p">:</span><span class="w"> </span><span class="err">applica</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="err">/jso</span><span class="kc">n</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">{</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nt">&quot;credential&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;card&quot;</span><span class="p">,</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="nt">&quot;card_number_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fpan&quot;</span><span class="p">,</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="nt">&quot;number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4111111111111111&quot;</span><span class="p">,</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="nt">&quot;expiry_month&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="nt">&quot;expiry_year&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2026</span><span class="p">,</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="nt">&quot;cvc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;123&quot;</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">  </span><span class="nt">&quot;binding&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="nt">&quot;checkout_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;abc123&quot;</span><span class="p">,</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="nt">&quot;identity&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">      </span><span class="nt">&quot;access_token&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;merchant_001&quot;</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><strong>Response:</strong></p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">&quot;token&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tok_abc123xyz789&quot;</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="post-detokenize">POST /detokenize<a class="headerlink" href="#post-detokenize" title="Permanent link">&para;</a></h3>
+<p>Returns the original credential for a valid token. Binding must match.</p>
+<p><strong>When to implement:</strong> Always, unless you combine detokenization with
+processing (see PSP example).</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="err">POST</span><span class="w"> </span><span class="err">/de</span><span class="kc">t</span><span class="err">oke</span><span class="kc">n</span><span class="err">ize</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="err">Co</span><span class="kc">ntent</span><span class="mi">-</span><span class="err">Type</span><span class="p">:</span><span class="w"> </span><span class="err">applica</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="err">/jso</span><span class="kc">n</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="err">Au</span><span class="kc">t</span><span class="err">horiza</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="p">:</span><span class="w"> </span><span class="err">Bearer</span><span class="w"> </span><span class="p">{</span><span class="err">caller_access_</span><span class="kc">t</span><span class="err">oke</span><span class="kc">n</span><span class="p">}</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="p">{</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span><span class="nt">&quot;token&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tok_abc123xyz789&quot;</span><span class="p">,</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">  </span><span class="nt">&quot;binding&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="nt">&quot;checkout_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;abc123&quot;</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><strong>Response:</strong></p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;card&quot;</span><span class="p">,</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">&quot;card_number_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fpan&quot;</span><span class="p">,</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="nt">&quot;number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4111111111111111&quot;</span><span class="p">,</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="nt">&quot;expiry_month&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">  </span><span class="nt">&quot;expiry_year&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2026</span><span class="p">,</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">  </span><span class="nt">&quot;cvc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;123&quot;</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><strong>Note:</strong> <code>binding.identity</code> is omitted when the authenticated caller is the
+binding target. Include it when acting on behalf of another participant (e.g.,
+PSP detokenizing for business).</p>
+<p>See the full <a href="https://ucp.dev/handlers/tokenization/openapi.json">OpenAPI specification</a> for complete request/response schemas.</p>
+<hr />
+<h2 id="security-requirements">Security Requirements<a class="headerlink" href="#security-requirements" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Requirement</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Binding required</strong></td>
+<td style="text-align: left;">Credentials <strong>MUST</strong> be bound to <code>checkout_id</code> and participant <code>identity</code> to prevent reuse</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Binding verified</strong></td>
+<td style="text-align: left;">Tokenizer <strong>MUST</strong> verify binding matches before returning credentials</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Cryptographically random</strong></td>
+<td style="text-align: left;">Use secure random generators; tokens must be unguessable</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Sufficient length</strong></td>
+<td style="text-align: left;">Minimum 128 bits of entropy</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Non-reversible</strong></td>
+<td style="text-align: left;">Cannot derive the credential from the token</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Scoped</strong></td>
+<td style="text-align: left;">Token should only work with your tokenizer</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Time-limited</strong></td>
+<td style="text-align: left;">Enforce TTL appropriate to use case (typically 5-30 minutes)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Single-use preferred</strong></td>
+<td style="text-align: left;">Invalidate after first detokenization when possible</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="handler-specification-requirements">Handler Specification Requirements<a class="headerlink" href="#handler-specification-requirements" title="Permanent link">&para;</a></h2>
+<p>When publishing your handler, your specification document <strong>MUST</strong> include:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Requirement</th>
+<th style="text-align: left;">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Unique handler name</strong></td>
+<td style="text-align: left;"><code>com.example.tokenization_payment</code> (reverse-DNS format)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Endpoint URLs</strong></td>
+<td style="text-align: left;">Production and sandbox base URLs</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Authentication requirements</strong></td>
+<td style="text-align: left;">OAuth 2.0, API keys, etc.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Onboarding process</strong></td>
+<td style="text-align: left;">How participants register and receive identities</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Accepted credentials</strong></td>
+<td style="text-align: left;">Which credential types are accepted for tokenization</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Token lifecycle policy</strong></td>
+<td style="text-align: left;">Single-use, TTL, or session-scoped</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Security acknowledgements</strong></td>
+<td style="text-align: left;">Participants receiving raw credentials must accept responsibility</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example-specification-outline">Example Specification Outline<a class="headerlink" href="#example-specification-outline" title="Permanent link">&para;</a></h3>
+<div class="language-markdown highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="gs">**Handler Name:**</span> <span class="sb">`com.acme.tokenization_payment`</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="gs">**OpenAPI:**</span> [<span class="nt">Tokenization API</span>](<span class="na">https://ucp.dev/handlers/tokenization/openapi.json</span>)
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>| Environment | Base URL                           |
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>| :---------- | :--------------------------------- |
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>| Production  | <span class="sb">`https://api.acme.com/ucp`</span>         |
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>| Sandbox     | <span class="sb">`https://sandbox.api.acme.com/ucp`</span> |
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="gs">**Supported Instruments:**</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>| Instrument | Source Credentials           | Checkout Credentials |
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>| :--------- | :--------------------------- | :------------------- |
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>| <span class="sb">`card`</span>     | <span class="sb">`card`</span> (fpan, network_token) | <span class="sb">`token`</span>              |
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="gs">**Token Lifecycle:**</span> Single-use (invalidated after detokenization)
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>
+</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="gs">**Authentication:**</span> OAuth 2.0 client credentials
+</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>
+</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="gs">**Onboarding:**</span> Register at portal.acme.com. Businesses receive <span class="sb">`access_token`</span> for handler identity.
+</span></code></pre></div>
+<hr />
+<h2 id="conformance-checklist">Conformance Checklist<a class="headerlink" href="#conformance-checklist" title="Permanent link">&para;</a></h2>
+<p>A tokenizer handler conforms to this pattern if it:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Publishes a handler specification at a stable URL with a unique, reverse-DNS <code>handler_name</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Implements <code>/tokenize</code> and/or <code>/detokenize</code> per the OpenAPI</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Defines authentication and onboarding requirements</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Documents credential transformation between source and checkout forms</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Produces tokens compatible with the <code>TokenCredential</code> schema</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Specifies token lifecycle policy (TTL, single-use, etc.)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Requires <code>binding</code> with <code>checkout_id</code> on tokenization requests</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Uses <code>PaymentIdentity</code> for participant identification</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Verifies <code>binding</code> matches on detokenization requests</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Requires security acknowledgements from participants receiving raw credentials</li>
+</ul>
+<hr />
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Resource</th>
+<th style="text-align: left;">URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Tokenization OpenAPI</td>
+<td style="text-align: left;"><code>https://ucp.dev/handlers/tokenization/openapi.json</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Identity Schema</td>
+<td style="text-align: left;"><code>https://ucp.dev/schemas/shopping/types/payment_identity.json</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Binding Schema</td>
+<td style="text-align: left;"><code>https://ucp.dev/schemas/shopping/types/binding.json</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Token Credential Schema</td>
+<td style="text-align: left;"><code>https://ucp.dev/schemas/shopping/types/token_credential.json</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Card Instrument Schema</td>
+<td style="text-align: left;"><code>https://ucp.dev/schemas/shopping/types/card_payment_instrument.json</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="see-also">See Also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong><a href="../examples/encrypted-credential-handler/">Encrypted Credential Handler</a></strong> — Alternative pattern using encryption instead of tokenize/detokenize round-trips</li>
+<li><strong><a href="../ap2-mandates/">AP2 Mandates Extension</a></strong> — Add cryptographic proof of checkout agreement for PSP verification</li>
+</ul>
 
 
 
