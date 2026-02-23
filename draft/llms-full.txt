@@ -3,656 +3,7 @@
 > The Universal Commerce Protocol (UCP) is a solution for enabling gen AI agents to make payments on behalf of users, safely, securely, and in a decentralized and privacy protecting manner. This protocol is a part of the broader ecosystem, which includes agentic protocols like A2A and MCP, and encompasses the global nature of payments.
 
 
-# Introduction
-
-# Universal Commerce Protocol
-
-The common language for platforms, agents and businesses.
-
-UCP defines building blocks for agentic commerce—from discovering and buying to post purchase experiences—allowing the ecosystem to interoperate through one standard, without custom builds.
-
-### Learn
-
-Protocol overview, core concepts, and design principles
-
-[Read the docs](https://ucp.dev/draft/specification/overview/index.md)
-
-### Implement
-
-GitHub repo, technical spec, SDKs, and reference implementations
-
-[View on GitHub](https://github.com/Universal-Commerce-Protocol/ucp)
-
-## Co-developed and adopted by industry leaders
-
-UCP was built by the industry, for the industry to solve for fragmented commerce journeys that lead to abandoned carts and frustrated shoppers, and enable agentic commerce.
-
-Google
-
-Shopify
-
-Etsy
-
-Wayfair
-
-Target
-
-Walmart
-
-## Built for flexibility, security, and scale
-
-Agentic commerce demands interoperability. UCP is built on industry standards — REST and JSON-RPC transports; [Agent Payments Protocol (AP2)](https://ap2-protocol.org/), [Agent2Agent (A2A)](https://a2a-protocol.org/latest/), and [Model Context Protocol (MCP)](https://modelcontextprotocol.io/docs/getting-started/intro) support built-in — so different systems can work together without custom integration.
-
-### Scalable and universal
-
-Surface-agnostic design that can scale to support any commerce entity (from small businesses to enterprise scale) and all modalities (chat, visual commerce, voice, etc).
-
-### Businesses at the center
-
-Built to facilitate commerce, ensuring retailers retain control of their business rules and remain the Merchant of Record with full ownership of the customer relationship.
-
-### Open and extensible
-
-Open and extensible by design, enabling development of community-driven capabilities and extensions across verticals.
-
-### Secure and private
-
-Built on proven security standards for account linking (OAuth 2.0) and secure payment (AP2) via payment mandates and verifiable credentials.
-
-### Frictionless payments
-
-Open wallet ecosystem with interoperability between providers to ensure buyers can pay with their preferred payment methods.
-
-## See it in action
-
-UCP is designed to facilitate the entire commerce lifecycle, from initial product discovery and search to final sale and post-purchase support. The protocol's initial launch focuses on three core capabilities: Checkout, Identity Linking, and Order Management.
-
-Checkout Identity Linking Order
-
-SEE IT IN ACTION
-
-### Checkout
-
-Support complex cart logic, dynamic pricing, tax calculations, and more across millions of businesses through unified checkout sessions.
-
-[Learn more](https://ucp.dev/draft/specification/checkout-rest/index.md)
-
-```json
-{
-  "ucp": { ... },
-  "id": "chk_123456789",
-  "status": "ready_for_complete",
-  "currency": "USD",
-  "buyer": {
-    "email": "e.beckett@example.com",
-    "first_name": "Elisa",
-    "last_name": "Beckett"
-  },
-  "line_items": [
-    {
-      "id": "li_1",
-      "item": {
-        "id": "item_123",
-        "title": "Monos Carry-On Pro suitcase",
-        "price": 26550
-      },
-      "quantity": 1,
-      ...
-    }
-  ],
-  "totals": [ ... ],
-  "links": [ ... ],
-  "payment": { ... },
-  "fulfillment": {
-    "methods": [
-      {
-        "id": "method_1",
-        "type": "shipping",
-        "line_item_ids": ["li_1"],
-        "selected_destination_id": "dest_1",
-        "destinations": [
-          {
-            "id": "dest_1",
-            "first_name": "Elisa",
-            "last_name": "Beckett",
-            "street_address": "1600 Amphitheatre Pkwy",
-            "address_locality": "Mountain View",
-            "address_region": "CA",
-            "postal_code": "94043",
-            "address_country": "US"
-          }
-        ],
-        "groups": [
-          {
-            "id": "group_1",
-            "line_item_ids": ["li_1"],
-            "selected_option_id": "free-shipping",
-            "options": [
-              {
-                "id": "free-shipping",
-                "title": "Free Shipping",
-                "totals": [ {"type": "total", "amount": 0} ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
-}
-```
-
-SEE IT IN ACTION
-
-### Identity Linking
-
-OAuth 2.0 standard enables agents to maintain secure, authorized relationships without sharing credentials.
-
-[Learn more](https://ucp.dev/draft/specification/identity-linking/index.md)
-
-```json
-Sample of /.well-known/oauth-authorization-server
-
-{
-  "issuer": "https://example.com",
-  "authorization_endpoint": "https://example.com/oauth2/authorize",
-  "token_endpoint": "https://example.com/oauth2/token",
-  "revocation_endpoint": "https://example.com/oauth2/revoke",
-  "scopes_supported": [
-    "ucp:scopes:checkout_session",
-  ],
-  "response_types_supported": [
-    "code"
-  ],
-  "grant_types_supported": [
-    "authorization_code",
-    "refresh_token"
-  ],
-  "token_endpoint_auth_methods_supported": [
-    "client_secret_basic"
-  ],
-  "service_documentation": "https://example.com/docs/oauth2"
-}
-```
-
-SEE IT IN ACTION
-
-### Order
-
-From purchase confirmation to delivery. Real-time webhooks power status updates, shipment tracking, and return processing across every channel.
-
-[Learn more](https://ucp.dev/draft/specification/order/index.md)
-
-```json
-{
-  "ucp": { ... },
-  "id": "order_123456789",
-  "checkout_id": "chk_123456789",
-  "permalink_url": ...,
-  "line_items": [ ... ],
-  "fulfillment": {
-    "expectations": [
-      {
-        "id": "exp_1",
-        "line_items": [{ "id": "li_1", "quantity": 1 }],
-        "method_type": "shipping",
-        "destination": {
-          "first_name": "Elisa",
-          "last_name": "Beckett",
-          "street_address": "1600 Amphitheatre Pkwy",
-          "address_locality": "Mountain View",
-          "address_region": "CA",
-          "postal_code": "94043",
-          "address_country": "US"
-        },
-        "description": "Arrives in 2-3 business days",
-        "fulfillable_on": "now"
-      }
-      ...
-    ],
-    "events": [
-      {
-        "id": "evt_1",
-        "occurred_at": "2026-01-11T10:30:00Z",
-        "type": "delivered",
-        "line_items": [{ "id": "li_1", "quantity": 1 }],
-        "tracking_number": "123456789",
-        "tracking_url": "https://fedex.com/track/123456789",
-        "description": "Delivered to front door"
-      }
-    ]
-  },
-  "adjustments": [
-    {
-      "id": "adj_1",
-      "type": "refund",
-      "occurred_at": "2026-01-12T14:30:00Z",
-      "status": "completed",
-      "line_items": [{ "id": "li_1", "quantity": 1 }],
-      "amount": 26550,
-      "description": "Defective item"
-    }
-  ],
-  "totals": [ ... ]
-}
-```
-
-### Power native checkout
-
-Integrate and negotiate directly with a seller's checkout API to power native UI and workflows for your platform.
-
-[See how it works](https://ucp.dev/draft/specification/checkout-rest/index.md)
-
-### Embed business checkout
-
-Embed and render business checkout UI to support complex checkout flows, with advanced capabilities like bidirectional communication, and payment and shipping address delegation.
-
-[Learn more](https://ucp.dev/draft/specification/embedded-checkout/index.md)
-
-## Designed for the entire commerce ecosystem
-
-### For Developers
-
-Build the future of commerce on an open foundation. Join our community in evolving an open-source standard designed for the next generation of digital commerce.
-
-[View the technical spec](https://ucp.dev/draft/specification/overview/index.md)
-
-### For Businesses
-
-UCP empowers retailers to meet customers wherever they are—AI assistants, shopping agents, embedded experiences—without rebuilding your checkout for each. You remain the Merchant of Record and your business logic stays intact.
-
-[Integrate with UCP](https://developers.google.com/merchant/ucp/)
-
-### For AI Platforms
-
-Simplify business onboarding with standardized APIs and provide your audience with an integrated shopping experience. Compatible with MCP, A2A, and existing agent frameworks.
-
-[Learn more about UCP core concepts](https://ucp.dev/draft/documentation/core-concepts/index.md)
-
-### For Payment Providers
-
-Universal payments that are provable—every authorization backed by cryptographic proof of user consent. Open, modular payment handler design enables open interoperability and choice of payment methods.
-
-[Learn more about UCP and AP2](https://ucp.dev/draft/documentation/ucp-and-ap2/index.md)
-
-## Endorsed across the ecosystem
-
-Adyen
-
-Affirm
-
-Amex
-
-Ant International
-
-Best Buy
-
-Block
-
-Carrefour
-
-Chewy
-
-Commerce
-
-Fiserv
-
-Flipkart
-
-Gap
-
-Klarna
-
-Kroger
-
-Lowe's
-
-Macy's
-
-Mastercard
-
-Paypal
-
-Salesforce
-
-Sephora
-
-Shopee
-
-Splitit
-
-Stripe
-
-The Home Depot
-
-Ulta
-
-Visa
-
-Worldpay
-
-Zalando
-
-Adyen
-
-Affirm
-
-Amex
-
-Ant International
-
-Best Buy
-
-Block
-
-Carrefour
-
-Chewy
-
-Commerce
-
-Fiserv
-
-Flipkart
-
-Gap
-
-Klarna
-
-Kroger
-
-Lowe's
-
-Macy's
-
-Mastercard
-
-Paypal
-
-Salesforce
-
-Sephora
-
-Shopee
-
-Splitit
-
-Stripe
-
-The Home Depot
-
-Ulta
-
-Visa
-
-Worldpay
-
-Zalando
-
-## Get started today
-
-UCP is an open standard designed to let AI agents, apps, businesses, and payment providers interact seamlessly without needing custom, one-off integrations for every connection. We actively seek your feedback and contributions to help build the future of commerce.
-
-The complete technical specification, documentation, and reference implementations are hosted in our public GitHub repository.
-
-### [Download](https://github.com/Universal-Commerce-Protocol/samples)
-
-Download and run our code samples
-
-### [Experiment](https://ucp.dev/playground/)
-
-Experiment with the protocol and its different agent roles
-
-### [Contribute](https://github.com/Universal-Commerce-Protocol/ucp/blob/main/CONTRIBUTING.md)
-
-Contribute your feedback and code to the public repository
-
-[Visit the GitHub repository](https://github.com/Universal-Commerce-Protocol/ucp)
-
-# Core Concepts
-
-The Universal Commerce Protocol (UCP) is an open standard designed to facilitate communication and interoperability between diverse commerce entities. In a fragmented landscape where consumer surfaces/platforms, businesses, payment providers, and identity providers operate on different systems, UCP provides a standardized common language and functional primitives.
-
-This document provides the detailed technical specification for UCP. For a complete definition of all data models and schemas, see the [Schema Reference](https://ucp.dev/draft/specification/reference/index.md).
-
-Its primary goal is to enable:
-
-- **Consumer Surfaces/Platforms:** To discover business capabilities and facilitate purchases.
-- **Businesses:** To expose their inventory and retail logic in a standard way without building custom integrations for every platform.
-- **Payment & Credential Providers:** To securely exchange tokens and credentials to facilitate transactions.
-
-## High level architecture
-
-## Key Goals of UCP
-
-- **Interoperability:** Bridge the gap between consumer surfaces, businesses, and payment ecosystems.
-- **Discovery:** Allow consumer surfaces to dynamically discover what businesses support (e.g., "Do they support guest checkout?", "Do they have loyalty programs?").
-- **Security:** Facilitate secure, standards-based (OAuth 2.0, PCI-DSS compliant patterns) exchanges of sensitive user and payment data.
-- **Agentic Commerce:** Enable AI agents to act on behalf of users to complete complex tasks like "Find a headset under $100 and buy it."
-
-## Roles & Participants
-
-UCP defines the interactions between four primary distinct actors, each playing a specific role in the commerce lifecycle.
-
-### Platform (Application/Agent)
-
-The platform is the consumer-facing surface (such as an AI agent, mobile app, or social media site) acting on behalf of the User. It orchestrates the commerce journey by discovering businesses and facilitating user intent.
-
-- **Responsibilities:** Discovering businesses capabilities via profiles, initiating checkout sessions, and presenting the UI or conversational interface to the user.
-- **Examples:** AI Shopping Assistants, Super Apps, Search Engines.
-
-### Business
-
-The entity selling goods or services. In the UCP model, businesses act as the **Merchant of Record (MoR)**, retaining financial liability and ownership of the order.
-
-- **Responsibilities:** Exposing commerce capabilities (inventory, pricing, tax calculation), fulfilling orders, and processing payments via their chosen PSP.
-- **Examples:** Retailers, Airlines, Hotel Chains, Service Providers.
-
-### Credential Provider (CP)
-
-A trusted entity responsible for securely managing and sharing sensitive user data, particularly payment instruments and shipping addresses.
-
-- **Responsibilities:** Authenticating the user, issuing payment tokens (to keep raw card data off the platform), and holding PII securely to minimize compliance scope for other parties.
-- **Examples:** Digital Wallets (e.g., Google Wallet, Apple Pay), Identity Providers.
-
-### Payment Service Provider (PSP)
-
-The financial infrastructure provider that processes payments on behalf of businesses.
-
-- **Responsibilities:** Authorizing and capturing transactions, handling settlements, and communicating with card networks. The PSP often interacts directly with tokens provided by the Credential Provider.
-- **Examples:** Stripe, Adyen, PayPal, Braintree, Chase Paymentech.
-
-## Core Concepts Summary
-
-UCP revolves around three fundamental constructs that define how entities interact.
-
-- **Capabilities:** Standalone core features that a business supports. These are the "verbs" of the protocol.
-  - *Examples:* Checkout, Identity Linking, Order.
-- **Extensions:** Optional capabilities that augment another capability via the `extends` field. Extensions appear in `ucp.capabilities[]` alongside core capabilities.
-  - *Examples:* Discounts (extends Checkout), AP2 Mandates (extends Checkout).
-- **Services:** The lower-level communication layers used to exchange data. UCP is transport-agnostic but defines specific bindings for interoperability.
-  - *Examples:* REST API (primary), MCP (Model Context Protocol), A2A (Agent2Agent).
-# UCP and AP2
-
-# UCP and AP2
-
-UCP is fully compatible with [Agent Payments Protocol (AP2)](https://ap2-protocol.org/). AP2 serves as the trust layer for agent-led transactions completed on behalf of a user, mandating a secure, verifiable exchange of intents and authorizations between Platforms and businesses. By using Verifiable Digital Credentials (VDCs), AP2 eliminates the need for middleman "trust referees." It allows businesses to receive signed checkout commitments—ensuring the price and terms don't change mid-flow—and allows Platforms to provide cryptographically signed payment authorizations that are mathematically tied to the specific state of the cart.
-
-## Key benefits
-
-- **Binding proof:** Both parties have cryptographic evidence of exactly what was offered and what was agreed upon, ensuring the transaction is final and authentic.
-- **Fraud reduction:** Payment mandates are scoped specifically to a checkout hash, preventing "token replay" or amount manipulation.
-- **Agentic readiness:** Allows autonomous AI agents to transact on behalf of users with pre-defined, verifiable boundaries.
-
-## Protocol flow
-
-1. **Discovery:** The business publishes their discovery document, declaring support for the AP2 extension.
-1. **Session Activation:** When creating or updating a checkout session, the Platform signals the activation of AP2.
-1. **Signing (business):** The business responds with a `checkoutSignature` (a detached JWT signing the checkout state) and lists supported verifiable presentation formats (e.g., `sd-jwt`).
-1. **Authorization:** Upon user consent, the Platform generates two credentials:
-   - **CheckoutMandate:** Contains the hash of the `CheckoutObject`.
-   - **PaymentMandate:** An SD-JWT-VC containing the payment authorization.
-1. **Completion:** The Platform submits both mandates to the business’ `/complete` endpoint.
-1. **Verification:**
-   - The business verifies the `CheckoutMandate`.
-   - The Payment Processor verifies the `PaymentMandate`.
-1. **Confirmation:** If valid, the payment is processed, and the order is confirmed.
-
-**Dependencies:** Checkout capability
-
-[See here for full AP2 mandates extension](https://ucp.dev/draft/specification/ap2-mandates/index.md)
-
-[Learn more about AP2](https://ap2-protocol.org)
-# Playground
-
-# UCP Playground
-
-Walk through a complete UCP checkout flow step-by-step. This interactive demo runs entirely in the browser, simulating payloads and validating against real UCP schemas at each stage.
-
-## 1. Platform Profile
-
-Select the capability profile for the Platform. This determines which extensions (e.g., fulfillment, discounts) are negotiated.
-
-### Configuration
-
-Platform Type Standard (Core Only) Advanced (All Extensions)
-
-Supports basic checkout and order retrieval.
-
-Capabilities Copy
-
-Continue →
-
-## 2. Discovery
-
-The Platform fetches `/.well-known/ucp`. The response below is filtered to show the intersection of the Business's capabilities and the Platform's profile.
-
-GET Request
-
-```
-GET /.well-known/ucp HTTP/1.1
-Host: business.example.com
-Accept: application/json
-```
-
-Response (Filtered)
-
-← Back Continue →
-
-## 3. Capability Negotiation
-
-Intersection of Platform and Business capabilities. Orphaned extensions are pruned.
-
-Business Capabilities
-
-Resulting Intersection
-
-← Back Continue →
-
-## 4. Create Checkout
-
-The Platform initiates a session. The error response below follows the strict `message.json` schema.
-
-Request Payload
-
-Response
-
-Simulation Scenario:
-
-Missing Buyer Email Missing Shipping Destination Run Request
-
-← Back Next Step →
-
-## 5. Update Checkout
-
-Patch the checkout with missing information to resolve validation errors.
-
-PATCH Request Run Update
-
-Response
-
-← Back Next Step →
-
-## 6. Mint Instrument
-
-Simulate the payment handler flow to acquire a payment credential.
-
-### Select Handler
-
-**Shop Pay**\
-com.shopify.shop_pay
-
-**Google Pay**\
-com.google.pay
-
-Mint Credential
-
-Minted Instrument
-
-← Back Next Step →
-
-## 7. Complete Checkout
-
-Submit the minted instrument to finalize the transaction and create an order.
-
-Request Finalize
-
-Response (Order Created)
-
-**Success!** Order ID: created.
-
-← Back Next Step →
-
-## 8. Webhook Simulation
-
-Simulate a backend event (e.g., shipping center update) triggering a webhook push to the Agent.
-
-### Trigger Event
-
-This action runs on the Business server and pushes data to the Platform's webhook URL.
-
-Simulate "Shipped" Event
-
-Webhook Payload (POST) Push Notification
-
-```
-// Waiting for event trigger...
-```
-
-← Back
-
-About this demo
-
-This playground is a simulation running entirely in your browser. It uses mocked logic to demonstrate the UCP protocol flow and isn't intended as a reference for production code. For real-world implementation examples and best practices, please check out our [samples on GitHub](https://github.com/Universal-Commerce-Protocol/samples).
-# Roadmap
-
-# Roadmap
-
-This roadmap is meant to provide transparency into our strategic priorities and to align our partners on the critical path toward a fully agentic, global commerce standard. Our goal is to move beyond isolated transactions and build a cohesive, intelligent commerce layer that works across borders and verticals.
-
-**Note:** This roadmap reflects our current direction and intends to guide planning, but it does not constitute a commitment to deliver specific features. Our approach to these challenges may evolve, and initiatives are subject to change, removal, or addition as business priorities shift and we receive community feedback.
-
-## Upcoming roadmap priorities
-
-### Deeper support for the full consumer journey
-
-To move beyond isolated transactions, we are expanding the protocol's scope to tackle key user journeys such as multi-item checkout, loyalty, and lifecycle management, while ensuring the business's brand and logic remain central to all shopping experiences. Key upcoming initiatives include:
-
-- **Product discovery and post-order management:** By facilitating the entire journey, we help businesses maximize lifetime and average order value rather than just processing a single item for checkout.
-- **Cart and basket building:** Support for multi-item checkout from a business, complex basket rules (e.g., promotions, tax, shipping), and varied fulfillment logic that reflects how people actually shop.
-- **Loyalty & Member benefits:** Capabilities to enable loyalty and member benefits to help users find the best value and businesses achieve a deeper connection with their consumers through account linking.
-- **Native cross-sell and upsell modules:** Capabilities for businesses to provide personalized recommendations and upsells based on user context.
-
-### Support for global markets
-
-We are building a scalable ecosystem that is inclusive of all business sizes and geographies, ensuring that "simple and open" means accessible to everyone. We plan to do this through a phased rollout across markets, including India, Indonesia, Latin America, and others. We are adapting the protocol to support broader regional use cases and localized payment interoperability.
-
-## Build with us
-
-The future of commerce cannot be built in a vacuum. We invite businesses, developers, and payment providers to join us in refining these specifications. Your feedback on our early builds helps us shape the standards that will power the next generation of global commerce.
-
-[Become a UCP contributor](https://github.com/Universal-Commerce-Protocol/ucp?tab=contributing-ov-file)
-# Specification Overview
+# Specification
 
 # Universal Commerce Protocol (UCP) Official Specification
 
@@ -5618,917 +4969,6 @@ When the user confirms the payment on a platform, the user signed checkout and p
   }
 }
 ```
-# Checkout Extensions
-
-# AP2 Mandates Extension
-
-## Overview
-
-The AP2 Mandates extension enables the secure exchange of user intents and authorizations using **Verifiable Digital Credentials**. It extends the standard Shopping Service Checkout capability to support the **[AP2 Protocol](https://ap2-protocol.org/)**.
-
-When this capability is negotiated and active, it transforms a standard checkout session into a cryptographically bound agreement:
-
-- **Businesses** **MUST** embed a cryptographic signature in checkout responses, proving the terms (price, line items) are authentic.
-- **Platforms** **MUST** provide cryptographically signed proofs (Mandates) during the `complete` operation, proving the user explicitly authorized the specific checkout state and funds transfer.
-
-**Security Binding:** Once this extension is negotiated in the capability intersection, the session is **Security Locked**. Neither party may revert to a standard (unprotected) checkout flow.
-
-### Design
-
-All AP2-specific fields are nested under an `ap2` object in both requests and responses. This design provides:
-
-- **Schema modularity** — Base checkout schema stays clean; AP2 adds one field containing all its data.
-- **Consistent canonicalization** — One rule: exclude `ap2` from the business's signature computation. Future AP2 fields are automatically handled.
-- **Extension coexistence** — Multiple security extensions can coexist without namespace collisions.
-- **Capability signal** — Presence of `ap2` object clearly indicates AP2 is active.
-
-## Discovery & Negotiation
-
-This extension follows the standard UCP negotiation protocol. It is activated only when it appears in the **Capability Intersection** of both the business and the platform.
-
-### Business Profile Advertisement
-
-Businesses declare support by adding `dev.ucp.shopping.ap2_mandate` to their `capabilities` list in `/.well-known/ucp`.
-
-**Business Profile Example:**
-
-```json
-{
-  "capabilities": {
-    "dev.ucp.shopping.checkout": [
-      {
-        "version": "2026-01-11",
-        "spec": "https://ucp.dev/specification/checkout",
-        "schema": "https://ucp.dev/schemas/shopping/checkout.json"
-      }
-    ],
-    "dev.ucp.shopping.ap2_mandate": [
-      {
-        "version": "2026-01-11",
-        "spec": "https://ucp.dev/specification/ap2-mandates",
-        "schema": "https://ucp.dev/schemas/shopping/ap2_mandate.json",
-        "extends": "dev.ucp.shopping.checkout",
-        "config": {
-          "vp_formats_supported": {
-            "dc+sd-jwt": { }
-          }
-        }
-      }
-    ]
-  }
-}
-```
-
-### Platform Profile Advertisement
-
-Platforms declare support in their profile. If the platform is operating under the trusted platform provider model, the platform **MUST** provide at least one key in the top-level `signing_keys` array in their profile.
-
-### Activation and Session Locking
-
-1. The platform advertises its profile URI (transport-specific mechanism).
-1. The business fetches the profile and computes the intersection.
-1. If `dev.ucp.shopping.ap2_mandate` is present in the intersection:
-   - The business **MUST** include `ap2.merchant_authorization` in all checkout responses.
-   - The business **MUST NOT** accept a `complete_checkout` request that lacks `ap2.checkout_mandate`.
-   - The platform **MUST** verify the business's signature before presenting the checkout to the user.
-
-### Signing Key Requirements
-
-To utilize this extension, a public signing key **MUST** be available for the business to verify the mandate's signature.
-
-- **Platform Provider Flow:** Key provided in the platform profile's `signing_keys`.
-- **User Credential Flow:** Key bound to the digital payment credential.
-
-If a public key cannot be resolved, or if the signature is invalid, the business **MUST** return an error.
-
-## Cryptographic Requirements
-
-This extension uses the cryptographic primitives defined in the [Message Signatures](https://ucp.dev/draft/specification/signatures/index.md) specification:
-
-- **Algorithms:** ES256 (required), ES384, ES512
-- **Canonicalization:** JCS ([RFC 8785](https://datatracker.ietf.org/doc/html/rfc8785))
-- **Key Format:** JWK ([RFC 7517](https://datatracker.ietf.org/doc/html/rfc7517))
-- **Key Discovery:** `signing_keys[]` in `/.well-known/ucp` (see [Key Discovery](https://ucp.dev/draft/specification/overview/#key-discovery))
-
-See [Message Signatures](https://ucp.dev/draft/specification/signatures/index.md) for complete details on algorithms, key format, and key rotation.
-
-### Business Authorization
-
-Businesses **MUST** embed their signature in the checkout response body under `ap2.merchant_authorization` using **JWS Detached Content** format ([RFC 7515 Appendix F](https://datatracker.ietf.org/doc/html/rfc7515#appendix-F)).
-
-**Checkout Response with Embedded Signature:**
-
-```json
-{
-  "id": "chk_abc123",
-  "status": "ready_for_complete",
-  "currency": "USD",
-  "line_items": [...],
-  "totals": [...],
-  "ap2": {
-    "merchant_authorization": "eyJhbGciOiJFUzI1NiIsImtpZCI6Im1lcmNoYW50XzIwMjUifQ..<signature>"
-  }
-}
-```
-
-The `merchant_authorization` value is a JWS with detached payload in the format `<header>..<signature>`. The double dot (`..`) indicates the payload is transmitted separately (as the checkout body itself).
-
-**JWS Header Claims:**
-
-| Claim | Type   | Required | Description                                      |
-| ----- | ------ | -------- | ------------------------------------------------ |
-| `alg` | string | Yes      | Signature algorithm (`ES256`, `ES384`, `ES512`)  |
-| `kid` | string | Yes      | Key ID referencing the business's `signing_keys` |
-
-**Signature Computation:**
-
-The signature **MUST** cover both the JWS header and the checkout payload. This prevents algorithm substitution attacks where an attacker modifies the `alg` claim without invalidating the signature.
-
-```text
-sign_checkout(checkout, private_key, kid, alg="ES256"):
-    // Extract payload (checkout minus ap2)
-    payload = checkout without "ap2" field
-
-    // Canonicalize using JCS (RFC 8785)
-    canonical_bytes = jcs_canonicalize(payload)
-
-    // Create protected header
-    header = {"alg": alg, "kid": kid}
-    encoded_header = base64url_encode(json_encode(header))
-
-    // Sign header + payload per JWS
-    signing_input = encoded_header + "." + base64url_encode(canonical_bytes)
-    signature = sign(signing_input, private_key, alg)
-
-    // Return detached JWS (header..signature, no payload)
-    checkout.ap2.merchant_authorization = encoded_header + ".." + base64url_encode(signature)
-    return checkout
-```
-
-### Mandate Structure
-
-Mandates are **SD-JWT** credentials with Key Binding (`+kb`). The platform **MUST** produce two distinct mandate artifacts:
-
-| Mandate              | UCP Placement                             | Purpose                                              |
-| -------------------- | ----------------------------------------- | ---------------------------------------------------- |
-| **checkout_mandate** | `ap2.checkout_mandate`                    | Proof bound to checkout terms, protects business     |
-| **payment_mandate**  | `payment.instruments[*].credential.token` | Proof bound to payment authorization, protects funds |
-
-The checkout mandate **MUST** contain the full checkout response including the `ap2.merchant_authorization` field. This creates a nested cryptographic binding where the platform's signature covers the business's signature.
-
-**Specification Boundary:** This extension defines *where* mandates are placed in UCP requests and responses. The mandate credential structure (claims, selective disclosure, key binding) is defined by the [AP2 Protocol Specification](https://ap2-protocol.org/specification).
-
-### Canonicalization
-
-All JSON payloads **MUST** be canonicalized using **JSON Canonicalization Scheme (JCS)** per [RFC 8785](https://datatracker.ietf.org/doc/html/rfc8785).
-
-**Why JCS for Mandates?** UCP request signatures use `Content-Digest` (raw bytes) without canonicalization — the request is signed and verified immediately over the same HTTP connection. Mandates are different:
-
-- **Durability** — Mandates are stored as evidence of user consent. They may be retrieved and verified days or months later.
-- **Cross-system transmission** — Mandates pass through multiple systems (platform → business → PSP → card network) that may re-serialize JSON.
-- **Reproducibility** — Any party must reconstruct the exact signed bytes from the logical JSON content, regardless of serialization differences.
-
-JCS ensures that semantically identical JSON produces byte-identical output, making signatures reproducible across implementations and time.
-
-**AP2-Specific Rule:** When computing the business's `merchant_authorization` signature, exclude the `ap2` field entirely. This ensures future AP2 fields are automatically handled.
-
-## The Mandate Flow
-
-Once the `dev.ucp.shopping.ap2_mandate` capability is negotiated, the session is locked into the following flow. Both parties **MUST** follow these steps to ensure cryptographic integrity; any attempt to bypass these steps or submit a completion request without mandates **MUST** result in a session failure.
-
-### Step 1: Checkout Creation & Signing
-
-The platform initiates the session. The business returns the `Checkout` object with `ap2.merchant_authorization` embedded in the response body.
-
-| Name         | Type          | Required | Description                                                                                                                                                                                                                                                     |
-| ------------ | ------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ucp          | any           | **Yes**  | UCP metadata for checkout responses.                                                                                                                                                                                                                            |
-| id           | string        | **Yes**  | Unique identifier of the checkout session.                                                                                                                                                                                                                      |
-| line_items   | Array[object] | **Yes**  | List of line items being checked out.                                                                                                                                                                                                                           |
-| buyer        | object        | No       | Representation of the buyer.                                                                                                                                                                                                                                    |
-| status       | string        | **Yes**  | Checkout state indicating the current phase and required action. See Checkout Status lifecycle documentation for state transition details. **Enum:** `incomplete`, `requires_escalation`, `ready_for_complete`, `complete_in_progress`, `completed`, `canceled` |
-| currency     | string        | **Yes**  | ISO 4217 currency code reflecting the merchant's market determination. Derived from address, context, and geo IP—buyers provide signals, merchants determine currency.                                                                                          |
-| totals       | Array[object] | **Yes**  | Different cart totals.                                                                                                                                                                                                                                          |
-| messages     | Array[object] | No       | List of messages with error and info about the checkout session state.                                                                                                                                                                                          |
-| links        | Array[object] | **Yes**  | Links to be displayed by the platform (Privacy Policy, TOS). Mandatory for legal compliance.                                                                                                                                                                    |
-| expires_at   | string        | No       | RFC 3339 expiry timestamp. Default TTL is 6 hours from creation if not sent.                                                                                                                                                                                    |
-| continue_url | string        | No       | URL for checkout handoff and session recovery. MUST be provided when status is requires_escalation. See specification for format and availability requirements.                                                                                                 |
-| payment      | object        | No       | Payment configuration containing handlers.                                                                                                                                                                                                                      |
-| order        | object        | No       | Details about an order created for this checkout session.                                                                                                                                                                                                       |
-| ap2          | any           | No       |                                                                                                                                                                                                                                                                 |
-
-**Example Response:**
-
-```json
-{
-  "id": "chk_abc123",
-  "status": "ready_for_complete",
-  "currency": "USD",
-  "line_items": [
-    {
-      "id": "li_1",
-      "item": {"id": "item_123", "title": "Widget", "price": 2500},
-      "quantity": 2,
-      "totals": [
-        {"type": "subtotal", "amount": 5000},
-        {"type": "total", "amount": 5000}
-      ]
-    }
-  ],
-  "totals": [
-    {"type": "subtotal", "amount": 5000},
-    {"type": "tax", "amount": 400},
-    {"type": "total", "amount": 5400}
-  ],
-  "ap2": {
-    "merchant_authorization": "eyJhbGciOiJFUzI1NiIsImtpZCI6Im1lcmNoYW50XzIwMjUifQ..<signature>"
-  }
-}
-```
-
-The platform **MUST** verify the signature:
-
-```text
-verify_merchant_authorization(checkout, merchant_profile):
-    // Parse detached JWS (header..signature)
-    jws = checkout.ap2.merchant_authorization
-    [encoded_header, empty, encoded_signature] = jws.split(".")
-
-    // Decode and validate header
-    header = json_decode(base64url_decode(encoded_header))
-    assert header.alg in ["ES256", "ES384", "ES512"]
-
-    // Reconstruct signed payload (checkout minus ap2)
-    payload = checkout without "ap2" field
-    canonical_bytes = jcs_canonicalize(payload)
-
-    // Reconstruct signing input (header + payload)
-    signing_input = encoded_header + "." + base64url_encode(canonical_bytes)
-
-    // Get business's public key and verify
-    public_key = get_key_by_kid(merchant_profile.signing_keys, header.kid)
-    return verify(encoded_signature, signing_input, public_key, header.alg)
-```
-
-### Step 2: User Consent & Mandate Generation
-
-When the user confirms the purchase, the platform **MUST** facilitate the generation of cryptographically verifiable mandates.
-
-#### Option 1: Trusted Platform Provider
-
-A trusted platform provider acts on the user's behalf to generate the mandate credentials. The platform provider **MUST** ensure that mandates are not created without explicit user consent from trusted, deterministic channels.
-
-Upon user consent, the platform signs the mandates using their server-side key. The business trusts the platform's signature implies user consent.
-
-#### Option 2: Digital Payment Credential
-
-In this model the user has a VDC issued from a source trusted by the business (for example: a digital payment credential issued by a bank or network).
-
-The platform requests a presentation via a protocol like OpenID4VP. The User's Wallet (or equivalent) processes the request and signs the mandates using the private key associated with their payment credential.
-
-The business trusts the Credential Issuer (Bank) and verifies the user's Key Binding (+kb) signature.
-
-### Step 3: Submission (`complete_checkout`)
-
-Once the mandates are generated, the platform submits them in the completion request:
-
-| Name             | Type                                                                    | Required | Description                                      |
-| ---------------- | ----------------------------------------------------------------------- | -------- | ------------------------------------------------ |
-| checkout_mandate | [Checkout Mandate](/draft/specification/ap2-mandates/#checkout-mandate) | No       | SD-JWT+kb proving user authorized this checkout. |
-
-```json
-{
-  "payment": {
-    "instruments": [
-      {
-        "id": "instr_1",
-        "handler_id": "gpay_1234",
-        "type": "card",
-        "selected": true,
-        "display": {
-          "description": "Visa •••• 1234",
-        },
-        "billing_address": {
-          "street_address": "123 Main St",
-          "address_locality": "Anytown",
-          "address_region": "CA",
-          "address_country": "US",
-          "postal_code": "12345"
-        },
-        "credential": {
-          "type": "PAYMENT_GATEWAY",
-          "token": "examplePaymentMethodToken"
-        }
-      }
-    ]
-  },
-  "ap2": {
-    "checkout_mandate": "eyJhbGciOiJFUzI1NiIsInR5cCI6InZjK3NkLWp3dCJ9..." // The User-Signed SD-JWT+kb / platform provider signed SD-JWT / delegated SD-JWT-KB
-  }
-}
-```
-
-- `ap2.checkout_mandate`: The SD-JWT+kb checkout mandate containing the full checkout (with `ap2.merchant_authorization`)
-- `payment.instruments[*].credential.token`: Contains the payment mandate (composite token)
-
-## Verification & Processing
-
-### Business Verification
-
-Upon receiving the `complete` request, the business **MUST**:
-
-1. **Enforce Negotiation:** If AP2 was negotiated, reject the request with `mandate_required` error code if `ap2.checkout_mandate` is missing.
-
-**Mandate Verification (per AP2 spec):**
-
-1. **Verify Mandate:** Decode and verify the SD-JWT signature, key binding, and expiration per the [AP2 Protocol Specification](https://ap2-protocol.org/specification).
-1. **Extract Embedded Checkout:** Extract the checkout object from the verified mandate claims.
-
-**UCP Verification:**
-
-1. **Verify Business Authorization:** Confirm `ap2.merchant_authorization` in the embedded checkout is the business's own valid signature:
-
-   ```text
-   jws = embedded_checkout.ap2.merchant_authorization
-   [encoded_header, _, encoded_signature] = jws.split(".")
-   header = json_decode(base64url_decode(encoded_header))
-
-   payload = embedded_checkout without "ap2" field
-   signing_input = encoded_header + "." + base64url_encode(jcs_canonicalize(payload))
-
-   my_key = get_key_by_kid(my_signing_keys, header.kid)
-   verify(encoded_signature, signing_input, my_key, header.alg)
-   ```
-
-1. **Verify Terms Match:** Confirm the embedded checkout terms match the current session state (id, totals, line items).
-
-### PSP Verification
-
-The business passes the `token` (composite object) to their Payment Handler / PSP. The PSP verifies the `payment_mandate` per the [AP2 Protocol Specification](https://ap2-protocol.org/specification), including signature validation, expiration, and correlation with the checkout.
-
-## Schema
-
-### Business Authorization
-
-JWS Detached Content signature (RFC 7515 Appendix F) over the checkout response body (excluding ap2 field). Format: `<base64url-header>..<base64url-signature>`. The header MUST contain 'alg' (ES256/ES384/ES512) and 'kid' claims. The signature covers both the header and JCS-canonicalized checkout payload.
-
-**Pattern:** `^[A-Za-z0-9_-]+\.\.[A-Za-z0-9_-]+$`
-
-### AP2 Checkout Response
-
-The `ap2` object included in checkout responses.
-
-| Name                   | Type                                                                                | Required | Description                                                |
-| ---------------------- | ----------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------- |
-| merchant_authorization | [Merchant Authorization](/draft/specification/ap2-mandates/#merchant-authorization) | No       | Merchant's signature proving checkout terms are authentic. |
-
-### Checkout Mandate
-
-SD-JWT+kb credential in `ap2.checkout_mandate`. Proving user authorization for the checkout. Contains the full checkout including `ap2.merchant_authorization`.
-
-**Pattern:** `^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]*\.[A-Za-z0-9_-]+(~[A-Za-z0-9_-]+)*$`
-
-### AP2 Complete Request
-
-The `ap2` object included in COMPLETE checkout requests.
-
-| Name             | Type                                                                    | Required | Description                                      |
-| ---------------- | ----------------------------------------------------------------------- | -------- | ------------------------------------------------ |
-| checkout_mandate | [Checkout Mandate](/draft/specification/ap2-mandates/#checkout-mandate) | No       | SD-JWT+kb proving user authorized this checkout. |
-
-### Error Codes
-
-Error codes specific to AP2 mandate verification.
-
-**Enum:** `mandate_required`, `agent_missing_key`, `mandate_invalid_signature`, `mandate_expired`, `mandate_scope_mismatch`, `merchant_authorization_invalid`, `merchant_authorization_missing`
-
-| Error Code                       | Description                                                       |
-| -------------------------------- | ----------------------------------------------------------------- |
-| `mandate_required`               | AP2 was negotiated, but the request lacks `ap2.checkout_mandate`. |
-| `agent_missing_key`              | Platform profile lacks a valid `signing_keys` entry.              |
-| `mandate_invalid_signature`      | The mandate signature cannot be verified.                         |
-| `mandate_expired`                | The mandate `exp` timestamp has passed.                           |
-| `mandate_scope_mismatch`         | The mandate is bound to a different checkout.                     |
-| `merchant_authorization_invalid` | The business authorization signature could not be verified.       |
-
-# Buyer Consent Extension
-
-## Overview
-
-The Buyer Consent extension enables platforms to transmit buyer consent choices to businesses regarding data usage and communication preferences. It allows buyers to communicate their consent status for various categories, such as analytics, marketing, and data sales, helping businesses comply with privacy regulations like CCPA and GDPR.
-
-When this extension is supported, the `buyer` object in checkout is extended with a `consent` field containing boolean consent states.
-
-This extension can be included in `create_checkout` and `update_checkout` operations.
-
-## Discovery
-
-Businesses advertise consent support in their profile:
-
-```json
-{
-  "capabilities": {
-    "dev.ucp.shopping.buyer_consent": [
-      {
-        "version": "2026-01-11",
-        "extends": "dev.ucp.shopping.checkout"
-      }
-    ]
-  }
-}
-```
-
-## Schema Composition
-
-The consent extension extends the **buyer object** within checkout:
-
-- **Base schema extended**: `checkout` via `buyer` object
-- **Path**: `checkout.buyer.consent`
-- **Schema reference**: `buyer_consent.json`
-
-## Schema Definition
-
-### Consent Object
-
-| Name         | Type    | Required | Description                                       |
-| ------------ | ------- | -------- | ------------------------------------------------- |
-| analytics    | boolean | No       | Consent for analytics and performance tracking.   |
-| preferences  | boolean | No       | Consent for storing user preferences.             |
-| marketing    | boolean | No       | Consent for marketing communications.             |
-| sale_of_data | boolean | No       | Consent for selling data to third parties (CCPA). |
-
-## Usage
-
-The platform includes consent within the `buyer` object in checkout operations:
-
-### Example: Create Checkout with Consent
-
-```json
-POST /checkouts
-
-{
-  "line_items": [
-    {
-      "item": {
-        "id": "prod_123",
-        "title": "Blue T-Shirt",
-        "price": 1999
-      },
-      "id": "li_1",
-      "quantity": 1
-    }
-  ],
-  "buyer": {
-    "email": "jane.doe@example.com",
-    "first_name": "Jane",
-    "last_name": "Doe",
-    "consent": {
-      "analytics": true,
-      "preferences": true,
-      "marketing": false,
-      "sale_of_data": false
-    }
-  }
-}
-```
-
-### Example: Checkout Response with Consent
-
-```json
-{
-  "id": "checkout_456",
-  "status": "ready_for_payment",
-  "currency": "USD",
-  "buyer": {
-    "email": "jane.doe@example.com",
-    "first_name": "Jane",
-    "last_name": "Doe",
-    "consent": {
-      "analytics": true,
-      "preferences": true,
-      "marketing": false,
-      "sale_of_data": false
-    }
-  },
-  "line_items": [...],
-  "totals": [...],
-  "links": [
-    {
-      "type": "privacy_policy",
-      "url": "https://example.com/privacy"
-    }
-  ]
-}
-```
-
-## Security & Privacy Considerations
-
-1. **Consent is declarative** - The protocol communicates consent, it does not enforce it
-1. **Legal compliance** remains the business's responsibility
-1. **Platforms should not** assume consent without explicit user action
-1. **Default behavior** when consent is not provided is business-specific
-
-# Discount Extension
-
-## Overview
-
-Discount extension allows businesses to indicate that they support discount codes on checkout sessions, and specifies how the discount codes are to be shared between the platform and the business.
-
-**Key features:**
-
-- Submit one or more discount codes
-- Receive applied discounts with human-readable titles and amounts
-- Rejected codes communicated via `messages[]` with detailed error codes
-- Automatic discounts surfaced alongside code-based discounts
-
-**Dependencies:**
-
-- Checkout Capability
-
-## Discovery
-
-Businesses advertise discount support in their profile:
-
-```json
-{
-  "ucp": {
-    "version": "2026-01-11",
-    "capabilities": {
-      "dev.ucp.shopping.discount": [
-        {
-          "version": "2026-01-11",
-          "extends": "dev.ucp.shopping.checkout",
-          "spec": "https://ucp.dev/specification/discount",
-          "schema": "https://ucp.dev/schemas/shopping/discount.json"
-        }
-      ]
-    }
-  }
-}
-```
-
-## Schema
-
-When this capability is active, checkout is extended with a `discounts` object.
-
-### Discounts Object
-
-| Name    | Type                                                                         | Required | Description                                                                                                |
-| ------- | ---------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------- |
-| codes   | Array[string]                                                                | No       | Discount codes to apply. Case-insensitive. Replaces previously submitted codes. Send empty array to clear. |
-| applied | Array\[[Applied Discount](/draft/specification/discount/#applied-discount)\] | No       | Discounts successfully applied (code-based and automatic).                                                 |
-
-### Applied Discount
-
-| Name        | Type                                                             | Required | Description                                                                                                                      |
-| ----------- | ---------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| code        | string                                                           | No       | The discount code. Omitted for automatic discounts.                                                                              |
-| title       | string                                                           | **Yes**  | Human-readable discount name (e.g., 'Summer Sale 20% Off').                                                                      |
-| amount      | integer                                                          | **Yes**  | Total discount amount in minor (cents) currency units.                                                                           |
-| automatic   | boolean                                                          | No       | True if applied automatically by merchant rules (no code required).                                                              |
-| method      | string                                                           | No       | Allocation method. 'each' = applied independently per item. 'across' = split proportionally by value. **Enum:** `each`, `across` |
-| priority    | integer                                                          | No       | Stacking order for discount calculation. Lower numbers applied first (1 = first).                                                |
-| allocations | Array\[[Allocation](/draft/specification/discount/#allocation)\] | No       | Breakdown of where this discount was allocated. Sum of allocation amounts equals total amount.                                   |
-
-### Allocation
-
-| Name   | Type    | Required | Description                                                                       |
-| ------ | ------- | -------- | --------------------------------------------------------------------------------- |
-| path   | string  | **Yes**  | JSONPath to the allocation target (e.g., '$.line_items[0]', '$.totals.shipping'). |
-| amount | integer | **Yes**  | Amount allocated to this target in minor (cents) currency units.                  |
-
-## Allocation Details
-
-The `applied` array explains how discounts were calculated and distributed.
-
-### Allocation Method
-
-The `method` field indicates how the discount was calculated:
-
-| Method   | Meaning                                 | Example                                          |
-| -------- | --------------------------------------- | ------------------------------------------------ |
-| `each`   | Applied independently per eligible item | "10% off each item" → 10% × item price           |
-| `across` | Split proportionally by value           | "$10 off order" → $6 to $60 item, $4 to $40 item |
-
-### Stacking Order
-
-When multiple discounts are applied, `priority` indicates the calculation order. Lower numbers are applied first:
-
-```text
-Cart: $100
-Discount A (priority: 1): 20% off → $100 × 0.8 = $80
-Discount B (priority: 2): $10 off → $80 - $10 = $70
-```
-
-The order matters because percentage discounts compound differently depending on when they're applied.
-
-### Allocations Array
-
-The `allocations` array breaks down where each discount dollar landed, using JSONPath to identify targets:
-
-| Path Pattern        | Target           |
-| ------------------- | ---------------- |
-| `$.line_items[0]`   | First line item  |
-| `$.line_items[1]`   | Second line item |
-| `$.totals.shipping` | Shipping cost    |
-
-This enables platforms to explain exactly how much each discount contributed to each line item, even when multiple discounts stack.
-
-**Invariant:** Sum of `allocations[].amount` equals `applied_discount.amount`.
-
-## Operations
-
-Discount codes are submitted via standard checkout create/update operations.
-
-**Request behavior:**
-
-- **Replacement semantics**: Submitting `discounts.codes` replaces any previously submitted codes
-- **Clear codes**: Send empty array `"codes": []` to remove all discount codes
-- **Case-insensitive**: Codes are matched case-insensitively by business
-
-**Response behavior:**
-
-- `discounts.applied` contains all active discounts (code-based + automatic)
-- Rejected codes communicated via `messages[]` (see below)
-- Discount amounts reflected in `totals[]` and `line_items[].discount`
-
-## Rejected Codes
-
-When a submitted discount code cannot be applied, businesses communicate this via the `messages[]` array:
-
-```json
-{
-  "messages": [
-    {
-      "type": "warning",
-      "code": "discount_code_expired",
-      "path": "$.discounts.codes[0]",
-      "content": "Code 'SUMMER20' expired on December 1st"
-    }
-  ]
-}
-```
-
-> **Implementation guidance:** Operations that affect order totals, or the user's expectation of the total, **SHOULD** use `type: "warning"` to ensure they are surfaced to the user rather than silently handled by platforms. Rejected discounts are a prime example—the user expects a discount but won't receive it, so they should be informed.
-
-**Error codes for rejected discounts:**
-
-| Code                                   | Description                                 |
-| -------------------------------------- | ------------------------------------------- |
-| `discount_code_expired`                | Code has expired                            |
-| `discount_code_invalid`                | Code not found or malformed                 |
-| `discount_code_already_applied`        | Code is already applied                     |
-| `discount_code_combination_disallowed` | Cannot combine with another active discount |
-| `discount_code_user_not_logged_in`     | Code requires authenticated user            |
-| `discount_code_user_ineligible`        | User does not meet eligibility criteria     |
-
-## Automatic Discounts
-
-Businesses may apply discounts automatically based on cart contents, customer segment, or promotional rules:
-
-- Appear in `discounts.applied` with `automatic: true` and no `code` field
-- Applied without platform action
-- Cannot be removed by the platform
-- Surfaced for transparency (platform can explain to user why discount was applied)
-
-## Impact on Line Items and Totals
-
-Applied discounts are reflected in the core checkout fields using two distinct total types:
-
-| Total Type       | When to Use                                               |
-| ---------------- | --------------------------------------------------------- |
-| `items_discount` | Discounts allocated to line items (`$.line_items[*]`)     |
-| `discount`       | Order-level discounts (shipping, fees, flat order amount) |
-
-**Determining the type:** If a discount has `allocations` pointing to line items, it contributes to `items_discount`. Discounts without allocations, or with allocations to shipping/fees, contribute to `discount`.
-
-| Discount Type        | Where Reflected                            |
-| -------------------- | ------------------------------------------ |
-| Line-item discount   | `line_items[].discount` + `items_discount` |
-| Order-level discount | `totals[]` with `type: "discount"`         |
-
-**Invariant:** `totals[type=items_discount].amount` equals `sum(line_items[].discount)`.
-
-The `discounts.applied` array shows **what** was applied. The `totals[]` and `line_items[].discount` show **where** and **how much**.
-
-**Amount convention:** All discount amounts are positive integers in minor currency units. When presenting totals to users, display discount types as subtractive (e.g., "-$13.99").
-
-## Examples
-
-### Order-level discount
-
-A flat discount applied to the order total. No allocations—the discount applies to the order as a whole and uses `type: "discount"` in totals.
-
-**Request:**
-
-```json
-{
-  "discounts": {
-    "codes": ["SAVE10"]
-  }
-}
-```
-
-**Response:**
-
-```json
-{
-  "discounts": {
-    "codes": ["SAVE10"],
-    "applied": [
-      {
-        "code": "SAVE10",
-        "title": "$10 Off Your Order",
-        "amount": 1000
-      }
-    ]
-  },
-  "totals": [
-    {"type": "subtotal", "display_text": "Subtotal", "amount": 5000},
-    {"type": "discount", "display_text": "Order Discount", "amount": 1000},
-    {"type": "total", "display_text": "Total", "amount": 4000}
-  ]
-}
-```
-
-### Mixed discounts (item + order level)
-
-This example shows both discount types: a per-item discount (20% off) allocated to line items, and an automatic shipping discount at the order level.
-
-**Request:**
-
-```json
-{
-  "discounts": {
-    "codes": ["SUMMER20"]
-  }
-}
-```
-
-**Response:**
-
-```json
-{
-  "line_items": [
-    {
-      "id": "li_1",
-      "item": {
-        "id": "prod_1",
-        "quantity": 2,
-        "title": "T-Shirt",
-        "price": 2000
-      },
-      "totals": [
-        {"type": "subtotal", "amount": 4000},
-        {"type": "items_discount", "amount": 800},
-        {"type": "total", "amount": 3200}
-      ]
-    }
-  ],
-  "discounts": {
-    "codes": ["SUMMER20"],
-    "applied": [
-      {
-        "code": "SUMMER20",
-        "title": "Summer Sale 20% Off",
-        "amount": 800,
-        "allocations": [
-          {"path": "$.line_items[0]", "amount": 800}
-        ]
-      },
-      {
-        "title": "Free shipping on orders over $30",
-        "amount": 599,
-        "automatic": true
-      }
-    ]
-  },
-  "totals": [
-    {"type": "subtotal", "display_text": "Subtotal", "amount": 4000},
-    {"type": "items_discount", "display_text": "Item Discounts", "amount": 800},
-    {"type": "discount", "display_text": "Order Discounts", "amount": 599},
-    {"type": "fulfillment", "display_text": "Shipping", "amount": 0},
-    {"type": "total", "display_text": "Total", "amount": 2601}
-  ]
-}
-```
-
-### Rejected discount code
-
-When a discount code cannot be applied, the rejection is communicated via the `messages[]` array. The code still appears in `discounts.codes` (echoed back) but not in `discounts.applied`.
-
-**Request:**
-
-```json
-{
-  "discounts": {
-    "codes": ["SAVE10", "EXPIRED50"]
-  }
-}
-```
-
-**Response:**
-
-```json
-{
-  "discounts": {
-    "codes": ["SAVE10", "EXPIRED50"],
-    "applied": [
-      {
-        "code": "SAVE10",
-        "title": "$10 Off Your Order",
-        "amount": 1000
-      }
-    ]
-  },
-  "totals": [
-    {"type": "subtotal", "display_text": "Subtotal", "amount": 5000},
-    {"type": "discount", "display_text": "Order Discount", "amount": 1000},
-    {"type": "total", "display_text": "Total", "amount": 4000}
-  ],
-  "messages": [
-    {
-      "type": "warning",
-      "code": "discount_code_expired",
-      "path": "$.discounts.codes[1]",
-      "content": "Code 'EXPIRED50' expired on December 1st"
-    }
-  ]
-}
-```
-
-### Stacked discounts with allocations
-
-Multiple discounts applied with full allocation breakdown:
-
-**Response:**
-
-```json
-{
-  "line_items": [
-    {
-      "id": "li_1",
-      "item": {
-        "title": "T-Shirt",
-        "price": 6000
-      },
-      "totals": [
-        {"type": "subtotal", "amount": 6000},
-        {"type": "items_discount", "amount": 1500},
-        {"type": "total", "amount": 4500}
-      ]
-    },
-    {
-      "id": "li_2",
-      "item": {
-        "title": "Socks",
-        "price": 4000
-      },
-      "totals": [
-        {"type": "subtotal", "amount": 4000},
-        {"type": "items_discount", "amount": 1000},
-        {"type": "total", "amount": 3000}
-      ]
-    }
-  ],
-  "discounts": {
-    "codes": ["SUMMER20", "LOYALTY5"],
-    "applied": [
-      {
-        "code": "SUMMER20",
-        "title": "Summer Sale 20% Off",
-        "amount": 2000,
-        "method": "each",
-        "priority": 1,
-        "allocations": [
-          {"path": "$.line_items[0]", "amount": 1200},
-          {"path": "$.line_items[1]", "amount": 800}
-        ]
-      },
-      {
-        "code": "LOYALTY5",
-        "title": "$5 Loyalty Reward",
-        "amount": 500,
-        "method": "across",
-        "priority": 2,
-        "allocations": [
-          {"path": "$.line_items[0]", "amount": 300},
-          {"path": "$.line_items[1]", "amount": 200}
-        ]
-      }
-    ]
-  },
-  "totals": [
-    {"type": "subtotal", "display_text": "Subtotal", "amount": 10000},
-    {"type": "items_discount", "display_text": "Item Discounts", "amount": 2500},
-    {"type": "total", "display_text": "Total", "amount": 7500}
-  ]
-}
-```
-
-With this data, an agent can explain:
-
-> "Your T-Shirt ($60) got $12 off from the 20% summer sale, plus $3 from your
 
 # Checkout Capability - EP Binding
 
@@ -7719,6 +6159,916 @@ Represents the processor or wallet provider responsible for authenticating and p
 
 *No properties defined.*
 
+# AP2 Mandates Extension
+
+## Overview
+
+The AP2 Mandates extension enables the secure exchange of user intents and authorizations using **Verifiable Digital Credentials**. It extends the standard Shopping Service Checkout capability to support the **[AP2 Protocol](https://ap2-protocol.org/)**.
+
+When this capability is negotiated and active, it transforms a standard checkout session into a cryptographically bound agreement:
+
+- **Businesses** **MUST** embed a cryptographic signature in checkout responses, proving the terms (price, line items) are authentic.
+- **Platforms** **MUST** provide cryptographically signed proofs (Mandates) during the `complete` operation, proving the user explicitly authorized the specific checkout state and funds transfer.
+
+**Security Binding:** Once this extension is negotiated in the capability intersection, the session is **Security Locked**. Neither party may revert to a standard (unprotected) checkout flow.
+
+### Design
+
+All AP2-specific fields are nested under an `ap2` object in both requests and responses. This design provides:
+
+- **Schema modularity** — Base checkout schema stays clean; AP2 adds one field containing all its data.
+- **Consistent canonicalization** — One rule: exclude `ap2` from the business's signature computation. Future AP2 fields are automatically handled.
+- **Extension coexistence** — Multiple security extensions can coexist without namespace collisions.
+- **Capability signal** — Presence of `ap2` object clearly indicates AP2 is active.
+
+## Discovery & Negotiation
+
+This extension follows the standard UCP negotiation protocol. It is activated only when it appears in the **Capability Intersection** of both the business and the platform.
+
+### Business Profile Advertisement
+
+Businesses declare support by adding `dev.ucp.shopping.ap2_mandate` to their `capabilities` list in `/.well-known/ucp`.
+
+**Business Profile Example:**
+
+```json
+{
+  "capabilities": {
+    "dev.ucp.shopping.checkout": [
+      {
+        "version": "2026-01-11",
+        "spec": "https://ucp.dev/specification/checkout",
+        "schema": "https://ucp.dev/schemas/shopping/checkout.json"
+      }
+    ],
+    "dev.ucp.shopping.ap2_mandate": [
+      {
+        "version": "2026-01-11",
+        "spec": "https://ucp.dev/specification/ap2-mandates",
+        "schema": "https://ucp.dev/schemas/shopping/ap2_mandate.json",
+        "extends": "dev.ucp.shopping.checkout",
+        "config": {
+          "vp_formats_supported": {
+            "dc+sd-jwt": { }
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
+### Platform Profile Advertisement
+
+Platforms declare support in their profile. If the platform is operating under the trusted platform provider model, the platform **MUST** provide at least one key in the top-level `signing_keys` array in their profile.
+
+### Activation and Session Locking
+
+1. The platform advertises its profile URI (transport-specific mechanism).
+1. The business fetches the profile and computes the intersection.
+1. If `dev.ucp.shopping.ap2_mandate` is present in the intersection:
+   - The business **MUST** include `ap2.merchant_authorization` in all checkout responses.
+   - The business **MUST NOT** accept a `complete_checkout` request that lacks `ap2.checkout_mandate`.
+   - The platform **MUST** verify the business's signature before presenting the checkout to the user.
+
+### Signing Key Requirements
+
+To utilize this extension, a public signing key **MUST** be available for the business to verify the mandate's signature.
+
+- **Platform Provider Flow:** Key provided in the platform profile's `signing_keys`.
+- **User Credential Flow:** Key bound to the digital payment credential.
+
+If a public key cannot be resolved, or if the signature is invalid, the business **MUST** return an error.
+
+## Cryptographic Requirements
+
+This extension uses the cryptographic primitives defined in the [Message Signatures](https://ucp.dev/draft/specification/signatures/index.md) specification:
+
+- **Algorithms:** ES256 (required), ES384, ES512
+- **Canonicalization:** JCS ([RFC 8785](https://datatracker.ietf.org/doc/html/rfc8785))
+- **Key Format:** JWK ([RFC 7517](https://datatracker.ietf.org/doc/html/rfc7517))
+- **Key Discovery:** `signing_keys[]` in `/.well-known/ucp` (see [Key Discovery](https://ucp.dev/draft/specification/overview/#key-discovery))
+
+See [Message Signatures](https://ucp.dev/draft/specification/signatures/index.md) for complete details on algorithms, key format, and key rotation.
+
+### Business Authorization
+
+Businesses **MUST** embed their signature in the checkout response body under `ap2.merchant_authorization` using **JWS Detached Content** format ([RFC 7515 Appendix F](https://datatracker.ietf.org/doc/html/rfc7515#appendix-F)).
+
+**Checkout Response with Embedded Signature:**
+
+```json
+{
+  "id": "chk_abc123",
+  "status": "ready_for_complete",
+  "currency": "USD",
+  "line_items": [...],
+  "totals": [...],
+  "ap2": {
+    "merchant_authorization": "eyJhbGciOiJFUzI1NiIsImtpZCI6Im1lcmNoYW50XzIwMjUifQ..<signature>"
+  }
+}
+```
+
+The `merchant_authorization` value is a JWS with detached payload in the format `<header>..<signature>`. The double dot (`..`) indicates the payload is transmitted separately (as the checkout body itself).
+
+**JWS Header Claims:**
+
+| Claim | Type   | Required | Description                                      |
+| ----- | ------ | -------- | ------------------------------------------------ |
+| `alg` | string | Yes      | Signature algorithm (`ES256`, `ES384`, `ES512`)  |
+| `kid` | string | Yes      | Key ID referencing the business's `signing_keys` |
+
+**Signature Computation:**
+
+The signature **MUST** cover both the JWS header and the checkout payload. This prevents algorithm substitution attacks where an attacker modifies the `alg` claim without invalidating the signature.
+
+```text
+sign_checkout(checkout, private_key, kid, alg="ES256"):
+    // Extract payload (checkout minus ap2)
+    payload = checkout without "ap2" field
+
+    // Canonicalize using JCS (RFC 8785)
+    canonical_bytes = jcs_canonicalize(payload)
+
+    // Create protected header
+    header = {"alg": alg, "kid": kid}
+    encoded_header = base64url_encode(json_encode(header))
+
+    // Sign header + payload per JWS
+    signing_input = encoded_header + "." + base64url_encode(canonical_bytes)
+    signature = sign(signing_input, private_key, alg)
+
+    // Return detached JWS (header..signature, no payload)
+    checkout.ap2.merchant_authorization = encoded_header + ".." + base64url_encode(signature)
+    return checkout
+```
+
+### Mandate Structure
+
+Mandates are **SD-JWT** credentials with Key Binding (`+kb`). The platform **MUST** produce two distinct mandate artifacts:
+
+| Mandate              | UCP Placement                             | Purpose                                              |
+| -------------------- | ----------------------------------------- | ---------------------------------------------------- |
+| **checkout_mandate** | `ap2.checkout_mandate`                    | Proof bound to checkout terms, protects business     |
+| **payment_mandate**  | `payment.instruments[*].credential.token` | Proof bound to payment authorization, protects funds |
+
+The checkout mandate **MUST** contain the full checkout response including the `ap2.merchant_authorization` field. This creates a nested cryptographic binding where the platform's signature covers the business's signature.
+
+**Specification Boundary:** This extension defines *where* mandates are placed in UCP requests and responses. The mandate credential structure (claims, selective disclosure, key binding) is defined by the [AP2 Protocol Specification](https://ap2-protocol.org/specification).
+
+### Canonicalization
+
+All JSON payloads **MUST** be canonicalized using **JSON Canonicalization Scheme (JCS)** per [RFC 8785](https://datatracker.ietf.org/doc/html/rfc8785).
+
+**Why JCS for Mandates?** UCP request signatures use `Content-Digest` (raw bytes) without canonicalization — the request is signed and verified immediately over the same HTTP connection. Mandates are different:
+
+- **Durability** — Mandates are stored as evidence of user consent. They may be retrieved and verified days or months later.
+- **Cross-system transmission** — Mandates pass through multiple systems (platform → business → PSP → card network) that may re-serialize JSON.
+- **Reproducibility** — Any party must reconstruct the exact signed bytes from the logical JSON content, regardless of serialization differences.
+
+JCS ensures that semantically identical JSON produces byte-identical output, making signatures reproducible across implementations and time.
+
+**AP2-Specific Rule:** When computing the business's `merchant_authorization` signature, exclude the `ap2` field entirely. This ensures future AP2 fields are automatically handled.
+
+## The Mandate Flow
+
+Once the `dev.ucp.shopping.ap2_mandate` capability is negotiated, the session is locked into the following flow. Both parties **MUST** follow these steps to ensure cryptographic integrity; any attempt to bypass these steps or submit a completion request without mandates **MUST** result in a session failure.
+
+### Step 1: Checkout Creation & Signing
+
+The platform initiates the session. The business returns the `Checkout` object with `ap2.merchant_authorization` embedded in the response body.
+
+| Name         | Type          | Required | Description                                                                                                                                                                                                                                                     |
+| ------------ | ------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ucp          | any           | **Yes**  | UCP metadata for checkout responses.                                                                                                                                                                                                                            |
+| id           | string        | **Yes**  | Unique identifier of the checkout session.                                                                                                                                                                                                                      |
+| line_items   | Array[object] | **Yes**  | List of line items being checked out.                                                                                                                                                                                                                           |
+| buyer        | object        | No       | Representation of the buyer.                                                                                                                                                                                                                                    |
+| status       | string        | **Yes**  | Checkout state indicating the current phase and required action. See Checkout Status lifecycle documentation for state transition details. **Enum:** `incomplete`, `requires_escalation`, `ready_for_complete`, `complete_in_progress`, `completed`, `canceled` |
+| currency     | string        | **Yes**  | ISO 4217 currency code reflecting the merchant's market determination. Derived from address, context, and geo IP—buyers provide signals, merchants determine currency.                                                                                          |
+| totals       | Array[object] | **Yes**  | Different cart totals.                                                                                                                                                                                                                                          |
+| messages     | Array[object] | No       | List of messages with error and info about the checkout session state.                                                                                                                                                                                          |
+| links        | Array[object] | **Yes**  | Links to be displayed by the platform (Privacy Policy, TOS). Mandatory for legal compliance.                                                                                                                                                                    |
+| expires_at   | string        | No       | RFC 3339 expiry timestamp. Default TTL is 6 hours from creation if not sent.                                                                                                                                                                                    |
+| continue_url | string        | No       | URL for checkout handoff and session recovery. MUST be provided when status is requires_escalation. See specification for format and availability requirements.                                                                                                 |
+| payment      | object        | No       | Payment configuration containing handlers.                                                                                                                                                                                                                      |
+| order        | object        | No       | Details about an order created for this checkout session.                                                                                                                                                                                                       |
+| ap2          | any           | No       |                                                                                                                                                                                                                                                                 |
+
+**Example Response:**
+
+```json
+{
+  "id": "chk_abc123",
+  "status": "ready_for_complete",
+  "currency": "USD",
+  "line_items": [
+    {
+      "id": "li_1",
+      "item": {"id": "item_123", "title": "Widget", "price": 2500},
+      "quantity": 2,
+      "totals": [
+        {"type": "subtotal", "amount": 5000},
+        {"type": "total", "amount": 5000}
+      ]
+    }
+  ],
+  "totals": [
+    {"type": "subtotal", "amount": 5000},
+    {"type": "tax", "amount": 400},
+    {"type": "total", "amount": 5400}
+  ],
+  "ap2": {
+    "merchant_authorization": "eyJhbGciOiJFUzI1NiIsImtpZCI6Im1lcmNoYW50XzIwMjUifQ..<signature>"
+  }
+}
+```
+
+The platform **MUST** verify the signature:
+
+```text
+verify_merchant_authorization(checkout, merchant_profile):
+    // Parse detached JWS (header..signature)
+    jws = checkout.ap2.merchant_authorization
+    [encoded_header, empty, encoded_signature] = jws.split(".")
+
+    // Decode and validate header
+    header = json_decode(base64url_decode(encoded_header))
+    assert header.alg in ["ES256", "ES384", "ES512"]
+
+    // Reconstruct signed payload (checkout minus ap2)
+    payload = checkout without "ap2" field
+    canonical_bytes = jcs_canonicalize(payload)
+
+    // Reconstruct signing input (header + payload)
+    signing_input = encoded_header + "." + base64url_encode(canonical_bytes)
+
+    // Get business's public key and verify
+    public_key = get_key_by_kid(merchant_profile.signing_keys, header.kid)
+    return verify(encoded_signature, signing_input, public_key, header.alg)
+```
+
+### Step 2: User Consent & Mandate Generation
+
+When the user confirms the purchase, the platform **MUST** facilitate the generation of cryptographically verifiable mandates.
+
+#### Option 1: Trusted Platform Provider
+
+A trusted platform provider acts on the user's behalf to generate the mandate credentials. The platform provider **MUST** ensure that mandates are not created without explicit user consent from trusted, deterministic channels.
+
+Upon user consent, the platform signs the mandates using their server-side key. The business trusts the platform's signature implies user consent.
+
+#### Option 2: Digital Payment Credential
+
+In this model the user has a VDC issued from a source trusted by the business (for example: a digital payment credential issued by a bank or network).
+
+The platform requests a presentation via a protocol like OpenID4VP. The User's Wallet (or equivalent) processes the request and signs the mandates using the private key associated with their payment credential.
+
+The business trusts the Credential Issuer (Bank) and verifies the user's Key Binding (+kb) signature.
+
+### Step 3: Submission (`complete_checkout`)
+
+Once the mandates are generated, the platform submits them in the completion request:
+
+| Name             | Type                                                                    | Required | Description                                      |
+| ---------------- | ----------------------------------------------------------------------- | -------- | ------------------------------------------------ |
+| checkout_mandate | [Checkout Mandate](/draft/specification/ap2-mandates/#checkout-mandate) | No       | SD-JWT+kb proving user authorized this checkout. |
+
+```json
+{
+  "payment": {
+    "instruments": [
+      {
+        "id": "instr_1",
+        "handler_id": "gpay_1234",
+        "type": "card",
+        "selected": true,
+        "display": {
+          "description": "Visa •••• 1234",
+        },
+        "billing_address": {
+          "street_address": "123 Main St",
+          "address_locality": "Anytown",
+          "address_region": "CA",
+          "address_country": "US",
+          "postal_code": "12345"
+        },
+        "credential": {
+          "type": "PAYMENT_GATEWAY",
+          "token": "examplePaymentMethodToken"
+        }
+      }
+    ]
+  },
+  "ap2": {
+    "checkout_mandate": "eyJhbGciOiJFUzI1NiIsInR5cCI6InZjK3NkLWp3dCJ9..." // The User-Signed SD-JWT+kb / platform provider signed SD-JWT / delegated SD-JWT-KB
+  }
+}
+```
+
+- `ap2.checkout_mandate`: The SD-JWT+kb checkout mandate containing the full checkout (with `ap2.merchant_authorization`)
+- `payment.instruments[*].credential.token`: Contains the payment mandate (composite token)
+
+## Verification & Processing
+
+### Business Verification
+
+Upon receiving the `complete` request, the business **MUST**:
+
+1. **Enforce Negotiation:** If AP2 was negotiated, reject the request with `mandate_required` error code if `ap2.checkout_mandate` is missing.
+
+**Mandate Verification (per AP2 spec):**
+
+1. **Verify Mandate:** Decode and verify the SD-JWT signature, key binding, and expiration per the [AP2 Protocol Specification](https://ap2-protocol.org/specification).
+1. **Extract Embedded Checkout:** Extract the checkout object from the verified mandate claims.
+
+**UCP Verification:**
+
+1. **Verify Business Authorization:** Confirm `ap2.merchant_authorization` in the embedded checkout is the business's own valid signature:
+
+   ```text
+   jws = embedded_checkout.ap2.merchant_authorization
+   [encoded_header, _, encoded_signature] = jws.split(".")
+   header = json_decode(base64url_decode(encoded_header))
+
+   payload = embedded_checkout without "ap2" field
+   signing_input = encoded_header + "." + base64url_encode(jcs_canonicalize(payload))
+
+   my_key = get_key_by_kid(my_signing_keys, header.kid)
+   verify(encoded_signature, signing_input, my_key, header.alg)
+   ```
+
+1. **Verify Terms Match:** Confirm the embedded checkout terms match the current session state (id, totals, line items).
+
+### PSP Verification
+
+The business passes the `token` (composite object) to their Payment Handler / PSP. The PSP verifies the `payment_mandate` per the [AP2 Protocol Specification](https://ap2-protocol.org/specification), including signature validation, expiration, and correlation with the checkout.
+
+## Schema
+
+### Business Authorization
+
+JWS Detached Content signature (RFC 7515 Appendix F) over the checkout response body (excluding ap2 field). Format: `<base64url-header>..<base64url-signature>`. The header MUST contain 'alg' (ES256/ES384/ES512) and 'kid' claims. The signature covers both the header and JCS-canonicalized checkout payload.
+
+**Pattern:** `^[A-Za-z0-9_-]+\.\.[A-Za-z0-9_-]+$`
+
+### AP2 Checkout Response
+
+The `ap2` object included in checkout responses.
+
+| Name                   | Type                                                                                | Required | Description                                                |
+| ---------------------- | ----------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------- |
+| merchant_authorization | [Merchant Authorization](/draft/specification/ap2-mandates/#merchant-authorization) | No       | Merchant's signature proving checkout terms are authentic. |
+
+### Checkout Mandate
+
+SD-JWT+kb credential in `ap2.checkout_mandate`. Proving user authorization for the checkout. Contains the full checkout including `ap2.merchant_authorization`.
+
+**Pattern:** `^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]*\.[A-Za-z0-9_-]+(~[A-Za-z0-9_-]+)*$`
+
+### AP2 Complete Request
+
+The `ap2` object included in COMPLETE checkout requests.
+
+| Name             | Type                                                                    | Required | Description                                      |
+| ---------------- | ----------------------------------------------------------------------- | -------- | ------------------------------------------------ |
+| checkout_mandate | [Checkout Mandate](/draft/specification/ap2-mandates/#checkout-mandate) | No       | SD-JWT+kb proving user authorized this checkout. |
+
+### Error Codes
+
+Error codes specific to AP2 mandate verification.
+
+**Enum:** `mandate_required`, `agent_missing_key`, `mandate_invalid_signature`, `mandate_expired`, `mandate_scope_mismatch`, `merchant_authorization_invalid`, `merchant_authorization_missing`
+
+| Error Code                       | Description                                                       |
+| -------------------------------- | ----------------------------------------------------------------- |
+| `mandate_required`               | AP2 was negotiated, but the request lacks `ap2.checkout_mandate`. |
+| `agent_missing_key`              | Platform profile lacks a valid `signing_keys` entry.              |
+| `mandate_invalid_signature`      | The mandate signature cannot be verified.                         |
+| `mandate_expired`                | The mandate `exp` timestamp has passed.                           |
+| `mandate_scope_mismatch`         | The mandate is bound to a different checkout.                     |
+| `merchant_authorization_invalid` | The business authorization signature could not be verified.       |
+
+# Buyer Consent Extension
+
+## Overview
+
+The Buyer Consent extension enables platforms to transmit buyer consent choices to businesses regarding data usage and communication preferences. It allows buyers to communicate their consent status for various categories, such as analytics, marketing, and data sales, helping businesses comply with privacy regulations like CCPA and GDPR.
+
+When this extension is supported, the `buyer` object in checkout is extended with a `consent` field containing boolean consent states.
+
+This extension can be included in `create_checkout` and `update_checkout` operations.
+
+## Discovery
+
+Businesses advertise consent support in their profile:
+
+```json
+{
+  "capabilities": {
+    "dev.ucp.shopping.buyer_consent": [
+      {
+        "version": "2026-01-11",
+        "extends": "dev.ucp.shopping.checkout"
+      }
+    ]
+  }
+}
+```
+
+## Schema Composition
+
+The consent extension extends the **buyer object** within checkout:
+
+- **Base schema extended**: `checkout` via `buyer` object
+- **Path**: `checkout.buyer.consent`
+- **Schema reference**: `buyer_consent.json`
+
+## Schema Definition
+
+### Consent Object
+
+| Name         | Type    | Required | Description                                       |
+| ------------ | ------- | -------- | ------------------------------------------------- |
+| analytics    | boolean | No       | Consent for analytics and performance tracking.   |
+| preferences  | boolean | No       | Consent for storing user preferences.             |
+| marketing    | boolean | No       | Consent for marketing communications.             |
+| sale_of_data | boolean | No       | Consent for selling data to third parties (CCPA). |
+
+## Usage
+
+The platform includes consent within the `buyer` object in checkout operations:
+
+### Example: Create Checkout with Consent
+
+```json
+POST /checkouts
+
+{
+  "line_items": [
+    {
+      "item": {
+        "id": "prod_123",
+        "title": "Blue T-Shirt",
+        "price": 1999
+      },
+      "id": "li_1",
+      "quantity": 1
+    }
+  ],
+  "buyer": {
+    "email": "jane.doe@example.com",
+    "first_name": "Jane",
+    "last_name": "Doe",
+    "consent": {
+      "analytics": true,
+      "preferences": true,
+      "marketing": false,
+      "sale_of_data": false
+    }
+  }
+}
+```
+
+### Example: Checkout Response with Consent
+
+```json
+{
+  "id": "checkout_456",
+  "status": "ready_for_payment",
+  "currency": "USD",
+  "buyer": {
+    "email": "jane.doe@example.com",
+    "first_name": "Jane",
+    "last_name": "Doe",
+    "consent": {
+      "analytics": true,
+      "preferences": true,
+      "marketing": false,
+      "sale_of_data": false
+    }
+  },
+  "line_items": [...],
+  "totals": [...],
+  "links": [
+    {
+      "type": "privacy_policy",
+      "url": "https://example.com/privacy"
+    }
+  ]
+}
+```
+
+## Security & Privacy Considerations
+
+1. **Consent is declarative** - The protocol communicates consent, it does not enforce it
+1. **Legal compliance** remains the business's responsibility
+1. **Platforms should not** assume consent without explicit user action
+1. **Default behavior** when consent is not provided is business-specific
+
+# Discount Extension
+
+## Overview
+
+Discount extension allows businesses to indicate that they support discount codes on checkout sessions, and specifies how the discount codes are to be shared between the platform and the business.
+
+**Key features:**
+
+- Submit one or more discount codes
+- Receive applied discounts with human-readable titles and amounts
+- Rejected codes communicated via `messages[]` with detailed error codes
+- Automatic discounts surfaced alongside code-based discounts
+
+**Dependencies:**
+
+- Checkout Capability
+
+## Discovery
+
+Businesses advertise discount support in their profile:
+
+```json
+{
+  "ucp": {
+    "version": "2026-01-11",
+    "capabilities": {
+      "dev.ucp.shopping.discount": [
+        {
+          "version": "2026-01-11",
+          "extends": "dev.ucp.shopping.checkout",
+          "spec": "https://ucp.dev/specification/discount",
+          "schema": "https://ucp.dev/schemas/shopping/discount.json"
+        }
+      ]
+    }
+  }
+}
+```
+
+## Schema
+
+When this capability is active, checkout is extended with a `discounts` object.
+
+### Discounts Object
+
+| Name    | Type                                                                         | Required | Description                                                                                                |
+| ------- | ---------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------- |
+| codes   | Array[string]                                                                | No       | Discount codes to apply. Case-insensitive. Replaces previously submitted codes. Send empty array to clear. |
+| applied | Array\[[Applied Discount](/draft/specification/discount/#applied-discount)\] | No       | Discounts successfully applied (code-based and automatic).                                                 |
+
+### Applied Discount
+
+| Name        | Type                                                             | Required | Description                                                                                                                      |
+| ----------- | ---------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| code        | string                                                           | No       | The discount code. Omitted for automatic discounts.                                                                              |
+| title       | string                                                           | **Yes**  | Human-readable discount name (e.g., 'Summer Sale 20% Off').                                                                      |
+| amount      | integer                                                          | **Yes**  | Total discount amount in minor (cents) currency units.                                                                           |
+| automatic   | boolean                                                          | No       | True if applied automatically by merchant rules (no code required).                                                              |
+| method      | string                                                           | No       | Allocation method. 'each' = applied independently per item. 'across' = split proportionally by value. **Enum:** `each`, `across` |
+| priority    | integer                                                          | No       | Stacking order for discount calculation. Lower numbers applied first (1 = first).                                                |
+| allocations | Array\[[Allocation](/draft/specification/discount/#allocation)\] | No       | Breakdown of where this discount was allocated. Sum of allocation amounts equals total amount.                                   |
+
+### Allocation
+
+| Name   | Type    | Required | Description                                                                       |
+| ------ | ------- | -------- | --------------------------------------------------------------------------------- |
+| path   | string  | **Yes**  | JSONPath to the allocation target (e.g., '$.line_items[0]', '$.totals.shipping'). |
+| amount | integer | **Yes**  | Amount allocated to this target in minor (cents) currency units.                  |
+
+## Allocation Details
+
+The `applied` array explains how discounts were calculated and distributed.
+
+### Allocation Method
+
+The `method` field indicates how the discount was calculated:
+
+| Method   | Meaning                                 | Example                                          |
+| -------- | --------------------------------------- | ------------------------------------------------ |
+| `each`   | Applied independently per eligible item | "10% off each item" → 10% × item price           |
+| `across` | Split proportionally by value           | "$10 off order" → $6 to $60 item, $4 to $40 item |
+
+### Stacking Order
+
+When multiple discounts are applied, `priority` indicates the calculation order. Lower numbers are applied first:
+
+```text
+Cart: $100
+Discount A (priority: 1): 20% off → $100 × 0.8 = $80
+Discount B (priority: 2): $10 off → $80 - $10 = $70
+```
+
+The order matters because percentage discounts compound differently depending on when they're applied.
+
+### Allocations Array
+
+The `allocations` array breaks down where each discount dollar landed, using JSONPath to identify targets:
+
+| Path Pattern        | Target           |
+| ------------------- | ---------------- |
+| `$.line_items[0]`   | First line item  |
+| `$.line_items[1]`   | Second line item |
+| `$.totals.shipping` | Shipping cost    |
+
+This enables platforms to explain exactly how much each discount contributed to each line item, even when multiple discounts stack.
+
+**Invariant:** Sum of `allocations[].amount` equals `applied_discount.amount`.
+
+## Operations
+
+Discount codes are submitted via standard checkout create/update operations.
+
+**Request behavior:**
+
+- **Replacement semantics**: Submitting `discounts.codes` replaces any previously submitted codes
+- **Clear codes**: Send empty array `"codes": []` to remove all discount codes
+- **Case-insensitive**: Codes are matched case-insensitively by business
+
+**Response behavior:**
+
+- `discounts.applied` contains all active discounts (code-based + automatic)
+- Rejected codes communicated via `messages[]` (see below)
+- Discount amounts reflected in `totals[]` and `line_items[].discount`
+
+## Rejected Codes
+
+When a submitted discount code cannot be applied, businesses communicate this via the `messages[]` array:
+
+```json
+{
+  "messages": [
+    {
+      "type": "warning",
+      "code": "discount_code_expired",
+      "path": "$.discounts.codes[0]",
+      "content": "Code 'SUMMER20' expired on December 1st"
+    }
+  ]
+}
+```
+
+> **Implementation guidance:** Operations that affect order totals, or the user's expectation of the total, **SHOULD** use `type: "warning"` to ensure they are surfaced to the user rather than silently handled by platforms. Rejected discounts are a prime example—the user expects a discount but won't receive it, so they should be informed.
+
+**Error codes for rejected discounts:**
+
+| Code                                   | Description                                 |
+| -------------------------------------- | ------------------------------------------- |
+| `discount_code_expired`                | Code has expired                            |
+| `discount_code_invalid`                | Code not found or malformed                 |
+| `discount_code_already_applied`        | Code is already applied                     |
+| `discount_code_combination_disallowed` | Cannot combine with another active discount |
+| `discount_code_user_not_logged_in`     | Code requires authenticated user            |
+| `discount_code_user_ineligible`        | User does not meet eligibility criteria     |
+
+## Automatic Discounts
+
+Businesses may apply discounts automatically based on cart contents, customer segment, or promotional rules:
+
+- Appear in `discounts.applied` with `automatic: true` and no `code` field
+- Applied without platform action
+- Cannot be removed by the platform
+- Surfaced for transparency (platform can explain to user why discount was applied)
+
+## Impact on Line Items and Totals
+
+Applied discounts are reflected in the core checkout fields using two distinct total types:
+
+| Total Type       | When to Use                                               |
+| ---------------- | --------------------------------------------------------- |
+| `items_discount` | Discounts allocated to line items (`$.line_items[*]`)     |
+| `discount`       | Order-level discounts (shipping, fees, flat order amount) |
+
+**Determining the type:** If a discount has `allocations` pointing to line items, it contributes to `items_discount`. Discounts without allocations, or with allocations to shipping/fees, contribute to `discount`.
+
+| Discount Type        | Where Reflected                            |
+| -------------------- | ------------------------------------------ |
+| Line-item discount   | `line_items[].discount` + `items_discount` |
+| Order-level discount | `totals[]` with `type: "discount"`         |
+
+**Invariant:** `totals[type=items_discount].amount` equals `sum(line_items[].discount)`.
+
+The `discounts.applied` array shows **what** was applied. The `totals[]` and `line_items[].discount` show **where** and **how much**.
+
+**Amount convention:** All discount amounts are positive integers in minor currency units. When presenting totals to users, display discount types as subtractive (e.g., "-$13.99").
+
+## Examples
+
+### Order-level discount
+
+A flat discount applied to the order total. No allocations—the discount applies to the order as a whole and uses `type: "discount"` in totals.
+
+**Request:**
+
+```json
+{
+  "discounts": {
+    "codes": ["SAVE10"]
+  }
+}
+```
+
+**Response:**
+
+```json
+{
+  "discounts": {
+    "codes": ["SAVE10"],
+    "applied": [
+      {
+        "code": "SAVE10",
+        "title": "$10 Off Your Order",
+        "amount": 1000
+      }
+    ]
+  },
+  "totals": [
+    {"type": "subtotal", "display_text": "Subtotal", "amount": 5000},
+    {"type": "discount", "display_text": "Order Discount", "amount": 1000},
+    {"type": "total", "display_text": "Total", "amount": 4000}
+  ]
+}
+```
+
+### Mixed discounts (item + order level)
+
+This example shows both discount types: a per-item discount (20% off) allocated to line items, and an automatic shipping discount at the order level.
+
+**Request:**
+
+```json
+{
+  "discounts": {
+    "codes": ["SUMMER20"]
+  }
+}
+```
+
+**Response:**
+
+```json
+{
+  "line_items": [
+    {
+      "id": "li_1",
+      "item": {
+        "id": "prod_1",
+        "quantity": 2,
+        "title": "T-Shirt",
+        "price": 2000
+      },
+      "totals": [
+        {"type": "subtotal", "amount": 4000},
+        {"type": "items_discount", "amount": 800},
+        {"type": "total", "amount": 3200}
+      ]
+    }
+  ],
+  "discounts": {
+    "codes": ["SUMMER20"],
+    "applied": [
+      {
+        "code": "SUMMER20",
+        "title": "Summer Sale 20% Off",
+        "amount": 800,
+        "allocations": [
+          {"path": "$.line_items[0]", "amount": 800}
+        ]
+      },
+      {
+        "title": "Free shipping on orders over $30",
+        "amount": 599,
+        "automatic": true
+      }
+    ]
+  },
+  "totals": [
+    {"type": "subtotal", "display_text": "Subtotal", "amount": 4000},
+    {"type": "items_discount", "display_text": "Item Discounts", "amount": 800},
+    {"type": "discount", "display_text": "Order Discounts", "amount": 599},
+    {"type": "fulfillment", "display_text": "Shipping", "amount": 0},
+    {"type": "total", "display_text": "Total", "amount": 2601}
+  ]
+}
+```
+
+### Rejected discount code
+
+When a discount code cannot be applied, the rejection is communicated via the `messages[]` array. The code still appears in `discounts.codes` (echoed back) but not in `discounts.applied`.
+
+**Request:**
+
+```json
+{
+  "discounts": {
+    "codes": ["SAVE10", "EXPIRED50"]
+  }
+}
+```
+
+**Response:**
+
+```json
+{
+  "discounts": {
+    "codes": ["SAVE10", "EXPIRED50"],
+    "applied": [
+      {
+        "code": "SAVE10",
+        "title": "$10 Off Your Order",
+        "amount": 1000
+      }
+    ]
+  },
+  "totals": [
+    {"type": "subtotal", "display_text": "Subtotal", "amount": 5000},
+    {"type": "discount", "display_text": "Order Discount", "amount": 1000},
+    {"type": "total", "display_text": "Total", "amount": 4000}
+  ],
+  "messages": [
+    {
+      "type": "warning",
+      "code": "discount_code_expired",
+      "path": "$.discounts.codes[1]",
+      "content": "Code 'EXPIRED50' expired on December 1st"
+    }
+  ]
+}
+```
+
+### Stacked discounts with allocations
+
+Multiple discounts applied with full allocation breakdown:
+
+**Response:**
+
+```json
+{
+  "line_items": [
+    {
+      "id": "li_1",
+      "item": {
+        "title": "T-Shirt",
+        "price": 6000
+      },
+      "totals": [
+        {"type": "subtotal", "amount": 6000},
+        {"type": "items_discount", "amount": 1500},
+        {"type": "total", "amount": 4500}
+      ]
+    },
+    {
+      "id": "li_2",
+      "item": {
+        "title": "Socks",
+        "price": 4000
+      },
+      "totals": [
+        {"type": "subtotal", "amount": 4000},
+        {"type": "items_discount", "amount": 1000},
+        {"type": "total", "amount": 3000}
+      ]
+    }
+  ],
+  "discounts": {
+    "codes": ["SUMMER20", "LOYALTY5"],
+    "applied": [
+      {
+        "code": "SUMMER20",
+        "title": "Summer Sale 20% Off",
+        "amount": 2000,
+        "method": "each",
+        "priority": 1,
+        "allocations": [
+          {"path": "$.line_items[0]", "amount": 1200},
+          {"path": "$.line_items[1]", "amount": 800}
+        ]
+      },
+      {
+        "code": "LOYALTY5",
+        "title": "$5 Loyalty Reward",
+        "amount": 500,
+        "method": "across",
+        "priority": 2,
+        "allocations": [
+          {"path": "$.line_items[0]", "amount": 300},
+          {"path": "$.line_items[1]", "amount": 200}
+        ]
+      }
+    ]
+  },
+  "totals": [
+    {"type": "subtotal", "display_text": "Subtotal", "amount": 10000},
+    {"type": "items_discount", "display_text": "Item Discounts", "amount": 2500},
+    {"type": "total", "display_text": "Total", "amount": 7500}
+  ]
+}
+```
+
+With this data, an agent can explain:
+
+> "Your T-Shirt ($60) got $12 off from the 20% summer sale, plus $3 from your
+
 # Fulfillment Extension
 
 ## Overview
@@ -8317,12 +7667,10 @@ Shirt ships to mom (US), pants ship to grandma (Hong Kong). Two methods of the s
   }
 }
 ```
-# Cart Capability
 
 # Cart Capability
 
 - **Capability Name:** `dev.ucp.shopping.cart`
-- **Version:** `DRAFT`
 
 ## Overview
 
@@ -9775,7 +9123,6 @@ A conforming MCP transport implementation **MUST**:
 1. Return business outcomes as JSON-RPC `result` with UCP envelope and `messages` array.
 1. Validate tool inputs against UCP schemas.
 1. Support HTTP transport with streaming.
-# Order Capability
 
 # Order Capability
 
@@ -10225,7 +9572,6 @@ See [Message Signatures - Key Rotation](https://ucp.dev/draft/specification/sign
 | capabilities     | object | No       | Capability registry keyed by reverse-domain name.      |
 | payment_handlers | object | No       | Payment handler registry keyed by reverse-domain name. |
 | capabilities     | any    | No       |                                                        |
-# Identity Linking Capability
 
 # Identity Linking Capability
 
@@ -10321,7 +9667,6 @@ Example of [metadata](https://datatracker.ietf.org/doc/html/rfc8414#section-2) s
   "service_documentation": "https://merchant.example.com/docs/oauth2"
 }
 ```
-# Payment Handlers
 
 # Payment Handler Specification Guide
 
@@ -11576,7 +10921,6 @@ ______________________________________________________________________
 
 - **[Encrypted Credential Handler](https://ucp.dev/draft/specification/examples/encrypted-credential-handler/index.md)** — Alternative pattern using encryption instead of tokenize/detokenize round-trips
 - **[AP2 Mandates Extension](https://ucp.dev/draft/specification/ap2-mandates/index.md)** — Add cryptographic proof of checkout agreement for PSP verification
-# Payment Handler Examples
 
 # Processor Tokenizer Payment Handler
 
@@ -12539,289 +11883,6 @@ ______________________________________________________________________
 
 - **Identity Schema:** `https://ucp.dev/schemas/shopping/types/payment_identity.json`
 - **Instrument Schema:** `https://ucp.dev/schemas/shopping/types/card_payment_instrument.json`
-# Schema Authoring
-
-# Schema Authoring Guide
-
-This guide documents conventions for authoring UCP JSON schemas: metadata fields, the registry pattern, schema variants, and versioning.
-
-## Schema Metadata Fields
-
-UCP schemas use standard JSON Schema fields plus UCP-specific metadata:
-
-| Field         | Standard    | Purpose                                                             | Required For                             |
-| ------------- | ----------- | ------------------------------------------------------------------- | ---------------------------------------- |
-| `$schema`     | JSON Schema | Declares JSON Schema draft version (**SHOULD** use `draft/2020-12`) | All schemas                              |
-| `$id`         | JSON Schema | Schema's canonical URI for `$ref` resolution                        | All schemas                              |
-| `title`       | JSON Schema | Human-readable display name                                         | All schemas                              |
-| `description` | JSON Schema | Schema purpose and usage                                            | All schemas                              |
-| `name`        | UCP         | Reverse-domain identifier; doubles as registry key                  | Capabilities, services, handlers         |
-| `version`     | UCP         | Entity version (`YYYY-MM-DD` format)                                | Capabilities, services, payment handlers |
-| `id`          | UCP         | Instance identifier for multiple configurations                     | Payment handlers only                    |
-
-### Why Self-Describing?
-
-Capability schemas **must be self-describing**: when a platform fetches a schema, it should determine exactly what capability and version it represents without cross-referencing other documents. This matters because:
-
-1. **Independent versioning**: Capabilities may version independently. The schema must declare its version explicitly—you can't infer it from the URL.
-1. **Validation**: Validators can cross-check that a capability declaration's `schema` URL points to a schema whose embedded `name`/`version` match the declaration. Mismatches are authoring errors caught at build time.
-1. **Developer experience**: When reading a schema file, integrators immediately see what capability it defines without reverse-engineering the `$id` URL.
-1. **Compact namespace**: The `name` field provides a standardized reverse-domain identifier (e.g., `dev.ucp.shopping.checkout`) that's more compact and semantic than the full `$id` URL.
-
-### Why Both `$id` and `name`?
-
-| Field  | Role                                                    | Format                 |
-| ------ | ------------------------------------------------------- | ---------------------- |
-| `$id`  | JSON Schema primitive for `$ref` resolution and tooling | URI (required by spec) |
-| `name` | Registry key and stable identifier                      | Reverse-domain         |
-
-`$id` must be a valid URI per JSON Schema spec. `name` is the **key used in registries** (`capabilities`, `services`, `payment_handlers`) and the wire protocol identifier used in capability negotiation—decoupled from schema hosting so that `schema` URLs can change as infrastructure evolves.
-
-The reverse-domain format provides **namespace governance**: domain owners control their namespace (`dev.ucp.*`, `com.shopify.*`), avoiding collisions between UCP and vendor entities. This stable identity layer allows trust and resolution mechanisms to evolve independently—future versions could adopt verifiable credentials, content-addressed schemas, or other verification methods without breaking capability negotiation.
-
-### Why `version` Uses Dates?
-
-The `version` field uses date-based versioning (`YYYY-MM-DD`) to enable:
-
-- **Capability negotiation**: Platforms request specific versions they support
-- **Breaking change management**: New versions get new dates; old versions remain valid and resolvable
-- **Independent lifecycles**: Extensions can release on their own schedule
-
-## Schema Categories
-
-UCP schemas fall into six categories based on their role in the protocol.
-
-### Capability Schemas
-
-Define negotiated capabilities that appear in `ucp.capabilities{}` registries.
-
-- **Top-level fields**: `$schema`, `$id`, `title`, `description`, `name`, `version`
-- **Variants**: `platform_schema`, `business_schema`, `response_schema`
-
-Examples: `checkout.json`, `fulfillment.json`, `discount.json`, `order.json`
-
-### Service Schemas
-
-Define transport bindings that appear in `ucp.services{}` registries. Each transport (REST, MCP, A2A, Embedded) is a separate entry.
-
-- **Top-level fields**: `$schema`, `$id`, `title`, `description`, `name`, `version`
-- **Variants**: `platform_schema`, `business_schema`
-- **Transport requirements**:
-  - REST/MCP: `endpoint`, `schema` (OpenAPI/OpenRPC URL)
-  - A2A: `endpoint` (Agent Card URL)
-  - Embedded: `schema` (OpenRPC URL)
-
-### Payment Handler Schemas
-
-Define payment handler configurations in `ucp.payment_handlers{}` registries.
-
-- **Top-level fields**: `$schema`, `$id`, `title`, `description`, `name`, `version`
-- **Variants**: `platform_schema`, `business_schema`, `response_schema`
-- **Instance `id`**: Required to distinguish multiple configurations of the same handler
-
-Examples: `com.google.pay`, `dev.shopify.shop_pay`, `dev.ucp.processor_tokenizer`
-
-**→ See [Payment Handler Guide](https://ucp.dev/draft/specification/payment-handler-guide/index.md)** for detailed guidance on handler structure, config/instrument/credential schemas, and the full specification template.
-
-### Component Schemas
-
-Data structures embedded within capabilities but not independently negotiated. Do **not** appear in registries.
-
-- **Top-level fields**: `$schema`, `$id`, `title`, `description`
-- **Omit**: `name`, `version` (not independently versioned)
-
-Examples:
-
-- `schemas/shopping/payment.json` — Payment configuration (part of checkout)
-
-### Type Schemas
-
-Reusable definitions referenced by other schemas. Do **not** appear in registries.
-
-- **Top-level fields**: `$schema`, `$id`, `title`, `description`
-- **Omit**: `name`, `version`
-
-Examples: `types/buyer.json`, `types/line_item.json`, `types/postal_address.json`
-
-### Meta Schemas
-
-Define protocol structure rather than entity payloads.
-
-- **Top-level fields**: `$schema`, `$id`, `title`, `description`
-- **Omit**: `name`, `version`
-
-Examples: `ucp.json` (entity base), `capability.json`, `service.json`, `payment_handler.json`
-
-## The Registry Pattern
-
-UCP organizes capabilities, services, and handlers in **registries**—objects keyed by `name` rather than arrays of objects with `name` fields.
-
-```json
-{
-  "capabilities": {
-    "dev.ucp.shopping.checkout": [{"version": "2026-01-11"}],
-    "dev.ucp.shopping.fulfillment": [{"version": "2026-01-11"}]
-  },
-  "services": {
-    "dev.ucp.shopping": [
-      {"version": "2026-01-11", "transport": "rest"},
-      {"version": "2026-01-11", "transport": "mcp"}
-    ]
-  },
-  "payment_handlers": {
-    "com.google.pay": [{"id": "gpay_1234", "version": "2026-01-11"}]
-  }
-}
-```
-
-### Registry Contexts
-
-The same registry structure appears in three contexts with different field requirements:
-
-| Context          | Location                | Required Fields                 |
-| ---------------- | ----------------------- | ------------------------------- |
-| Platform Profile | Advertised URI          | `version`, `spec`, `schema`     |
-| Business Profile | `/.well-known/ucp`      | `version`; may add `config`     |
-| API Responses    | Checkout/order payloads | `version` (+ `id` for handlers) |
-
-## The Entity Pattern
-
-All capabilities, services, and handlers extend a common `entity` base schema:
-
-| Field     | Type   | Description                                     |
-| --------- | ------ | ----------------------------------------------- |
-| `version` | string | Entity version (`YYYY-MM-DD`) — always required |
-| `spec`    | URI    | Human-readable specification                    |
-| `schema`  | URI    | JSON Schema URL                                 |
-| `id`      | string | Instance identifier (handlers only)             |
-| `config`  | object | Entity-specific configuration                   |
-
-### Schema Variants
-
-Each entity type defines **three variants** for different contexts:
-
-**`platform_schema`** — Full declarations for discovery
-
-```json
-{
-  "dev.ucp.shopping.fulfillment": [{
-    "version": "2026-01-11",
-    "spec": "https://ucp.dev/specification/fulfillment",
-    "schema": "https://ucp.dev/schemas/shopping/fulfillment.json",
-    "config": {
-      "supports_multi_group": true
-    }
-  }]
-}
-```
-
-**`business_schema`** — Business-specific overrides
-
-```json
-{
-  "dev.ucp.shopping.fulfillment": [{
-    "version": "2026-01-11",
-    "config": {
-      "allows_multi_destination": {"shipping": true}
-    }
-  }]
-}
-```
-
-**`response_schema`** — Minimal references in API responses
-
-```json
-{
-  "ucp": {
-    "capabilities": {
-      "dev.ucp.shopping.fulfillment": [{"version": "2026-01-11"}]
-    }
-  }
-}
-```
-
-Define all three in your schema's `$defs`:
-
-```json
-"$defs": {
-  "platform_schema": {
-    "allOf": [{"$ref": "../capability.json#/$defs/platform_schema"}]
-  },
-  "business_schema": {
-    "allOf": [{"$ref": "../capability.json#/$defs/business_schema"}]
-  },
-  "response_schema": {
-    "allOf": [{"$ref": "../capability.json#/$defs/response_schema"}]
-  }
-}
-```
-
-## Versioning Strategy
-
-### UCP Capabilities (`dev.ucp.*`)
-
-UCP-authored capabilities version with protocol releases by default. Individual capabilities **may** version independently when needed.
-
-### Vendor Capabilities (`com.{vendor}.*`)
-
-Capabilities outside `dev.ucp.*` version fully independently:
-
-```json
-{
-  "name": "com.shopify.loyalty",
-  "version": "2025-09-01",
-  "spec": "https://shopify.dev/ucp/loyalty",
-  "schema": "https://shopify.dev/ucp/schemas/loyalty.json"
-}
-```
-
-Vendor schemas follow the same self-describing requirements.
-
-## Complete Example: Capability Schema
-
-A capability schema defines both payload structure and declaration variants:
-
-```json
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://ucp.dev/schemas/shopping/checkout.json",
-  "name": "dev.ucp.shopping.checkout",
-  "version": "2026-01-11",
-  "title": "Checkout",
-  "description": "Base checkout schema. Extensions compose via allOf.",
-
-  "$defs": {
-    "platform_schema": {
-      "allOf": [{"$ref": "../capability.json#/$defs/platform_schema"}]
-    },
-    "business_schema": {
-      "allOf": [{"$ref": "../capability.json#/$defs/business_schema"}]
-    },
-    "response_schema": {
-      "allOf": [{"$ref": "../capability.json#/$defs/response_schema"}]
-    }
-  },
-
-  "type": "object",
-  "required": ["ucp", "id", "line_items", "status", "currency", "totals", "links"],
-  "properties": {
-    "ucp": {"$ref": "../ucp.json#/$defs/response_checkout_schema"},
-    "id": {"type": "string", "description": "Checkout identifier"},
-    "line_items": {"type": "array", "items": {"$ref": "types/line_item.json"}},
-    "status": {"type": "string", "enum": ["open", "completed", "expired"]},
-    "currency": {"type": "string", "pattern": "^[A-Z]{3}$"},
-    "totals": {"$ref": "types/totals.json"},
-    "links": {"$ref": "types/links.json"}
-  }
-}
-```
-
-Key points:
-
-- **Top-level `name` and `version`** make the schema self-describing
-- **`$defs` variants** enable validation in different contexts
-- **Payload properties** define the actual checkout response structure
-# Reference
 
 # Schema Reference
 
@@ -13594,3 +12655,123 @@ As seen in response messages.
 | id      | string  | No       | Unique identifier for this entity instance. Used to disambiguate when multiple instances exist.                                 |
 | config  | object  | No       | Entity-specific configuration. Structure defined by each entity's schema.                                                       |
 | extends | OneOf[] | No       | Parent capability(s) this extends. Present for extensions, absent for root capabilities. Use array for multi-parent extensions. |
+
+# UCP Playground
+
+Walk through a complete UCP checkout flow step-by-step. This interactive demo runs entirely in the browser, simulating payloads and validating against real UCP schemas at each stage.
+
+## 1. Platform Profile
+
+Select the capability profile for the Platform. This determines which extensions (e.g., fulfillment, discounts) are negotiated.
+
+### Configuration
+
+Platform Type Standard (Core Only) Advanced (All Extensions)
+
+Supports basic checkout and order retrieval.
+
+Capabilities Copy
+
+Continue →
+
+## 2. Discovery
+
+The Platform fetches `/.well-known/ucp`. The response below is filtered to show the intersection of the Business's capabilities and the Platform's profile.
+
+GET Request
+
+```
+GET /.well-known/ucp HTTP/1.1
+Host: business.example.com
+Accept: application/json
+```
+
+Response (Filtered)
+
+← Back Continue →
+
+## 3. Capability Negotiation
+
+Intersection of Platform and Business capabilities. Orphaned extensions are pruned.
+
+Business Capabilities
+
+Resulting Intersection
+
+← Back Continue →
+
+## 4. Create Checkout
+
+The Platform initiates a session. The error response below follows the strict `message.json` schema.
+
+Request Payload
+
+Response
+
+Simulation Scenario:
+
+Missing Buyer Email Missing Shipping Destination Run Request
+
+← Back Next Step →
+
+## 5. Update Checkout
+
+Patch the checkout with missing information to resolve validation errors.
+
+PATCH Request Run Update
+
+Response
+
+← Back Next Step →
+
+## 6. Mint Instrument
+
+Simulate the payment handler flow to acquire a payment credential.
+
+### Select Handler
+
+**Shop Pay**\
+com.shopify.shop_pay
+
+**Google Pay**\
+com.google.pay
+
+Mint Credential
+
+Minted Instrument
+
+← Back Next Step →
+
+## 7. Complete Checkout
+
+Submit the minted instrument to finalize the transaction and create an order.
+
+Request Finalize
+
+Response (Order Created)
+
+**Success!** Order ID: created.
+
+← Back Next Step →
+
+## 8. Webhook Simulation
+
+Simulate a backend event (e.g., shipping center update) triggering a webhook push to the Agent.
+
+### Trigger Event
+
+This action runs on the Business server and pushes data to the Platform's webhook URL.
+
+Simulate "Shipped" Event
+
+Webhook Payload (POST) Push Notification
+
+```
+// Waiting for event trigger...
+```
+
+← Back
+
+About this demo
+
+This playground is a simulation running entirely in your browser. It uses mocked logic to demonstrate the UCP protocol flow and isn't intended as a reference for production code. For real-world implementation examples and best practices, please check out our [samples on GitHub](https://github.com/Universal-Commerce-Protocol/samples).
