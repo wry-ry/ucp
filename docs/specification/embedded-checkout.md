@@ -91,7 +91,7 @@ the `embedded` transport in their `/.well-known/ucp` profile, all checkout
         "dev.ucp.shopping": {
             "version": "2026-01-11",
             "rest": {
-                "schema": "https://ucp.dev/services/shopping/rest.openapi.json",
+                "schema": "https://ucp.dev/services/shopping/openapi.json",
                 "endpoint": "https://merchant.example.com/ucp/v1"
             },
             "mcp": {
