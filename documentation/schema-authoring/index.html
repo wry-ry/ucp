@@ -1408,9 +1408,10 @@ breaking capability negotiation.</p>
 <h3 id="payment-handler-schemas">Payment Handler Schemas<a class="headerlink" href="#payment-handler-schemas" title="Permanent link">&para;</a></h3>
 <p>Define payment handler configurations in <code>ucp.payment_handlers{}</code> registries.</p>
 <ul>
-<li><strong>Top-level fields</strong>: <code>$schema</code>, <code>$id</code>, <code>title</code>, <code>description</code>, <code>name</code>, <code>version</code></li>
+<li><strong>Top-level fields</strong>: <code>$schema</code>, <code>$id</code>, <code>title</code>, <code>description</code>, <code>name</code>, <code>version</code>, <code>available_instruments</code></li>
 <li><strong>Variants</strong>: <code>platform_schema</code>, <code>business_schema</code>, <code>response_schema</code></li>
 <li><strong>Instance <code>id</code></strong>: Required to distinguish multiple configurations of the same handler</li>
+<li><strong><code>available_instruments</code></strong>: Optional. Array of supported instrument types with type-specific constraints (e.g., brands for credit cards). When absent, the handler places no restrictions — it supports the full set of instrument types defined by its handler schema.</li>
 </ul>
 <p>Examples: <code>com.google.pay</code>, <code>dev.shopify.shop_pay</code>, <code>dev.ucp.processor_tokenizer</code></p>
 <p><strong>→ See <a href="/ucp/latest/specification/payment-handler-guide/">Payment Handler Guide</a></strong> for detailed
@@ -1456,7 +1457,7 @@ by <code>name</code> rather than arrays of objects with <code>name</code> fields
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="p">]</span>
 </span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">  </span><span class="p">},</span>
 </span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">  </span><span class="nt">&quot;payment_handlers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="nt">&quot;com.google.pay&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gpay_1234&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-01-11&quot;</span><span class="p">}]</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="nt">&quot;com.google.pay&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gpay_1234&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-01-11&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;available_instruments&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;google_pay_card&quot;</span><span class="p">}]}]</span>
 </span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">  </span><span class="p">}</span>
 </span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="p">}</span>
 </span></code></pre></div>
