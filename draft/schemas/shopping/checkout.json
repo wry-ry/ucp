@@ -25,7 +25,13 @@
       "description": "Unique identifier of the checkout session.",
       "ucp_request": {
         "create": "omit",
-        "update": "required",
+        "update": {
+          "transition": {
+            "from": "required",
+            "to": "omit",
+            "description": "ID is provided as argument on the request, this ID is redundant."
+          }
+        },
         "complete": "omit"
       }
     },
@@ -131,5 +137,5 @@
       "ucp_request": "omit"
     }
   },
-  "version": "2026-02-25"
+  "version": "2026-02-26"
 }
