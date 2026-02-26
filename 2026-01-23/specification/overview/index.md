@@ -46,7 +46,7 @@ The `spec` and `schema` fields are **REQUIRED** for all capabilities. The origin
 
 | Namespace       | Required Origin           |
 | --------------- | ------------------------- |
-| `dev.ucp.*`     | `https://ucp.dev/...`     |
+| `dev.ucp.*`     | `../...`                  |
 | `com.example.*` | `https://example.com/...` |
 
 Platform **MUST** validate this binding and **SHOULD** reject capabilities where the spec origin does not match the namespace authority.
