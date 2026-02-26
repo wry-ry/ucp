@@ -27,7 +27,6 @@ edit_uri: edit/main/docs/
 # Exclude non-spec documentation
 exclude_docs: |
   documentation/
-  index.md
   versioning.md
 
 # Navigation
