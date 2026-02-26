@@ -492,11 +492,11 @@ image: assets/banner.png
         <span>Amex</span>
       </div>
       <div class="partner-logo">
-        <img src="assets/partner/endorsed/Ant International.svg" alt="Ant International" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+        <img src="assets/partner/endorsed/Ant%20International.svg" alt="Ant International" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
         <span>Ant International</span>
       </div>
       <div class="partner-logo">
-        <img src="assets/partner/endorsed/Best Buy.svg" alt="Best Buy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+        <img src="assets/partner/endorsed/Best%20Buy.svg" alt="Best Buy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
         <span>Best Buy</span>
       </div>
       <div class="partner-logo">
@@ -576,7 +576,7 @@ image: assets/banner.png
         <span>Stripe</span>
       </div>
       <div class="partner-logo">
-        <img src="assets/partner/endorsed/Home Depot.svg" alt="The Home Depot" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+        <img src="assets/partner/endorsed/Home%20Depot.svg" alt="The Home Depot" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
         <span>The Home Depot</span>
       </div>
       <div class="partner-logo">
@@ -609,11 +609,11 @@ image: assets/banner.png
         <span>Amex</span>
       </div>
       <div class="partner-logo">
-        <img src="assets/partner/endorsed/Ant International.svg" alt="Ant International" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+        <img src="assets/partner/endorsed/Ant%20International.svg" alt="Ant International" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
         <span>Ant International</span>
       </div>
       <div class="partner-logo">
-        <img src="assets/partner/endorsed/Best Buy.svg" alt="Best Buy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+        <img src="assets/partner/endorsed/Best%20Buy.svg" alt="Best Buy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
         <span>Best Buy</span>
       </div>
       <div class="partner-logo">
@@ -693,7 +693,7 @@ image: assets/banner.png
         <span>Stripe</span>
       </div>
       <div class="partner-logo">
-        <img src="assets/partner/endorsed/Home Depot.svg" alt="The Home Depot" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+        <img src="assets/partner/endorsed/Home%20Depot.svg" alt="The Home Depot" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
         <span>The Home Depot</span>
       </div>
       <div class="partner-logo">
