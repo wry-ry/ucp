@@ -29,6 +29,7 @@ on:
       - ".github/workflows/docs.yml"
       - "requirements-docs.txt"
       - "mkdocs.yml"
+      - "mkdocs-spec.yml"
       - "main.py"
       - "hooks.py"
       - "docs/**"
@@ -74,6 +75,28 @@ jobs:
         with:
           files: source/**
 
+      - name: Check for changed files (Spec)
+        id: spec_files_changed
+        uses: tj-actions/changed-files@v46
+        with:
+          files: |
+            docs/specification/**
+            source/**
+            hooks.py
+            main.py
+            mkdocs-spec.yml
+
+      - name: Check for changed files (Root)
+        id: root_files_changed
+        uses: tj-actions/changed-files@v46
+        with:
+          files: |
+            docs/**
+            !docs/specification/**
+            hooks.py
+            main.py
+            mkdocs.yml
+
       - name: Install ucp-schema for runtime resolution
         run: |
           cargo install ucp-schema
@@ -110,22 +133,21 @@ jobs:
           echo "Set SITE_URL to $PAGES_URL"
           echo "SITE_URL=$PAGES_URL" >> $GITHUB_ENV
 
-      - name: Build Documentation (PR Check)
-        if: github.event_name == 'pull_request'
-        run: uv run mkdocs build --strict
+      - name: Build Documentation (PR Check - Root)
+        if: github.event_name == 'pull_request' && steps.root_files_changed.outputs.any_changed == 'true'
+        run: uv run mkdocs build --strict -f mkdocs.yml
+
+      - name: Build Documentation (PR Check - Spec)
+        if: github.event_name == 'pull_request' && steps.spec_files_changed.outputs.any_changed == 'true'
+        run: uv run mkdocs build --strict -f mkdocs-spec.yml
 
       - name: Deploy development version from main branch
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
-          # 1. Deploy Specification Site using mike (DOCS_MODE=spec)
-          export DOCS_MODE=spec
-          uv run mike deploy --push draft
+          # 1. Build Root Site
+          uv run mkdocs build -f mkdocs.yml
 
-          # 2. Build Root Site (DOCS_MODE=root)
-          export DOCS_MODE=root
-          uv run mkdocs build
-
-          # 3. Deploy Root Site to gh-pages root
+          # 2. Deploy Root Site to gh-pages root
           # Fetch and checkout gh-pages
           git fetch origin gh-pages
           git checkout gh-pages
@@ -142,12 +164,11 @@ jobs:
       - name: Deploy release version
         if: startsWith(github.ref, 'refs/heads/release/')
         run: |
-          export DOCS_MODE=spec
           # Extract the date (e.g., release/2026-01-11 -> 2026-01-11)
           VERSION_NAME=${GITHUB_REF#refs/heads/release/}
 
           # Deploy this version, tag it as 'latest', and set it as the default site root
-          uv run mike deploy --push --update-aliases $VERSION_NAME latest
+          uv run mike deploy --config-file mkdocs-spec.yml --push --update-aliases $VERSION_NAME latest
 
       - name: Create GitHub Release and Tag
         if: startsWith(github.ref, 'refs/heads/release/')

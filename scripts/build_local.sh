@@ -50,39 +50,33 @@ for branch in $RELEASE_BRANCHES; do
 
 	pushd "$WORKTREE_DIR" >/dev/null
 
-	# Copy latest hooks from project root (main) to ensure consistent build logic
+	# Copy latest hooks and spec config from project root (main) to ensure consistent build logic
 	cp "$PROJECT_ROOT/hooks.py" .
+	cp "$PROJECT_ROOT/mkdocs-spec.yml" .
 
-	# Deploy
-	# mike will now use the mkdocs in PATH (which is the root venv)
-	export DOCS_MODE=spec
-	export UCP_BUILD_VERSION="$version"
-	mike deploy "$version"
+	# Deploy using the spec config
+	mike deploy --config-file mkdocs-spec.yml "$version"
 
 	popd >/dev/null
 	git worktree remove -f "$WORKTREE_DIR"
 done
 
 echo ">>> Building Current Version (Draft & Latest)"
-export DOCS_MODE=spec
-export UCP_BUILD_VERSION="draft"
-mike deploy draft
+mike deploy --config-file mkdocs-spec.yml draft
 
 LATEST_VERSION=$(echo "$RELEASE_BRANCHES" | sed 's/release\///' | sort -r | head -n 1)
 
 if [ -n "$LATEST_VERSION" ]; then
 	echo "Aliasing 'latest' to $LATEST_VERSION"
-	mike alias "$LATEST_VERSION" latest --update-aliases
+	mike alias --config-file mkdocs-spec.yml "$LATEST_VERSION" latest --update-aliases
 else
 	echo "No release found, aliasing latest to draft"
-	mike alias draft latest --update-aliases
+	mike alias --config-file mkdocs-spec.yml draft latest --update-aliases
 fi
 
 echo ">>> Building Root Site"
 # Build root site FIRST so we establish the base (index.html, etc.)
-# Run in sub-shell or unset variable to be safe, though later steps don't use it
-export DOCS_MODE=root
-uv run mkdocs build --strict -d "$OUTPUT_DIR"
+uv run mkdocs build --strict -f mkdocs.yml -d "$OUTPUT_DIR"
 
 echo ">>> Merging Spec Versions"
 # Extract ONLY the spec folders (versions) to avoid overwriting Root Site's index.html

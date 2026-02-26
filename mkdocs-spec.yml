@@ -24,20 +24,42 @@ site_description: >
 site_dir: site
 edit_uri: edit/main/docs/
 
-# Exclude spec documentation from root site
+# Exclude non-spec documentation
 exclude_docs: |
-  specification/
+  documentation/
+  index.md
+  versioning.md
 
 # Navigation
 nav:
-  - Overview:
-      - Home: index.md
-      - Core Concepts: documentation/core-concepts.md
-      - Specification: https://ucp.dev/latest/specification/overview/
-      - UCP and AP2: documentation/ucp-and-ap2.md
-      - Roadmap: documentation/roadmap.md
-      - Schema Authoring: documentation/schema-authoring.md
-      - Versioning: versioning.md
+  - Overview: specification/overview.md
+  - Checkout Capability:
+      - Overview: specification/checkout.md
+      - HTTP/REST Binding: specification/checkout-rest.md
+      - MCP Binding: specification/checkout-mcp.md
+      - A2A Binding: specification/checkout-a2a.md
+      - EP Binding: specification/embedded-checkout.md
+      - AP2 Mandates Extension: specification/ap2-mandates.md
+      - Buyer Consent Extension: specification/buyer-consent.md
+      - Discounts Extension: specification/discount.md
+      - Fulfillment Extension: specification/fulfillment.md
+  - Cart Capability:
+      - Overview: specification/cart.md
+      - HTTP/REST Binding: specification/cart-rest.md
+      - MCP Binding: specification/cart-mcp.md
+  - Order Capability: specification/order.md
+  - Identity Linking Capability: specification/identity-linking.md
+  - Payment Handlers:
+      - Guide: specification/payment-handler-guide.md
+      - Template: specification/payment-handler-template.md
+      - Tokenization Guide: specification/tokenization-guide.md
+      - Examples:
+          - Processor Tokenizer: specification/examples/processor-tokenizer-payment-handler.md
+          - Platform Tokenizer: specification/examples/platform-tokenizer-payment-handler.md
+          - Encrypted Credential: specification/examples/encrypted-credential-handler.md
+  - Signatures: specification/signatures.md
+  - Reference: specification/reference.md
+  - Playground: specification/playground.md
 
 repo_name: UCP on GitHub # Override repo name to be shorter on site header.
 repo_url: https://github.com/Universal-Commerce-Protocol/ucp
@@ -51,6 +73,7 @@ extra_css:
 
 #Global Constants
 extra:
+  ucp_version: "draft"
   ucp_url: https://ucp.dev
   analytics:
     provider: google
@@ -65,6 +88,8 @@ extra:
       find what they're searching for. With your consent, you're helping us to
       make our documentation better.
   scope: /
+  version:
+    provider: mike
 
 # Configuration
 theme:
@@ -152,6 +177,10 @@ markdown_extensions:
   - toc:
       permalink: true
 
+# Custom hooks
+hooks:
+  - hooks.py
+
 # Plugins
 plugins:
   - search
@@ -162,10 +191,30 @@ plugins:
   - llmstxt:
       full_output: llms-full.txt
       sections:
-        Overview:
-          - index.md
-          - documentation/core-concepts.md
-          - documentation/ucp-and-ap2.md
-          - documentation/roadmap.md
-          - documentation/schema-authoring.md
-          - versioning.md
+        Specification:
+          - specification/overview.md
+        Message Signatures:
+          - specification/signatures.md
+        Checkout Capability:
+          - specification/checkout.md
+          - specification/checkout-rest.md
+          - specification/checkout-mcp.md
+          - specification/checkout-a2a.md
+          - specification/embedded-checkout.md
+          - specification/ap2-mandates.md
+          - specification/buyer-consent.md
+          - specification/discount.md
+          - specification/fulfillment.md
+          - specification/cart.md
+          - specification/cart-rest.md
+          - specification/cart-mcp.md
+          - specification/order.md
+          - specification/identity-linking.md
+          - specification/payment-handler-guide.md
+          - specification/payment-handler-template.md
+          - specification/tokenization-guide.md
+          - specification/examples/processor-tokenizer-payment-handler.md
+          - specification/examples/platform-tokenizer-payment-handler.md
+          - specification/examples/encrypted-credential-handler.md
+          - specification/reference.md
+          - specification/playground.md
