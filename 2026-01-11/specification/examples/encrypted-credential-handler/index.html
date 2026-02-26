@@ -1723,8 +1723,8 @@ locally to obtain raw <code>CardCredential</code> for payment processing. This i
 <p>Businesses advertise the platform's handler. The <code>identity</code> field contains the
 <strong>business's identity</strong>, which the platform uses to look up the correct public
 key for encryption.</p>
-<p>The only supported identity schema is <a href="https://ucp.dev/schemas/shopping/types/payment_identity.json">PaymentIdentity</a>.</p>
-<p>The only supported instrument schema is <a href="https://ucp.dev/schemas/shopping/types/card_payment_instrument.json">CardPaymentInstrument</a>, the only supported checkout credential schema is <code>EncryptedCredential</code>, and the only supported source credential schema is <a href="https://ucp.dev/schemas/shopping/types/card_credential.json">CardCredential</a>.</p>
+<p>The only supported identity schema is <a href="/{version}/schemas/shopping/types/payment_identity.json">PaymentIdentity</a>.</p>
+<p>The only supported instrument schema is <a href="/{version}/schemas/shopping/types/card_payment_instrument.json">CardPaymentInstrument</a>, the only supported checkout credential schema is <code>EncryptedCredential</code>, and the only supported source credential schema is <a href="/{version}/schemas/shopping/types/card_credential.json">CardCredential</a>.</p>
 <p><strong>Note:</strong> <code>CardCredential</code> contains raw PANs. The platform's
 <strong>PCI DSS compliant</strong> vaulting service handles these credentials and encrypts
 them before transmission. Businesses receive only encrypted payloads but
@@ -1876,8 +1876,8 @@ access to raw PANs.</p>
 <hr />
 <h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Identity Schema:</strong> <code>https://ucp.dev/schemas/shopping/types/payment_identity.json</code></li>
-<li><strong>Instrument Schema:</strong> <code>https://ucp.dev/schemas/shopping/types/card_payment_instrument.json</code></li>
+<li><strong>Identity Schema:</strong> <code>/{version}/schemas/shopping/types/payment_identity.json</code></li>
+<li><strong>Instrument Schema:</strong> <code>/{version}/schemas/shopping/types/card_payment_instrument.json</code></li>
 </ul>
 
 

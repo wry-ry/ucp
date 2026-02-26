@@ -90,9 +90,9 @@ While businesses receive only encrypted `EncryptedCredential` payloads during ch
 
 Businesses advertise the platform's handler. The `identity` field contains the **business's identity**, which the platform uses to look up the correct public key for encryption.
 
-The only supported identity schema is [PaymentIdentity](https://ucp.dev/schemas/shopping/types/payment_identity.json).
+The only supported identity schema is [PaymentIdentity](/%7Bversion%7D/schemas/shopping/types/payment_identity.json).
 
-The only supported instrument schema is [CardPaymentInstrument](https://ucp.dev/schemas/shopping/types/card_payment_instrument.json), the only supported checkout credential schema is `EncryptedCredential`, and the only supported source credential schema is [CardCredential](https://ucp.dev/schemas/shopping/types/card_credential.json).
+The only supported instrument schema is [CardPaymentInstrument](/%7Bversion%7D/schemas/shopping/types/card_payment_instrument.json), the only supported checkout credential schema is `EncryptedCredential`, and the only supported source credential schema is [CardCredential](/%7Bversion%7D/schemas/shopping/types/card_credential.json).
 
 **Note:** `CardCredential` contains raw PANs. The platform's **PCI DSS compliant** vaulting service handles these credentials and encrypts them before transmission. Businesses receive only encrypted payloads but MUST be PCI DSS compliant once they decrypt the credentials locally.
 
@@ -209,5 +209,5 @@ ______________________________________________________________________
 
 ## References
 
-- **Identity Schema:** `https://ucp.dev/schemas/shopping/types/payment_identity.json`
-- **Instrument Schema:** `https://ucp.dev/schemas/shopping/types/card_payment_instrument.json`
+- **Identity Schema:** `/{version}/schemas/shopping/types/payment_identity.json`
+- **Instrument Schema:** `/{version}/schemas/shopping/types/card_payment_instrument.json`

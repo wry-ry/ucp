@@ -53,7 +53,7 @@ The `spec` and `schema` fields are **REQUIRED** for all capabilities. The origin
 
 | Namespace       | Required Origin           |
 | --------------- | ------------------------- |
-| `dev.ucp.*`     | `https://ucp.dev/...`     |
+| `dev.ucp.*`     | `../...`                  |
 | `com.example.*` | `https://example.com/...` |
 
 Platform **MUST** validate this binding and **SHOULD** reject capabilities where the spec origin does not match the namespace authority.
@@ -3579,7 +3579,7 @@ The following table defines the required headers for enabling an A2A Agent to co
 
 The A2A Protocol provides a strong foundation for inter-agent communication. [A2A extensions](https://a2a-protocol.org/latest/topics/extensions/) enable communication between agents with structured data types. This enables businesses to build AI applications to leverage UCP data types for communication with platforms.
 
-The URI for UCP A2A extension: `https://ucp.dev/specification/reference?v=2026-01-11`
+The URI for UCP A2A extension: `./reference?v=2026-01-11`
 
 Businesses supporting UCP must advertise the extension and any optional capabilities in their A2A Agent Card to allow platforms to activate the extension.
 
@@ -7020,7 +7020,7 @@ PREREQUISITES(participant, onboarding_input) → prerequisites_output
 
 **Prerequisites Output:**
 
-The `prerequisites_output` contains what a participant receives from onboarding. At minimum, this includes an **identity** (see [Payment Identity](https://ucp.dev/schemas/shopping/types/payment_identity.json)). It **MAY** also include additional configuration, credentials, or settings specific to the handler.
+The `prerequisites_output` contains what a participant receives from onboarding. At minimum, this includes an **identity** (see [Payment Identity](/%7Bversion%7D/schemas/shopping/types/payment_identity.json)). It **MAY** also include additional configuration, credentials, or settings specific to the handler.
 
 Payment handler specifications **are not required** to define a formal schema for `prerequisites_output`. Instead, the specification **SHOULD** clearly document:
 
@@ -7052,7 +7052,7 @@ HANDLER_DECLARATION(prerequisites_output) → handler_declaration
 
 **Output Structure:**
 
-The handler declaration conforms to the [`PaymentHandler`](https://ucp.dev/schemas/shopping/types/payment_handler.json) schema. The specification **SHOULD** define the available config and instrument schemas, and how to construct each based on the business's prerequisites output and desired configuration.
+The handler declaration conforms to the [`PaymentHandler`](/%7Bversion%7D/schemas/shopping/types/payment_handler.json) schema. The specification **SHOULD** define the available config and instrument schemas, and how to construct each based on the business's prerequisites output and desired configuration.
 
 ```json
 {
@@ -7104,10 +7104,10 @@ ______________________________________________________________________
 
 **Base Instrument Schemas:**
 
-| Schema                                                                                                | Description                                             |
-| ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| [`payment_instrument.json`](https://ucp.dev/schemas/shopping/types/payment_instrument.json)           | Base: id, handler_id, type, credential, billing_address |
-| [`card_payment_instrument.json`](https://ucp.dev/schemas/shopping/types/card_payment_instrument.json) | Card display: brand, last_digits, expiry                |
+| Schema                                                                                               | Description                                             |
+| ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| [`payment_instrument.json`](/%7Bversion%7D/schemas/shopping/types/payment_instrument.json)           | Base: id, handler_id, type, credential, billing_address |
+| [`card_payment_instrument.json`](/%7Bversion%7D/schemas/shopping/types/card_payment_instrument.json) | Card display: brand, last_digits, expiry                |
 
 UCP provides base schemas for universal payment instruments like `card`. Spec authors **MAY** extend any of the basic payment instruments to add additional handler-specific display data.
 
@@ -7132,10 +7132,10 @@ UCP provides base schemas for universal payment instruments like `card`. Spec au
 
 **Base Credential Schemas:**
 
-| Schema                                                                                      | Description                   |
-| ------------------------------------------------------------------------------------------- | ----------------------------- |
-| [`payment_credential.json`](https://ucp.dev/schemas/shopping/types/payment_credential.json) | Base: type discriminator only |
-| [`token_credential.json`](https://ucp.dev/schemas/shopping/types/token_credential.json)     | Token: type + token string    |
+| Schema                                                                                     | Description                   |
+| ------------------------------------------------------------------------------------------ | ----------------------------- |
+| [`payment_credential.json`](/%7Bversion%7D/schemas/shopping/types/payment_credential.json) | Base: type discriminator only |
+| [`token_credential.json`](/%7Bversion%7D/schemas/shopping/types/token_credential.json)     | Token: type + token string    |
 
 UCP provides base schemas for universal payment credentials like `card` and `token`. Authors **MAY** extend these schemas to include handler-specific credential context.
 
@@ -7571,7 +7571,7 @@ ______________________________________________________________________
 
 # Tokenization Guide
 
-**OpenAPI:** [Tokenization API](https://ucp.dev/handlers/tokenization/openapi.json)
+**OpenAPI:** [Tokenization API](/%7Bversion%7D/handlers/tokenization/openapi.json)
 
 ## Overview
 
@@ -7644,7 +7644,7 @@ All tokenization requests require a `binding` object that ties the token to a sp
 | `checkout_id` | Yes         | The checkout session this token is valid for                                                    |
 | `identity`    | Conditional | The participant identity to bind to; required when caller acts on behalf of another participant |
 
-The tokenizer **MUST** verify binding matches on `/detokenize`. See [Binding Schema](https://ucp.dev/schemas/shopping/types/binding.json).
+The tokenizer **MUST** verify binding matches on `/detokenize`. See [Binding Schema](/%7Bversion%7D/schemas/shopping/types/binding.json).
 
 ______________________________________________________________________
 
@@ -7722,7 +7722,7 @@ Authorization: Bearer {caller_access_token}
 
 **Note:** `binding.identity` is omitted when the authenticated caller is the binding target. Include it when acting on behalf of another participant (e.g., PSP detokenizing for business).
 
-See the full [OpenAPI specification](https://ucp.dev/handlers/tokenization/openapi.json) for complete request/response schemas.
+See the full [OpenAPI specification](/%7Bversion%7D/handlers/tokenization/openapi.json) for complete request/response schemas.
 
 ______________________________________________________________________
 
@@ -7759,7 +7759,7 @@ When publishing your handler, your specification document **MUST** include:
 
 ```markdown
 **Handler Name:** `com.acme.tokenization_payment`
-**OpenAPI:** [Tokenization API](https://ucp.dev/handlers/tokenization/openapi.json)
+**OpenAPI:** [Tokenization API](/{version}/handlers/tokenization/openapi.json)
 
 | Environment | Base URL |
 |:------------|:---------|
@@ -7800,13 +7800,13 @@ ______________________________________________________________________
 
 ## References
 
-| Resource                | URL                                                                   |
-| ----------------------- | --------------------------------------------------------------------- |
-| Tokenization OpenAPI    | `https://ucp.dev/handlers/tokenization/openapi.json`                  |
-| Identity Schema         | `https://ucp.dev/schemas/shopping/types/payment_identity.json`        |
-| Binding Schema          | `https://ucp.dev/schemas/shopping/types/binding.json`                 |
-| Token Credential Schema | `https://ucp.dev/schemas/shopping/types/token_credential.json`        |
-| Card Instrument Schema  | `https://ucp.dev/schemas/shopping/types/card_payment_instrument.json` |
+| Resource                | URL                                                              |
+| ----------------------- | ---------------------------------------------------------------- |
+| Tokenization OpenAPI    | `/{version}/handlers/tokenization/openapi.json`                  |
+| Identity Schema         | `/{version}/schemas/shopping/types/payment_identity.json`        |
+| Binding Schema          | `/{version}/schemas/shopping/types/binding.json`                 |
+| Token Credential Schema | `/{version}/schemas/shopping/types/token_credential.json`        |
+| Card Instrument Schema  | `/{version}/schemas/shopping/types/card_payment_instrument.json` |
 
 ______________________________________________________________________
 
@@ -8164,7 +8164,7 @@ Optionally, businesses may configure their PSP to detokenize on their behalf (PS
 
 Businesses advertise the platform's tokenization handler. The `config` contains the business's identity with the platform for token binding. The platform's handler specification (referenced via `spec`) documents the `/detokenize` endpoint URL exposed by the platform's **payment credential provider**.
 
-The handler accepts [CardCredential](https://ucp.dev/schemas/shopping/types/card_credential.json) for tokenization and produces [TokenCredential](https://ucp.dev/schemas/shopping/types/token_credential.json) for checkout.
+The handler accepts [CardCredential](/%7Bversion%7D/schemas/shopping/types/card_credential.json) for tokenization and produces [TokenCredential](/%7Bversion%7D/schemas/shopping/types/token_credential.json) for checkout.
 
 **Note:** The result of `/detokenize` contains **sensitive payment data**. Both the sender (platform's credential provider) and receiver (business or PSP) **MUST** be PCI DSS compliant.
 
@@ -8361,9 +8361,9 @@ ______________________________________________________________________
 
 ## References
 
-- **Pattern:** [Tokenization Payment Handler](https://ucp.dev/specification/payment-handler-guide)
-- **API Pattern:** `https://ucp.dev/handlers/tokenization/openapi.json`
-- **Identity Schema:** `https://ucp.dev/schemas/shopping/types/payment_identity.json`
+- **Pattern:** [Tokenization Payment Handler](https://ucp.dev/2026-01-11/specification/payment-handler-guide/index.md)
+- **API Pattern:** `/{version}/handlers/tokenization/openapi.json`
+- **Identity Schema:** `/{version}/schemas/shopping/types/payment_identity.json`
 
 # Encrypted Credential Handler
 
@@ -8457,9 +8457,9 @@ While businesses receive only encrypted `EncryptedCredential` payloads during ch
 
 Businesses advertise the platform's handler. The `identity` field contains the **business's identity**, which the platform uses to look up the correct public key for encryption.
 
-The only supported identity schema is [PaymentIdentity](https://ucp.dev/schemas/shopping/types/payment_identity.json).
+The only supported identity schema is [PaymentIdentity](/%7Bversion%7D/schemas/shopping/types/payment_identity.json).
 
-The only supported instrument schema is [CardPaymentInstrument](https://ucp.dev/schemas/shopping/types/card_payment_instrument.json), the only supported checkout credential schema is `EncryptedCredential`, and the only supported source credential schema is [CardCredential](https://ucp.dev/schemas/shopping/types/card_credential.json).
+The only supported instrument schema is [CardPaymentInstrument](/%7Bversion%7D/schemas/shopping/types/card_payment_instrument.json), the only supported checkout credential schema is `EncryptedCredential`, and the only supported source credential schema is [CardCredential](/%7Bversion%7D/schemas/shopping/types/card_credential.json).
 
 **Note:** `CardCredential` contains raw PANs. The platform's **PCI DSS compliant** vaulting service handles these credentials and encrypts them before transmission. Businesses receive only encrypted payloads but MUST be PCI DSS compliant once they decrypt the credentials locally.
 
@@ -8576,8 +8576,8 @@ ______________________________________________________________________
 
 ## References
 
-- **Identity Schema:** `https://ucp.dev/schemas/shopping/types/payment_identity.json`
-- **Instrument Schema:** `https://ucp.dev/schemas/shopping/types/card_payment_instrument.json`
+- **Identity Schema:** `/{version}/schemas/shopping/types/payment_identity.json`
+- **Instrument Schema:** `/{version}/schemas/shopping/types/card_payment_instrument.json`
 
 # Schema Reference
 
