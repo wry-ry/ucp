@@ -132,13 +132,23 @@ jobs:
           echo "Set SITE_URL to $PAGES_URL"
           echo "SITE_URL=$PAGES_URL" >> $GITHUB_ENV
 
-      - name: Build Documentation (PR Check)
-        if: github.event_name == 'pull_request'
-        run: mkdocs build --strict
+      - name: Build and Verify Specification Docs
+        run: |
+          export DOCS_MODE=spec
+          mkdocs build --strict
+          python scripts/check_links.py site
+
+      - name: Build and Verify Root Docs (Main only)
+        if: github.ref == 'refs/heads/main' || github.event.pull_request.base.ref == 'main'
+        run: |
+          export DOCS_MODE=root
+          mkdocs build --strict
+          python scripts/check_links.py site
 
       - name: Deploy development version from main branch
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
+          export DOCS_MODE=spec
           mike deploy --push draft
 
       - name: Deploy release version
