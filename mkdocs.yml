@@ -30,14 +30,13 @@ exclude_docs: |
 
 # Navigation
 nav:
-  - Overview:
-      - Home: index.md
-      - Core Concepts: documentation/core-concepts.md
-      - Specification: https://ucp.dev/latest/specification/overview/
-      - UCP and AP2: documentation/ucp-and-ap2.md
-      - Roadmap: documentation/roadmap.md
-      - Schema Authoring: documentation/schema-authoring.md
-      - Versioning: versioning.md
+  - Home: index.md
+  - Core Concepts: documentation/core-concepts.md
+  - Specification: /latest/specification/overview/
+  - UCP and AP2: documentation/ucp-and-ap2.md
+  - Roadmap: documentation/roadmap.md
+  - Schema Authoring: documentation/schema-authoring.md
+  - Versioning: versioning.md
 
 repo_name: UCP on GitHub # Override repo name to be shorter on site header.
 repo_url: https://github.com/Universal-Commerce-Protocol/ucp

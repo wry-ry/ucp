@@ -25,6 +25,7 @@ on:
   pull_request:
     branches:
       - main
+      - 'release/**'
     paths:
       - ".github/workflows/docs.yml"
       - "requirements-docs.txt"
@@ -134,15 +135,19 @@ jobs:
           echo "SITE_URL=$PAGES_URL" >> $GITHUB_ENV
 
       - name: Build Documentation (PR Check - Root)
-        if: github.event_name == 'pull_request' && steps.root_files_changed.outputs.any_changed == 'true'
+        if: github.event_name == 'pull_request' && github.base_ref == 'main' && steps.root_files_changed.outputs.any_changed == 'true'
         run: uv run mkdocs build --strict -f mkdocs.yml
 
       - name: Build Documentation (PR Check - Spec)
-        if: github.event_name == 'pull_request' && steps.spec_files_changed.outputs.any_changed == 'true'
+        if: github.event_name == 'pull_request' && (startsWith(github.base_ref, 'release/') || steps.spec_files_changed.outputs.any_changed == 'true')
         run: uv run mkdocs build --strict -f mkdocs-spec.yml
 
-      - name: Deploy development version from main branch
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      - name: Deploy spec version (draft) from main branch
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.spec_files_changed.outputs.any_changed == 'true'
+        run: uv run mike deploy --config-file mkdocs-spec.yml --push draft
+
+      - name: Deploy root site from main branch
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.root_files_changed.outputs.any_changed == 'true'
         run: |
           # 1. Build Root Site
           uv run mkdocs build -f mkdocs.yml
@@ -162,16 +167,24 @@ jobs:
           git push origin gh-pages
 
       - name: Deploy release version
-        if: startsWith(github.ref, 'refs/heads/release/')
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/heads/release/')
         run: |
           # Extract the date (e.g., release/2026-01-11 -> 2026-01-11)
           VERSION_NAME=${GITHUB_REF#refs/heads/release/}
 
-          # Deploy this version, tag it as 'latest', and set it as the default site root
-          uv run mike deploy --config-file mkdocs-spec.yml --push --update-aliases $VERSION_NAME latest
+          # Get all remote release branches, extract dates, and find the latest one
+          LATEST_VERSION=$(git branch -r | grep "origin/release/[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}" | sed 's/ *origin\/release\///' | sort -r | head -n 1)
+
+          if [ "$VERSION_NAME" = "$LATEST_VERSION" ]; then
+            echo "Deploying $VERSION_NAME and updating 'latest' alias"
+            uv run mike deploy --config-file mkdocs-spec.yml --push --update-aliases $VERSION_NAME latest
+          else
+            echo "Deploying $VERSION_NAME without updating 'latest' alias (Latest is $LATEST_VERSION)"
+            uv run mike deploy --config-file mkdocs-spec.yml --push $VERSION_NAME
+          fi
 
       - name: Create GitHub Release and Tag
-        if: startsWith(github.ref, 'refs/heads/release/')
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/heads/release/')
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
