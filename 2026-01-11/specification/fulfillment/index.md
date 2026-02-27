@@ -12,7 +12,7 @@ This extension adds a `fulfillment` field to Checkout containing:
   - `groups[]` — business-generated packages, each with selectable `options[]`
 - `available_methods[]` — inventory availability per item (optional)
 
-**Mental model:**
+### Mental model
 
 - `methods[0]` Shipping
   - `line_item_ids` 👕👖
@@ -211,25 +211,25 @@ Fulfillment options are designed for **method-agnostic rendering**. Platforms do
 
 ### Business Responsibilities
 
-**For `options[].title`:**
+### For `options[].title`
 
 - **MUST** distinguish this option from its siblings
 - **SHOULD** include method and speed (e.g., "Express Shipping", "Curbside Pickup")
 - **MUST** be sufficient for buyer decision if `description` is absent
 
-**For `options[].description`:**
+### For `options[].description`
 
 - **MUST NOT** repeat `title` or `total`—provides supplementary context only
 - **SHOULD** include timing, carrier, or other decision-relevant details
 - **SHOULD** be a complete phrase (e.g., "Arrives Dec 12-15 via FedEx")
 - **MAY** be omitted if title is self-explanatory
 
-**For `available_methods[].description`:**
+### For `available_methods[].description`
 
 - **MUST** be a standalone sentence explaining what, when, and where
 - **SHOULD** be usable verbatim in platform dialogue (e.g., "Pants available for pickup at Downtown Store today at 2pm")
 
-**For ordering:**
+### For ordering
 
 - Businesses **SHOULD** return `options[]` in a meaningful order (e.g., cheapest first, fastest first)
 - Platforms **SHOULD** render options in the provided order
@@ -344,13 +344,13 @@ This example says: shipping can go to multiple addresses, and carts can mix ship
 
 ### Business Response Behavior
 
-**When `supports_multi_group: false` (default):**
+### When `supports_multi_group: false` (default)
 
 - Business **MUST** consolidate all items into a **single group per method**
 - Response still uses array structure: `methods[].groups[]` with `groups.length === 1`
 - Business **MAY** still return multiple methods (e.g., shipping + pickup) if cart items require it
 
-**When `supports_multi_group: true`:**
+### When `supports_multi_group: true`
 
 - Business **MAY** return multiple groups per method based on inventory, packaging, or warehouse logic
 - Platform is responsible for rendering group selection UI (e.g., choose shipping speed per package)

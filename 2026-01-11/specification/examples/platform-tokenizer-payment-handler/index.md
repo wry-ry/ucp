@@ -37,7 +37,7 @@ ______________________________________________________________________
 
 ### Pattern Flow: Business Detokenizes
 
-```text
+```json
 ┌─────────────────┐                              ┌────────────┐
 │    Platform     │                              │  Business  │
 │  (Tokenizer)    │                              │            │
@@ -72,7 +72,7 @@ ______________________________________________________________________
 
 ### Pattern Flow: PSP Detokenizes
 
-```text
+```json
 ┌─────────────────┐     ┌────────────┐      ┌─────────┐
 │    Platform     │     │  Business  │      │   PSP   │
 │  (Tokenizer)    │     │            │      │         │
@@ -116,7 +116,7 @@ ______________________________________________________________________
 
 ### Prerequisites
 
-**CRITICAL: Security & Compliance Required**
+### CRITICAL: Security & Compliance Required
 
 Before accepting this handler, businesses must register with the platform to obtain authentication credentials for calling `/detokenize`.
 
@@ -128,7 +128,7 @@ As the party receiving sensitive instrument details (e.g., PANs) via the `/detok
 
 Optionally, businesses may configure their PSP to detokenize on their behalf (PSP must also be compliant).
 
-**Prerequisites Output:**
+### Prerequisites Output
 
 | Field                      | Description                                                   |
 | -------------------------- | ------------------------------------------------------------- |
@@ -209,7 +209,7 @@ This handler is implemented by platforms that operate **compliant payment creden
 1. Expose a `/detokenize` endpoint conforming to the API pattern from the credential provider.
 1. Onboard businesses and PSPs who will call the credential provider's `/detokenize` endpoint.
 
-**Implementation Requirements:**
+### Implementation Requirements
 
 | Requirement            | Description                                                                              |
 | ---------------------- | ---------------------------------------------------------------------------------------- |
@@ -262,7 +262,7 @@ ______________________________________________________________________
 
 ### Prerequisites
 
-**CRITICAL: Security & Compliance Required**
+### CRITICAL: Security & Compliance Required
 
 Before detokenizing on behalf of businesses, PSPs must register with the platform, providing the list of businesses they process for.
 
@@ -272,7 +272,7 @@ As the party receiving sensitive instrument details via the `/detokenize` endpoi
 - Secure handling of sensitive data during payment processing
 - Compliance with all regulations regarding the storage and processing of financial instruments
 
-**Prerequisites Output:**
+### Prerequisites Output
 
 | Field                      | Description                                                   |
 | -------------------------- | ------------------------------------------------------------- |

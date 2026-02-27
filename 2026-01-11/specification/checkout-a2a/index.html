@@ -783,7 +783,16 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Checkout Completion">
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#request-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Request format
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Request format">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -797,6 +806,15 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#request-format_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Request format
+    </span>
+  </a>
   
 </li>
         
@@ -1399,7 +1417,16 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Checkout Completion">
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#request-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Request format
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Request format">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1413,6 +1440,15 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#request-format_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Request format
+    </span>
+  </a>
   
 </li>
         
@@ -1481,8 +1517,8 @@ platforms to interact with the business services over A2A Protocol.</p>
 <h2 id="shopping-agent-profile-advertisement">Shopping Agent Profile Advertisement<a class="headerlink" href="#shopping-agent-profile-advertisement" title="Permanent link">&para;</a></h2>
 <p>Shopping platforms interacting with the business agent must send their profile
 URI as <code>UCP-Agent</code> request headers with every request.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>UCP-Agent: profile=&quot;https://agent.example/profiles/v2025-11/shopping-agent.json&quot;
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Content-Type: application/json
+<div class="language-json highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="err">UCP</span><span class="mi">-</span><span class="err">Age</span><span class="kc">nt</span><span class="p">:</span><span class="w"> </span><span class="err">pro</span><span class="kc">f</span><span class="err">ile=</span><span class="s2">&quot;https://agent.example/profiles/v2025-11/shopping-agent.json&quot;</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="err">Co</span><span class="kc">ntent</span><span class="mi">-</span><span class="err">Type</span><span class="p">:</span><span class="w"> </span><span class="err">applica</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="err">/jso</span><span class="kc">n</span>
 </span></code></pre></div>
 <h3 id="header-mapping-reference">Header Mapping Reference<a class="headerlink" href="#header-mapping-reference" title="Permanent link">&para;</a></h3>
 <p>The following table defines the required headers for enabling an A2A Agent to
@@ -1646,7 +1682,7 @@ with attribute name <code>a2a.ucp.checkout.payment_data</code>. Any associated r
 should be sent with attribute name <code>a2a.ucp.checkout.risk_signals</code>.</p>
 <p>Upon completion of the checkout process, the business agent must return the
 checkout object containing an <code>order</code> attribute with <code>id</code> and <code>permalink_url</code>.</p>
-<p><strong>Request format:</strong></p>
+<h3 id="request-format">Request format<a class="headerlink" href="#request-format" title="Permanent link">&para;</a></h3>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">{</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user&quot;</span><span class="p">,</span>
@@ -1737,7 +1773,7 @@ the <code>DataPart</code> as <code>ap2.checkout_mandate</code>. The <code>token<
 <code>payment_data</code> contains the payment mandate. Refer to
 <a href="../ap2-mandates/">AP2 Mandates Extension</a> documentation for more details about
 verification and processing of the mandates to complete the checkout.</p>
-<p><strong>Request format:</strong></p>
+<h3 id="request-format_1">Request format<a class="headerlink" href="#request-format_1" title="Permanent link">&para;</a></h3>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">{</span>
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">        </span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user&quot;</span><span class="p">,</span>

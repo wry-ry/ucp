@@ -642,6 +642,51 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#flow-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Flow overview
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#payments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fulfillment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fulfillment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checkout-status-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checkout Status Lifecycle
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#status-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Status Values
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#error-handling" class="md-nav__link">
     <span class="md-ellipsis">
       Error Handling
@@ -733,6 +778,30 @@
       Guidelines
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Guidelines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      Platform
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#business" class="md-nav__link">
+    <span class="md-ellipsis">
+      Business
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1738,6 +1807,51 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#flow-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Flow overview
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#payments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fulfillment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fulfillment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checkout-status-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checkout Status Lifecycle
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#status-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Status Values
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#error-handling" class="md-nav__link">
     <span class="md-ellipsis">
       Error Handling
@@ -1829,6 +1943,30 @@
       Guidelines
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Guidelines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      Platform
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#business" class="md-nav__link">
+    <span class="md-ellipsis">
+      Business
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2288,57 +2426,57 @@ finalized manually by the user through a trusted UI unless the AP2 Mandates
 extension is supported.</p>
 <p>The business remains the Merchant of Record (MoR), and they don't need to become
 PCI DSS compliant to support this Capability.</p>
-<p><strong>Flow overview</strong></p>
+<h3 id="flow-overview">Flow overview<a class="headerlink" href="#flow-overview" title="Permanent link">&para;</a></h3>
 <p><img alt="High-level checkout flow sequence diagram" src="/ucp/2026-01-11/specification/images/ucp-checkout-flow.png" /></p>
-<p><strong>Payments</strong></p>
+<h3 id="payments">Payments<a class="headerlink" href="#payments" title="Permanent link">&para;</a></h3>
 <p>On checkout creation, businesses are required to define a payment configuration.
 The Checkout object includes <code>payment.handlers</code> which define the processing
 specifications for collecting payment instruments (e.g., Google Pay, direct
 tokenization). When the buyer submits payment, the platform populates the
 <code>payment.instruments</code> array with the collected instrument data.</p>
-<p><strong>Fulfillment</strong></p>
+<h3 id="fulfillment">Fulfillment<a class="headerlink" href="#fulfillment" title="Permanent link">&para;</a></h3>
 <p>Fulfillment is modelled as an extension in UCP to account for diverse use cases.</p>
 <p>Fulfillment is optional in the checkout object. This is done to enable a
 platform to perform checkout for digital goods without needing to furnish
 fulfillment details more relevant for physical goods.</p>
-<p><strong>Checkout Status Lifecycle</strong></p>
+<h3 id="checkout-status-lifecycle">Checkout Status Lifecycle<a class="headerlink" href="#checkout-status-lifecycle" title="Permanent link">&para;</a></h3>
 <p>The checkout <code>status</code> field indicates the current phase of the session and
 determines what action is required next. The business sets the status; the
 platform receives messages indicating what's needed to progress.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>┌────────────┐    ┌─────────────────────┐
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>│ incomplete │◀──▶│ requires_escalation │
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>└─────┬──────┘    │                     │
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>      │           │  (buyer handoff     │
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>      │           │   via continue_url) │
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>      │           └──────────┬──────────┘
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>      │                      │
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>      │ all info collected   │ continue_url
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>      ▼                      │
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>┌──────────────────┐         │
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>│ready_for_complete│         │
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>│                  │         │
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>│ (platform can    │         │
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>│ call Complete    │         │
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>│   Checkout).     │         │
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>└────────┬─────────┘         │
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>         │                   │
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>         │ Complete Checkout │
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>         ▼                   │
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>┌────────────────────┐       │
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>│complete_in_progress│       │
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>└─────────┬──────────┘       │
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>          │                  │
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>          └────────┬─────────┘
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>                   ▼
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>            ┌─────────────┐
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>            │  completed  │
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>            └─────────────┘
+<div class="language-json highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="err">┌────────────┐</span><span class="w">    </span><span class="err">┌─────────────────────┐</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="err">│</span><span class="w"> </span><span class="err">i</span><span class="kc">n</span><span class="err">comple</span><span class="kc">te</span><span class="w"> </span><span class="err">│◀──▶│</span><span class="w"> </span><span class="err">requires_escala</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="w"> </span><span class="err">│</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="err">└─────┬──────┘</span><span class="w">    </span><span class="err">│</span><span class="w">                     </span><span class="err">│</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">      </span><span class="err">│</span><span class="w">           </span><span class="err">│</span><span class="w">  </span><span class="err">(buyer</span><span class="w"> </span><span class="err">ha</span><span class="kc">n</span><span class="err">do</span><span class="kc">ff</span><span class="w">     </span><span class="err">│</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">      </span><span class="err">│</span><span class="w">           </span><span class="err">│</span><span class="w">   </span><span class="err">via</span><span class="w"> </span><span class="err">co</span><span class="kc">nt</span><span class="err">i</span><span class="kc">nue</span><span class="err">_url)</span><span class="w"> </span><span class="err">│</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">      </span><span class="err">│</span><span class="w">           </span><span class="err">└──────────┬──────────┘</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">      </span><span class="err">│</span><span class="w">                      </span><span class="err">│</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">      </span><span class="err">│</span><span class="w"> </span><span class="err">all</span><span class="w"> </span><span class="err">i</span><span class="kc">nf</span><span class="err">o</span><span class="w"> </span><span class="err">collec</span><span class="kc">te</span><span class="err">d</span><span class="w">   </span><span class="err">│</span><span class="w"> </span><span class="err">co</span><span class="kc">nt</span><span class="err">i</span><span class="kc">nue</span><span class="err">_url</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">      </span><span class="err">▼</span><span class="w">                      </span><span class="err">│</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="err">┌──────────────────┐</span><span class="w">         </span><span class="err">│</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="err">│ready_</span><span class="kc">f</span><span class="err">or_comple</span><span class="kc">te</span><span class="err">│</span><span class="w">         </span><span class="err">│</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="err">│</span><span class="w">                  </span><span class="err">│</span><span class="w">         </span><span class="err">│</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="err">│</span><span class="w"> </span><span class="err">(pla</span><span class="kc">tf</span><span class="err">orm</span><span class="w"> </span><span class="err">ca</span><span class="kc">n</span><span class="w">    </span><span class="err">│</span><span class="w">         </span><span class="err">│</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="err">│</span><span class="w"> </span><span class="err">call</span><span class="w"> </span><span class="err">Comple</span><span class="kc">te</span><span class="w">    </span><span class="err">│</span><span class="w">         </span><span class="err">│</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="err">│</span><span class="w">   </span><span class="err">Checkou</span><span class="kc">t</span><span class="err">).</span><span class="w">     </span><span class="err">│</span><span class="w">         </span><span class="err">│</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="err">└────────┬─────────┘</span><span class="w">         </span><span class="err">│</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">         </span><span class="err">│</span><span class="w">                   </span><span class="err">│</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">         </span><span class="err">│</span><span class="w"> </span><span class="err">Comple</span><span class="kc">te</span><span class="w"> </span><span class="err">Checkou</span><span class="kc">t</span><span class="w"> </span><span class="err">│</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">         </span><span class="err">▼</span><span class="w">                   </span><span class="err">│</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="err">┌────────────────────┐</span><span class="w">       </span><span class="err">│</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="err">│comple</span><span class="kc">te</span><span class="err">_i</span><span class="kc">n</span><span class="err">_progress│</span><span class="w">       </span><span class="err">│</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="err">└─────────┬──────────┘</span><span class="w">       </span><span class="err">│</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="w">          </span><span class="err">│</span><span class="w">                  </span><span class="err">│</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="w">          </span><span class="err">└────────┬─────────┘</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="w">                   </span><span class="err">▼</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">            </span><span class="err">┌─────────────┐</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="w">            </span><span class="err">│</span><span class="w">  </span><span class="err">comple</span><span class="kc">te</span><span class="err">d</span><span class="w">  </span><span class="err">│</span>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="w">            </span><span class="err">└─────────────┘</span>
 </span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>
-</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>            ┌─────────────┐
-</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>            │  canceled   │  (session invalid/expired - can occur from any state)
-</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>            └─────────────┘
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="w">            </span><span class="err">┌─────────────┐</span>
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="w">            </span><span class="err">│</span><span class="w">  </span><span class="err">ca</span><span class="kc">n</span><span class="err">celed</span><span class="w">   </span><span class="err">│</span><span class="w">  </span><span class="err">(sessio</span><span class="kc">n</span><span class="w"> </span><span class="err">i</span><span class="kc">n</span><span class="err">valid/expired</span><span class="w"> </span><span class="mi">-</span><span class="w"> </span><span class="err">ca</span><span class="kc">n</span><span class="w"> </span><span class="err">occur</span><span class="w"> </span><span class="kc">fr</span><span class="err">om</span><span class="w"> </span><span class="err">a</span><span class="kc">n</span><span class="err">y</span><span class="w"> </span><span class="err">s</span><span class="kc">tate</span><span class="err">)</span>
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="w">            </span><span class="err">└─────────────┘</span>
 </span></code></pre></div>
-<p><strong>Status Values</strong></p>
+<h3 id="status-values">Status Values<a class="headerlink" href="#status-values" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
 <p><strong><code>incomplete</code></strong>: Checkout session is missing required information or has
@@ -2440,24 +2578,24 @@ Businesses <strong>SHOULD</strong> surface such messages as early as possible, a
 </span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="p">}</span>
 </span></code></pre></div>
 <p>Example error processing algorithm:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>GIVEN checkout with messages array
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>FILTER errors FROM messages WHERE type = &quot;error&quot;
+<div class="language-json highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="err">GIVEN</span><span class="w"> </span><span class="err">checkou</span><span class="kc">t</span><span class="w"> </span><span class="err">wi</span><span class="kc">t</span><span class="err">h</span><span class="w"> </span><span class="err">messages</span><span class="w"> </span><span class="err">array</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="err">FILTER</span><span class="w"> </span><span class="err">errors</span><span class="w"> </span><span class="err">FROM</span><span class="w"> </span><span class="err">messages</span><span class="w"> </span><span class="err">WHERE</span><span class="w"> </span><span class="kc">t</span><span class="err">ype</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="s2">&quot;error&quot;</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>PARTITION errors INTO
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>  recoverable           WHERE severity = &quot;recoverable&quot;
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>  requires_buyer_input  WHERE severity = &quot;requires_buyer_input&quot;
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>  requires_buyer_review WHERE severity = &quot;requires_buyer_review&quot;
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="err">PARTITION</span><span class="w"> </span><span class="err">errors</span><span class="w"> </span><span class="err">INTO</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="err">recoverable</span><span class="w">           </span><span class="err">WHERE</span><span class="w"> </span><span class="err">severi</span><span class="kc">t</span><span class="err">y</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="s2">&quot;recoverable&quot;</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="err">requires_buyer_i</span><span class="kc">n</span><span class="err">pu</span><span class="kc">t</span><span class="w">  </span><span class="err">WHERE</span><span class="w"> </span><span class="err">severi</span><span class="kc">t</span><span class="err">y</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="s2">&quot;requires_buyer_input&quot;</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span><span class="err">requires_buyer_review</span><span class="w"> </span><span class="err">WHERE</span><span class="w"> </span><span class="err">severi</span><span class="kc">t</span><span class="err">y</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="s2">&quot;requires_buyer_review&quot;</span>
 </span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>IF recoverable is not empty
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>  FOR EACH error IN recoverable
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    ATTEMPT to fix error (e.g., reformat phone number)
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>  CALL Update Checkout
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>  RETURN and re-evaluate response
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="err">IF</span><span class="w"> </span><span class="err">recoverable</span><span class="w"> </span><span class="err">is</span><span class="w"> </span><span class="kc">n</span><span class="err">o</span><span class="kc">t</span><span class="w"> </span><span class="err">emp</span><span class="kc">t</span><span class="err">y</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">  </span><span class="err">FOR</span><span class="w"> </span><span class="err">EACH</span><span class="w"> </span><span class="err">error</span><span class="w"> </span><span class="err">IN</span><span class="w"> </span><span class="err">recoverable</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="err">ATTEMPT</span><span class="w"> </span><span class="kc">t</span><span class="err">o</span><span class="w"> </span><span class="kc">f</span><span class="err">ix</span><span class="w"> </span><span class="err">error</span><span class="w"> </span><span class="err">(e.g.</span><span class="p">,</span><span class="w"> </span><span class="err">re</span><span class="kc">f</span><span class="err">orma</span><span class="kc">t</span><span class="w"> </span><span class="err">pho</span><span class="kc">ne</span><span class="w"> </span><span class="kc">nu</span><span class="err">mber)</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">  </span><span class="err">CALL</span><span class="w"> </span><span class="err">Upda</span><span class="kc">te</span><span class="w"> </span><span class="err">Checkou</span><span class="kc">t</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">  </span><span class="err">RETURN</span><span class="w"> </span><span class="err">a</span><span class="kc">n</span><span class="err">d</span><span class="w"> </span><span class="err">re</span><span class="mf">-e</span><span class="err">valua</span><span class="kc">te</span><span class="w"> </span><span class="err">respo</span><span class="kc">nse</span>
 </span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>IF requires_buyer_input is not empty
-</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>  handoff_context = &quot;incomplete, additional input from buyer is required&quot;
-</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>ELSE IF requires_buyer_review is not empty
-</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>  handoff_context = &quot;ready for final review by the buyer&quot;
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="err">IF</span><span class="w"> </span><span class="err">requires_buyer_i</span><span class="kc">n</span><span class="err">pu</span><span class="kc">t</span><span class="w"> </span><span class="err">is</span><span class="w"> </span><span class="kc">n</span><span class="err">o</span><span class="kc">t</span><span class="w"> </span><span class="err">emp</span><span class="kc">t</span><span class="err">y</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">  </span><span class="err">ha</span><span class="kc">n</span><span class="err">do</span><span class="kc">ff</span><span class="err">_co</span><span class="kc">nte</span><span class="err">x</span><span class="kc">t</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="s2">&quot;incomplete, additional input from buyer is required&quot;</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="err">ELSE</span><span class="w"> </span><span class="err">IF</span><span class="w"> </span><span class="err">requires_buyer_review</span><span class="w"> </span><span class="err">is</span><span class="w"> </span><span class="kc">n</span><span class="err">o</span><span class="kc">t</span><span class="w"> </span><span class="err">emp</span><span class="kc">t</span><span class="err">y</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">  </span><span class="err">ha</span><span class="kc">n</span><span class="err">do</span><span class="kc">ff</span><span class="err">_co</span><span class="kc">nte</span><span class="err">x</span><span class="kc">t</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="s2">&quot;ready for final review by the buyer&quot;</span>
 </span></code></pre></div>
 <h2 id="continue-url">Continue URL<a class="headerlink" href="#continue-url" title="Permanent link">&para;</a></h2>
 <p>The <code>continue_url</code> field enables checkout handoff from platform to business UI,
@@ -2474,7 +2612,7 @@ checkout state for seamless handoff. Businesses <strong>MAY</strong> implement s
 preservation using either approach:</p>
 <h4 id="server-side-state-recommended">Server-Side State (Recommended)<a class="headerlink" href="#server-side-state-recommended" title="Permanent link">&para;</a></h4>
 <p>An opaque URL backed by server-side checkout state:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>https://business.example.com/checkout-sessions/{checkout_id}
+<div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="err">h</span><span class="kc">tt</span><span class="err">ps</span><span class="p">:</span><span class="c1">//business.example.com/checkout-sessions/{checkout_id}</span>
 </span></code></pre></div>
 <ul>
 <li>Server maintains checkout state tied to <code>checkout_id</code></li>
@@ -2493,7 +2631,7 @@ redirect to the checkout UI or renders the checkout page directly.</p>
 </blockquote>
 <h2 id="guidelines">Guidelines<a class="headerlink" href="#guidelines" title="Permanent link">&para;</a></h2>
 <p>(In addition to the overarching guidelines)</p>
-<p><strong>Platform</strong></p>
+<h3 id="platform">Platform<a class="headerlink" href="#platform" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>MAY</strong> engage an agent to facilitate the checkout session (e.g. add items to
   the checkout session, select fulfillment address). However, the agent must
@@ -2509,7 +2647,7 @@ redirect to the checkout UI or renders the checkout page directly.</p>
 <li>When performing handoff, <strong>SHOULD</strong> prefer business-provided <code>continue_url</code>
   over platform-constructed checkout permalinks.</li>
 </ul>
-<p><strong>Business</strong></p>
+<h3 id="business">Business<a class="headerlink" href="#business" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>MUST</strong> send a confirmation email after the checkout has been completed.</li>
 <li><strong>SHOULD</strong> provide accurate error messages.</li>

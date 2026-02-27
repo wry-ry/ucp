@@ -43,7 +43,7 @@ ECP draws inspiration from the **[W3C Payment Request API](https://www.w3.org/TR
 
 ECP availability is signaled via service discovery. When a business advertises the `embedded` transport in their `/.well-known/ucp` profile, all checkout `continue_url` values support the Embedded Checkout Protocol.
 
-**Service Discovery Example:**
+### Service Discovery Example
 
 ```json
 {
@@ -93,13 +93,13 @@ All ECP parameters are passed via URL query string, not HTTP headers, to ensure 
 
 #### Authentication
 
-**Token Format:**
+### Token Format
 
 - The `auth` parameter format is entirely business-defined
 - Common formats include JWT, OAuth tokens, API keys, or session identifiers
 - Businesses **MUST** document their expected token format and validation process
 
-**Example (Informative - JWT-based):**
+### Example (Informative - JWT-based)
 
 ```json
 // One possible implementation using JWT
@@ -117,9 +117,9 @@ All ECP parameters are passed via URL query string, not HTTP headers, to ensure 
 
 Businesses **MUST** validate authentication according to their security requirements.
 
-**Example initialization with authentication:**
+### Example initialization with authentication
 
-```text
+```json
 https://example.com/checkout/abc123?ec_version=2026-01-11&ec_auth=eyJ...
 ```
 
@@ -129,7 +129,7 @@ Note: All query parameter values must be properly URL-encoded per RFC 3986.
 
 The optional `ec_delegate` parameter declares which operations the host wants to handle natively, instead of having a buyer handle them in the Embedded Checkout UI. Each delegation identifier maps to a corresponding `_request` message following a consistent pattern: `ec.{delegation}_request`
 
-**Example delegation identifiers:**
+### Example delegation identifiers
 
 | `ec_delegate` value          | Corresponding message                   |
 | ---------------------------- | --------------------------------------- |
@@ -139,7 +139,7 @@ The optional `ec_delegate` parameter declares which operations the host wants to
 
 Extensions define their own delegation identifiers; see each extension's specification for available options.
 
-```text
+```json
 ?ec_version=2026-01-11&ec_delegate=payment.instruments_change,payment.credential,fulfillment.address_change
 ```
 
@@ -161,13 +161,13 @@ The Embedded Checkout **MUST** indicate accepted delegations in the `ec.ready` r
 
 **Once delegation is accepted**, both parties enter a binding contract:
 
-**Embedded Checkout responsibilities:**
+### Embedded Checkout responsibilities
 
 1. **MUST** fire the appropriate `{action}_request` message when that action is triggered
 1. **MUST** wait for the host's response before proceeding
 1. **MUST NOT** show its own UI for that delegated action
 
-**Host responsibilities:**
+### Host responsibilities
 
 1. **MUST** respond to every `{action}_request` message it receives
 1. **MUST** respond with an appropriate error if the user cancels
@@ -186,7 +186,7 @@ See [Payment Extension](#payment-extension) and [Fulfillment Extension](#fulfill
 
 When checkout is rendered in embedded mode, the implementation **SHOULD** prevent off-checkout navigation to maintain a focused checkout experience. The embedded view is intended to provide a checkout flow, not a general-purpose browser.
 
-**Navigation Requirements:**
+### Navigation Requirements
 
 - The embedded checkout **SHOULD** block or intercept navigation attempts to URLs outside the checkout flow
 - The embedded checkout **SHOULD** remove or disable UI elements that would navigate away from checkout (e.g., external links, navigation bars)
@@ -233,13 +233,13 @@ All ECP messages **MUST** use JSON-RPC 2.0 format ([RFC 7159](https://datatracke
 
 For requests (messages with `id`), receivers **MUST** respond with either:
 
-**Success Response:**
+### Success Response
 
 ```json
 { "jsonrpc": "2.0", "id": "...", "result": {...} }
 ```
 
-**Error Response:**
+### Error Response
 
 ```json
 { "jsonrpc": "2.0", "id": "...", "error": {...} }
@@ -310,7 +310,7 @@ Upon rendering, the Embedded Checkout **MUST** broadcast readiness to the parent
 - **Payload:**
   - `delegate` (array of strings, **REQUIRED**): List of delegation identifiers accepted by the Embedded Checkout. This is a subset of the delegations requested via the `ec_delegate` URL parameter. Omitted or empty array means no delegations were accepted.
 
-**Example Message (no delegations accepted):**
+### Example Message (no delegations accepted)
 
 ```json
 {
@@ -323,7 +323,7 @@ Upon rendering, the Embedded Checkout **MUST** broadcast readiness to the parent
 }
 ```
 
-**Example Message (delegations accepted):**
+### Example Message (delegations accepted)
 
 ```json
 {
@@ -345,7 +345,7 @@ The `ec.ready` message is a request, which means that the host **MUST** respond 
   - `checkout` (object, **OPTIONAL**): Additional, display-only state for the checkout that was not communicated over UCP checkout actions. This is used to populate the checkout UI, and may only be used to populate the following fields, under specific conditions:
     - `payment.instruments`: can be overwritten when the host and Embedded Checkout both accept the `payment.instruments_change` delegation.
 
-**Example Message:**
+### Example Message
 
 ```json
 {
@@ -357,7 +357,7 @@ The `ec.ready` message is a request, which means that the host **MUST** respond 
 
 Hosts **MAY** respond with an `upgrade` field to update the communication channel between host and Embedded Checkout. Currently, this object only supports a `port` field, which **MUST** be a `MessagePort` object, and **MUST** be transferred to the embedded checkout context (e.g., with `{transfer: [port2]}` on the host's `iframe.contentWindow.postMessage()` call):
 
-**Example Message:**
+### Example Message
 
 ```json
 {
@@ -375,7 +375,9 @@ When the host responds with an `upgrade` object, the Embedded Checkout **MUST** 
 
 The host **MAY** also respond with a `checkout` object, which will be used to populate the checkout UI according to the delegation contract between host and business.
 
-**Example Message: Providing payment instruments, including display information:**
+### Example Message: Providing payment instruments, including display
+
+information:
 
 ```json
 {
@@ -416,7 +418,7 @@ Signals that checkout is visible and ready for interaction.
 - **Payload:**
   - `checkout`: The latest state of the checkout, using the same structure as the `checkout` object in UCP responses.
 
-**Example Message:**
+### Example Message
 
 ```json
 {
@@ -461,7 +463,7 @@ Indicates successful checkout completion.
 - **Payload:**
   - `checkout`: The latest state of the checkout, using the same structure as the `checkout` object in UCP responses.
 
-**Example Message:**
+### Example Message
 
 ```json
 {
@@ -493,7 +495,7 @@ Line items have been modified (quantity changed, items added/removed) in the che
 - **Payload:**
   - `checkout`: The latest state of the checkout
 
-**Example Message:**
+### Example Message
 
 ```json
 {
@@ -524,7 +526,7 @@ Buyer information has been updated in the checkout UI.
 - **Payload:**
   - `checkout`: The latest state of the checkout
 
-**Example Message:**
+### Example Message
 
 ```json
 {
@@ -552,7 +554,7 @@ Checkout messages have been updated. Messages include errors, warnings, and info
 - **Payload:**
   - `checkout`: The latest state of the checkout
 
-**Example Message:**
+### Example Message
 
 ```json
 {
@@ -615,7 +617,7 @@ Informs the host that something has changed in the payment section of the checko
 - **Payload:**
   - `checkout`: The latest state of the checkout
 
-**Example Message:**
+### Example Message
 
 ```json
 {
@@ -649,7 +651,7 @@ Requests the host to present payment instrument selection UI.
 - **Payload:**
   - `checkout`: The latest state of the checkout
 
-**Example Message:**
+### Example Message
 
 ```json
 {
@@ -676,7 +678,7 @@ The host **MUST** respond with either an error, or the newly-selected payment in
 - **Payload:**
   - `checkout`: The update to apply to the checkout object
 
-**Example Success Response:**
+### Example Success Response
 
 ```json
 {
@@ -707,7 +709,7 @@ The host **MUST** respond with either an error, or the newly-selected payment in
 }
 ```
 
-**Example Error Response:**
+### Example Error Response
 
 ```json
 {
@@ -729,7 +731,7 @@ Requests a credential for the selected payment instrument during checkout submis
 - **Payload:**
   - `checkout`: The latest state of the checkout
 
-**Example Message:**
+### Example Message
 
 ```json
 {
@@ -762,7 +764,7 @@ The host **MUST** respond with either an error, or the credential for the select
 - **Payload:**
   - `checkout`: The update to apply to the checkout object
 
-**Example Success Response:**
+### Example Success Response
 
 ```json
 {
@@ -796,7 +798,7 @@ The host **MUST** respond with either an error, or the credential for the select
 }
 ```
 
-**Example Error Response:**
+### Example Error Response
 
 ```json
 {
@@ -809,7 +811,7 @@ The host **MUST** respond with either an error, or the credential for the select
 }
 ```
 
-**Host responsibilities during payment token delegation:**
+### Host responsibilities during payment token delegation
 
 1. **Confirmation:** Host displays the Trusted Payment UI (Payment Sheet / Biometric Prompt). The host **MUST NOT** silently release a token based solely on the message.
 1. **Auth:** host performs User Authorization via the Payment Handler.
@@ -849,7 +851,7 @@ Informs the host that the fulfillment details have been changed in the checkout 
 - **Payload:**
   - `checkout`: The latest state of the checkout
 
-**Example Message:**
+### Example Message
 
 ```json
 {
@@ -877,7 +879,7 @@ Requests the host to present address selection UI for a shipping fulfillment met
 - **Payload:**
   - `checkout`: The latest state of the checkout
 
-**Example Message:**
+### Example Message
 
 ```json
 {
@@ -918,7 +920,7 @@ The host **MUST** respond with either an error, or the newly-selected address. I
 - **Payload:**
   - `checkout`: The update to apply to the checkout object
 
-**Example Success Response:**
+### Example Success Response
 
 ```json
 {
@@ -948,7 +950,7 @@ The host **MUST** respond with either an error, or the newly-selected address. I
 }
 ```
 
-**Example Error Response:**
+### Example Error Response
 
 ```json
 {
@@ -998,7 +1000,11 @@ Responses to delegation request messages from the embedded checkout may resolve 
 
 #### Content Security Policy (CSP)
 
-To ensure security, both parties **MUST** implement appropriate **[Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)** directives:
+To ensure security, both parties **MUST** implement appropriate
+
+### [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
+
+directives:
 
 - **Business:** **MUST** set `frame-ancestors <host_origin>;` to ensure it's only embedded by trusted hosts.
 

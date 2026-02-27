@@ -61,7 +61,7 @@ Every payment handler specification **MUST** define the core elements below.
 
 **Note on Terminology:**: While this guide refers to the participant as the **"Business"**, technical schema fields may retain the standard industry nomenclature **`merchant_*`** (e.g., `merchant_id`, `merchant_name`). Specifications **MUST** explicitly document these field mappings.
 
-**Standard Participants:**
+### Standard Participants
 
 | Participant  | Role                                                               |
 | ------------ | ------------------------------------------------------------------ |
@@ -79,7 +79,7 @@ Every payment handler specification **MUST** define the core elements below.
 
 **Definition:** The onboarding, setup, or configuration a participant must complete before participating in the handler's flows.
 
-**Signature:**
+### Signature
 
 ```text
 PREREQUISITES(participant, onboarding_input) → prerequisites_output
@@ -91,7 +91,7 @@ PREREQUISITES(participant, onboarding_input) → prerequisites_output
 | `onboarding_input`     | What the participant provides during setup                 |
 | `prerequisites_output` | The identity and any additional configuration received     |
 
-**Prerequisites Output:**
+### Prerequisites Output
 
 The `prerequisites_output` contains what a participant receives from onboarding. At minimum, this includes an **identity** (see [Payment Identity](/ucp/2026-01-11/schemas/shopping/types/payment_identity.json)). It **MAY** also include additional configuration, credentials, or settings specific to the handler.
 
@@ -101,7 +101,7 @@ Payment handler specifications **are not required** to define a formal schema fo
 - What additional configuration is provided
 - How the prerequisites output is used in Handler Declaration, Instrument Acquisition, or Processing
 
-**Notes:**
+### Notes
 
 - Prerequisites typically occur out-of-band (portals, contracts, API calls)
 - Multiple participants **MAY** have independent prerequisites
@@ -112,7 +112,7 @@ Payment handler specifications **are not required** to define a formal schema fo
 
 **Definition:** The configuration a business advertises to indicate support for this handler and enable platforms to invoke it.
 
-**Signature:**
+### Signature
 
 ```text
 HANDLER_DECLARATION(prerequisites_output) → handler_declaration
@@ -123,7 +123,7 @@ HANDLER_DECLARATION(prerequisites_output) → handler_declaration
 | `prerequisites_output` | The identity and configuration from business prerequisites     |
 | `handler_declaration`  | The complete handler object advertised in `payment.handlers[]` |
 
-**Output Structure:**
+### Output Structure
 
 The handler declaration conforms to the [`PaymentHandler`](/ucp/2026-01-11/schemas/shopping/types/payment_handler.json) schema. The specification **SHOULD** define the available config and instrument schemas, and how to construct each based on the business's prerequisites output and desired configuration.
 
@@ -151,7 +151,7 @@ The `config_schema` field points to a JSON schema that validates the `config` ob
 
 **Recommendation:** Most handlers require an environment setting (e.g., Sandbox vs. Production). It is recommended to include this in the config schema to **standardize** testing flows.
 
-**Example Config Schema:**
+### Example Config Schema
 
 ```json
 {
@@ -175,7 +175,7 @@ ______________________________________________________________________
 
 #### Defining Instrument Schemas
 
-**Base Instrument Schemas:**
+### Base Instrument Schemas
 
 | Schema                                                                                                | Description                                             |
 | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
@@ -205,7 +205,7 @@ UCP provides base schemas for universal payment instruments like `card`. Spec au
 
 #### Defining Credential Schemas
 
-**Base Credential Schemas:**
+### Base Credential Schemas
 
 | Schema                                                                                      | Description                   |
 | ------------------------------------------------------------------------------------------- | ----------------------------- |
@@ -235,7 +235,7 @@ The specification **MUST** define which credential types are accepted by the han
 
 **Definition:** The protocol a platform follows to acquire a payment instrument that can be submitted to the business's checkout.
 
-**Signature:**
+### Signature
 
 ```text
 INSTRUMENT_ACQUISITION(
@@ -263,7 +263,7 @@ Payment handler specifications do NOT need to define a formal process for instru
 
 **Definition:** The steps a participant (typically business or PSP) takes to process a received payment instrument and complete the transaction.
 
-**Signature:**
+### Signature
 
 ```text
 PROCESSING(
@@ -298,7 +298,7 @@ ______________________________________________________________________
 
 Handler specifications **SHOULD** use the standard template structure. Sections marked **[REQUIRED]** **MUST** be present; sections marked **[CONDITIONAL]** are required only when applicable.
 
-**→ [Payment Handler Template](https://ucp.dev/2026-01-11/specification/payment-handler-template/index.md)**
+### → [Payment Handler Template](https://ucp.dev/2026-01-11/specification/payment-handler-template/index.md)
 
 ## Conformance Checklist for Spec Authors
 

@@ -36,7 +36,7 @@ ______________________________________________________________________
 
 {Optional: ASCII diagram showing participant relationships}
 
-```text
+```json
 ┌─────────┐     ┌───────────────┐     ┌────────────┐
 │Platform │     │   {Provider}  │     │  Business  │
 └────┬────┘     └───────┬───────┘     └──────┬─────┘
@@ -62,7 +62,7 @@ Before advertising this handler, businesses **MUST** complete:
 1. {Prerequisite 1, e.g., "Register with {provider} to obtain a business identifier"}
 1. {Prerequisite 2}
 
-**Prerequisites Output:**
+### Prerequisites Output
 
 | Field                   | Description                                      |
 | ----------------------- | ------------------------------------------------ |
@@ -126,7 +126,7 @@ Before using this handler, Platforms **MUST** complete:
 1. {Prerequisite 1, e.g., "Register with {provider} to obtain a Platform identifier"}
 1. {Prerequisite 2}
 
-**Prerequisites Output:**
+### Prerequisites Output
 
 | Field                   | Description                                    |
 | ----------------------- | ---------------------------------------------- |
@@ -201,7 +201,7 @@ Before participating in this handler's flow, {participants} **MUST** complete:
 1. {Prerequisite 1}
 1. {Prerequisite 2}
 
-**Prerequisites Output:**
+### Prerequisites Output
 
 | Field                   | Description                                    |
 | ----------------------- | ---------------------------------------------- |

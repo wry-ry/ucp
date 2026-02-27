@@ -33,7 +33,7 @@ ______________________________________________________________________
 
 ### Pattern Flow
 
-```text
+```json
 ┌─────────────────┐                              ┌────────────┐
 │  Platform       │                              │  Business  │
 │                 │                              │            │
@@ -69,7 +69,7 @@ ______________________________________________________________________
 
 ### Prerequisites
 
-**CRITICAL: PCI DSS Compliance Required**
+### CRITICAL: PCI DSS Compliance Required
 
 Before accepting this handler, businesses must register their public encryption key with the platform.
 
@@ -79,7 +79,7 @@ While businesses receive only encrypted `EncryptedCredential` payloads during ch
 - Secure handling of raw credentials after decryption
 - Compliance with all PCI DSS requirements for handling Primary Account Numbers (PANs)
 
-**Prerequisites Output:**
+### Prerequisites Output
 
 | Field                   | Description                                                |
 | ----------------------- | ---------------------------------------------------------- |
@@ -143,7 +143,7 @@ This handler is implemented by platforms that operate **PCI DSS compliant** cred
 1. Store business public keys during onboarding
 1. Encrypt credentials using the correct business's key based on handler identity
 
-**Implementation Requirements:**
+### Implementation Requirements
 
 | Requirement | Description                                                      |
 | ----------- | ---------------------------------------------------------------- |

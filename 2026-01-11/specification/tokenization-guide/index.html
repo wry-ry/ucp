@@ -990,6 +990,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#openapi" class="md-nav__link">
+    <span class="md-ellipsis">
+      OpenAPI
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
       Overview
@@ -1041,7 +1050,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#openapi" class="md-nav__link">
+  <a href="#openapi_1" class="md-nav__link">
     <span class="md-ellipsis">
       OpenAPI
     </span>
@@ -1060,9 +1069,27 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#response" class="md-nav__link">
+    <span class="md-ellipsis">
+      Response
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#post-detokenize" class="md-nav__link">
     <span class="md-ellipsis">
       POST /detokenize
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Response
     </span>
   </a>
   
@@ -1356,6 +1383,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#openapi" class="md-nav__link">
+    <span class="md-ellipsis">
+      OpenAPI
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
       Overview
@@ -1407,7 +1443,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#openapi" class="md-nav__link">
+  <a href="#openapi_1" class="md-nav__link">
     <span class="md-ellipsis">
       OpenAPI
     </span>
@@ -1426,9 +1462,27 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#response" class="md-nav__link">
+    <span class="md-ellipsis">
+      Response
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#post-detokenize" class="md-nav__link">
     <span class="md-ellipsis">
       POST /detokenize
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Response
     </span>
   </a>
   
@@ -1535,7 +1589,9 @@
 -->
 
 <h1 id="tokenization-guide">Tokenization Guide<a class="headerlink" href="#tokenization-guide" title="Permanent link">&para;</a></h1>
-<p><strong>OpenAPI:</strong> <a href="/ucp/2026-01-11/handlers/tokenization/openapi.json">Tokenization API</a></p>
+<h2 id="openapi">OpenAPI<a class="headerlink" href="#openapi" title="Permanent link">&para;</a></h2>
+<p><a href="/ucp/2026-01-11/handlers/tokenization/openapi.json">Tokenization API</a>
+<strong>OpenAPI:</strong> <a href="/ucp/2026-01-11/handlers/tokenization/openapi.json">Tokenization API</a></p>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>This guide is for <strong>implementers building tokenization payment handlers</strong>. It
 defines the shared API, security requirements, and conformance criteria that all
@@ -1567,36 +1623,36 @@ tokenization handlers follow.</p>
 <h2 id="core-concepts">Core Concepts<a class="headerlink" href="#core-concepts" title="Permanent link">&para;</a></h2>
 <h3 id="credential-flow">Credential Flow<a class="headerlink" href="#credential-flow" title="Permanent link">&para;</a></h3>
 <p>Tokenization handlers transform credentials between source and checkout forms:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>┌─────────────────────────────────────────────────────────────────────────┐
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>│                     Tokenization Payment Flow                           │
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>├─────────────────────────────────────────────────────────────────────────┤
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>│                                                                         │
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│   Platform has:            Tokenizer            Business receives:      │
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>│   Card Credential    ──▶  /tokenize  ──▶         TokenCredential        │
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>│                                                                         │
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>│   ┌─────────────────┐                      ┌─────────────────────────┐  │
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>│   │ source_         │                      │ checkout_               │  │
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>│   │ credentials     │    What goes IN      │ credentials             │  │
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>│   │                 │◀───────────────      │                         │  │
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>│   │ • card/fpan     │                      │ What comes OUT          │  │
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>│   │ • card/dpan     │                ─────▶│ • token                 │  │
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>│   │                 │                      │                         │  │
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>│   └─────────────────┘                      └─────────────────────────┘  │
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>│                                                                         │
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>└─────────────────────────────────────────────────────────────────────────┘
+<div class="language-json highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="err">┌─────────────────────────────────────────────────────────────────────────┐</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="err">│</span><span class="w">                     </span><span class="err">Toke</span><span class="kc">n</span><span class="err">iza</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="w"> </span><span class="err">Payme</span><span class="kc">nt</span><span class="w"> </span><span class="err">Flow</span><span class="w">                           </span><span class="err">│</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="err">├─────────────────────────────────────────────────────────────────────────┤</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="err">│</span><span class="w">                                                                         </span><span class="err">│</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="err">│</span><span class="w">   </span><span class="err">Pla</span><span class="kc">tf</span><span class="err">orm</span><span class="w"> </span><span class="err">has</span><span class="p">:</span><span class="w">            </span><span class="err">Toke</span><span class="kc">n</span><span class="err">izer</span><span class="w">            </span><span class="err">Busi</span><span class="kc">ness</span><span class="w"> </span><span class="err">receives</span><span class="p">:</span><span class="w">      </span><span class="err">│</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="err">│</span><span class="w">   </span><span class="err">Card</span><span class="w"> </span><span class="err">Crede</span><span class="kc">nt</span><span class="err">ial</span><span class="w">    </span><span class="err">──▶</span><span class="w">  </span><span class="err">/</span><span class="kc">t</span><span class="err">oke</span><span class="kc">n</span><span class="err">ize</span><span class="w">  </span><span class="err">──▶</span><span class="w">         </span><span class="err">Toke</span><span class="kc">n</span><span class="err">Crede</span><span class="kc">nt</span><span class="err">ial</span><span class="w">        </span><span class="err">│</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="err">│</span><span class="w">                                                                         </span><span class="err">│</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="err">│</span><span class="w">   </span><span class="err">┌─────────────────┐</span><span class="w">                      </span><span class="err">┌─────────────────────────┐</span><span class="w">  </span><span class="err">│</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w"> </span><span class="err">source_</span><span class="w">         </span><span class="err">│</span><span class="w">                      </span><span class="err">│</span><span class="w"> </span><span class="err">checkou</span><span class="kc">t</span><span class="err">_</span><span class="w">               </span><span class="err">│</span><span class="w">  </span><span class="err">│</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w"> </span><span class="err">crede</span><span class="kc">nt</span><span class="err">ials</span><span class="w">     </span><span class="err">│</span><span class="w">    </span><span class="err">Wha</span><span class="kc">t</span><span class="w"> </span><span class="err">goes</span><span class="w"> </span><span class="err">IN</span><span class="w">      </span><span class="err">│</span><span class="w"> </span><span class="err">crede</span><span class="kc">nt</span><span class="err">ials</span><span class="w">             </span><span class="err">│</span><span class="w">  </span><span class="err">│</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">                 </span><span class="err">│◀───────────────</span><span class="w">      </span><span class="err">│</span><span class="w">                         </span><span class="err">│</span><span class="w">  </span><span class="err">│</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w"> </span><span class="err">•</span><span class="w"> </span><span class="err">card/</span><span class="kc">f</span><span class="err">pa</span><span class="kc">n</span><span class="w">     </span><span class="err">│</span><span class="w">                      </span><span class="err">│</span><span class="w"> </span><span class="err">Wha</span><span class="kc">t</span><span class="w"> </span><span class="err">comes</span><span class="w"> </span><span class="err">OUT</span><span class="w">          </span><span class="err">│</span><span class="w">  </span><span class="err">│</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w"> </span><span class="err">•</span><span class="w"> </span><span class="err">card/dpa</span><span class="kc">n</span><span class="w">     </span><span class="err">│</span><span class="w">                </span><span class="err">─────▶│</span><span class="w"> </span><span class="err">•</span><span class="w"> </span><span class="kc">t</span><span class="err">oke</span><span class="kc">n</span><span class="w">                 </span><span class="err">│</span><span class="w">  </span><span class="err">│</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">                 </span><span class="err">│</span><span class="w">                      </span><span class="err">│</span><span class="w">                         </span><span class="err">│</span><span class="w">  </span><span class="err">│</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="err">│</span><span class="w">   </span><span class="err">└─────────────────┘</span><span class="w">                      </span><span class="err">└─────────────────────────┘</span><span class="w">  </span><span class="err">│</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="err">│</span><span class="w">                                                                         </span><span class="err">│</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="err">└─────────────────────────────────────────────────────────────────────────┘</span>
 </span></code></pre></div>
 <p>Tokenization handlers accept source credentials (e.g., card with FPAN) and
 produce checkout credentials (e.g., tokens).</p>
 <h3 id="token-lifecycle">Token Lifecycle<a class="headerlink" href="#token-lifecycle" title="Permanent link">&para;</a></h3>
 <p>Tokens move through distinct phases. Your handler specification must document
 which lifecycle policy you use:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>┌──────────────┐    ┌──────────────┐    ┌──────────────┐    ┌──────────────┐
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>│  Generation  │───▶│   Storage    │───▶│ Detokenize   │───▶│ Invalidation │
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>│              │    │              │    │              │    │              │
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>│Platform calls│    │ Tokenizer    │    │ Business/PSP │    │ Token expires│
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>│ /tokenize    │    │ holds token  │    │ calls        │    │ or is used   │
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>│              │    │ → credential │    │ /detokenize  │    │              │
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>└──────────────┘    └──────────────┘    └──────────────┘    └──────────────┘
+<div class="language-json highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="err">┌──────────────┐</span><span class="w">    </span><span class="err">┌──────────────┐</span><span class="w">    </span><span class="err">┌──────────────┐</span><span class="w">    </span><span class="err">┌──────────────┐</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="err">│</span><span class="w">  </span><span class="err">Ge</span><span class="kc">nerat</span><span class="err">io</span><span class="kc">n</span><span class="w">  </span><span class="err">│───▶│</span><span class="w">   </span><span class="err">S</span><span class="kc">t</span><span class="err">orage</span><span class="w">    </span><span class="err">│───▶│</span><span class="w"> </span><span class="err">De</span><span class="kc">t</span><span class="err">oke</span><span class="kc">n</span><span class="err">ize</span><span class="w">   </span><span class="err">│───▶│</span><span class="w"> </span><span class="err">I</span><span class="kc">n</span><span class="err">valida</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="w"> </span><span class="err">│</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="err">│</span><span class="w">              </span><span class="err">│</span><span class="w">    </span><span class="err">│</span><span class="w">              </span><span class="err">│</span><span class="w">    </span><span class="err">│</span><span class="w">              </span><span class="err">│</span><span class="w">    </span><span class="err">│</span><span class="w">              </span><span class="err">│</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="err">│Pla</span><span class="kc">tf</span><span class="err">orm</span><span class="w"> </span><span class="err">calls│</span><span class="w">    </span><span class="err">│</span><span class="w"> </span><span class="err">Toke</span><span class="kc">n</span><span class="err">izer</span><span class="w">    </span><span class="err">│</span><span class="w">    </span><span class="err">│</span><span class="w"> </span><span class="err">Busi</span><span class="kc">ness</span><span class="err">/PSP</span><span class="w"> </span><span class="err">│</span><span class="w">    </span><span class="err">│</span><span class="w"> </span><span class="err">Toke</span><span class="kc">n</span><span class="w"> </span><span class="err">expires│</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="err">│</span><span class="w"> </span><span class="err">/</span><span class="kc">t</span><span class="err">oke</span><span class="kc">n</span><span class="err">ize</span><span class="w">    </span><span class="err">│</span><span class="w">    </span><span class="err">│</span><span class="w"> </span><span class="err">holds</span><span class="w"> </span><span class="kc">t</span><span class="err">oke</span><span class="kc">n</span><span class="w">  </span><span class="err">│</span><span class="w">    </span><span class="err">│</span><span class="w"> </span><span class="err">calls</span><span class="w">        </span><span class="err">│</span><span class="w">    </span><span class="err">│</span><span class="w"> </span><span class="err">or</span><span class="w"> </span><span class="err">is</span><span class="w"> </span><span class="err">used</span><span class="w">   </span><span class="err">│</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="err">│</span><span class="w">              </span><span class="err">│</span><span class="w">    </span><span class="err">│</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="err">crede</span><span class="kc">nt</span><span class="err">ial</span><span class="w"> </span><span class="err">│</span><span class="w">    </span><span class="err">│</span><span class="w"> </span><span class="err">/de</span><span class="kc">t</span><span class="err">oke</span><span class="kc">n</span><span class="err">ize</span><span class="w">  </span><span class="err">│</span><span class="w">    </span><span class="err">│</span><span class="w">              </span><span class="err">│</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="err">└──────────────┘</span><span class="w">    </span><span class="err">└──────────────┘</span><span class="w">    </span><span class="err">└──────────────┘</span><span class="w">    </span><span class="err">└──────────────┘</span>
 </span></code></pre></div>
 <table>
 <thead>
@@ -1651,7 +1707,7 @@ specific context:</p>
 <p>The tokenizer <strong>MUST</strong> verify binding matches on <code>/detokenize</code>. See
 <a href="/ucp/2026-01-11/schemas/shopping/types/binding.json">Binding Schema</a>.</p>
 <hr />
-<h2 id="openapi">OpenAPI<a class="headerlink" href="#openapi" title="Permanent link">&para;</a></h2>
+<h2 id="openapi_1">OpenAPI<a class="headerlink" href="#openapi_1" title="Permanent link">&para;</a></h2>
 <p>Tokenization handlers implement two endpoints. Your handler <strong>MAY</strong> implement
 one or both depending on your architecture. Or none, like our encrypted payload
 example, which defines its own mechanism to encrypt.</p>
@@ -1679,7 +1735,7 @@ internally.</p>
 </span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">  </span><span class="p">}</span>
 </span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="p">}</span>
 </span></code></pre></div>
-<p><strong>Response:</strong></p>
+<h3 id="response">Response<a class="headerlink" href="#response" title="Permanent link">&para;</a></h3>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nt">&quot;token&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tok_abc123xyz789&quot;</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="p">}</span>
@@ -1699,7 +1755,7 @@ internally.</p>
 </span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">  </span><span class="p">}</span>
 </span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="p">}</span>
 </span></code></pre></div>
-<p><strong>Response:</strong></p>
+<h3 id="response_1">Response<a class="headerlink" href="#response_1" title="Permanent link">&para;</a></h3>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;card&quot;</span><span class="p">,</span>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">&quot;card_number_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fpan&quot;</span><span class="p">,</span>
@@ -1808,7 +1864,7 @@ for complete request/response schemas.</p>
 </span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>| Production  | <span class="sb">`https://api.acme.com/ucp`</span>         |
 </span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>| Sandbox     | <span class="sb">`https://sandbox.api.acme.com/ucp`</span> |
 </span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="gs">**Supported Instruments:**</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="gu">### Supported Instruments:</span>
 </span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>
 </span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>| Instrument | Source Credentials           | Checkout Credentials |
 </span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>| :--------- | :--------------------------- | :------------------- |

@@ -34,7 +34,7 @@ ______________________________________________________________________
 
 ### Pattern Flow
 
-```text
+```json
 ┌────────────┐                         ┌───────────────────────────────────┐
 │  Platform  │                         │       Tokenizer / Processor       │
 │ (Collector)│                         │      (Business or PSP)            │
@@ -101,7 +101,7 @@ Before using this handler, platforms must:
 1. Have access to a **compliant secure payment credential providers** that collects sensitive payment data from users. This service must meet the compliance requirements of the instruments being handled (e.g., PCI DSS).
 1. Obtain authentication credentials (e.g., API Key) authorized to call the specific `endpoint` defined in the handler configuration.
 
-**Prerequisites Output:**
+### Prerequisites Output
 
 | Field                        | Description                                                                   |
 | ---------------------------- | ----------------------------------------------------------------------------- |

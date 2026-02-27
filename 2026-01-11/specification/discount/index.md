@@ -4,14 +4,14 @@
 
 Discount extension allows businesses to indicate that they support discount codes on checkout sessions, and specifies how the discount codes are to be shared between the platform and the business.
 
-**Key features:**
+### Key features
 
 - Submit one or more discount codes
 - Receive applied discounts with human-readable titles and amounts
 - Rejected codes communicated via `messages[]` with detailed error codes
 - Automatic discounts surfaced alongside code-based discounts
 
-**Dependencies:**
+### Dependencies
 
 - Checkout Capability
 
@@ -83,7 +83,7 @@ The `method` field indicates how the discount was calculated:
 
 When multiple discounts are applied, `priority` indicates the calculation order. Lower numbers are applied first:
 
-```text
+```json
 Cart: $100
 Discount A (priority: 1): 20% off → $100 × 0.8 = $80
 Discount B (priority: 2): $10 off → $80 - $10 = $70
@@ -109,13 +109,13 @@ This enables platforms to explain exactly how much each discount contributed to 
 
 Discount codes are submitted via standard checkout create/update operations.
 
-**Request behavior:**
+### Request behavior
 
 - **Replacement semantics**: Submitting `discounts.codes` replaces any previously submitted codes
 - **Clear codes**: Send empty array `"codes": []` to remove all discount codes
 - **Case-insensitive**: Codes are matched case-insensitively by business
 
-**Response behavior:**
+### Response behavior
 
 - `discounts.applied` contains all active discounts (code-based + automatic)
 - Rejected codes communicated via `messages[]` (see below)
@@ -140,7 +140,7 @@ When a submitted discount code cannot be applied, businesses communicate this vi
 
 > **Implementation guidance:** Operations that affect order totals, or the user's expectation of the total, **SHOULD** use `type: "warning"` to ensure they are surfaced to the user rather than silently handled by platforms. Rejected discounts are a prime example—the user expects a discount but won't receive it, so they should be informed.
 
-**Error codes for rejected discounts:**
+### Error codes for rejected discounts
 
 | Code                                   | Description                                 |
 | -------------------------------------- | ------------------------------------------- |
@@ -188,7 +188,7 @@ The `discounts.applied` array shows **what** was applied. The `totals[]` and `li
 
 A flat discount applied to the order total. No allocations—the discount applies to the order as a whole and uses `type: "discount"` in totals.
 
-**Request:**
+### Request
 
 ```json
 {
@@ -198,7 +198,7 @@ A flat discount applied to the order total. No allocations—the discount applie
 }
 ```
 
-**Response:**
+### Response
 
 ```json
 {
@@ -228,7 +228,7 @@ A flat discount applied to the order total. No allocations—the discount applie
 
 This example shows both discount types: a per-item discount (20% off) allocated to line items, and an automatic shipping discount at the order level.
 
-**Request:**
+### Request
 
 ```json
 {
@@ -238,7 +238,7 @@ This example shows both discount types: a per-item discount (20% off) allocated 
 }
 ```
 
-**Response:**
+### Response
 
 ```json
 {
@@ -296,7 +296,7 @@ This example shows both discount types: a per-item discount (20% off) allocated 
 
 When a discount code cannot be applied, the rejection is communicated via the `messages[]` array. The code still appears in `discounts.codes` (echoed back) but not in `discounts.applied`.
 
-**Request:**
+### Request
 
 ```json
 {
@@ -306,7 +306,7 @@ When a discount code cannot be applied, the rejection is communicated via the `m
 }
 ```
 
-**Response:**
+### Response
 
 ```json
 {
@@ -344,7 +344,7 @@ When a discount code cannot be applied, the rejection is communicated via the `m
 
 Multiple discounts applied with full allocation breakdown:
 
-**Response:**
+### Response
 
 ```json
 {

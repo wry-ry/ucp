@@ -99,7 +99,7 @@ Line items reflect what was purchased at checkout and their current state. Statu
 | status    | string                                                       | **Yes**  | Derived status: fulfilled if quantity.fulfilled == quantity.total, partial if quantity.fulfilled > 0, otherwise processing. **Enum:** `processing`, `partial`, `fulfilled` |
 | parent_id | string                                                       | No       | Parent line item identifier for any nested structures.                                                                                                                     |
 
-**Quantity Structure:**
+### Quantity Structure
 
 ```json
 {
@@ -108,9 +108,9 @@ Line items reflect what was purchased at checkout and their current state. Statu
 }
 ```
 
-**Status Derivation:**
+### Status Derivation
 
-```text
+```json
 if (fulfilled == total) → "fulfilled"
 else if (fulfilled > 0) → "partial"
 else → "processing"
@@ -309,7 +309,7 @@ The platform provides its webhook URL in the order capability's `config` field d
 | ----------- | ------ | -------- | ----------------------------------------------------------- |
 | webhook_url | string | **Yes**  | URL where merchant sends order lifecycle events (webhooks). |
 
-**Example:**
+### Example
 
 ```json
 {
@@ -325,14 +325,14 @@ The platform provides its webhook URL in the order capability's `config` field d
 
 Webhook payloads **MUST** be signed by the business and verified by the platform to ensure authenticity and integrity.
 
-**Signing (Business)**
+### Signing (Business)
 
 1. Select a key from the `signing_keys` array in UCP profile.
 1. Create a detached JWT (RFC 7797) over the request body using the selected key.
 1. Include the JWT in the `Request-Signature` header.
 1. Include the key ID in the JWT header's `kid` claim to allow the receiver to identify which key to use for verification.
 
-**Verification (Platform)**
+### Verification (Platform)
 
 1. Extract the `Request-Signature` header from the incoming webhook request.
 1. Parse the JWT header to retrieve the `kid` (key ID).
@@ -341,7 +341,7 @@ Webhook payloads **MUST** be signed by the business and verified by the platform
 1. Verify the JWT signature against the request body using the public key.
 1. If verification fails, reject the webhook with an appropriate error response.
 
-**Key Rotation**
+### Key Rotation
 
 The `signing_keys` array supports multiple keys to enable zero-downtime rotation:
 
@@ -350,12 +350,12 @@ The `signing_keys` array supports multiple keys to enable zero-downtime rotation
 
 ## Guidelines
 
-**Platform:**
+### Platform
 
 - **MUST** respond quickly with a 2xx HTTP status code to acknowledge receipt
 - Process events asynchronously after responding
 
-**Business:**
+### Business
 
 - **MUST** sign all webhook payloads using a key from their `signing_keys` array (published in `/.well-known/ucp`). The signature **MUST** be included in the `Request-Signature` header as a detached JWT (RFC 7797).
 - **MUST** send "Order created" event with fully populated order entity

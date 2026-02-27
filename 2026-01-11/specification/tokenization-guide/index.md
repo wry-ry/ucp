@@ -1,6 +1,8 @@
 # Tokenization Guide
 
-**OpenAPI:** [Tokenization API](/ucp/2026-01-11/handlers/tokenization/openapi.json)
+## OpenAPI
+
+[Tokenization API](/ucp/2026-01-11/handlers/tokenization/openapi.json) **OpenAPI:** [Tokenization API](/ucp/2026-01-11/handlers/tokenization/openapi.json)
 
 ## Overview
 
@@ -22,7 +24,7 @@ ______________________________________________________________________
 
 Tokenization handlers transform credentials between source and checkout forms:
 
-```text
+```json
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                     Tokenization Payment Flow                           │
 ├─────────────────────────────────────────────────────────────────────────┤
@@ -48,7 +50,7 @@ Tokenization handlers accept source credentials (e.g., card with FPAN) and produ
 
 Tokens move through distinct phases. Your handler specification must document which lifecycle policy you use:
 
-```text
+```json
 ┌──────────────┐    ┌──────────────┐    ┌──────────────┐    ┌──────────────┐
 │  Generation  │───▶│   Storage    │───▶│ Detokenize   │───▶│ Invalidation │
 │              │    │              │    │              │    │              │
@@ -109,7 +111,7 @@ Content-Type: application/json
 }
 ```
 
-**Response:**
+### Response
 
 ```json
 {
@@ -136,7 +138,7 @@ Authorization: Bearer {caller_access_token}
 }
 ```
 
-**Response:**
+### Response
 
 ```json
 {
@@ -195,7 +197,7 @@ When publishing your handler, your specification document **MUST** include:
 | Production  | `https://api.acme.com/ucp`         |
 | Sandbox     | `https://sandbox.api.acme.com/ucp` |
 
-**Supported Instruments:**
+### Supported Instruments:
 
 | Instrument | Source Credentials           | Checkout Credentials |
 | :--------- | :--------------------------- | :------------------- |

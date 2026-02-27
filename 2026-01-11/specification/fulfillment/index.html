@@ -822,6 +822,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mental-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mental model
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -991,6 +1006,42 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#for-optionstitle" class="md-nav__link">
+    <span class="md-ellipsis">
+      For options[].title
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-optionsdescription" class="md-nav__link">
+    <span class="md-ellipsis">
+      For options[].description
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-available_methodsdescription" class="md-nav__link">
+    <span class="md-ellipsis">
+      For available_methods[].description
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-ordering" class="md-nav__link">
+    <span class="md-ellipsis">
+      For ordering
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#platform-responsibilities" class="md-nav__link">
     <span class="md-ellipsis">
       Platform Responsibilities
@@ -1045,6 +1096,24 @@
   <a href="#business-response-behavior" class="md-nav__link">
     <span class="md-ellipsis">
       Business Response Behavior
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-supports_multi_group-false-default" class="md-nav__link">
+    <span class="md-ellipsis">
+      When supports_multi_group: false (default)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-supports_multi_group-true" class="md-nav__link">
+    <span class="md-ellipsis">
+      When supports_multi_group: true
     </span>
   </a>
   
@@ -1509,6 +1578,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mental-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mental model
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1678,6 +1762,42 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#for-optionstitle" class="md-nav__link">
+    <span class="md-ellipsis">
+      For options[].title
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-optionsdescription" class="md-nav__link">
+    <span class="md-ellipsis">
+      For options[].description
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-available_methodsdescription" class="md-nav__link">
+    <span class="md-ellipsis">
+      For available_methods[].description
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-ordering" class="md-nav__link">
+    <span class="md-ellipsis">
+      For ordering
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#platform-responsibilities" class="md-nav__link">
     <span class="md-ellipsis">
       Platform Responsibilities
@@ -1732,6 +1852,24 @@
   <a href="#business-response-behavior" class="md-nav__link">
     <span class="md-ellipsis">
       Business Response Behavior
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-supports_multi_group-false-default" class="md-nav__link">
+    <span class="md-ellipsis">
+      When supports_multi_group: false (default)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-supports_multi_group-true" class="md-nav__link">
+    <span class="md-ellipsis">
+      When supports_multi_group: true
     </span>
   </a>
   
@@ -1843,7 +1981,7 @@ goods fulfillment (shipping, pickup, etc).</p>
 </li>
 <li><code>available_methods[]</code> — inventory availability per item (optional)</li>
 </ul>
-<p><strong>Mental model:</strong></p>
+<h3 id="mental-model">Mental model<a class="headerlink" href="#mental-model" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>methods[0]</code> Shipping<ul>
 <li><code>line_item_ids</code> 👕👖</li>
@@ -2407,27 +2545,27 @@ that platforms render directly.</p>
 </tbody>
 </table>
 <h3 id="business-responsibilities">Business Responsibilities<a class="headerlink" href="#business-responsibilities" title="Permanent link">&para;</a></h3>
-<p><strong>For <code>options[].title</code>:</strong></p>
+<h3 id="for-optionstitle">For <code>options[].title</code><a class="headerlink" href="#for-optionstitle" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>MUST</strong> distinguish this option from its siblings</li>
 <li><strong>SHOULD</strong> include method and speed (e.g., "Express Shipping", "Curbside
   Pickup")</li>
 <li><strong>MUST</strong> be sufficient for buyer decision if <code>description</code> is absent</li>
 </ul>
-<p><strong>For <code>options[].description</code>:</strong></p>
+<h3 id="for-optionsdescription">For <code>options[].description</code><a class="headerlink" href="#for-optionsdescription" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>MUST NOT</strong> repeat <code>title</code> or <code>total</code>—provides supplementary context only</li>
 <li><strong>SHOULD</strong> include timing, carrier, or other decision-relevant details</li>
 <li><strong>SHOULD</strong> be a complete phrase (e.g., "Arrives Dec 12-15 via FedEx")</li>
 <li><strong>MAY</strong> be omitted if title is self-explanatory</li>
 </ul>
-<p><strong>For <code>available_methods[].description</code>:</strong></p>
+<h3 id="for-available_methodsdescription">For <code>available_methods[].description</code><a class="headerlink" href="#for-available_methodsdescription" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>MUST</strong> be a standalone sentence explaining what, when, and where</li>
 <li><strong>SHOULD</strong> be usable verbatim in platform dialogue (e.g., "Pants available for
   pickup at Downtown Store today at 2pm")</li>
 </ul>
-<p><strong>For ordering:</strong></p>
+<h3 id="for-ordering">For ordering<a class="headerlink" href="#for-ordering" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Businesses <strong>SHOULD</strong> return <code>options[]</code> in a meaningful order (e.g., cheapest
   first, fastest first)</li>
@@ -2571,7 +2709,7 @@ difference is whether <code>groups.length</code> can exceed 1 within each method
 <p>This example says: shipping can go to multiple addresses, and carts can mix
 shipping+pickup.</p>
 <h3 id="business-response-behavior">Business Response Behavior<a class="headerlink" href="#business-response-behavior" title="Permanent link">&para;</a></h3>
-<p><strong>When <code>supports_multi_group: false</code> (default):</strong></p>
+<h3 id="when-supports_multi_group-false-default">When <code>supports_multi_group: false</code> (default)<a class="headerlink" href="#when-supports_multi_group-false-default" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Business <strong>MUST</strong> consolidate all items into a <strong>single group per method</strong></li>
 <li>Response still uses array structure: <code>methods[].groups[]</code> with
@@ -2579,7 +2717,7 @@ shipping+pickup.</p>
 <li>Business <strong>MAY</strong> still return multiple methods (e.g., shipping + pickup) if
   cart items require it</li>
 </ul>
-<p><strong>When <code>supports_multi_group: true</code>:</strong></p>
+<h3 id="when-supports_multi_group-true">When <code>supports_multi_group: true</code><a class="headerlink" href="#when-supports_multi_group-true" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Business <strong>MAY</strong> return multiple groups per method based on inventory,
   packaging, or warehouse logic</li>
