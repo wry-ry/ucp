@@ -642,6 +642,51 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#flow-overviewn" class="md-nav__link">
+    <span class="md-ellipsis">
+      Flow overview\n
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#payments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fulfillment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fulfillment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checkout-status-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checkout Status Lifecycle
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#status-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Status Values
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#error-handling" class="md-nav__link">
     <span class="md-ellipsis">
       Error Handling
@@ -733,6 +778,30 @@
       Guidelines
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Guidelines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      Platform
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#business" class="md-nav__link">
+    <span class="md-ellipsis">
+      Business
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1738,6 +1807,51 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#flow-overviewn" class="md-nav__link">
+    <span class="md-ellipsis">
+      Flow overview\n
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#payments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fulfillment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fulfillment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checkout-status-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checkout Status Lifecycle
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#status-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Status Values
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#error-handling" class="md-nav__link">
     <span class="md-ellipsis">
       Error Handling
@@ -1829,6 +1943,30 @@
       Guidelines
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Guidelines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      Platform
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#business" class="md-nav__link">
+    <span class="md-ellipsis">
+      Business
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2288,20 +2426,20 @@ finalized manually by the user through a trusted UI unless the AP2 Mandates
 extension is supported.</p>
 <p>The business remains the Merchant of Record (MoR), and they don't need to become
 PCI DSS compliant to support this Capability.</p>
-<p><strong>Flow overview</strong></p>
+<h3 id="flow-overviewn">Flow overview\n<a class="headerlink" href="#flow-overviewn" title="Permanent link">&para;</a></h3>
 <p><img alt="High-level checkout flow sequence diagram" src="/ucp/2026-01-11/specification/images/ucp-checkout-flow.png" /></p>
-<p><strong>Payments</strong></p>
+<h3 id="payments">Payments<a class="headerlink" href="#payments" title="Permanent link">&para;</a></h3>
 <p>On checkout creation, businesses are required to define a payment configuration.
 The Checkout object includes <code>payment.handlers</code> which define the processing
 specifications for collecting payment instruments (e.g., Google Pay, direct
 tokenization). When the buyer submits payment, the platform populates the
 <code>payment.instruments</code> array with the collected instrument data.</p>
-<p><strong>Fulfillment</strong></p>
+<h3 id="fulfillment">Fulfillment<a class="headerlink" href="#fulfillment" title="Permanent link">&para;</a></h3>
 <p>Fulfillment is modelled as an extension in UCP to account for diverse use cases.</p>
 <p>Fulfillment is optional in the checkout object. This is done to enable a
 platform to perform checkout for digital goods without needing to furnish
 fulfillment details more relevant for physical goods.</p>
-<p><strong>Checkout Status Lifecycle</strong></p>
+<h3 id="checkout-status-lifecycle">Checkout Status Lifecycle<a class="headerlink" href="#checkout-status-lifecycle" title="Permanent link">&para;</a></h3>
 <p>The checkout <code>status</code> field indicates the current phase of the session and
 determines what action is required next. The business sets the status; the
 platform receives messages indicating what's needed to progress.</p>
@@ -2338,7 +2476,7 @@ platform receives messages indicating what's needed to progress.</p>
 </span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>            │  canceled   │  (session invalid/expired - can occur from any state)
 </span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>            └─────────────┘
 </span></code></pre></div>
-<p><strong>Status Values</strong></p>
+<h3 id="status-values">Status Values<a class="headerlink" href="#status-values" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
 <p><strong><code>incomplete</code></strong>: Checkout session is missing required information or has
@@ -2376,26 +2514,26 @@ declares <strong>who resolves the error</strong>:</p>
 <table>
 <thead>
 <tr>
-<th>Severity</th>
-<th>Meaning</th>
-<th>Platform Action</th>
+<th style="text-align: left;">Severity</th>
+<th style="text-align: left;">Meaning</th>
+<th style="text-align: left;">Platform Action</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>recoverable</code></td>
-<td>Platform can fix via API</td>
-<td>Resolve using Update Checkout</td>
+<td style="text-align: left;"><code>recoverable</code></td>
+<td style="text-align: left;">Platform can fix via API</td>
+<td style="text-align: left;">Resolve using Update Checkout</td>
 </tr>
 <tr>
-<td><code>requires_buyer_input</code></td>
-<td>Business requires input not available via API</td>
-<td>Hand off via <code>continue_url</code></td>
+<td style="text-align: left;"><code>requires_buyer_input</code></td>
+<td style="text-align: left;">Business requires input not available via API</td>
+<td style="text-align: left;">Hand off via <code>continue_url</code></td>
 </tr>
 <tr>
-<td><code>requires_buyer_review</code></td>
-<td>Buyer review and authorization is required</td>
-<td>Hand off via <code>continue_url</code></td>
+<td style="text-align: left;"><code>requires_buyer_review</code></td>
+<td style="text-align: left;">Buyer review and authorization is required</td>
+<td style="text-align: left;">Hand off via <code>continue_url</code></td>
 </tr>
 </tbody>
 </table>
@@ -2494,7 +2632,7 @@ redirect to the checkout UI or renders the checkout page directly.</p>
 </blockquote>
 <h2 id="guidelines">Guidelines<a class="headerlink" href="#guidelines" title="Permanent link">&para;</a></h2>
 <p>(In addition to the overarching guidelines)</p>
-<p><strong>Platform</strong></p>
+<h3 id="platform">Platform<a class="headerlink" href="#platform" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>MAY</strong> engage an agent to facilitate the checkout session (e.g. add items
     to the checkout session, select fulfillment address). However, the
@@ -2511,7 +2649,7 @@ redirect to the checkout UI or renders the checkout page directly.</p>
 <li>When performing handoff, <strong>SHOULD</strong> prefer business-provided
     <code>continue_url</code> over platform-constructed checkout permalinks.</li>
 </ul>
-<p><strong>Business</strong></p>
+<h3 id="business">Business<a class="headerlink" href="#business" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>MUST</strong> send a confirmation email after the checkout has been completed.</li>
 <li><strong>SHOULD</strong> provide accurate error messages.</li>
@@ -3620,30 +3758,30 @@ following are the recommended well-known types:</p>
 <table>
 <thead>
 <tr>
-<th>Type</th>
-<th>Description</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>privacy_policy</code></td>
-<td>Link to the business's privacy policy</td>
+<td style="text-align: left;"><code>privacy_policy</code></td>
+<td style="text-align: left;">Link to the business's privacy policy</td>
 </tr>
 <tr>
-<td><code>terms_of_service</code></td>
-<td>Link to the business's terms of service</td>
+<td style="text-align: left;"><code>terms_of_service</code></td>
+<td style="text-align: left;">Link to the business's terms of service</td>
 </tr>
 <tr>
-<td><code>refund_policy</code></td>
-<td>Link to the business's refund policy</td>
+<td style="text-align: left;"><code>refund_policy</code></td>
+<td style="text-align: left;">Link to the business's refund policy</td>
 </tr>
 <tr>
-<td><code>shipping_policy</code></td>
-<td>Link to the business's shipping policy</td>
+<td style="text-align: left;"><code>shipping_policy</code></td>
+<td style="text-align: left;">Link to the business's shipping policy</td>
 </tr>
 <tr>
-<td><code>faq</code></td>
-<td>Link to the business's frequently asked questions</td>
+<td style="text-align: left;"><code>faq</code></td>
+<td style="text-align: left;">Link to the business's frequently asked questions</td>
 </tr>
 </tbody>
 </table>

@@ -116,7 +116,7 @@ ______________________________________________________________________
 
 ### Prerequisites
 
-**CRITICAL: Security & Compliance Required**
+### CRITICAL: Security & Compliance Required\\n
 
 Before accepting this handler, businesses must register with the platform to obtain authentication credentials for calling `/detokenize`.
 
@@ -262,7 +262,7 @@ ______________________________________________________________________
 
 ### Prerequisites
 
-**CRITICAL: Security & Compliance Required**
+### CRITICAL: Security & Compliance Required
 
 Before detokenizing on behalf of businesses, PSPs must register with the platform, providing the list of businesses they process for.
 

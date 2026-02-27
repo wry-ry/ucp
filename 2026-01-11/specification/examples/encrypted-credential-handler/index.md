@@ -69,7 +69,7 @@ ______________________________________________________________________
 
 ### Prerequisites
 
-**CRITICAL: PCI DSS Compliance Required**
+### CRITICAL: PCI DSS Compliance Required\\n
 
 Before accepting this handler, businesses must register their public encryption key with the platform.
 

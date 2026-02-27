@@ -190,16 +190,16 @@ When publishing your handler, your specification document **MUST** include:
 **Handler Name:** `com.acme.tokenization_payment`
 **OpenAPI:** [Tokenization API](/{version}/handlers/tokenization/openapi.json)
 
-| Environment | Base URL |
-|:------------|:---------|
-| Production | `https://api.acme.com/ucp` |
-| Sandbox | `https://sandbox.api.acme.com/ucp` |
+| Environment | Base URL                           |
+| :---------- | :--------------------------------- |
+| Production  | `https://api.acme.com/ucp`         |
+| Sandbox     | `https://sandbox.api.acme.com/ucp` |
 
 **Supported Instruments:**
 
-| Instrument | Source Credentials | Checkout Credentials |
-|:-----------|:-------------------|:---------------------|
-| `card` | `card` (fpan, network_token) | `token` |
+| Instrument | Source Credentials           | Checkout Credentials |
+| :--------- | :--------------------------- | :------------------- |
+| `card`     | `card` (fpan, network_token) | `token`              |
 
 **Token Lifecycle:** Single-use (invalidated after detokenization)
 

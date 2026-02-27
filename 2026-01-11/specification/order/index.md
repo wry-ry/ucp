@@ -317,14 +317,14 @@ The platform provides its webhook URL in the order capability's `config` field d
 
 Webhook payloads **MUST** be signed by the business and verified by the platform to ensure authenticity and integrity.
 
-**Signing (Business)**
+### Signing (Business)\\n
 
 1. Select a key from the `signing_keys` array in UCP profile.
 1. Create a detached JWT (RFC 7797) over the request body using the selected key.
 1. Include the JWT in the `Request-Signature` header.
 1. Include the key ID in the JWT header's `kid` claim to allow the receiver to identify which key to use for verification.
 
-**Verification (Platform)**
+### Verification (Platform)
 
 1. Extract the `Request-Signature` header from the incoming webhook request.
 1. Parse the JWT header to retrieve the `kid` (key ID).
@@ -333,7 +333,7 @@ Webhook payloads **MUST** be signed by the business and verified by the platform
 1. Verify the JWT signature against the request body using the public key.
 1. If verification fails, reject the webhook with an appropriate error response.
 
-**Key Rotation**
+### Key Rotation
 
 The `signing_keys` array supports multiple keys to enable zero-downtime rotation:
 
@@ -400,7 +400,7 @@ The `signing_keys` array supports multiple keys to enable zero-downtime rotation
 | display_text | string  | No       | Text to display against the amount. Should reflect appropriate method (e.g., 'Shipping', 'Delivery').                         |
 | amount       | integer | **Yes**  | If type == total, sums subtotal - discount + fulfillment + tax + fee. Should be >= 0. Amount in minor (cents) currency units. |
 
-### UCP Metadata
+### UCP Response Order
 
 | Name         | Type       | Required | Description                                |
 | ------------ | ---------- | -------- | ------------------------------------------ |

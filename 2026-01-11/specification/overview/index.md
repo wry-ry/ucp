@@ -21,9 +21,7 @@ UCP uses reverse-domain naming to encode governance authority directly into capa
 
 All capability and service names **MUST** use the format:
 
-```text
-{reverse-domain}.{service}.{capability}
-```
+`{reverse-domain}.{service}.{capability}`
 
 **Components:**
 
@@ -102,11 +100,7 @@ The `endpoint` field provides the base URL for API calls. OpenAPI paths are appe
 }
 ```
 
-With OpenAPI path `/checkout-sessions`, the resolved URL is:
-
-```text
-POST https://business.example.com/api/v2/checkout-sessions
-```
+With OpenAPI path `/checkout-sessions`, the resolved URL is: `POST https://business.example.com/api/v2/checkout-sessions`
 
 **Rules:**
 
@@ -537,7 +531,7 @@ The following scenarios illustrate how different payment handlers and instrument
 
 In this scenario, the platform identifies a digital wallet handler (e.g., `com.google.pay`, `dev.shopify.shop_pay`) and uses the wallet's API to acquire an encrypted payment token.
 
-**1. Business Advertisement (Response from Create Checkout)**
+### 1. Business Advertisement (Response from Create Checkout)\\n
 
 ```json
 {
@@ -623,7 +617,7 @@ POST /checkout-sessions/{id}/complete
 
 In this scenario, the platform uses a generic tokenizer to request a session token or network tokens. The bank requires Strong Customer Authentication (SCA/3DS), forcing the business to pause completion and request a challenge.
 
-**1. Business Advertisement**
+### 1. Business Advertisement
 
 ```json
 {
@@ -641,11 +635,11 @@ In this scenario, the platform uses a generic tokenizer to request a session tok
 }
 ```
 
-**2. Token Execution (Platform Side)**
+### 2. Token Execution (Platform Side)
 
 The platform calls `https://api.psp.com/tokens` which identity **SHOULD** have previous legal binding connection with them and receives `tok_visa_123` (which could represent a vaulted card or network token).
 
-**3. Complete Checkout (Request to Business)**
+### 3. Complete Checkout (Request to Business)
 
 ```json
 POST /checkout-sessions/{id}/complete
@@ -662,7 +656,7 @@ POST /checkout-sessions/{id}/complete
 }
 ```
 
-**4. Challenge Required (Response from Business)**
+### 4. Challenge Required (Response from Business)
 
 The business attempts the charge, but the PSP returns a "Soft Decline" requiring 3DS.
 
@@ -686,7 +680,7 @@ HTTP/1.1 200 OK
 
 This scenario demonstrates the **Recommended Flow for Agents**. Instead of a session token, the agent generates cryptographic mandates.
 
-**1. Business Advertisement**
+### 1. Business Advertisement
 
 ```json
 {
@@ -700,11 +694,11 @@ This scenario demonstrates the **Recommended Flow for Agents**. Instead of a ses
 }
 ```
 
-**2. Agent Execution**
+### 2. Agent Execution
 
 The agent cryptographically signs objects using the user's private key on a non-agentic surface.
 
-**3. Complete Checkout**
+### 3. Complete Checkout
 
 ```json
 POST /checkout-sessions/{id}/complete
@@ -732,7 +726,7 @@ POST /checkout-sessions/{id}/complete
 
 ### PCI-DSS Scope Management
 
-**Platform Scope**
+### Platform Scope
 
 Most platform implementations can **avoid PCI-DSS scope** by:
 
@@ -741,7 +735,7 @@ Most platform implementations can **avoid PCI-DSS scope** by:
 - Forwarding credentials without the ability to use them directly
 - Using PSP tokenization payment handlers where raw credentials never pass through the platform
 
-**Business Scope**
+### Business Scope
 
 Businesses can minimize PCI scope by:
 
@@ -750,7 +744,7 @@ Businesses can minimize PCI scope by:
 - Never logging raw credentials
 - Delegating credential processing to PCI-certified payment credential providers
 
-**Payment Credential Provider Scope**
+### Payment Credential Provider Scope
 
 Payment credential providers (PSPs, wallets) are typically PCI-DSS Level 1 certified and handle:
 

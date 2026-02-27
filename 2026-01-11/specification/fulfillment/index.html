@@ -1834,15 +1834,17 @@
 goods fulfillment (shipping, pickup, etc).</p>
 <p>This extension adds a <code>fulfillment</code> field to Checkout containing:</p>
 <ul>
-<li><code>methods[]</code> — fulfillment methods applicable to cart items (shipping, pickup, etc.)</li>
+<li><code>methods[]</code> — fulfillment methods applicable to cart items (shipping, pickup, etc.)<ul>
 <li><code>line_item_ids</code> — which items this method fulfills</li>
 <li><code>destinations[]</code> — where to fulfill (address, store location)</li>
 <li><code>groups[]</code> — business-generated packages, each with selectable <code>options[]</code></li>
+</ul>
+</li>
 <li><code>available_methods[]</code> — inventory availability per item (optional)</li>
 </ul>
 <p><strong>Mental model:</strong></p>
 <ul>
-<li><code>methods[0]</code> Shipping</li>
+<li><code>methods[0]</code> Shipping<ul>
 <li><code>line_item_ids</code> 👕👖</li>
 <li><code>selected_destination_id</code> = <code>destinations[0].id</code> 🔘✅ 123 Fake St</li>
 <li><code>groups[0]</code> 📦👕👖<ul>
@@ -1850,12 +1852,16 @@ goods fulfillment (shipping, pickup, etc).</p>
 <li><code>options[1]</code> 🔘 Express $10</li>
 </ul>
 </li>
-<li><code>methods[1]</code> Pick Up in Store</li>
+</ul>
+</li>
+<li><code>methods[1]</code> Pick Up in Store<ul>
 <li><code>line_item_ids</code> 👞</li>
 <li><code>selected_destination_id</code> = <code>destinations[0].id</code> 🔘✅ Uptown Store</li>
 <li><code>groups[0]</code> 📦👞<ul>
 <li><code>selected_option_id</code> = <code>options[0].id</code> 🔘✅ In-Store Pickup</li>
 <li><code>options[1]</code> 🔘 Curbside Pickup</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
