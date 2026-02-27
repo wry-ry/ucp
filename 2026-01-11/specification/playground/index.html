@@ -1178,7 +1178,6 @@
 
 
 <!--
-
    Copyright 2026 UCP Authors
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -1194,7 +1193,12 @@
    limitations under the License.
 -->
 
-<!-- markdownlint-disable-file MD041 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UCP Playground</title>
 
 <style>
 /* ============================================
@@ -1355,6 +1359,8 @@ select, input {
 .callout { background: var(--success-bg); border: 1px solid var(--success); color: #0d652d; padding: 12px; border-radius: 8px; margin-top: 16px; font-size: 0.9rem; }
 .badge { background: #e8f0fe; color: var(--accent); padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; white-space: nowrap; flex-shrink: 0; }
 </style>
+</head>
+<body>
 
 <div class="container">
   <div class="sectionDescription">
@@ -1646,13 +1652,13 @@ const UcpData = {
       {
         name: "dev.ucp.shopping.checkout",
         version: "2026-01-11",
-        spec: "https://ucp.dev/2026-01-11/specification/checkout",
+        spec: "https://ucp.dev/specs/checkout",
         schema: "https://ucp.dev/2026-01-11/schemas/shopping/checkout.json"
       },
       {
         name: "dev.ucp.shopping.order",
         version: "2026-01-11",
-        spec: "https://ucp.dev/2026-01-11/specification/order",
+        spec: "https://ucp.dev/specs/order",
         schema: "https://ucp.dev/2026-01-11/schemas/shopping/order.json"
       }
     ],
@@ -1661,28 +1667,28 @@ const UcpData = {
         name: "dev.ucp.shopping.fulfillment",
         extends: "dev.ucp.shopping.checkout",
         version: "2026-01-11",
-        spec: "https://ucp.dev/2026-01-11/specification/fulfillment",
+        spec: "https://ucp.dev/specs/fulfillment",
         schema: "https://ucp.dev/2026-01-11/schemas/shopping/fulfillment.json"
       },
       {
         name: "dev.ucp.shopping.discount",
         extends: "dev.ucp.shopping.checkout",
         version: "2026-01-11",
-        spec: "https://ucp.dev/2026-01-11/specification/discount",
+        spec: "https://ucp.dev/specs/discount",
         schema: "https://ucp.dev/2026-01-11/schemas/shopping/discount.json"
       },
       {
         name: "dev.ucp.shopping.buyer_consent",
         extends: "dev.ucp.shopping.checkout",
         version: "2026-01-11",
-        spec: "https://ucp.dev/2026-01-11/specification/buyer_consent",
+        spec: "https://ucp.dev/specs/buyer_consent",
         schema: "https://ucp.dev/2026-01-11/schemas/shopping/buyer_consent.json"
       },
       {
         name: "dev.ucp.shopping.ap2_mandates",
         extends: "dev.ucp.shopping.checkout",
         version: "2026-01-11",
-        spec: "https://ucp.dev/2026-01-11/specification/ap2_mandates",
+        spec: "https://ucp.dev/specs/ap2_mandates",
         schema: "https://ucp.dev/2026-01-11/schemas/shopping/ap2_mandates.json"
       },
     ]
@@ -1740,7 +1746,7 @@ class UcpBackend {
   }
 
   genId(prefix) {
-    const r = crypto.randomUUID ? crypto.randomUUID().substring(0, 8) : Math.random().toString(36).substr(2, 9);
+    const r = crypto.randomUUID ? crypto.randomUUID().split['-'](0) : Math.random().toString(36).substr(2, 9);
     return `${prefix}_${r}`;
   }
 
@@ -2246,6 +2252,8 @@ if (document.readyState === 'loading') {
 window.addEventListener('popstate', startUcpPlayground);
 })();
 </script>
+</body>
+</html>
 
 
 

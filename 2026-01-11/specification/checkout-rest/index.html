@@ -1703,8 +1703,8 @@
 <h3 id="base-url">Base URL<a class="headerlink" href="#base-url" title="Permanent link">&para;</a></h3>
 <p>All UCP REST endpoints are relative to the business's base URL, which is
 discovered through the UCP profile at <code>/.well-known/ucp</code>. The endpoint for the
-checkout capability is defined in the <code>rest.endpoint</code> field of the
-business profile.</p>
+checkout capability is defined in the <code>rest.endpoint</code> field of the business
+profile.</p>
 <h3 id="content-types">Content Types<a class="headerlink" href="#content-types" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Request</strong>: <code>application/json</code></li>
@@ -1713,8 +1713,7 @@ business profile.</p>
 <p>All request and response bodies <strong>MUST</strong> be valid JSON as specified in
 <a href="https://tools.ietf.org/html/rfc8259" target="_blank">RFC 8259</a>.</p>
 <h3 id="transport-security">Transport Security<a class="headerlink" href="#transport-security" title="Permanent link">&para;</a></h3>
-<p>All REST endpoints <strong>MUST</strong> be served over HTTPS with minimum TLS version
-1.3.</p>
+<p>All REST endpoints <strong>MUST</strong> be served over HTTPS with minimum TLS version 1.3.</p>
 <h2 id="operations">Operations<a class="headerlink" href="#operations" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -1889,9 +1888,9 @@ business profile.</p>
 </div>
 <h3 id="update-checkout">Update Checkout<a class="headerlink" href="#update-checkout" title="Permanent link">&para;</a></h3>
 <h4 id="update-buyer-info">Update Buyer Info<a class="headerlink" href="#update-buyer-info" title="Permanent link">&para;</a></h4>
-<p>All fields in <code>buyer</code> are optional, allowing clients to progressively build
-the checkout state across multiple calls. Each PUT replaces the entire session,
-so clients must include all previously set fields they wish to retain.</p>
+<p>All fields in <code>buyer</code> are optional, allowing clients to progressively build the
+checkout state across multiple calls. Each PUT replaces the entire session, so
+clients must include all previously set fields they wish to retain.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="request_1" name="__tabbed_2" type="radio" /><input id="response_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="request_1">Request</label><label for="response_1">Response</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -2032,8 +2031,8 @@ so clients must include all previously set fields they wish to retain.</p>
 </div>
 <h4 id="update-fulfillment">Update Fulfillment<a class="headerlink" href="#update-fulfillment" title="Permanent link">&para;</a></h4>
 <p>Fulfillment is an extension to the checkout capability. Most fields are provided
-by the business based on buyer inputs, which includes desired fulfillment
-type &amp; addresses.</p>
+by the business based on buyer inputs, which includes desired fulfillment type &amp;
+addresses.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="request_2" name="__tabbed_3" type="radio" /><input id="response_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="request_2">Request</label><label for="response_2">Response</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -3038,12 +3037,12 @@ operations unless otherwise noted.</p>
 </table>
 <h3 id="specific-header-requirements">Specific Header Requirements<a class="headerlink" href="#specific-header-requirements" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>UCP-Agent</strong>: All requests <strong>MUST</strong> include the <code>UCP-Agent</code> header
-    containing the platform profile URI using Dictionary Structured Field syntax
-    (<a href="https://datatracker.ietf.org/doc/html/rfc8941" target="_blank">RFC 8941</a>).
-    Format: <code>profile="https://platform.example/profile"</code>.</li>
+<li><strong>UCP-Agent</strong>: All requests <strong>MUST</strong> include the <code>UCP-Agent</code> header containing
+  the platform profile URI using Dictionary Structured Field syntax
+  (<a href="https://datatracker.ietf.org/doc/html/rfc8941" target="_blank">RFC 8941</a>).
+  Format: <code>profile="https://platform.example/profile"</code>.</li>
 <li><strong>Idempotency-Key</strong>: Operations that modify state <strong>SHOULD</strong> support
-    idempotency. When provided, the server <strong>MUST</strong>:<ol>
+  idempotency. When provided, the server <strong>MUST</strong>:<ol>
 <li>Store the key with the operation result for at least 24 hours.</li>
 <li>Return the cached result for duplicate keys.</li>
 <li>Return <code>409 Conflict</code> if the key is reused with different parameters.</li>
@@ -3107,15 +3106,15 @@ request.</p>
 <h3 id="error-responses">Error Responses<a class="headerlink" href="#error-responses" title="Permanent link">&para;</a></h3>
 <p>Error responses follow the standard UCP error structure:</p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="p">{</span>
-</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;requires_escalation&quot;</span><span class="p">,</span>
-</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">  </span><span class="nt">&quot;messages&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">    </span><span class="p">{</span>
-</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;error&quot;</span><span class="p">,</span>
-</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">      </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;invalid_cart_items&quot;</span><span class="p">,</span>
-</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">      </span><span class="nt">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;One or more cart items are invalid&quot;</span><span class="p">,</span>
-</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="w">      </span><span class="nt">&quot;severity&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;requires_buyer_input&quot;</span><span class="p">,</span>
-</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="w">  </span><span class="p">]</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;requires_escalation&quot;</span><span class="p">,</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span><span class="nt">&quot;messages&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">        </span><span class="p">{</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;error&quot;</span><span class="p">,</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">            </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;invalid_cart_items&quot;</span><span class="p">,</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">            </span><span class="nt">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;One or more cart items are invalid&quot;</span><span class="p">,</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="w">            </span><span class="nt">&quot;severity&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;requires_buyer_input&quot;</span>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="w">    </span><span class="p">]</span>
 </span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="p">}</span>
 </span></code></pre></div>
 <h2 id="security-considerations">Security Considerations<a class="headerlink" href="#security-considerations" title="Permanent link">&para;</a></h2>
@@ -3126,7 +3125,7 @@ authentication is required, the REST transport <strong>MAY</strong> use:</p>
 <li><strong>Open API</strong>: No authentication required for public operations.</li>
 <li><strong>API Keys</strong>: Via <code>X-API-Key</code> header.</li>
 <li><strong>OAuth 2.0</strong>: Via <code>Authorization: Bearer {token}</code> header, following
-    <a href="https://tools.ietf.org/html/rfc6749" target="_blank">RFC 6749</a>.</li>
+   <a href="https://tools.ietf.org/html/rfc6749" target="_blank">RFC 6749</a>.</li>
 <li><strong>Mutual TLS</strong>: For high-security environments.</li>
 </ol>
 <p>Businesses <strong>MAY</strong> require authentication for some operations while leaving

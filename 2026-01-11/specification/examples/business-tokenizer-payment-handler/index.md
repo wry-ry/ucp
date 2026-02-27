@@ -71,24 +71,24 @@ The Business advertises this handler in the checkout's `payment.handlers` array.
 
 ```json
 {
-  "payment": {
-    "handlers": [
-      {
-        "id": "processor_tokenizer",
-        "name": "com.example.processor_tokenizer",
-        "spec": "https://example.com/ucp/processor-tokenizer.json",
-        "instrument_schemas": [
-           "https://ucp.dev/schemas/shopping/types/card_payment_instrument.json"
-        ],
-        "config": {
-          "endpoint": "https://api.psp.com/v1/tokenize",
-          "identity": {
-            "access_token": "merchant_xyz789"
-          }
-        }
-      }
-    ]
-  }
+    "payment": {
+        "handlers": [
+            {
+                "id": "processor_tokenizer",
+                "name": "com.example.processor_tokenizer",
+                "spec": "https://example.com/ucp/processor-tokenizer.json",
+                "instrument_schemas": [
+                    "https://ucp.dev/schemas/shopping/types/card_payment_instrument.json"
+                ],
+                "config": {
+                    "endpoint": "https://api.psp.com/v1/tokenize",
+                    "identity": {
+                        "access_token": "merchant_xyz789"
+                    }
+                }
+            }
+        ]
+    }
 }
 ```
 
@@ -116,15 +116,15 @@ Platform identifies the processor tokenizer handler and retrieves the configurat
 
 ```json
 {
-  "id": "processor_tokenizer",
-  "name": "com.example.processor_tokenizer",
-  "spec": "https://example.com/ucp/processor-tokenizer.json",
-  "config": {
-    "endpoint": "https://api.processor.com/v1/tokenize",
-    "identity": {
-      "access_token": "merchant_xyz789"
+    "id": "processor_tokenizer",
+    "name": "com.example.processor_tokenizer",
+    "spec": "https://example.com/ucp/processor-tokenizer.json",
+    "config": {
+        "endpoint": "https://api.processor.com/v1/tokenize",
+        "identity": {
+            "access_token": "merchant_xyz789"
+        }
     }
-  }
 }
 ```
 
@@ -142,7 +142,7 @@ Response:
 
 ```json
 {
-  "token": "tok_a1b2c3d4e5f6"
+    "token": "tok_a1b2c3d4e5f6"
 }
 ```
 

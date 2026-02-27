@@ -1273,15 +1273,15 @@ Error responses follow the standard UCP error structure:
 
 ```json
 {
-  "status": "requires_escalation",
-  "messages": [
-    {
-      "type": "error",
-      "code": "invalid_cart_items",
-      "content": "One or more cart items are invalid",
-      "severity": "requires_buyer_input",
-    }
-  ]
+    "status": "requires_escalation",
+    "messages": [
+        {
+            "type": "error",
+            "code": "invalid_cart_items",
+            "content": "One or more cart items are invalid",
+            "severity": "requires_buyer_input"
+        }
+    ]
 }
 ```
 

@@ -116,7 +116,7 @@ ______________________________________________________________________
 
 ### Prerequisites
 
-### CRITICAL: Security & Compliance Required\\n
+**CRITICAL: Security & Compliance Required**
 
 Before accepting this handler, businesses must register with the platform to obtain authentication credentials for calling `/detokenize`.
 
@@ -139,7 +139,7 @@ Optionally, businesses may configure their PSP to detokenize on their behalf (PS
 
 Businesses advertise the platform's tokenization handler. The `config` contains the business's identity with the platform for token binding. The platform's handler specification (referenced via `spec`) documents the `/detokenize` endpoint URL exposed by the platform's **payment credential provider**.
 
-The handler accepts [CardCredential](/ucp/2026-01-11/schemas/shopping/types/card_credential.json) for tokenization and produces [TokenCredential](/ucp/2026-01-11/schemas/shopping/types/token_credential.json) for checkout.
+The handler accepts [CardCredential](https://ucp.dev/2026-01-11/schemas/shopping/types/card_credential.json) for tokenization and produces [TokenCredential](https://ucp.dev/2026-01-11/schemas/shopping/types/token_credential.json) for checkout.
 
 **Note:** The result of `/detokenize` contains **sensitive payment data**. Both the sender (platform's credential provider) and receiver (business or PSP) **MUST** be PCI DSS compliant.
 
@@ -147,24 +147,24 @@ The handler accepts [CardCredential](/ucp/2026-01-11/schemas/shopping/types/card
 
 ```json
 {
-  "payment": {
-    "handlers": [
-      {
-        "id": "platform_wallet",
-        "name": "com.example.platform_tokenizer",
-        "version": "2026-01-12",
-        "spec": "https://platform.example.com/ucp/handler.json",
-        "config_schema": "https://platform.example.com/ucp/handler/config.json",
-        "instrument_schemas": [
-          "https://ucp.dev/schemas/shopping/types/card_payment_instrument.json"
-        ],
-        "config": {
-          "business_id": "business_abc123",
-          "environment": "production"
-        }
-      }
-    ]
-  }
+    "payment": {
+        "handlers": [
+            {
+                "id": "platform_wallet",
+                "name": "com.example.platform_tokenizer",
+                "version": "2026-01-12",
+                "spec": "https://platform.example.com/ucp/handler.json",
+                "config_schema": "https://platform.example.com/ucp/handler/config.json",
+                "instrument_schemas": [
+                    "https://ucp.dev/2026-01-11/schemas/shopping/types/card_payment_instrument.json"
+                ],
+                "config": {
+                    "business_id": "business_abc123",
+                    "environment": "production"
+                }
+            }
+        ]
+    }
 }
 ```
 
@@ -174,8 +174,8 @@ Upon receiving a checkout with a token credential:
 
 1. **Validate Handler:** Confirm `instrument.handler_id` matches the expected handler ID.
 1. **Detokenize or Delegate:**
-1. **Option A (Direct):** Call the platform's **credential provider** `/detokenize` endpoint directly, then process payments.
-1. **Option B (Delegated):** Forward the token to a PSP for detokenization and payment processing.
+   - **Option A (Direct):** Call the platform's **credential provider** `/detokenize` endpoint directly, then process payments.
+   - **Option B (Delegated):** Forward the token to a PSP for detokenization and payment processing.
 1. **Return Response:** Respond with the finalized checkout state.
 
 For option B, see section [PSP Integration](#psp-integration).
@@ -262,7 +262,7 @@ ______________________________________________________________________
 
 ### Prerequisites
 
-### CRITICAL: Security & Compliance Required
+**CRITICAL: Security & Compliance Required**
 
 Before detokenizing on behalf of businesses, PSPs must register with the platform, providing the list of businesses they process for.
 
@@ -336,6 +336,6 @@ ______________________________________________________________________
 
 ## References
 
-- **Pattern:** [Tokenization Payment Handler](https://ucp.dev/2026-01-11/specification/payment-handler-guide/index.md)
-- **API Pattern:** `/2026-01-11/handlers/tokenization/openapi.json`
-- **Identity Schema:** `/2026-01-11/schemas/shopping/types/payment_identity.json`
+- **Pattern:** [Tokenization Payment Handler](https://ucp.dev/specification/payment-handler-guide)
+- **API Pattern:** `https://ucp.dev/2026-01-11/handlers/tokenization/openapi.json`
+- **Identity Schema:** `https://ucp.dev/2026-01-11/schemas/shopping/types/payment_identity.json`

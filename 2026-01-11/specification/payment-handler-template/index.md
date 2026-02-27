@@ -85,23 +85,21 @@ Businesses advertise support for this handler in the checkout's `payment.handler
 
 ```json
 {
-  "payment": {
-    "handlers": [
-      {
-        "id": "{handler_id}",
-        "name": "{handler_name}",
-        "version": "2026-01-11",
-        "spec": "{spec_url}",
-        "config_schema": "{config_schema_url}",
-        "instrument_schemas": [
-          "{instrument_schema_url}"
-        ],
-        "config": {
-          // Handler-specific configuration
-        }
-      }
-    ]
-  }
+    "payment": {
+        "handlers": [
+            {
+                "id": "{handler_id}",
+                "name": "{handler_name}",
+                "version": "2026-01-11",
+                "spec": "{spec_url}",
+                "config_schema": "{config_schema_url}",
+                "instrument_schemas": ["{instrument_schema_url}"],
+                "config": {
+                    // Handler-specific configuration
+                }
+            }
+        ]
+    }
 }
 ```
 
@@ -145,11 +143,11 @@ The Platform identifies `{handler_name}` in the business's `payment.handlers` ar
 
 ```json
 {
-  "id": "{handler_id}",
-  "name": "{handler_name}",
-  "config": {
-    // Business's configuration
-  }
+    "id": "{handler_id}",
+    "name": "{handler_name}",
+    "config": {
+        // Business's configuration
+    }
 }
 ```
 

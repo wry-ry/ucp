@@ -93,7 +93,7 @@ PREREQUISITES(participant, onboarding_input) → prerequisites_output
 
 **Prerequisites Output:**
 
-The `prerequisites_output` contains what a participant receives from onboarding. At minimum, this includes an **identity** (see [Payment Identity](/ucp/2026-01-11/schemas/shopping/types/payment_identity.json)). It **MAY** also include additional configuration, credentials, or settings specific to the handler.
+The `prerequisites_output` contains what a participant receives from onboarding. At minimum, this includes an **identity** (see [Payment Identity](https://ucp.dev/2026-01-11/schemas/shopping/types/payment_identity.json)). It **MAY** also include additional configuration, credentials, or settings specific to the handler.
 
 Payment handler specifications **are not required** to define a formal schema for `prerequisites_output`. Instead, the specification **SHOULD** clearly document:
 
@@ -125,21 +125,21 @@ HANDLER_DECLARATION(prerequisites_output) → handler_declaration
 
 **Output Structure:**
 
-The handler declaration conforms to the [`PaymentHandler`](/ucp/2026-01-11/schemas/shopping/types/payment_handler.json) schema. The specification **SHOULD** define the available config and instrument schemas, and how to construct each based on the business's prerequisites output and desired configuration.
+The handler declaration conforms to the [`PaymentHandler`](https://ucp.dev/2026-01-11/schemas/shopping/types/payment_handler.json) schema. The specification **SHOULD** define the available config and instrument schemas, and how to construct each based on the business's prerequisites output and desired configuration.
 
 ```json
 {
-  "id": "handler_instance_id",
-  "name": "com.example.handler",
-  "version": "2026-01-11",
-  "spec": "https://example.com/ucp/handler",
-  "config_schema": "https://example.com/ucp/handler/config.json",
-  "instrument_schemas": [
-    "https://example.com/ucp/handler/instruments/card.json"
-  ],
-  "config": {
-    // Handler-specific configuration (see 2.3.1)
-  }
+    "id": "handler_instance_id",
+    "name": "com.example.handler",
+    "version": "2026-01-11",
+    "spec": "https://example.com/ucp/handler",
+    "config_schema": "https://example.com/ucp/handler/config.json",
+    "instrument_schemas": [
+        "https://example.com/ucp/handler/instruments/card.json"
+    ],
+    "config": {
+        // Handler-specific configuration (see 2.3.1)
+    }
 }
 ```
 
@@ -155,19 +155,19 @@ The `config_schema` field points to a JSON schema that validates the `config` ob
 
 ```json
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com/ucp/handlers/my_handler/config.json",
-  "title": "MyHandlerConfig",
-  "description": "Configuration for the com.example.my_handler payment handler.",
-  "type": "object",
-  "properties": {
-    "environment": {
-      "type": "string",
-      "enum": ["sandbox", "production"],
-      "description": "The API environment this business supports for the example handler.",
-      "default": "production"
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.com/ucp/handlers/my_handler/config.json",
+    "title": "MyHandlerConfig",
+    "description": "Configuration for the com.example.my_handler payment handler.",
+    "type": "object",
+    "properties": {
+        "environment": {
+            "type": "string",
+            "enum": ["sandbox", "production"],
+            "description": "The API environment this business supports for the example handler.",
+            "default": "production"
+        }
     }
-  }
 }
 ```
 
@@ -177,27 +177,29 @@ ______________________________________________________________________
 
 **Base Instrument Schemas:**
 
-| Schema                                                                                                | Description                                             |
-| ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| [`payment_instrument.json`](/ucp/2026-01-11/schemas/shopping/types/payment_instrument.json)           | Base: id, handler_id, type, credential, billing_address |
-| [`card_payment_instrument.json`](/ucp/2026-01-11/schemas/shopping/types/card_payment_instrument.json) | Card display: brand, last_digits, expiry                |
+| Schema                                                                                                           | Description                                             |
+| ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| [`payment_instrument.json`](https://ucp.dev/2026-01-11/schemas/shopping/types/payment_instrument.json)           | Base: id, handler_id, type, credential, billing_address |
+| [`card_payment_instrument.json`](https://ucp.dev/2026-01-11/schemas/shopping/types/card_payment_instrument.json) | Card display: brand, last_digits, expiry                |
 
 UCP provides base schemas for universal payment instruments like `card`. Spec authors **MAY** extend any of the basic payment instruments to add additional handler-specific display data.
 
 ```json
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com/ucp/handlers/my_wallet/instrument.json",
-  "title": "MyWalletInstrument",
-  "allOf": [
-    { "$ref": "https://ucp.dev/schemas/shopping/types/payment_instrument.json" }
-  ],
-  "type": "object",
-  "required": ["type", "account_type"],
-  "properties": {
-    "type": { "const": "my_wallet" },
-    // base payment instrument or specific payment instrument defined by handler
-  }
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.com/ucp/handlers/my_wallet/instrument.json",
+    "title": "MyWalletInstrument",
+    "allOf": [
+        {
+            "$ref": "https://ucp.dev/2026-01-11/schemas/shopping/types/payment_instrument.json"
+        }
+    ],
+    "type": "object",
+    "required": ["type", "account_type"],
+    "properties": {
+        "type": { "const": "my_wallet" }
+        // base payment instrument or specific payment instrument defined by handler
+    }
 }
 ```
 
@@ -205,10 +207,10 @@ UCP provides base schemas for universal payment instruments like `card`. Spec au
 
 **Base Credential Schemas:**
 
-| Schema                                                                                      | Description                   |
-| ------------------------------------------------------------------------------------------- | ----------------------------- |
-| [`payment_credential.json`](/ucp/2026-01-11/schemas/shopping/types/payment_credential.json) | Base: type discriminator only |
-| [`token_credential.json`](/ucp/2026-01-11/schemas/shopping/types/token_credential.json)     | Token: type + token string    |
+| Schema                                                                                                 | Description                   |
+| ------------------------------------------------------------------------------------------------------ | ----------------------------- |
+| [`payment_credential.json`](https://ucp.dev/2026-01-11/schemas/shopping/types/payment_credential.json) | Base: type discriminator only |
+| [`token_credential.json`](https://ucp.dev/2026-01-11/schemas/shopping/types/token_credential.json)     | Token: type + token string    |
 
 UCP provides base schemas for universal payment credentials like `card` and `token`. Authors **MAY** extend these schemas to include handler-specific credential context.
 
@@ -218,14 +220,14 @@ The specification **MUST** define which credential types are accepted by the han
 
 ```json
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com/ucp/handlers/my_wallet/credential.json",
-  "title": "MyWalletCredential",
-  "type": "object",
-  "required": ["type", "token"],
-  "properties": {
-    // base credential object or credential context defined by handler
-  }
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.com/ucp/handlers/my_wallet/credential.json",
+    "title": "MyWalletCredential",
+    "type": "object",
+    "required": ["type", "token"],
+    "properties": {
+        // base credential object or credential context defined by handler
+    }
 }
 ```
 
@@ -399,5 +401,5 @@ ______________________________________________________________________
 ## See Also
 
 - **[Tokenization Guide](https://ucp.dev/2026-01-11/specification/tokenization-guide/index.md)** — Guide for building tokenization payment handlers
-- **[Google Pay Handler](https://developers.google.com/merchant/ucp/guides/google-pay-payment-handler)** — Handler for Google Pay integration
-- **[Shop Pay Handler](https://shopify.dev/docs/agents/checkout/shop-pay-handler)** — Handler for Shop Pay integration
+- **[Google Pay Handler](https://developers.google.com/merchant/ucp/guides/google-pay-payment-handler){ target="\_blank" }** — Handler for Google Pay integration
+- **[Shop Pay Handler](https://shopify.dev/docs/agents/checkout/shop-pay-handler){ target="\_blank" }** — Handler for Shop Pay integration

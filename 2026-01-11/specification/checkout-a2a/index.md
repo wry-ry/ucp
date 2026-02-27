@@ -8,18 +8,18 @@ Businesses that support A2A transport must specify the agent card endpoint as pa
 
 ```json
 {
-  "ucp": {
-    "version": "2026-01-11",
-    "services": {
-      "dev.ucp.shopping": {
+    "ucp": {
         "version": "2026-01-11",
-        "spec": "https://ucp.dev/specification/overview",
-        "a2a": {
-          "endpoint": "https://example-business.com/.well-known/agent-card.json"
+        "services": {
+            "dev.ucp.shopping": {
+                "version": "2026-01-11",
+                "spec": "https://ucp.dev/specification/overview",
+                "a2a": {
+                    "endpoint": "https://example-business.com/.well-known/agent-card.json"
+                }
+            }
         }
-      }
     }
-  }
 }
 ```
 
@@ -45,7 +45,7 @@ The following table defines the required headers for enabling an A2A Agent to co
 
 The A2A Protocol provides a strong foundation for inter-agent communication. [A2A extensions](https://a2a-protocol.org/latest/topics/extensions/) enable communication between agents with structured data types. This enables businesses to build AI applications to leverage UCP data types for communication with platforms.
 
-The URI for UCP A2A extension: `./reference?v=2026-01-11`
+The URI for UCP A2A extension: `https://ucp.dev/specification/reference?v=2026-01-11`
 
 Businesses supporting UCP must advertise the extension and any optional capabilities in their A2A Agent Card to allow platforms to activate the extension.
 
@@ -53,25 +53,25 @@ An example:
 
 ```json
 {
-  "extensions": [
-    {
-      "uri": "https://ucp.dev/specification/reference?v=2026-01-11",
-      "description": "Business agent supporting UCP",
-      "params": {
-        "capabilities": [
-          {
-            "name": "dev.ucp.shopping.checkout",
-            "version": "2026-01-11"
-          },
-          {
-            "name": "dev.ucp.shopping.fulfillment",
-            "version": "2026-01-11",
-            "extends": "dev.ucp.shopping.checkout"
-          }
-        ]
-      }
-    }
-  ]
+    "extensions": [
+        {
+            "uri": "https://ucp.dev/specification/reference?v=2026-01-11",
+            "description": "Business agent supporting UCP",
+            "params": {
+                "capabilities": [
+                    {
+                        "name": "dev.ucp.shopping.checkout",
+                        "version": "2026-01-11"
+                    },
+                    {
+                        "name": "dev.ucp.shopping.fulfillment",
+                        "version": "2026-01-11",
+                        "extends": "dev.ucp.shopping.checkout"
+                    }
+                ]
+            }
+        }
+    ]
 }
 ```
 
@@ -101,18 +101,18 @@ Examples:
 
 ```json
 {
-  "message": {
-    "role": "user",
-    "parts": [
-      {
-        "type": "text",
-        "text": "add Pixel 10 Pro to my checkout"
-      }
-    ],
-    "messageId": "69da8f87-991b-479e-80dc-ed92fcb57cbe",
-    "kind": "message",
-    "contextId": "aad14abc-4082-4748-84ca-4afff85aedfa"
-  }
+    "message": {
+        "role": "user",
+        "parts": [
+            {
+                "type": "text",
+                "text": "add Pixel 10 Pro to my checkout"
+            }
+        ],
+        "messageId": "69da8f87-991b-479e-80dc-ed92fcb57cbe",
+        "kind": "message",
+        "contextId": "aad14abc-4082-4748-84ca-4afff85aedfa"
+    }
 }
 ```
 
@@ -120,22 +120,22 @@ Examples:
 
 ```json
 {
-  "message": {
-    "role": "user",
-    "parts": [
-      {
-        "type": "data",
-        "data": {
-          "action": "add_to_checkout",
-          "product_id": "PIXEL-10-PRO",
-          "quantity": 1
-        }
-      }
-    ],
-    "messageId": "e94a8c10-69f4-4c4c-b988-21a298302da6",
-    "kind": "message",
-    "contextId": "aad14abc-4082-4748-84ca-4afff85aedfa"
-  }
+    "message": {
+        "role": "user",
+        "parts": [
+            {
+                "type": "data",
+                "data": {
+                    "action": "add_to_checkout",
+                    "product_id": "PIXEL-10-PRO",
+                    "quantity": 1
+                }
+            }
+        ],
+        "messageId": "e94a8c10-69f4-4c4c-b988-21a298302da6",
+        "kind": "message",
+        "contextId": "aad14abc-4082-4748-84ca-4afff85aedfa"
+    }
 }
 ```
 
@@ -257,44 +257,44 @@ When the user confirms the payment on a platform, the user signed checkout and p
 
 ```json
 {
-  "message": {
-    "role": "user",
-    "parts": [
-      {
-        "type": "data",
-        "data": {
-          "action": "complete_checkout"
-        }
-      },
-      {
-        "kind": "data",
-        "data": {
-          "a2a.ucp.checkout.payment_data": {
-            "id": "instr_1",
-            "handler_id": "gpay",
-            "type": "card",
-            "description": "Visa •••• 1234",
-            "billing_address": {
-              "street_address": "123 Main St",
-              "address_locality": "Anytown",
-              "address_region": "CA",
-              "address_country": "US",
-              "postal_code": "12345"
+    "message": {
+        "role": "user",
+        "parts": [
+            {
+                "type": "data",
+                "data": {
+                    "action": "complete_checkout"
+                }
             },
-            "credential": {
-              "type": "PAYMENT_GATEWAY",
-              "token": "examplePaymentMethodToken"
+            {
+                "kind": "data",
+                "data": {
+                    "a2a.ucp.checkout.payment_data": {
+                        "id": "instr_1",
+                        "handler_id": "gpay",
+                        "type": "card",
+                        "description": "Visa •••• 1234",
+                        "billing_address": {
+                            "street_address": "123 Main St",
+                            "address_locality": "Anytown",
+                            "address_region": "CA",
+                            "address_country": "US",
+                            "postal_code": "12345"
+                        },
+                        "credential": {
+                            "type": "PAYMENT_GATEWAY",
+                            "token": "examplePaymentMethodToken"
+                        }
+                    },
+                    "ap2": {
+                        "checkout_mandate": "eyJhbGciOiJFUz..."
+                    }
+                }
             }
-          },
-          "ap2": {
-            "checkout_mandate": "eyJhbGciOiJFUz..."
-          }
-        }
-      }
-    ],
-    "messageId": "e94a8c10-69f4-4c4c-b988-21a298302da6",
-    "kind": "message",
-    "contextId": "aad14abc-4082-4748-84ca-4afff85aedfa"
-  }
+        ],
+        "messageId": "e94a8c10-69f4-4c4c-b988-21a298302da6",
+        "kind": "message",
+        "contextId": "aad14abc-4082-4748-84ca-4afff85aedfa"
+    }
 }
 ```

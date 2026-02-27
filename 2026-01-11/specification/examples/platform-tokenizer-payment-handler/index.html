@@ -1172,15 +1172,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#critical-security-compliance-requiredn" class="md-nav__link">
-    <span class="md-ellipsis">
-      CRITICAL: Security &amp; Compliance Required\n
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#handler-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       Handler Configuration
@@ -1289,15 +1280,6 @@
   <a href="#prerequisites_2" class="md-nav__link">
     <span class="md-ellipsis">
       Prerequisites
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#critical-security-compliance-required" class="md-nav__link">
-    <span class="md-ellipsis">
-      CRITICAL: Security &amp; Compliance Required
     </span>
   </a>
   
@@ -1563,15 +1545,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#critical-security-compliance-requiredn" class="md-nav__link">
-    <span class="md-ellipsis">
-      CRITICAL: Security &amp; Compliance Required\n
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#handler-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       Handler Configuration
@@ -1686,15 +1659,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#critical-security-compliance-required" class="md-nav__link">
-    <span class="md-ellipsis">
-      CRITICAL: Security &amp; Compliance Required
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#detokenization-flow" class="md-nav__link">
     <span class="md-ellipsis">
       Detokenization Flow
@@ -1782,11 +1746,10 @@
 <li><strong>Type:</strong> Payment Handler Example</li>
 </ul>
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>This example demonstrates a tokenization payment handler where the
-<strong>platform acts as the tokenizer</strong>. The platform's
-<strong>payment credential provider</strong> securely stores sensitive payment data
-(e.g., stored cards from user wallets) and generates tokens internally without
-calling an external <code>/tokenize</code> endpoint.</p>
+<p>This example demonstrates a tokenization payment handler where the <strong>platform
+acts as the tokenizer</strong>. The platform's <strong>payment credential provider</strong> securely
+stores sensitive payment data (e.g., stored cards from user wallets) and
+generates tokens internally without calling an external <code>/tokenize</code> endpoint.</p>
 <p>The platform's credential provider exposes a <code>/detokenize</code> endpoint for
 businesses to call back and retrieve the sensitive instrument details for
 processing.</p>
@@ -1794,9 +1757,12 @@ processing.</p>
 compliant credential storage.</p>
 <h3 id="key-benefits">Key Benefits<a class="headerlink" href="#key-benefits" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Zero early transmission:</strong> Platforms never expose sensitive data until a payment request is being finalized.</li>
-<li><strong>Platform-controlled security:</strong> Platform defines token lifecycle and binding policies.</li>
-<li><strong>PSP flexibility:</strong> Businesses can delegate detokenization to their PSP, keeping sensitive data out of business systems entirely.</li>
+<li><strong>Zero early transmission:</strong> Platforms never expose sensitive data until a
+  payment request is being finalized.</li>
+<li><strong>Platform-controlled security:</strong> Platform defines token lifecycle and binding
+  policies.</li>
+<li><strong>PSP flexibility:</strong> Businesses can delegate detokenization to their PSP,
+  keeping sensitive data out of business systems entirely.</li>
 </ul>
 <h3 id="quickstart">QuickStart<a class="headerlink" href="#quickstart" title="Permanent link">&para;</a></h3>
 <table>
@@ -1921,7 +1887,7 @@ compliant credential storage.</p>
 <hr />
 <h2 id="business-integration">Business Integration<a class="headerlink" href="#business-integration" title="Permanent link">&para;</a></h2>
 <h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
-<h3 id="critical-security-compliance-requiredn">CRITICAL: Security &amp; Compliance Required\n<a class="headerlink" href="#critical-security-compliance-requiredn" title="Permanent link">&para;</a></h3>
+<p><strong>CRITICAL: Security &amp; Compliance Required</strong></p>
 <p>Before accepting this handler, businesses must register with the platform to
 obtain authentication credentials for calling <code>/detokenize</code>.</p>
 <p>As the party receiving sensitive instrument details (e.g., PANs) via the
@@ -1930,7 +1896,8 @@ security standards (e.g., PCI DSS). This includes:</p>
 <ul>
 <li>Secure transmission (HTTPS/TLS with strong cipher suites)</li>
 <li>Secure handling of sensitive data during payment processing</li>
-<li>Compliance with all regulations regarding the storage and processing of financial instruments</li>
+<li>Compliance with all regulations regarding the storage and processing of
+  financial instruments</li>
 </ul>
 <p>Optionally, businesses may configure their PSP to detokenize on their behalf
 (PSP must also be compliant).</p>
@@ -1954,44 +1921,52 @@ security standards (e.g., PCI DSS). This includes:</p>
 </tbody>
 </table>
 <h3 id="handler-configuration">Handler Configuration<a class="headerlink" href="#handler-configuration" title="Permanent link">&para;</a></h3>
-<p>Businesses advertise the platform's tokenization handler. The <code>config</code>
-contains the business's identity with the platform for token binding. The
-platform's handler specification (referenced via <code>spec</code>) documents the
-<code>/detokenize</code> endpoint URL exposed by the platform's
-<strong>payment credential provider</strong>.</p>
-<p>The handler accepts <a href="/ucp/2026-01-11/schemas/shopping/types/card_credential.json">CardCredential</a> for tokenization and produces <a href="/ucp/2026-01-11/schemas/shopping/types/token_credential.json">TokenCredential</a> for checkout.</p>
-<p><strong>Note:</strong> The result of <code>/detokenize</code> contains <strong>sensitive payment data</strong>.
-Both the sender (platform's credential provider) and receiver
-(business or PSP) <strong>MUST</strong> be PCI DSS compliant.</p>
+<p>Businesses advertise the platform's tokenization handler. The <code>config</code> contains
+the business's identity with the platform for token binding. The platform's
+handler specification (referenced via <code>spec</code>) documents the <code>/detokenize</code>
+endpoint URL exposed by the platform's <strong>payment credential provider</strong>.</p>
+<p>The handler accepts
+<a href="https://ucp.dev/2026-01-11/schemas/shopping/types/card_credential.json">CardCredential</a>
+for tokenization and produces
+<a href="https://ucp.dev/2026-01-11/schemas/shopping/types/token_credential.json">TokenCredential</a>
+for checkout.</p>
+<p><strong>Note:</strong> The result of <code>/detokenize</code> contains <strong>sensitive payment data</strong>. Both
+the sender (platform's credential provider) and receiver (business or PSP)
+<strong>MUST</strong> be PCI DSS compliant.</p>
 <h4 id="example-handler-declaration">Example Handler Declaration<a class="headerlink" href="#example-handler-declaration" title="Permanent link">&para;</a></h4>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">&quot;payment&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">&quot;handlers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">      </span><span class="p">{</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;platform_wallet&quot;</span><span class="p">,</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;com.example.platform_tokenizer&quot;</span><span class="p">,</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">        </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-01-12&quot;</span><span class="p">,</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">        </span><span class="nt">&quot;spec&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://platform.example.com/ucp/handler.json&quot;</span><span class="p">,</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">        </span><span class="nt">&quot;config_schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://platform.example.com/ucp/handler/config.json&quot;</span><span class="p">,</span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">        </span><span class="nt">&quot;instrument_schemas&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">          </span><span class="s2">&quot;https://ucp.dev/schemas/shopping/types/card_payment_instrument.json&quot;</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">        </span><span class="p">],</span>
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">        </span><span class="nt">&quot;config&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">          </span><span class="nt">&quot;business_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;business_abc123&quot;</span><span class="p">,</span>
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">          </span><span class="nt">&quot;environment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;production&quot;</span>
-</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">        </span><span class="p">}</span>
-</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">      </span><span class="p">}</span>
-</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">    </span><span class="p">]</span>
-</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nt">&quot;payment&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">        </span><span class="nt">&quot;handlers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">            </span><span class="p">{</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">                </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;platform_wallet&quot;</span><span class="p">,</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;com.example.platform_tokenizer&quot;</span><span class="p">,</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">                </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-01-12&quot;</span><span class="p">,</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">                </span><span class="nt">&quot;spec&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://platform.example.com/ucp/handler.json&quot;</span><span class="p">,</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">                </span><span class="nt">&quot;config_schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://platform.example.com/ucp/handler/config.json&quot;</span><span class="p">,</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">                </span><span class="nt">&quot;instrument_schemas&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">                    </span><span class="s2">&quot;https://ucp.dev/2026-01-11/schemas/shopping/types/card_payment_instrument.json&quot;</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">                </span><span class="p">],</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">                </span><span class="nt">&quot;config&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">                    </span><span class="nt">&quot;business_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;business_abc123&quot;</span><span class="p">,</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">                    </span><span class="nt">&quot;environment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;production&quot;</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">                </span><span class="p">}</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">        </span><span class="p">]</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="p">}</span>
 </span></code></pre></div>
 <h3 id="processing-payments">Processing Payments<a class="headerlink" href="#processing-payments" title="Permanent link">&para;</a></h3>
 <p>Upon receiving a checkout with a token credential:</p>
 <ol>
-<li><strong>Validate Handler:</strong> Confirm <code>instrument.handler_id</code> matches the expected handler ID.</li>
-<li><strong>Detokenize or Delegate:</strong></li>
-<li><strong>Option A (Direct):</strong> Call the platform's <strong>credential provider</strong> <code>/detokenize</code> endpoint directly, then process payments.</li>
-<li><strong>Option B (Delegated):</strong> Forward the token to a PSP for detokenization and payment processing.</li>
+<li><strong>Validate Handler:</strong> Confirm <code>instrument.handler_id</code> matches the expected
+   handler ID.</li>
+<li><strong>Detokenize or Delegate:</strong><ul>
+<li><strong>Option A (Direct):</strong> Call the platform's <strong>credential provider</strong>
+  <code>/detokenize</code> endpoint directly, then process payments.</li>
+<li><strong>Option B (Delegated):</strong> Forward the token to a PSP for detokenization
+  and payment processing.</li>
+</ul>
+</li>
 <li><strong>Return Response:</strong> Respond with the finalized checkout state.</li>
 </ol>
 <p>For option B, see section <a href="#psp-integration">PSP Integration</a>.</p>
@@ -2007,19 +1982,22 @@ Both the sender (platform's credential provider) and receiver
 </span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">  </span><span class="p">}</span>
 </span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="p">}</span>
 </span></code></pre></div>
-<p>Note: No <code>binding.identity</code> is needed if the business authenticates
-directly—the platform knows who they are based on the API key.</p>
+<p>Note: No <code>binding.identity</code> is needed if the business authenticates directly—the
+platform knows who they are based on the API key.</p>
 <hr />
 <h2 id="platform-integration">Platform Integration<a class="headerlink" href="#platform-integration" title="Permanent link">&para;</a></h2>
 <h3 id="prerequisites_1">Prerequisites<a class="headerlink" href="#prerequisites_1" title="Permanent link">&para;</a></h3>
-<p>This handler is implemented by platforms that operate
-<strong>compliant payment credential providers</strong> or wallet services. The payment
-credential provider (not the main platform application) handles sensitive
-data and exposes the <code>/detokenize</code> endpoint. To implement, platforms must:</p>
+<p>This handler is implemented by platforms that operate <strong>compliant payment
+credential providers</strong> or wallet services. The payment credential provider (not
+the main platform application) handles sensitive data and exposes the
+<code>/detokenize</code> endpoint. To implement, platforms must:</p>
 <ol>
-<li>Deploy a <strong>compliant payment credential provider</strong> that maintains compliance for credential storage and handling.</li>
-<li>Expose a <code>/detokenize</code> endpoint conforming to the API pattern from the credential provider.</li>
-<li>Onboard businesses and PSPs who will call the credential provider's <code>/detokenize</code> endpoint.</li>
+<li>Deploy a <strong>compliant payment credential provider</strong> that maintains compliance
+   for credential storage and handling.</li>
+<li>Expose a <code>/detokenize</code> endpoint conforming to the API pattern from the
+   credential provider.</li>
+<li>Onboard businesses and PSPs who will call the credential provider's
+   <code>/detokenize</code> endpoint.</li>
 </ol>
 <p><strong>Implementation Requirements:</strong></p>
 <table>
@@ -2049,12 +2027,15 @@ data and exposes the <code>/detokenize</code> endpoint. To implement, platforms 
 </tbody>
 </table>
 <h3 id="token-generation">Token Generation<a class="headerlink" href="#token-generation" title="Permanent link">&para;</a></h3>
-<p>The platform application orchestrates the payment flow but
-<strong>never has access to sensitive payment data</strong>. Instead:</p>
+<p>The platform application orchestrates the payment flow but <strong>never has access to
+sensitive payment data</strong>. Instead:</p>
 <ol>
-<li>The platform's <strong>payment credential provider</strong> securely stores payment credentials.</li>
-<li>When a payment is needed, the platform application requests a token from the credential provider.</li>
-<li>The credential provider generates a token bound to both the <code>checkout_id</code> and the business's <code>identity</code> (from the handler declaration).</li>
+<li>The platform's <strong>payment credential provider</strong> securely stores payment
+   credentials.</li>
+<li>When a payment is needed, the platform application requests a token from the
+   credential provider.</li>
+<li>The credential provider generates a token bound to both the <code>checkout_id</code> and
+   the business's <code>identity</code> (from the handler declaration).</li>
 <li>The credential provider returns the token to the platform application.</li>
 <li>The platform application includes this token in the checkout submission.</li>
 </ol>
@@ -2086,12 +2067,12 @@ payment credential provider):</p>
 <hr />
 <h2 id="psp-integration">PSP Integration<a class="headerlink" href="#psp-integration" title="Permanent link">&para;</a></h2>
 <h3 id="prerequisites_2">Prerequisites<a class="headerlink" href="#prerequisites_2" title="Permanent link">&para;</a></h3>
-<h3 id="critical-security-compliance-required">CRITICAL: Security &amp; Compliance Required<a class="headerlink" href="#critical-security-compliance-required" title="Permanent link">&para;</a></h3>
+<p><strong>CRITICAL: Security &amp; Compliance Required</strong></p>
 <p>Before detokenizing on behalf of businesses, PSPs must register with the
 platform, providing the list of businesses they process for.</p>
 <p>As the party receiving sensitive instrument details via the <code>/detokenize</code>
-endpoint, PSPs <strong>MUST</strong> be <strong>compliant</strong> with relevant security standards
-This includes:</p>
+endpoint, PSPs <strong>MUST</strong> be <strong>compliant</strong> with relevant security standards This
+includes:</p>
 <ul>
 <li>Secure transmission (HTTPS/TLS with strong cipher suites)</li>
 <li>Secure handling of sensitive data during payment processing</li>
@@ -2211,9 +2192,11 @@ business, so they must specify which businesses' token they are retrieving.</p>
 <hr />
 <h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Pattern:</strong> <a href="../../payment-handler-guide/">Tokenization Payment Handler</a></li>
-<li><strong>API Pattern:</strong> <code>/2026-01-11/handlers/tokenization/openapi.json</code></li>
-<li><strong>Identity Schema:</strong> <code>/2026-01-11/schemas/shopping/types/payment_identity.json</code></li>
+<li><strong>Pattern:</strong>
+  <a href="https://ucp.dev/specification/payment-handler-guide">Tokenization Payment Handler</a></li>
+<li><strong>API Pattern:</strong> <code>https://ucp.dev/2026-01-11/handlers/tokenization/openapi.json</code></li>
+<li><strong>Identity Schema:</strong>
+  <code>https://ucp.dev/2026-01-11/schemas/shopping/types/payment_identity.json</code></li>
 </ul>
 
 

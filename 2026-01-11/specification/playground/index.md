@@ -1,3 +1,5 @@
+UCP Playground
+
 # UCP Playground
 
 Walk through a complete UCP checkout flow step-by-step. This interactive demo runs entirely in the browser, simulating payloads and validating against real UCP schemas at each stage.

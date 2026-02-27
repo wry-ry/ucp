@@ -142,57 +142,57 @@ This object MUST be one of the following types: [Shipping Destination](/ucp/2026
 
 ```json
 {
-  "fulfillment": {
-    "methods": [
-      {
-        "id": "method_1",
-        "type": "shipping",
-        "line_item_ids": ["shirt", "pants"],
-        "selected_destination_id": "dest_1",
-        "destinations": [
-          {
-            "id": "dest_1",
-            "street_address": "123 Main St",
-            "address_locality": "Springfield",
-            "address_region": "IL",
-            "postal_code": "62701",
-            "address_country": "US"
-          }
-        ],
-        "groups": [
-          {
-            "id": "package_1",
-            "line_item_ids": ["shirt", "pants"],
-            "selected_option_id": "standard",
-            "options": [
-              {
-                "id": "standard",
-                "title": "Standard Shipping",
-                "description": "Arrives Dec 12-15 via USPS",
-                "totals": [
-                  {
-                    "type": "total",
-                    "amount": 500
-                  }
+    "fulfillment": {
+        "methods": [
+            {
+                "id": "method_1",
+                "type": "shipping",
+                "line_item_ids": ["shirt", "pants"],
+                "selected_destination_id": "dest_1",
+                "destinations": [
+                    {
+                        "id": "dest_1",
+                        "street_address": "123 Main St",
+                        "address_locality": "Springfield",
+                        "address_region": "IL",
+                        "postal_code": "62701",
+                        "address_country": "US"
+                    }
+                ],
+                "groups": [
+                    {
+                        "id": "package_1",
+                        "line_item_ids": ["shirt", "pants"],
+                        "selected_option_id": "standard",
+                        "options": [
+                            {
+                                "id": "standard",
+                                "title": "Standard Shipping",
+                                "description": "Arrives Dec 12-15 via USPS",
+                                "totals": [
+                                    {
+                                        "type": "total",
+                                        "amount": 500
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "express",
+                                "title": "Express Shipping",
+                                "description": "Arrives Dec 10-11 via FedEx",
+                                "totals": [
+                                    {
+                                        "type": "total",
+                                        "amount": 1000
+                                    }
+                                ]
+                            }
+                        ]
+                    }
                 ]
-              },
-              {
-                "id": "express",
-                "title": "Express Shipping",
-                "description": "Arrives Dec 10-11 via FedEx",
-                "totals": [
-                  {
-                    "type": "total",
-                    "amount": 1000
-                  }
-                ]
-              }
-            ]
-          }
+            }
         ]
-      }
-    ]
-  }
+    }
 }
 ```
 
@@ -256,33 +256,33 @@ Available methods indicate whether an item can be fulfilled with a given method,
 
 ```json
 {
-  "fulfillment": {
-    "methods": [
-      {
-        "id": "shipping",
-        "type": "shipping",
-        "line_item_ids": ["shirt", "pants"]
-      },
-      {
-        "id": "pickup",
-        "type": "pickup",
-        "line_item_ids": []
-      }
-    ],
-    "available_methods": [
-      {
-        "type": "shipping",
-        "line_item_ids": ["shirt", "pants"],
-        "fulfillable_on": "now"
-      },
-      {
-        "type": "pickup",
-        "line_item_ids": ["pants"],
-        "fulfillable_on": "2026-12-01T10:00:00Z",
-        "description": "Available for pickup at Downtown Store today at 2pm"
-      }
-    ]
-  }
+    "fulfillment": {
+        "methods": [
+            {
+                "id": "shipping",
+                "type": "shipping",
+                "line_item_ids": ["shirt", "pants"]
+            },
+            {
+                "id": "pickup",
+                "type": "pickup",
+                "line_item_ids": []
+            }
+        ],
+        "available_methods": [
+            {
+                "type": "shipping",
+                "line_item_ids": ["shirt", "pants"],
+                "fulfillable_on": "now"
+            },
+            {
+                "type": "pickup",
+                "line_item_ids": ["pants"],
+                "fulfillable_on": "2026-12-01T10:00:00Z",
+                "description": "Available for pickup at Downtown Store today at 2pm"
+            }
+        ]
+    }
 }
 ```
 
@@ -325,16 +325,18 @@ Businesses declare what fulfillment configurations they support using `merchant_
 
 ```json
 {
-  "capabilities": [{
-    "name": "dev.ucp.shopping.fulfillment",
-    "version": "2026-01-11",
-    "config": {
-      "allows_multi_destination": {
-        "shipping": true
-      },
-      "allows_method_combinations": [["shipping", "pickup"]]
-    }
-  }]
+    "capabilities": [
+        {
+            "name": "dev.ucp.shopping.fulfillment",
+            "version": "2026-01-11",
+            "config": {
+                "allows_multi_destination": {
+                    "shipping": true
+                },
+                "allows_method_combinations": [["shipping", "pickup"]]
+            }
+        }
+    ]
 }
 ```
 
@@ -372,57 +374,57 @@ Note: Platform's `supports_multi_group` is method-agnostic (single boolean), so 
 
 ```json
 {
-  "fulfillment": {
-    "methods": [
-      {
-        "id": "method_1",
-        "type": "shipping",
-        "line_item_ids": ["shirt", "pants"],
-        "selected_destination_id": "dest_1",
-        "destinations": [
-          {
-            "id": "dest_1",
-            "street_address": "123 Main St",
-            "address_locality": "Springfield",
-            "address_region": "IL",
-            "postal_code": "62701",
-            "address_country": "US"
-          }
-        ],
-        "groups": [
-          {
-            "id": "package_1",
-            "line_item_ids": ["shirt", "pants"],
-            "selected_option_id": "standard",
-            "options": [
-              {
-                "id": "standard",
-                "title": "Standard Shipping",
-                "description": "Arrives Dec 12-15 via USPS",
-                "totals": [
-                  {
-                    "type": "total",
-                    "amount": 500
-                  }
+    "fulfillment": {
+        "methods": [
+            {
+                "id": "method_1",
+                "type": "shipping",
+                "line_item_ids": ["shirt", "pants"],
+                "selected_destination_id": "dest_1",
+                "destinations": [
+                    {
+                        "id": "dest_1",
+                        "street_address": "123 Main St",
+                        "address_locality": "Springfield",
+                        "address_region": "IL",
+                        "postal_code": "62701",
+                        "address_country": "US"
+                    }
+                ],
+                "groups": [
+                    {
+                        "id": "package_1",
+                        "line_item_ids": ["shirt", "pants"],
+                        "selected_option_id": "standard",
+                        "options": [
+                            {
+                                "id": "standard",
+                                "title": "Standard Shipping",
+                                "description": "Arrives Dec 12-15 via USPS",
+                                "totals": [
+                                    {
+                                        "type": "total",
+                                        "amount": 500
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "express",
+                                "title": "Express Shipping",
+                                "description": "Arrives Dec 10-11 via FedEx",
+                                "totals": [
+                                    {
+                                        "type": "total",
+                                        "amount": 1000
+                                    }
+                                ]
+                            }
+                        ]
+                    }
                 ]
-              },
-              {
-                "id": "express",
-                "title": "Express Shipping",
-                "description": "Arrives Dec 10-11 via FedEx",
-                "totals": [
-                  {
-                    "type": "total",
-                    "amount": 1000
-                  }
-                ]
-              }
-            ]
-          }
+            }
         ]
-      }
-    ]
-  }
+    }
 }
 ```
 
@@ -434,62 +436,62 @@ Business splits items into multiple packages; buyer selects shipping rate per pa
 
 ```json
 {
-  "fulfillment": {
-    "methods": [
-      {
-        "id": "method_1",
-        "type": "shipping",
-        "line_item_ids": ["shirt", "pants"],
-        "selected_destination_id": "dest_1",
-        "destinations": [
-          {
-            "id": "dest_1",
-            "street_address": "123 Main St",
-            "address_locality": "Springfield",
-            "address_region": "IL",
-            "postal_code": "62701",
-            "address_country": "US"
-          }
-        ],
-        "groups": [
-          {
-            "id": "package_1",
-            "line_item_ids": ["shirt"],
-            "selected_option_id": "standard",
-            "options": [
-              {
-                "id": "standard",
-                "title": "Standard",
-                "totals": [ {"type": "total", "amount": 500} ]
-              },
-              {
-                "id": "express",
-                "title": "Express",
-                "totals": [ {"type": "total", "amount": 1000} ]
-              }
-            ]
-          },
-          {
-            "id": "package_2",
-            "line_item_ids": ["pants"],
-            "selected_option_id": "express",
-            "options": [
-              {
-                "id": "standard",
-                "title": "Standard",
-                "totals": [ {"type": "total", "amount": 500} ]
-              },
-              {
-                "id": "express",
-                "title": "Express",
-                "totals": [ {"type": "total", "amount": 1000} ]
-              }
-            ]
-          }
+    "fulfillment": {
+        "methods": [
+            {
+                "id": "method_1",
+                "type": "shipping",
+                "line_item_ids": ["shirt", "pants"],
+                "selected_destination_id": "dest_1",
+                "destinations": [
+                    {
+                        "id": "dest_1",
+                        "street_address": "123 Main St",
+                        "address_locality": "Springfield",
+                        "address_region": "IL",
+                        "postal_code": "62701",
+                        "address_country": "US"
+                    }
+                ],
+                "groups": [
+                    {
+                        "id": "package_1",
+                        "line_item_ids": ["shirt"],
+                        "selected_option_id": "standard",
+                        "options": [
+                            {
+                                "id": "standard",
+                                "title": "Standard",
+                                "totals": [{ "type": "total", "amount": 500 }]
+                            },
+                            {
+                                "id": "express",
+                                "title": "Express",
+                                "totals": [{ "type": "total", "amount": 1000 }]
+                            }
+                        ]
+                    },
+                    {
+                        "id": "package_2",
+                        "line_item_ids": ["pants"],
+                        "selected_option_id": "express",
+                        "options": [
+                            {
+                                "id": "standard",
+                                "title": "Standard",
+                                "totals": [{ "type": "total", "amount": 500 }]
+                            },
+                            {
+                                "id": "express",
+                                "title": "Express",
+                                "totals": [{ "type": "total", "amount": 1000 }]
+                            }
+                        ]
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  }
+    }
 }
 ```
 
@@ -501,97 +503,97 @@ Shirt ships to mom (US), pants ship to grandma (Hong Kong). Two methods of the s
 
 ```json
 {
-  "fulfillment": {
-    "methods": [
-      {
-        "id": "method_1",
-        "type": "shipping",
-        "line_item_ids": ["shirt"],
-        "selected_destination_id": "dest_mom",
-        "destinations": [
-          {
-            "id": "dest_mom",
-            "street_address": "123 Mom St",
-            "address_locality": "Springfield",
-            "address_region": "IL",
-            "postal_code": "62701",
-            "address_country": "US"
-          }
-        ],
-        "groups": [
-          {
-            "id": "package_1",
-            "line_item_ids": ["shirt"],
-            "selected_option_id": "standard",
-            "options": [
-              {
-                "id": "standard",
-                "title": "Standard",
-                "totals": [
-                  {
-                    "type": "total",
-                    "amount": 500
-                  }
+    "fulfillment": {
+        "methods": [
+            {
+                "id": "method_1",
+                "type": "shipping",
+                "line_item_ids": ["shirt"],
+                "selected_destination_id": "dest_mom",
+                "destinations": [
+                    {
+                        "id": "dest_mom",
+                        "street_address": "123 Mom St",
+                        "address_locality": "Springfield",
+                        "address_region": "IL",
+                        "postal_code": "62701",
+                        "address_country": "US"
+                    }
+                ],
+                "groups": [
+                    {
+                        "id": "package_1",
+                        "line_item_ids": ["shirt"],
+                        "selected_option_id": "standard",
+                        "options": [
+                            {
+                                "id": "standard",
+                                "title": "Standard",
+                                "totals": [
+                                    {
+                                        "type": "total",
+                                        "amount": 500
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "express",
+                                "title": "Express",
+                                "totals": [
+                                    {
+                                        "type": "total",
+                                        "amount": 1000
+                                    }
+                                ]
+                            }
+                        ]
+                    }
                 ]
-              },
-              {
-                "id": "express",
-                "title": "Express",
-                "totals": [
-                  {
-                    "type": "total",
-                    "amount": 1000
-                  }
+            },
+            {
+                "id": "method_2",
+                "type": "shipping",
+                "line_item_ids": ["pants"],
+                "selected_destination_id": "dest_grandma",
+                "destinations": [
+                    {
+                        "id": "dest_grandma",
+                        "street_address": "88 Queensway",
+                        "address_locality": "Hong Kong",
+                        "address_country": "HK"
+                    }
+                ],
+                "groups": [
+                    {
+                        "id": "package_2",
+                        "line_item_ids": ["pants"],
+                        "selected_option_id": "standard",
+                        "options": [
+                            {
+                                "id": "standard",
+                                "title": "Standard",
+                                "totals": [
+                                    {
+                                        "type": "total",
+                                        "amount": 500
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "express",
+                                "title": "Express",
+                                "totals": [
+                                    {
+                                        "type": "total",
+                                        "amount": 1000
+                                    }
+                                ]
+                            }
+                        ]
+                    }
                 ]
-              }
-            ]
-          }
+            }
         ]
-      },
-      {
-        "id": "method_2",
-        "type": "shipping",
-        "line_item_ids": ["pants"],
-        "selected_destination_id": "dest_grandma",
-        "destinations": [
-          {
-            "id": "dest_grandma",
-            "street_address": "88 Queensway",
-            "address_locality": "Hong Kong",
-            "address_country": "HK"
-          }
-        ],
-        "groups": [
-          {
-            "id": "package_2",
-            "line_item_ids": ["pants"],
-            "selected_option_id": "standard",
-            "options": [
-              {
-                "id": "standard",
-                "title": "Standard",
-                "totals": [
-                  {
-                    "type": "total",
-                    "amount": 500
-                  }
-                ]
-              },
-              {
-                "id": "express",
-                "title": "Express",
-                "totals": [
-                  {
-                    "type": "total",
-                    "amount": 1000
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
+    }
 }
 ```

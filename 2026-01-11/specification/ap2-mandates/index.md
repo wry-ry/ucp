@@ -32,26 +32,26 @@ Businesses declare support by adding `dev.ucp.shopping.ap2_mandate` to their `ca
 
 ```json
 {
-  "capabilities": [
-    {
-      "name": "dev.ucp.shopping.checkout",
-      "version": "2026-01-11",
-      "spec": "https://ucp.dev/specification/checkout",
-      "schema": "https://ucp.dev/schemas/shopping/checkout.json"
-    },
-    {
-      "name": "dev.ucp.shopping.ap2_mandate",
-      "version": "2026-01-11",
-      "spec": "https://ucp.dev/specification/ap2-mandates",
-      "schema": "https://ucp.dev/schemas/shopping/ap2_mandate.json",
-      "extends": "dev.ucp.shopping.checkout",
-      "config": {
-        "vp_formats_supported": {
-          "dc+sd-jwt": { }
+    "capabilities": [
+        {
+            "name": "dev.ucp.shopping.checkout",
+            "version": "2026-01-11",
+            "spec": "https://ucp.dev/specification/checkout",
+            "schema": "https://ucp.dev/schemas/shopping/checkout.json"
+        },
+        {
+            "name": "dev.ucp.shopping.ap2_mandate",
+            "version": "2026-01-11",
+            "spec": "https://ucp.dev/specification/ap2-mandates",
+            "schema": "https://ucp.dev/schemas/shopping/ap2_mandate.json",
+            "extends": "dev.ucp.shopping.checkout",
+            "config": {
+                "vp_formats_supported": {
+                    "dc+sd-jwt": {}
+                }
+            }
         }
-      }
-    }
-  ]
+    ]
 }
 ```
 
@@ -192,28 +192,28 @@ The platform initiates the session. The business returns the `Checkout` object w
 
 ```json
 {
-  "id": "chk_abc123",
-  "status": "ready_for_complete",
-  "currency": "USD",
-  "line_items": [
-    {
-      "id": "li_1",
-      "item": {"id": "item_123", "title": "Widget", "price": 2500},
-      "quantity": 2,
-      "totals": [
-        {"type": "subtotal", "amount": 5000},
-        {"type": "total", "amount": 5000}
-      ]
+    "id": "chk_abc123",
+    "status": "ready_for_complete",
+    "currency": "USD",
+    "line_items": [
+        {
+            "id": "li_1",
+            "item": { "id": "item_123", "title": "Widget", "price": 2500 },
+            "quantity": 2,
+            "totals": [
+                { "type": "subtotal", "amount": 5000 },
+                { "type": "total", "amount": 5000 }
+            ]
+        }
+    ],
+    "totals": [
+        { "type": "subtotal", "amount": 5000 },
+        { "type": "tax", "amount": 400 },
+        { "type": "total", "amount": 5400 }
+    ],
+    "ap2": {
+        "merchant_authorization": "eyJhbGciOiJFUzI1NiIsImtpZCI6Im1lcmNoYW50XzIwMjUifQ..<signature>"
     }
-  ],
-  "totals": [
-    {"type": "subtotal", "amount": 5000},
-    {"type": "tax", "amount": 400},
-    {"type": "total", "amount": 5400}
-  ],
-  "ap2": {
-    "merchant_authorization": "eyJhbGciOiJFUzI1NiIsImtpZCI6Im1lcmNoYW50XzIwMjUifQ..<signature>"
-  }
 }
 ```
 
@@ -269,26 +269,26 @@ Once the mandates are generated, the platform submits them in the completion req
 
 ```json
 {
-  "payment_data": {
-      "id": "instr_1",
-      "handler_id": "gpay",
-      "type": "card",
-      "description": "Visa •••• 1234",
-      "billing_address": {
-        "street_address": "123 Main St",
-        "address_locality": "Anytown",
-        "address_region": "CA",
-        "address_country": "US",
-        "postal_code": "12345"
-      },
-      "credential": {
-        "type": "PAYMENT_GATEWAY",
-        "token": "examplePaymentMethodToken"
-      }
-  },
-  "ap2": {
-     "checkout_mandate": "eyJhbGciOiJFUzI1NiIsInR5cCI6InZjK3NkLWp3dCJ9..." // The User-Signed SD-JWT+kb / platform provider signed SD-JWT / delegated SD-JWT-KB
-  }
+    "payment_data": {
+        "id": "instr_1",
+        "handler_id": "gpay",
+        "type": "card",
+        "description": "Visa •••• 1234",
+        "billing_address": {
+            "street_address": "123 Main St",
+            "address_locality": "Anytown",
+            "address_region": "CA",
+            "address_country": "US",
+            "postal_code": "12345"
+        },
+        "credential": {
+            "type": "PAYMENT_GATEWAY",
+            "token": "examplePaymentMethodToken"
+        }
+    },
+    "ap2": {
+        "checkout_mandate": "eyJhbGciOiJFUzI1NiIsInR5cCI6InZjK3NkLWp3dCJ9..." // The User-Signed SD-JWT+kb / platform provider signed SD-JWT / delegated SD-JWT-KB
+    }
 }
 ```
 

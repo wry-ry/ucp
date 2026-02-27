@@ -8,19 +8,19 @@ Allows platforms to facilitate checkout sessions. The checkout has to be finaliz
 
 The business remains the Merchant of Record (MoR), and they don't need to become PCI DSS compliant to support this Capability.
 
-### Flow overview\\n
+**Flow overview**
 
-### Payments
+**Payments**
 
 On checkout creation, businesses are required to define a payment configuration. The Checkout object includes `payment.handlers` which define the processing specifications for collecting payment instruments (e.g., Google Pay, direct tokenization). When the buyer submits payment, the platform populates the `payment.instruments` array with the collected instrument data.
 
-### Fulfillment
+**Fulfillment**
 
 Fulfillment is modelled as an extension in UCP to account for diverse use cases.
 
 Fulfillment is optional in the checkout object. This is done to enable a platform to perform checkout for digital goods without needing to furnish fulfillment details more relevant for physical goods.
 
-### Checkout Status Lifecycle
+**Checkout Status Lifecycle**
 
 The checkout `status` field indicates the current phase of the session and determines what action is required next. The business sets the status; the platform receives messages indicating what's needed to progress.
 
@@ -59,7 +59,7 @@ The checkout `status` field indicates the current phase of the session and deter
             └─────────────┘
 ```
 
-### Status Values
+**Status Values**
 
 - **`incomplete`**: Checkout session is missing required information or has issues that need resolution. Platform should inspect `messages` array for context and should attempt to resolve via Update Checkout.
 - **`requires_escalation`**: Checkout session requires information that cannot be provided via API, or buyer input is required. Platform should inspect `messages` to understand what's needed (see Error Handling below). If any `recoverable` errors exist, resolve those first. Then hand off to buyer via `continue_url`.
@@ -89,27 +89,27 @@ When status is `incomplete` or `requires_escalation`, platforms should process e
 
 ```json
 {
-  "status": "requires_escalation",
-  "messages": [
-    {
-      "type": "error",
-      "code": "invalid_phone",
-      "severity": "recoverable",
-      "content": "Phone number format is invalid"
-    },
-    {
-      "type": "error",
-      "code": "schedule_delivery",
-      "severity": "requires_buyer_input",
-      "content": "Select delivery window for your purchase"
-    },
-    {
-      "type": "error",
-      "code": "high_value_order",
-      "severity": "requires_buyer_review",
-      "content": "Orders over $500 require additional verification"
-    }
-  ]
+    "status": "requires_escalation",
+    "messages": [
+        {
+            "type": "error",
+            "code": "invalid_phone",
+            "severity": "recoverable",
+            "content": "Phone number format is invalid"
+        },
+        {
+            "type": "error",
+            "code": "schedule_delivery",
+            "severity": "requires_buyer_input",
+            "content": "Select delivery window for your purchase"
+        },
+        {
+            "type": "error",
+            "code": "high_value_order",
+            "severity": "requires_buyer_review",
+            "content": "Orders over $500 require additional verification"
+        }
+    ]
 }
 ```
 
@@ -170,7 +170,7 @@ A stateless URL that encodes checkout state directly, allowing reconstruction wi
 
 (In addition to the overarching guidelines)
 
-### Platform
+**Platform**
 
 - **MAY** engage an agent to facilitate the checkout session (e.g. add items to the checkout session, select fulfillment address). However, the agent must hand over the checkout session to a trusted and deterministic UI for the user to review the checkout details and place the order.
 - **MAY** send the user from the trusted, deterministic UI back to the agent at any time. For example, when the user decides to exit the checkout screen to keep adding items to the cart.
@@ -179,7 +179,7 @@ A stateless URL that encodes checkout state directly, allowing reconstruction wi
 - **MAY** use `continue_url` to hand off to business UI in other situations.
 - When performing handoff, **SHOULD** prefer business-provided `continue_url` over platform-constructed checkout permalinks.
 
-### Business
+**Business**
 
 - **MUST** send a confirmation email after the checkout has been completed.
 - **SHOULD** provide accurate error messages.

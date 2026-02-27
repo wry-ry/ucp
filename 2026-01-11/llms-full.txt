@@ -28,7 +28,9 @@ UCP uses reverse-domain naming to encode governance authority directly into capa
 
 All capability and service names **MUST** use the format:
 
-`{reverse-domain}.{service}.{capability}`
+```text
+{reverse-domain}.{service}.{capability}
+```
 
 **Components:**
 
@@ -51,7 +53,7 @@ The `spec` and `schema` fields are **REQUIRED** for all capabilities. The origin
 
 | Namespace       | Required Origin           |
 | --------------- | ------------------------- |
-| `dev.ucp.*`     | `../...`                  |
+| `dev.ucp.*`     | `https://ucp.dev/...`     |
 | `com.example.*` | `https://example.com/...` |
 
 Platform **MUST** validate this binding and **SHOULD** reject capabilities where the spec origin does not match the namespace authority.
@@ -107,7 +109,11 @@ The `endpoint` field provides the base URL for API calls. OpenAPI paths are appe
 }
 ```
 
-With OpenAPI path `/checkout-sessions`, the resolved URL is: `POST https://business.example.com/api/v2/checkout-sessions`
+With OpenAPI path `/checkout-sessions`, the resolved URL is:
+
+```text
+POST https://business.example.com/api/v2/checkout-sessions
+```
 
 **Rules:**
 
@@ -138,11 +144,11 @@ An **extension** is an optional module that augments another capability. Extensi
 
 ```json
 {
-  "name": "dev.ucp.shopping.fulfillment",
-  "version": "2026-01-11",
-  "spec": "https://ucp.dev/specification/fulfillment",
-  "schema": "https://ucp.dev/schemas/shopping/fulfillment.json",
-  "extends": "dev.ucp.shopping.checkout"
+    "name": "dev.ucp.shopping.fulfillment",
+    "version": "2026-01-11",
+    "spec": "https://ucp.dev/specification/fulfillment",
+    "schema": "https://ucp.dev/schemas/shopping/fulfillment.json",
+    "extends": "dev.ucp.shopping.checkout"
 }
 ```
 
@@ -206,85 +212,85 @@ Businesses publish their profile at `/.well-known/ucp`. An example:
 
 ```json
 {
-  "ucp": {
-    "version": "2026-01-11",
-    "services": {
-      "dev.ucp.shopping": {
+    "ucp": {
         "version": "2026-01-11",
-        "spec": "https://ucp.dev/specification/overview",
-        "rest": {
-          "schema": "https://ucp.dev/services/shopping/openapi.json",
-          "endpoint": "https://business.example.com/ucp/v1"
-        },
-        "mcp": {
-          "schema": "https://ucp.dev/services/shopping/mcp.openrpc.json",
-          "endpoint": "https://business.example.com/ucp/mcp"
-        },
-        "a2a": {
-          "endpoint": "https://business.example.com/.well-known/agent-card.json"
-        },
-        "embedded": {
-          "schema": "https://ucp.dev/services/shopping/embedded.openrpc.json"
-        }
-      }
-    },
-    "capabilities": [
-      {
-        "name": "dev.ucp.shopping.checkout",
-        "version": "2026-01-11",
-        "spec": "https://ucp.dev/specification/checkout",
-        "schema": "https://ucp.dev/schemas/shopping/checkout.json"
-      },
-      {
-        "name": "dev.ucp.shopping.fulfillment",
-        "version": "2026-01-11",
-        "spec": "https://ucp.dev/specification/fulfillment",
-        "schema": "https://ucp.dev/schemas/shopping/fulfillment.json",
-        "extends": "dev.ucp.shopping.checkout"
-      },
-      {
-        "name": "dev.ucp.shopping.discount",
-        "version": "2026-01-11",
-        "spec": "https://ucp.dev/specification/discount",
-        "schema": "https://ucp.dev/schemas/shopping/discount.json",
-        "extends": "dev.ucp.shopping.checkout"
-      }
-    ]
-  },
-  "payment": {
-    "handlers": [
-      {
-        "id": "business_tokenizer",
-        "name": "com.example.business_tokenizer",
-        "version": "2026-01-11",
-        "spec": "https://example.com/specs/payments/business_tokenizer",
-        "config_schema": "https://example.com/specs/payments/merchant_tokenizer.json",
-        "instrument_schemas": [
-          "https://ucp.dev/schemas/shopping/types/card_payment_instrument.json"
-        ],
-        "config": {
-          "type": "CARD",
-          "tokenization_specification": {
-            "type": "PUSH",
-            "parameters": {
-              "token_retrieval_url": "https://api.psp.example.com/v1/tokens"
+        "services": {
+            "dev.ucp.shopping": {
+                "version": "2026-01-11",
+                "spec": "https://ucp.dev/specification/overview",
+                "rest": {
+                    "schema": "https://ucp.dev/services/shopping/openapi.json",
+                    "endpoint": "https://business.example.com/ucp/v1"
+                },
+                "mcp": {
+                    "schema": "https://ucp.dev/services/shopping/mcp.openrpc.json",
+                    "endpoint": "https://business.example.com/ucp/mcp"
+                },
+                "a2a": {
+                    "endpoint": "https://business.example.com/.well-known/agent-card.json"
+                },
+                "embedded": {
+                    "schema": "https://ucp.dev/services/shopping/embedded.openrpc.json"
+                }
             }
-          }
+        },
+        "capabilities": [
+            {
+                "name": "dev.ucp.shopping.checkout",
+                "version": "2026-01-11",
+                "spec": "https://ucp.dev/specification/checkout",
+                "schema": "https://ucp.dev/schemas/shopping/checkout.json"
+            },
+            {
+                "name": "dev.ucp.shopping.fulfillment",
+                "version": "2026-01-11",
+                "spec": "https://ucp.dev/specification/fulfillment",
+                "schema": "https://ucp.dev/schemas/shopping/fulfillment.json",
+                "extends": "dev.ucp.shopping.checkout"
+            },
+            {
+                "name": "dev.ucp.shopping.discount",
+                "version": "2026-01-11",
+                "spec": "https://ucp.dev/specification/discount",
+                "schema": "https://ucp.dev/schemas/shopping/discount.json",
+                "extends": "dev.ucp.shopping.checkout"
+            }
+        ]
+    },
+    "payment": {
+        "handlers": [
+            {
+                "id": "business_tokenizer",
+                "name": "com.example.business_tokenizer",
+                "version": "2026-01-11",
+                "spec": "https://example.com/specs/payments/business_tokenizer",
+                "config_schema": "https://example.com/specs/payments/merchant_tokenizer.json",
+                "instrument_schemas": [
+                    "https://ucp.dev/schemas/shopping/types/card_payment_instrument.json"
+                ],
+                "config": {
+                    "type": "CARD",
+                    "tokenization_specification": {
+                        "type": "PUSH",
+                        "parameters": {
+                            "token_retrieval_url": "https://api.psp.example.com/v1/tokens"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    "signing_keys": [
+        {
+            "kid": "business_2025",
+            "kty": "EC",
+            "crv": "P-256",
+            "x": "WbbXwVYGdJoP4Xm3qCkGvBRcRvKtEfXDbWvPzpPS8LA",
+            "y": "sP4jHHxYqC89HBo8TjrtVOAGHfJDflYxw7MFMxuFMPY",
+            "use": "sig",
+            "alg": "ES256"
         }
-      }
     ]
-  },
-  "signing_keys": [
-    {
-      "kid": "business_2025",
-      "kty": "EC",
-      "crv": "P-256",
-      "x": "WbbXwVYGdJoP4Xm3qCkGvBRcRvKtEfXDbWvPzpPS8LA",
-      "y": "sP4jHHxYqC89HBo8TjrtVOAGHfJDflYxw7MFMxuFMPY",
-      "use": "sig",
-      "alg": "ES256"
-    }
-  ]
 }
 ```
 
@@ -296,68 +302,68 @@ Platform profiles are similar and include signing keys for capabilities requirin
 
 ```json
 {
-  "ucp": {
-    "version": "2026-01-11",
-    "capabilities": [
-      {
-        "name": "dev.ucp.shopping.checkout",
+    "ucp": {
         "version": "2026-01-11",
-        "spec": "https://ucp.dev/specification/checkout",
-        "schema": "https://ucp.dev/schemas/shopping/checkout.json"
-      },
-      {
-        "name": "dev.ucp.shopping.fulfillment",
-        "version": "2026-01-11",
-        "spec": "https://ucp.dev/specification/fulfillment",
-        "schema": "https://ucp.dev/schemas/shopping/fulfillment.json",
-        "extends": "dev.ucp.shopping.checkout"
-      },
-      {
-        "name": "dev.ucp.shopping.order",
-        "version": "2026-01-11",
-        "spec": "https://ucp.dev/specification/order",
-        "schema": "https://ucp.dev/schemas/shopping/order.json",
-        "config": {
-          "webhook_url": "https://platform.example.com/webhooks/ucp/orders"
+        "capabilities": [
+            {
+                "name": "dev.ucp.shopping.checkout",
+                "version": "2026-01-11",
+                "spec": "https://ucp.dev/specification/checkout",
+                "schema": "https://ucp.dev/schemas/shopping/checkout.json"
+            },
+            {
+                "name": "dev.ucp.shopping.fulfillment",
+                "version": "2026-01-11",
+                "spec": "https://ucp.dev/specification/fulfillment",
+                "schema": "https://ucp.dev/schemas/shopping/fulfillment.json",
+                "extends": "dev.ucp.shopping.checkout"
+            },
+            {
+                "name": "dev.ucp.shopping.order",
+                "version": "2026-01-11",
+                "spec": "https://ucp.dev/specification/order",
+                "schema": "https://ucp.dev/schemas/shopping/order.json",
+                "config": {
+                    "webhook_url": "https://platform.example.com/webhooks/ucp/orders"
+                }
+            }
+        ]
+    },
+    "payment": {
+        "handlers": [
+            {
+                "id": "gpay",
+                "name": "com.google.pay",
+                "version": "2024-12-03",
+                "spec": "https://developers.google.com/merchant/ucp/guides/gpay-payment-handler",
+                "config_schema": "https://pay.google.com/gp/p/ucp/2026-01-11/schemas/gpay_config.json",
+                "instrument_schemas": [
+                    "https://pay.google.com/gp/p/ucp/2026-01-11/schemas/gpay_card_payment_instrument.json"
+                ]
+            },
+            {
+                "id": "business_tokenizer",
+                "name": "dev.ucp.business_tokenizer",
+                "version": "2026-01-11",
+                "spec": "https://example.com/specs/payments/business_tokenizer-payment",
+                "config_schema": "https://ucp.dev/schemas/payments/delegate-payment.json",
+                "instrument_schemas": [
+                    "https://ucp.dev/schemas/shopping/types/card_payment_instrument.json"
+                ]
+            }
+        ]
+    },
+    "signing_keys": [
+        {
+            "kid": "platform_2025",
+            "kty": "EC",
+            "crv": "P-256",
+            "x": "MKBCTNIcKUSDii11ySs3526iDZ8AiTo7Tu6KPAqv7D4",
+            "y": "4Etl6SRW2YiLUrN5vfvVHuhp7x8PxltmWWlbbM4IFyM",
+            "use": "sig",
+            "alg": "ES256"
         }
-      }
     ]
-  },
-  "payment": {
-    "handlers": [
-      {
-        "id": "gpay",
-        "name": "com.google.pay",
-        "version": "2024-12-03",
-        "spec": "https://developers.google.com/merchant/ucp/guides/gpay-payment-handler",
-        "config_schema": "https://pay.google.com/gp/p/ucp/2026-01-11/schemas/gpay_config.json",
-        "instrument_schemas": [
-          "https://pay.google.com/gp/p/ucp/2026-01-11/schemas/gpay_card_payment_instrument.json"
-        ]
-      },
-      {
-        "id": "business_tokenizer",
-        "name": "dev.ucp.business_tokenizer",
-        "version": "2026-01-11",
-        "spec": "https://example.com/specs/payments/business_tokenizer-payment",
-        "config_schema": "https://ucp.dev/schemas/payments/delegate-payment.json",
-        "instrument_schemas": [
-          "https://ucp.dev/schemas/shopping/types/card_payment_instrument.json"
-        ]
-      }
-    ]
-  },
-  "signing_keys": [
-    {
-      "kid": "platform_2025",
-      "kty": "EC",
-      "crv": "P-256",
-      "x": "MKBCTNIcKUSDii11ySs3526iDZ8AiTo7Tu6KPAqv7D4",
-      "y": "4Etl6SRW2YiLUrN5vfvVHuhp7x8PxltmWWlbbM4IFyM",
-      "use": "sig",
-      "alg": "ES256"
-    }
-  ]
 }
 ```
 
@@ -427,13 +433,15 @@ If negotiation fails, businesses **MUST** return an error response:
 
 ```json
 {
-  "status": "requires_escalation",
-  "messages": [{
-    "type": "error",
-    "code": "version_unsupported",
-    "message": "Version 2026-01-11 is not supported.",
-    "severity": "requires_buyer_input"
-  }]
+    "status": "requires_escalation",
+    "messages": [
+        {
+            "type": "error",
+            "code": "version_unsupported",
+            "message": "Version 2026-01-11 is not supported.",
+            "severity": "requires_buyer_input"
+        }
+    ]
 }
 ```
 
@@ -523,10 +531,10 @@ To aid in fraud assessment, the Platform **MAY** include additional risk signals
 
 ```json
 {
-  "risk_signals": {
-    "session_id": "abc_123_xyz",
-    "score": 0.95,
-  }
+    "risk_signals": {
+        "session_id": "abc_123_xyz",
+        "score": 0.95
+    }
 }
 ```
 
@@ -538,50 +546,50 @@ The following scenarios illustrate how different payment handlers and instrument
 
 In this scenario, the platform identifies a digital wallet handler (e.g., `com.google.pay`, `dev.shopify.shop_pay`) and uses the wallet's API to acquire an encrypted payment token.
 
-### 1. Business Advertisement (Response from Create Checkout)\\n
+**1. Business Advertisement (Response from Create Checkout)**
 
 ```json
 {
-  "payment": {
-    "handlers": [
-      {
-        "id": "8c9202bd-63cc-4241-8d24-d57ce69ea31c",
-        "name": "com.google.pay",
-        "version": "2026-01-11",
-        "spec": "https://pay.google.com/gp/p/ucp/2026-01-11/",
-        "config_schema": "https://pay.google.com/gp/p/ucp/2026-01-11/schemas/config.json",
-        "instrument_schemas": [
-          "https://pay.google.com/gp/p/ucp/2026-01-11/schemas/card_payment_instrument.json"
-        ],
-        "config": {
-          "api_version": 2,
-          "api_version_minor": 0,
-          "environment": "TEST",
-          "merchant_info": {
-            "merchant_name": "Example Merchant",
-            "merchant_id": "01234567890123456789",
-            "merchant_origin": "checkout.merchant.com"
-          },
-          "allowed_payment_methods": [
+    "payment": {
+        "handlers": [
             {
-              "type": "CARD",
-              "parameters": {
-                "allowed_auth_methods": ["PAN_ONLY"],
-                "allowed_card_networks": ["VISA", "MASTERCARD"]
-              },
-              "tokenization_specification": {
-                "type": "PAYMENT_GATEWAY",
-                "parameters": {
-                  "gateway": "example",
-                  "gatewayMerchantId": "exampleGatewayMerchantId"
+                "id": "8c9202bd-63cc-4241-8d24-d57ce69ea31c",
+                "name": "com.google.pay",
+                "version": "2026-01-11",
+                "spec": "https://pay.google.com/gp/p/ucp/2026-01-11/",
+                "config_schema": "https://pay.google.com/gp/p/ucp/2026-01-11/schemas/config.json",
+                "instrument_schemas": [
+                    "https://pay.google.com/gp/p/ucp/2026-01-11/schemas/card_payment_instrument.json"
+                ],
+                "config": {
+                    "api_version": 2,
+                    "api_version_minor": 0,
+                    "environment": "TEST",
+                    "merchant_info": {
+                        "merchant_name": "Example Merchant",
+                        "merchant_id": "01234567890123456789",
+                        "merchant_origin": "checkout.merchant.com"
+                    },
+                    "allowed_payment_methods": [
+                        {
+                            "type": "CARD",
+                            "parameters": {
+                                "allowed_auth_methods": ["PAN_ONLY"],
+                                "allowed_card_networks": ["VISA", "MASTERCARD"]
+                            },
+                            "tokenization_specification": {
+                                "type": "PAYMENT_GATEWAY",
+                                "parameters": {
+                                    "gateway": "example",
+                                    "gatewayMerchantId": "exampleGatewayMerchantId"
+                                }
+                            }
+                        }
+                    ]
                 }
-              }
             }
-          ]
-        }
-      }
-    ]
-  }
+        ]
+    }
 }
 ```
 
@@ -624,29 +632,31 @@ POST /checkout-sessions/{id}/complete
 
 In this scenario, the platform uses a generic tokenizer to request a session token or network tokens. The bank requires Strong Customer Authentication (SCA/3DS), forcing the business to pause completion and request a challenge.
 
-### 1. Business Advertisement
+**1. Business Advertisement**
 
 ```json
 {
-  "payment": {
-    "handlers": [{
-      "id": "merchant_tokenizer",
-      "name": "com.example.tokenizer",
-      // ... more handler required field
-      "config": {
-        "token_url": "https://api.psp.com/tokens",
-        "public_key": "pk_123"
-      }
-    }]
-  }
+    "payment": {
+        "handlers": [
+            {
+                "id": "merchant_tokenizer",
+                "name": "com.example.tokenizer",
+                // ... more handler required field
+                "config": {
+                    "token_url": "https://api.psp.com/tokens",
+                    "public_key": "pk_123"
+                }
+            }
+        ]
+    }
 }
 ```
 
-### 2. Token Execution (Platform Side)
+**2. Token Execution (Platform Side)**
 
 The platform calls `https://api.psp.com/tokens` which identity **SHOULD** have previous legal binding connection with them and receives `tok_visa_123` (which could represent a vaulted card or network token).
 
-### 3. Complete Checkout (Request to Business)
+**3. Complete Checkout (Request to Business)**
 
 ```json
 POST /checkout-sessions/{id}/complete
@@ -663,7 +673,7 @@ POST /checkout-sessions/{id}/complete
 }
 ```
 
-### 4. Challenge Required (Response from Business)
+**4. Challenge Required (Response from Business)**
 
 The business attempts the charge, but the PSP returns a "Soft Decline" requiring 3DS.
 
@@ -681,31 +691,33 @@ HTTP/1.1 200 OK
 }
 ```
 
-*The platform* *MUST* *now open `continue_url` in a WebView/Window for the user to complete the bank check, then retry the completion.*
+*The platform **MUST** now open `continue_url` in a WebView/Window for the user to complete the bank check, then retry the completion.*
 
 #### Scenario C: Autonomous Agent (AP2)
 
 This scenario demonstrates the **Recommended Flow for Agents**. Instead of a session token, the agent generates cryptographic mandates.
 
-### 1. Business Advertisement
+**1. Business Advertisement**
 
 ```json
 {
-  "payment": {
-    "handlers": [{
-      "id": "ap2_234352",
-      "name": "dev.ucp.ap2_mandate_compatible_handlers",
-      // ... other required handler fields
-    }]
-  }
+    "payment": {
+        "handlers": [
+            {
+                "id": "ap2_234352",
+                "name": "dev.ucp.ap2_mandate_compatible_handlers"
+                // ... other required handler fields
+            }
+        ]
+    }
 }
 ```
 
-### 2. Agent Execution
+**2. Agent Execution**
 
 The agent cryptographically signs objects using the user's private key on a non-agentic surface.
 
-### 3. Complete Checkout
+**3. Complete Checkout**
 
 ```json
 POST /checkout-sessions/{id}/complete
@@ -733,7 +745,7 @@ POST /checkout-sessions/{id}/complete
 
 ### PCI-DSS Scope Management
 
-### Platform Scope
+**Platform Scope**
 
 Most platform implementations can **avoid PCI-DSS scope** by:
 
@@ -742,7 +754,7 @@ Most platform implementations can **avoid PCI-DSS scope** by:
 - Forwarding credentials without the ability to use them directly
 - Using PSP tokenization payment handlers where raw credentials never pass through the platform
 
-### Business Scope
+**Business Scope**
 
 Businesses can minimize PCI scope by:
 
@@ -751,7 +763,7 @@ Businesses can minimize PCI scope by:
 - Never logging raw credentials
 - Delegating credential processing to PCI-certified payment credential providers
 
-### Payment Credential Provider Scope
+**Payment Credential Provider Scope**
 
 Payment credential providers (PSPs, wallets) are typically PCI-DSS Level 1 certified and handle:
 
@@ -937,13 +949,15 @@ Version unsupported error:
 
 ```json
 {
-  "status": "requires_escalation",
-  "messages": [{
-    "type": "error",
-    "code": "version_unsupported",
-    "message": "Version 2026-01-12 is not supported. This business implements version 2026-01-11.",
-    "severity": "requires_buyer_input"
-  }]
+    "status": "requires_escalation",
+    "messages": [
+        {
+            "type": "error",
+            "code": "version_unsupported",
+            "message": "Version 2026-01-12 is not supported. This business implements version 2026-01-11.",
+            "severity": "requires_buyer_input"
+        }
+    ]
 }
 ```
 
@@ -1017,19 +1031,19 @@ Allows platforms to facilitate checkout sessions. The checkout has to be finaliz
 
 The business remains the Merchant of Record (MoR), and they don't need to become PCI DSS compliant to support this Capability.
 
-### Flow overview\\n
+**Flow overview**
 
-### Payments
+**Payments**
 
 On checkout creation, businesses are required to define a payment configuration. The Checkout object includes `payment.handlers` which define the processing specifications for collecting payment instruments (e.g., Google Pay, direct tokenization). When the buyer submits payment, the platform populates the `payment.instruments` array with the collected instrument data.
 
-### Fulfillment
+**Fulfillment**
 
 Fulfillment is modelled as an extension in UCP to account for diverse use cases.
 
 Fulfillment is optional in the checkout object. This is done to enable a platform to perform checkout for digital goods without needing to furnish fulfillment details more relevant for physical goods.
 
-### Checkout Status Lifecycle
+**Checkout Status Lifecycle**
 
 The checkout `status` field indicates the current phase of the session and determines what action is required next. The business sets the status; the platform receives messages indicating what's needed to progress.
 
@@ -1068,7 +1082,7 @@ The checkout `status` field indicates the current phase of the session and deter
             └─────────────┘
 ```
 
-### Status Values
+**Status Values**
 
 - **`incomplete`**: Checkout session is missing required information or has issues that need resolution. Platform should inspect `messages` array for context and should attempt to resolve via Update Checkout.
 - **`requires_escalation`**: Checkout session requires information that cannot be provided via API, or buyer input is required. Platform should inspect `messages` to understand what's needed (see Error Handling below). If any `recoverable` errors exist, resolve those first. Then hand off to buyer via `continue_url`.
@@ -1098,27 +1112,27 @@ When status is `incomplete` or `requires_escalation`, platforms should process e
 
 ```json
 {
-  "status": "requires_escalation",
-  "messages": [
-    {
-      "type": "error",
-      "code": "invalid_phone",
-      "severity": "recoverable",
-      "content": "Phone number format is invalid"
-    },
-    {
-      "type": "error",
-      "code": "schedule_delivery",
-      "severity": "requires_buyer_input",
-      "content": "Select delivery window for your purchase"
-    },
-    {
-      "type": "error",
-      "code": "high_value_order",
-      "severity": "requires_buyer_review",
-      "content": "Orders over $500 require additional verification"
-    }
-  ]
+    "status": "requires_escalation",
+    "messages": [
+        {
+            "type": "error",
+            "code": "invalid_phone",
+            "severity": "recoverable",
+            "content": "Phone number format is invalid"
+        },
+        {
+            "type": "error",
+            "code": "schedule_delivery",
+            "severity": "requires_buyer_input",
+            "content": "Select delivery window for your purchase"
+        },
+        {
+            "type": "error",
+            "code": "high_value_order",
+            "severity": "requires_buyer_review",
+            "content": "Orders over $500 require additional verification"
+        }
+    ]
 }
 ```
 
@@ -1179,7 +1193,7 @@ A stateless URL that encodes checkout state directly, allowing reconstruction wi
 
 (In addition to the overarching guidelines)
 
-### Platform
+**Platform**
 
 - **MAY** engage an agent to facilitate the checkout session (e.g. add items to the checkout session, select fulfillment address). However, the agent must hand over the checkout session to a trusted and deterministic UI for the user to review the checkout details and place the order.
 - **MAY** send the user from the trusted, deterministic UI back to the agent at any time. For example, when the user decides to exit the checkout screen to keep adding items to the cart.
@@ -1188,7 +1202,7 @@ A stateless URL that encodes checkout state directly, allowing reconstruction wi
 - **MAY** use `continue_url` to hand off to business UI in other situations.
 - When performing handoff, **SHOULD** prefer business-provided `continue_url` over platform-constructed checkout permalinks.
 
-### Business
+**Business**
 
 - **MUST** send a confirmation email after the checkout has been completed.
 - **SHOULD** provide accurate error messages.
@@ -2932,15 +2946,15 @@ Error responses follow the standard UCP error structure:
 
 ```json
 {
-  "status": "requires_escalation",
-  "messages": [
-    {
-      "type": "error",
-      "code": "invalid_cart_items",
-      "content": "One or more cart items are invalid",
-      "severity": "requires_buyer_input",
-    }
-  ]
+    "status": "requires_escalation",
+    "messages": [
+        {
+            "type": "error",
+            "code": "invalid_cart_items",
+            "content": "One or more cart items are invalid",
+            "severity": "requires_buyer_input"
+        }
+    ]
 }
 ```
 
@@ -2969,34 +2983,34 @@ Businesses advertise MCP transport availability through their UCP profile at `/.
 
 ```json
 {
-  "ucp": {
-    "version": "2026-01-11",
-    "services": {
-      "dev.ucp.shopping": {
+    "ucp": {
         "version": "2026-01-11",
-        "spec": "https://ucp.dev/specification/overview",
-        "mcp": {
-          "schema": "https://ucp.dev/services/shopping/mcp.openrpc.json",
-          "endpoint": "https://business.example.com/ucp/mcp"
-        }
-      }
-    },
-    "capabilities": [
-      {
-        "name": "dev.ucp.shopping.checkout",
-        "version": "2026-01-11",
-        "spec": "https://ucp.dev/specification/checkout",
-        "schema": "https://ucp.dev/schemas/shopping/checkout.json"
-      },
-      {
-        "name": "dev.ucp.shopping.fulfillment",
-        "version": "2026-01-11",
-        "spec": "https://ucp.dev/specification/fulfillment",
-        "schema": "https://ucp.dev/schemas/shopping/fulfillment.json",
-        "extends": "dev.ucp.shopping.checkout"
-      }
-    ]
-  }
+        "services": {
+            "dev.ucp.shopping": {
+                "version": "2026-01-11",
+                "spec": "https://ucp.dev/specification/overview",
+                "mcp": {
+                    "schema": "https://ucp.dev/services/shopping/mcp.openrpc.json",
+                    "endpoint": "https://business.example.com/ucp/mcp"
+                }
+            }
+        },
+        "capabilities": [
+            {
+                "name": "dev.ucp.shopping.checkout",
+                "version": "2026-01-11",
+                "spec": "https://ucp.dev/specification/checkout",
+                "schema": "https://ucp.dev/schemas/shopping/checkout.json"
+            },
+            {
+                "name": "dev.ucp.shopping.fulfillment",
+                "version": "2026-01-11",
+                "spec": "https://ucp.dev/specification/fulfillment",
+                "schema": "https://ucp.dev/schemas/shopping/fulfillment.json",
+                "extends": "dev.ucp.shopping.checkout"
+            }
+        ]
+    }
 }
 ```
 
@@ -3006,17 +3020,17 @@ MCP clients **MUST** include the UCP platform profile URI with every request. Th
 
 ```json
 {
-  "jsonrpc": "2.0",
-  "id": 1,
-  "method": "create_checkout",
-  "params": {
-    "_meta": {
-      "ucp": {
-        "profile": "https://platform.example/profiles/v2026-01/shopping-agent.json"
-      }
-    },
-    "idempotency_key": "..."
-  }
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "create_checkout",
+    "params": {
+        "_meta": {
+            "ucp": {
+                "profile": "https://platform.example/profiles/v2026-01/shopping-agent.json"
+            }
+        },
+        "idempotency_key": "..."
+    }
 }
 ```
 
@@ -3494,25 +3508,25 @@ Error responses follow JSON-RPC 2.0 format while using the UCP error structure d
 
 ```json
 {
-  "jsonrpc": "2.0",
-  "id": 1,
-  "error": {
-    "code": -32603,
-    "message": "Internal error",
-    "data": {
-      "status": "error",
-      "errors": [
-        {
-          "code": "MERCHANDISE_NOT_AVAILABLE",
-          "message": "One or more cart items are not available",
-          "severity": "requires_buyer_input",
-          "details": {
-            "invalid_items": ["sku_999"]
-          }
+    "jsonrpc": "2.0",
+    "id": 1,
+    "error": {
+        "code": -32603,
+        "message": "Internal error",
+        "data": {
+            "status": "error",
+            "errors": [
+                {
+                    "code": "MERCHANDISE_NOT_AVAILABLE",
+                    "message": "One or more cart items are not available",
+                    "severity": "requires_buyer_input",
+                    "details": {
+                        "invalid_items": ["sku_999"]
+                    }
+                }
+            ]
         }
-      ]
     }
-  }
 }
 ```
 
@@ -3536,18 +3550,18 @@ Businesses that support A2A transport must specify the agent card endpoint as pa
 
 ```json
 {
-  "ucp": {
-    "version": "2026-01-11",
-    "services": {
-      "dev.ucp.shopping": {
+    "ucp": {
         "version": "2026-01-11",
-        "spec": "https://ucp.dev/specification/overview",
-        "a2a": {
-          "endpoint": "https://example-business.com/.well-known/agent-card.json"
+        "services": {
+            "dev.ucp.shopping": {
+                "version": "2026-01-11",
+                "spec": "https://ucp.dev/specification/overview",
+                "a2a": {
+                    "endpoint": "https://example-business.com/.well-known/agent-card.json"
+                }
+            }
         }
-      }
     }
-  }
 }
 ```
 
@@ -3573,7 +3587,7 @@ The following table defines the required headers for enabling an A2A Agent to co
 
 The A2A Protocol provides a strong foundation for inter-agent communication. [A2A extensions](https://a2a-protocol.org/latest/topics/extensions/) enable communication between agents with structured data types. This enables businesses to build AI applications to leverage UCP data types for communication with platforms.
 
-The URI for UCP A2A extension: `./reference?v=2026-01-11`
+The URI for UCP A2A extension: `https://ucp.dev/specification/reference?v=2026-01-11`
 
 Businesses supporting UCP must advertise the extension and any optional capabilities in their A2A Agent Card to allow platforms to activate the extension.
 
@@ -3581,25 +3595,25 @@ An example:
 
 ```json
 {
-  "extensions": [
-    {
-      "uri": "https://ucp.dev/specification/reference?v=2026-01-11",
-      "description": "Business agent supporting UCP",
-      "params": {
-        "capabilities": [
-          {
-            "name": "dev.ucp.shopping.checkout",
-            "version": "2026-01-11"
-          },
-          {
-            "name": "dev.ucp.shopping.fulfillment",
-            "version": "2026-01-11",
-            "extends": "dev.ucp.shopping.checkout"
-          }
-        ]
-      }
-    }
-  ]
+    "extensions": [
+        {
+            "uri": "https://ucp.dev/specification/reference?v=2026-01-11",
+            "description": "Business agent supporting UCP",
+            "params": {
+                "capabilities": [
+                    {
+                        "name": "dev.ucp.shopping.checkout",
+                        "version": "2026-01-11"
+                    },
+                    {
+                        "name": "dev.ucp.shopping.fulfillment",
+                        "version": "2026-01-11",
+                        "extends": "dev.ucp.shopping.checkout"
+                    }
+                ]
+            }
+        }
+    ]
 }
 ```
 
@@ -3629,18 +3643,18 @@ Examples:
 
 ```json
 {
-  "message": {
-    "role": "user",
-    "parts": [
-      {
-        "type": "text",
-        "text": "add Pixel 10 Pro to my checkout"
-      }
-    ],
-    "messageId": "69da8f87-991b-479e-80dc-ed92fcb57cbe",
-    "kind": "message",
-    "contextId": "aad14abc-4082-4748-84ca-4afff85aedfa"
-  }
+    "message": {
+        "role": "user",
+        "parts": [
+            {
+                "type": "text",
+                "text": "add Pixel 10 Pro to my checkout"
+            }
+        ],
+        "messageId": "69da8f87-991b-479e-80dc-ed92fcb57cbe",
+        "kind": "message",
+        "contextId": "aad14abc-4082-4748-84ca-4afff85aedfa"
+    }
 }
 ```
 
@@ -3648,22 +3662,22 @@ Examples:
 
 ```json
 {
-  "message": {
-    "role": "user",
-    "parts": [
-      {
-        "type": "data",
-        "data": {
-          "action": "add_to_checkout",
-          "product_id": "PIXEL-10-PRO",
-          "quantity": 1
-        }
-      }
-    ],
-    "messageId": "e94a8c10-69f4-4c4c-b988-21a298302da6",
-    "kind": "message",
-    "contextId": "aad14abc-4082-4748-84ca-4afff85aedfa"
-  }
+    "message": {
+        "role": "user",
+        "parts": [
+            {
+                "type": "data",
+                "data": {
+                    "action": "add_to_checkout",
+                    "product_id": "PIXEL-10-PRO",
+                    "quantity": 1
+                }
+            }
+        ],
+        "messageId": "e94a8c10-69f4-4c4c-b988-21a298302da6",
+        "kind": "message",
+        "contextId": "aad14abc-4082-4748-84ca-4afff85aedfa"
+    }
 }
 ```
 
@@ -3785,45 +3799,45 @@ When the user confirms the payment on a platform, the user signed checkout and p
 
 ```json
 {
-  "message": {
-    "role": "user",
-    "parts": [
-      {
-        "type": "data",
-        "data": {
-          "action": "complete_checkout"
-        }
-      },
-      {
-        "kind": "data",
-        "data": {
-          "a2a.ucp.checkout.payment_data": {
-            "id": "instr_1",
-            "handler_id": "gpay",
-            "type": "card",
-            "description": "Visa •••• 1234",
-            "billing_address": {
-              "street_address": "123 Main St",
-              "address_locality": "Anytown",
-              "address_region": "CA",
-              "address_country": "US",
-              "postal_code": "12345"
+    "message": {
+        "role": "user",
+        "parts": [
+            {
+                "type": "data",
+                "data": {
+                    "action": "complete_checkout"
+                }
             },
-            "credential": {
-              "type": "PAYMENT_GATEWAY",
-              "token": "examplePaymentMethodToken"
+            {
+                "kind": "data",
+                "data": {
+                    "a2a.ucp.checkout.payment_data": {
+                        "id": "instr_1",
+                        "handler_id": "gpay",
+                        "type": "card",
+                        "description": "Visa •••• 1234",
+                        "billing_address": {
+                            "street_address": "123 Main St",
+                            "address_locality": "Anytown",
+                            "address_region": "CA",
+                            "address_country": "US",
+                            "postal_code": "12345"
+                        },
+                        "credential": {
+                            "type": "PAYMENT_GATEWAY",
+                            "token": "examplePaymentMethodToken"
+                        }
+                    },
+                    "ap2": {
+                        "checkout_mandate": "eyJhbGciOiJFUz..."
+                    }
+                }
             }
-          },
-          "ap2": {
-            "checkout_mandate": "eyJhbGciOiJFUz..."
-          }
-        }
-      }
-    ],
-    "messageId": "e94a8c10-69f4-4c4c-b988-21a298302da6",
-    "kind": "message",
-    "contextId": "aad14abc-4082-4748-84ca-4afff85aedfa"
-  }
+        ],
+        "messageId": "e94a8c10-69f4-4c4c-b988-21a298302da6",
+        "kind": "message",
+        "contextId": "aad14abc-4082-4748-84ca-4afff85aedfa"
+    }
 }
 ```
 
@@ -3835,7 +3849,7 @@ Embedded Checkout Protocol (ECP) is a checkout-specific implementation of UCP's 
 
 ### W3C Payment Request Conceptual Alignment
 
-ECP draws inspiration from the **[W3C Payment Request API](https://www.w3.org/TR/payment-request/)**, adapting its mental model for embedded checkout scenarios. Developers familiar with Payment Request will recognize similar patterns, though the execution model differs:
+ECP draws inspiration from the **[W3C Payment Request API](https://www.w3.org/TR/payment-request/){ target="\_blank" }**, adapting its mental model for embedded checkout scenarios. Developers familiar with Payment Request will recognize similar patterns, though the execution model differs:
 
 **W3C Payment Request:** Browser-controlled. The business calls `show()` and the browser renders a native payment sheet. Events flow from the payment handler to the business.
 
@@ -4264,10 +4278,18 @@ Signals that checkout is visible and ready for interaction.
                     "severity": "recoverable"
                 }
             ],
-            "totals": [/* ... */],
-            "line_items": [/* ... */],
-            "buyer": {/* ... */},
-            "payment": {/* ... */}
+            "totals": [
+                /* ... */
+            ],
+            "line_items": [
+                /* ... */
+            ],
+            "buyer": {
+                /* ... */
+            },
+            "payment": {
+                /* ... */
+            }
         }
     }
 }
@@ -4998,26 +5020,26 @@ Businesses declare support by adding `dev.ucp.shopping.ap2_mandate` to their `ca
 
 ```json
 {
-  "capabilities": [
-    {
-      "name": "dev.ucp.shopping.checkout",
-      "version": "2026-01-11",
-      "spec": "https://ucp.dev/specification/checkout",
-      "schema": "https://ucp.dev/schemas/shopping/checkout.json"
-    },
-    {
-      "name": "dev.ucp.shopping.ap2_mandate",
-      "version": "2026-01-11",
-      "spec": "https://ucp.dev/specification/ap2-mandates",
-      "schema": "https://ucp.dev/schemas/shopping/ap2_mandate.json",
-      "extends": "dev.ucp.shopping.checkout",
-      "config": {
-        "vp_formats_supported": {
-          "dc+sd-jwt": { }
+    "capabilities": [
+        {
+            "name": "dev.ucp.shopping.checkout",
+            "version": "2026-01-11",
+            "spec": "https://ucp.dev/specification/checkout",
+            "schema": "https://ucp.dev/schemas/shopping/checkout.json"
+        },
+        {
+            "name": "dev.ucp.shopping.ap2_mandate",
+            "version": "2026-01-11",
+            "spec": "https://ucp.dev/specification/ap2-mandates",
+            "schema": "https://ucp.dev/schemas/shopping/ap2_mandate.json",
+            "extends": "dev.ucp.shopping.checkout",
+            "config": {
+                "vp_formats_supported": {
+                    "dc+sd-jwt": {}
+                }
+            }
         }
-      }
-    }
-  ]
+    ]
 }
 ```
 
@@ -5158,28 +5180,28 @@ The platform initiates the session. The business returns the `Checkout` object w
 
 ```json
 {
-  "id": "chk_abc123",
-  "status": "ready_for_complete",
-  "currency": "USD",
-  "line_items": [
-    {
-      "id": "li_1",
-      "item": {"id": "item_123", "title": "Widget", "price": 2500},
-      "quantity": 2,
-      "totals": [
-        {"type": "subtotal", "amount": 5000},
-        {"type": "total", "amount": 5000}
-      ]
+    "id": "chk_abc123",
+    "status": "ready_for_complete",
+    "currency": "USD",
+    "line_items": [
+        {
+            "id": "li_1",
+            "item": { "id": "item_123", "title": "Widget", "price": 2500 },
+            "quantity": 2,
+            "totals": [
+                { "type": "subtotal", "amount": 5000 },
+                { "type": "total", "amount": 5000 }
+            ]
+        }
+    ],
+    "totals": [
+        { "type": "subtotal", "amount": 5000 },
+        { "type": "tax", "amount": 400 },
+        { "type": "total", "amount": 5400 }
+    ],
+    "ap2": {
+        "merchant_authorization": "eyJhbGciOiJFUzI1NiIsImtpZCI6Im1lcmNoYW50XzIwMjUifQ..<signature>"
     }
-  ],
-  "totals": [
-    {"type": "subtotal", "amount": 5000},
-    {"type": "tax", "amount": 400},
-    {"type": "total", "amount": 5400}
-  ],
-  "ap2": {
-    "merchant_authorization": "eyJhbGciOiJFUzI1NiIsImtpZCI6Im1lcmNoYW50XzIwMjUifQ..<signature>"
-  }
 }
 ```
 
@@ -5235,26 +5257,26 @@ Once the mandates are generated, the platform submits them in the completion req
 
 ```json
 {
-  "payment_data": {
-      "id": "instr_1",
-      "handler_id": "gpay",
-      "type": "card",
-      "description": "Visa •••• 1234",
-      "billing_address": {
-        "street_address": "123 Main St",
-        "address_locality": "Anytown",
-        "address_region": "CA",
-        "address_country": "US",
-        "postal_code": "12345"
-      },
-      "credential": {
-        "type": "PAYMENT_GATEWAY",
-        "token": "examplePaymentMethodToken"
-      }
-  },
-  "ap2": {
-     "checkout_mandate": "eyJhbGciOiJFUzI1NiIsInR5cCI6InZjK3NkLWp3dCJ9..." // The User-Signed SD-JWT+kb / platform provider signed SD-JWT / delegated SD-JWT-KB
-  }
+    "payment_data": {
+        "id": "instr_1",
+        "handler_id": "gpay",
+        "type": "card",
+        "description": "Visa •••• 1234",
+        "billing_address": {
+            "street_address": "123 Main St",
+            "address_locality": "Anytown",
+            "address_region": "CA",
+            "address_country": "US",
+            "postal_code": "12345"
+        },
+        "credential": {
+            "type": "PAYMENT_GATEWAY",
+            "token": "examplePaymentMethodToken"
+        }
+    },
+    "ap2": {
+        "checkout_mandate": "eyJhbGciOiJFUzI1NiIsInR5cCI6InZjK3NkLWp3dCJ9..." // The User-Signed SD-JWT+kb / platform provider signed SD-JWT / delegated SD-JWT-KB
+    }
 }
 ```
 
@@ -5358,13 +5380,13 @@ Businesses advertise consent support in their profile:
 
 ```json
 {
-  "capabilities": [
-    {
-      "name": "dev.ucp.shopping.buyer_consent",
-      "version": "2026-01-11",
-      "extends": "dev.ucp.shopping.checkout"
-    }
-  ]
+    "capabilities": [
+        {
+            "name": "dev.ucp.shopping.buyer_consent",
+            "version": "2026-01-11",
+            "extends": "dev.ucp.shopping.checkout"
+        }
+    ]
 }
 ```
 
@@ -5482,18 +5504,18 @@ Businesses advertise discount support in their profile:
 
 ```json
 {
-  "ucp": {
-    "version": "2026-01-11",
-    "capabilities": [
-      {
-        "name": "dev.ucp.shopping.discount",
+    "ucp": {
         "version": "2026-01-11",
-        "extends": "dev.ucp.shopping.checkout",
-        "spec": "https://ucp.dev/specification/discount",
-        "schema": "https://ucp.dev/schemas/shopping/discount.json"
-      }
-    ]
-  }
+        "capabilities": [
+            {
+                "name": "dev.ucp.shopping.discount",
+                "version": "2026-01-11",
+                "extends": "dev.ucp.shopping.checkout",
+                "spec": "https://ucp.dev/specification/discount",
+                "schema": "https://ucp.dev/schemas/shopping/discount.json"
+            }
+        ]
+    }
 }
 ```
 
@@ -5588,14 +5610,14 @@ When a submitted discount code cannot be applied, businesses communicate this vi
 
 ```json
 {
-  "messages": [
-    {
-      "type": "warning",
-      "code": "discount_code_expired",
-      "path": "$.discounts.codes[0]",
-      "content": "Code 'SUMMER20' expired on December 1st"
-    }
-  ]
+    "messages": [
+        {
+            "type": "warning",
+            "code": "discount_code_expired",
+            "path": "$.discounts.codes[0]",
+            "content": "Code 'SUMMER20' expired on December 1st"
+        }
+    ]
 }
 ```
 
@@ -5653,9 +5675,9 @@ A flat discount applied to the order total. No allocations—the discount applie
 
 ```json
 {
-  "discounts": {
-    "codes": ["SAVE10"]
-  }
+    "discounts": {
+        "codes": ["SAVE10"]
+    }
 }
 ```
 
@@ -5663,21 +5685,25 @@ A flat discount applied to the order total. No allocations—the discount applie
 
 ```json
 {
-  "discounts": {
-    "codes": ["SAVE10"],
-    "applied": [
-      {
-        "code": "SAVE10",
-        "title": "$10 Off Your Order",
-        "amount": 1000
-      }
+    "discounts": {
+        "codes": ["SAVE10"],
+        "applied": [
+            {
+                "code": "SAVE10",
+                "title": "$10 Off Your Order",
+                "amount": 1000
+            }
+        ]
+    },
+    "totals": [
+        { "type": "subtotal", "display_text": "Subtotal", "amount": 5000 },
+        {
+            "type": "discount",
+            "display_text": "Order Discount",
+            "amount": 1000
+        },
+        { "type": "total", "display_text": "Total", "amount": 4000 }
     ]
-  },
-  "totals": [
-    {"type": "subtotal", "display_text": "Subtotal", "amount": 5000},
-    {"type": "discount", "display_text": "Order Discount", "amount": 1000},
-    {"type": "total", "display_text": "Total", "amount": 4000}
-  ]
 }
 ```
 
@@ -5689,9 +5715,9 @@ This example shows both discount types: a per-item discount (20% off) allocated 
 
 ```json
 {
-  "discounts": {
-    "codes": ["SUMMER20"]
-  }
+    "discounts": {
+        "codes": ["SUMMER20"]
+    }
 }
 ```
 
@@ -5699,47 +5725,53 @@ This example shows both discount types: a per-item discount (20% off) allocated 
 
 ```json
 {
-  "line_items": [
-    {
-      "id": "li_1",
-      "item": {
-        "id": "prod_1",
-        "quantity": 2,
-        "title": "T-Shirt",
-        "price": 2000
-      },
-      "totals": [
-        {"type": "subtotal", "amount": 4000},
-        {"type": "items_discount", "amount": 800},
-        {"type": "total", "amount": 3200}
-      ]
-    }
-  ],
-  "discounts": {
-    "codes": ["SUMMER20"],
-    "applied": [
-      {
-        "code": "SUMMER20",
-        "title": "Summer Sale 20% Off",
-        "amount": 800,
-        "allocations": [
-          {"path": "$.line_items[0]", "amount": 800}
+    "line_items": [
+        {
+            "id": "li_1",
+            "item": {
+                "id": "prod_1",
+                "quantity": 2,
+                "title": "T-Shirt",
+                "price": 2000
+            },
+            "totals": [
+                { "type": "subtotal", "amount": 4000 },
+                { "type": "items_discount", "amount": 800 },
+                { "type": "total", "amount": 3200 }
+            ]
+        }
+    ],
+    "discounts": {
+        "codes": ["SUMMER20"],
+        "applied": [
+            {
+                "code": "SUMMER20",
+                "title": "Summer Sale 20% Off",
+                "amount": 800,
+                "allocations": [{ "path": "$.line_items[0]", "amount": 800 }]
+            },
+            {
+                "title": "Free shipping on orders over $30",
+                "amount": 599,
+                "automatic": true
+            }
         ]
-      },
-      {
-        "title": "Free shipping on orders over $30",
-        "amount": 599,
-        "automatic": true
-      }
+    },
+    "totals": [
+        { "type": "subtotal", "display_text": "Subtotal", "amount": 4000 },
+        {
+            "type": "items_discount",
+            "display_text": "Item Discounts",
+            "amount": 800
+        },
+        {
+            "type": "discount",
+            "display_text": "Order Discounts",
+            "amount": 599
+        },
+        { "type": "fulfillment", "display_text": "Shipping", "amount": 0 },
+        { "type": "total", "display_text": "Total", "amount": 2601 }
     ]
-  },
-  "totals": [
-    {"type": "subtotal", "display_text": "Subtotal", "amount": 4000},
-    {"type": "items_discount", "display_text": "Item Discounts", "amount": 800},
-    {"type": "discount", "display_text": "Order Discounts", "amount": 599},
-    {"type": "fulfillment", "display_text": "Shipping", "amount": 0},
-    {"type": "total", "display_text": "Total", "amount": 2601}
-  ]
 }
 ```
 
@@ -5751,9 +5783,9 @@ When a discount code cannot be applied, the rejection is communicated via the `m
 
 ```json
 {
-  "discounts": {
-    "codes": ["SAVE10", "EXPIRED50"]
-  }
+    "discounts": {
+        "codes": ["SAVE10", "EXPIRED50"]
+    }
 }
 ```
 
@@ -5761,29 +5793,33 @@ When a discount code cannot be applied, the rejection is communicated via the `m
 
 ```json
 {
-  "discounts": {
-    "codes": ["SAVE10", "EXPIRED50"],
-    "applied": [
-      {
-        "code": "SAVE10",
-        "title": "$10 Off Your Order",
-        "amount": 1000
-      }
+    "discounts": {
+        "codes": ["SAVE10", "EXPIRED50"],
+        "applied": [
+            {
+                "code": "SAVE10",
+                "title": "$10 Off Your Order",
+                "amount": 1000
+            }
+        ]
+    },
+    "totals": [
+        { "type": "subtotal", "display_text": "Subtotal", "amount": 5000 },
+        {
+            "type": "discount",
+            "display_text": "Order Discount",
+            "amount": 1000
+        },
+        { "type": "total", "display_text": "Total", "amount": 4000 }
+    ],
+    "messages": [
+        {
+            "type": "warning",
+            "code": "discount_code_expired",
+            "path": "$.discounts.codes[1]",
+            "content": "Code 'EXPIRED50' expired on December 1st"
+        }
     ]
-  },
-  "totals": [
-    {"type": "subtotal", "display_text": "Subtotal", "amount": 5000},
-    {"type": "discount", "display_text": "Order Discount", "amount": 1000},
-    {"type": "total", "display_text": "Total", "amount": 4000}
-  ],
-  "messages": [
-    {
-      "type": "warning",
-      "code": "discount_code_expired",
-      "path": "$.discounts.codes[1]",
-      "content": "Code 'EXPIRED50' expired on December 1st"
-    }
-  ]
 }
 ```
 
@@ -5795,64 +5831,68 @@ Multiple discounts applied with full allocation breakdown:
 
 ```json
 {
-  "line_items": [
-    {
-      "id": "li_1",
-      "item": {
-        "title": "T-Shirt",
-        "price": 6000
-      },
-      "totals": [
-        {"type": "subtotal", "amount": 6000},
-        {"type": "items_discount", "amount": 1500},
-        {"type": "total", "amount": 4500}
-      ]
+    "line_items": [
+        {
+            "id": "li_1",
+            "item": {
+                "title": "T-Shirt",
+                "price": 6000
+            },
+            "totals": [
+                { "type": "subtotal", "amount": 6000 },
+                { "type": "items_discount", "amount": 1500 },
+                { "type": "total", "amount": 4500 }
+            ]
+        },
+        {
+            "id": "li_2",
+            "item": {
+                "title": "Socks",
+                "price": 4000
+            },
+            "totals": [
+                { "type": "subtotal", "amount": 4000 },
+                { "type": "items_discount", "amount": 1000 },
+                { "type": "total", "amount": 3000 }
+            ]
+        }
+    ],
+    "discounts": {
+        "codes": ["SUMMER20", "LOYALTY5"],
+        "applied": [
+            {
+                "code": "SUMMER20",
+                "title": "Summer Sale 20% Off",
+                "amount": 2000,
+                "method": "each",
+                "priority": 1,
+                "allocations": [
+                    { "path": "$.line_items[0]", "amount": 1200 },
+                    { "path": "$.line_items[1]", "amount": 800 }
+                ]
+            },
+            {
+                "code": "LOYALTY5",
+                "title": "$5 Loyalty Reward",
+                "amount": 500,
+                "method": "across",
+                "priority": 2,
+                "allocations": [
+                    { "path": "$.line_items[0]", "amount": 300 },
+                    { "path": "$.line_items[1]", "amount": 200 }
+                ]
+            }
+        ]
     },
-    {
-      "id": "li_2",
-      "item": {
-        "title": "Socks",
-        "price": 4000
-      },
-      "totals": [
-        {"type": "subtotal", "amount": 4000},
-        {"type": "items_discount", "amount": 1000},
-        {"type": "total", "amount": 3000}
-      ]
-    }
-  ],
-  "discounts": {
-    "codes": ["SUMMER20", "LOYALTY5"],
-    "applied": [
-      {
-        "code": "SUMMER20",
-        "title": "Summer Sale 20% Off",
-        "amount": 2000,
-        "method": "each",
-        "priority": 1,
-        "allocations": [
-          {"path": "$.line_items[0]", "amount": 1200},
-          {"path": "$.line_items[1]", "amount": 800}
-        ]
-      },
-      {
-        "code": "LOYALTY5",
-        "title": "$5 Loyalty Reward",
-        "amount": 500,
-        "method": "across",
-        "priority": 2,
-        "allocations": [
-          {"path": "$.line_items[0]", "amount": 300},
-          {"path": "$.line_items[1]", "amount": 200}
-        ]
-      }
+    "totals": [
+        { "type": "subtotal", "display_text": "Subtotal", "amount": 10000 },
+        {
+            "type": "items_discount",
+            "display_text": "Item Discounts",
+            "amount": 2500
+        },
+        { "type": "total", "display_text": "Total", "amount": 7500 }
     ]
-  },
-  "totals": [
-    {"type": "subtotal", "display_text": "Subtotal", "amount": 10000},
-    {"type": "items_discount", "display_text": "Item Discounts", "amount": 2500},
-    {"type": "total", "display_text": "Total", "amount": 7500}
-  ]
 }
 ```
 
@@ -6004,57 +6044,57 @@ This object MUST be one of the following types: [Shipping Destination](/ucp/2026
 
 ```json
 {
-  "fulfillment": {
-    "methods": [
-      {
-        "id": "method_1",
-        "type": "shipping",
-        "line_item_ids": ["shirt", "pants"],
-        "selected_destination_id": "dest_1",
-        "destinations": [
-          {
-            "id": "dest_1",
-            "street_address": "123 Main St",
-            "address_locality": "Springfield",
-            "address_region": "IL",
-            "postal_code": "62701",
-            "address_country": "US"
-          }
-        ],
-        "groups": [
-          {
-            "id": "package_1",
-            "line_item_ids": ["shirt", "pants"],
-            "selected_option_id": "standard",
-            "options": [
-              {
-                "id": "standard",
-                "title": "Standard Shipping",
-                "description": "Arrives Dec 12-15 via USPS",
-                "totals": [
-                  {
-                    "type": "total",
-                    "amount": 500
-                  }
+    "fulfillment": {
+        "methods": [
+            {
+                "id": "method_1",
+                "type": "shipping",
+                "line_item_ids": ["shirt", "pants"],
+                "selected_destination_id": "dest_1",
+                "destinations": [
+                    {
+                        "id": "dest_1",
+                        "street_address": "123 Main St",
+                        "address_locality": "Springfield",
+                        "address_region": "IL",
+                        "postal_code": "62701",
+                        "address_country": "US"
+                    }
+                ],
+                "groups": [
+                    {
+                        "id": "package_1",
+                        "line_item_ids": ["shirt", "pants"],
+                        "selected_option_id": "standard",
+                        "options": [
+                            {
+                                "id": "standard",
+                                "title": "Standard Shipping",
+                                "description": "Arrives Dec 12-15 via USPS",
+                                "totals": [
+                                    {
+                                        "type": "total",
+                                        "amount": 500
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "express",
+                                "title": "Express Shipping",
+                                "description": "Arrives Dec 10-11 via FedEx",
+                                "totals": [
+                                    {
+                                        "type": "total",
+                                        "amount": 1000
+                                    }
+                                ]
+                            }
+                        ]
+                    }
                 ]
-              },
-              {
-                "id": "express",
-                "title": "Express Shipping",
-                "description": "Arrives Dec 10-11 via FedEx",
-                "totals": [
-                  {
-                    "type": "total",
-                    "amount": 1000
-                  }
-                ]
-              }
-            ]
-          }
+            }
         ]
-      }
-    ]
-  }
+    }
 }
 ```
 
@@ -6118,33 +6158,33 @@ Available methods indicate whether an item can be fulfilled with a given method,
 
 ```json
 {
-  "fulfillment": {
-    "methods": [
-      {
-        "id": "shipping",
-        "type": "shipping",
-        "line_item_ids": ["shirt", "pants"]
-      },
-      {
-        "id": "pickup",
-        "type": "pickup",
-        "line_item_ids": []
-      }
-    ],
-    "available_methods": [
-      {
-        "type": "shipping",
-        "line_item_ids": ["shirt", "pants"],
-        "fulfillable_on": "now"
-      },
-      {
-        "type": "pickup",
-        "line_item_ids": ["pants"],
-        "fulfillable_on": "2026-12-01T10:00:00Z",
-        "description": "Available for pickup at Downtown Store today at 2pm"
-      }
-    ]
-  }
+    "fulfillment": {
+        "methods": [
+            {
+                "id": "shipping",
+                "type": "shipping",
+                "line_item_ids": ["shirt", "pants"]
+            },
+            {
+                "id": "pickup",
+                "type": "pickup",
+                "line_item_ids": []
+            }
+        ],
+        "available_methods": [
+            {
+                "type": "shipping",
+                "line_item_ids": ["shirt", "pants"],
+                "fulfillable_on": "now"
+            },
+            {
+                "type": "pickup",
+                "line_item_ids": ["pants"],
+                "fulfillable_on": "2026-12-01T10:00:00Z",
+                "description": "Available for pickup at Downtown Store today at 2pm"
+            }
+        ]
+    }
 }
 ```
 
@@ -6187,16 +6227,18 @@ Businesses declare what fulfillment configurations they support using `merchant_
 
 ```json
 {
-  "capabilities": [{
-    "name": "dev.ucp.shopping.fulfillment",
-    "version": "2026-01-11",
-    "config": {
-      "allows_multi_destination": {
-        "shipping": true
-      },
-      "allows_method_combinations": [["shipping", "pickup"]]
-    }
-  }]
+    "capabilities": [
+        {
+            "name": "dev.ucp.shopping.fulfillment",
+            "version": "2026-01-11",
+            "config": {
+                "allows_multi_destination": {
+                    "shipping": true
+                },
+                "allows_method_combinations": [["shipping", "pickup"]]
+            }
+        }
+    ]
 }
 ```
 
@@ -6234,57 +6276,57 @@ Note: Platform's `supports_multi_group` is method-agnostic (single boolean), so 
 
 ```json
 {
-  "fulfillment": {
-    "methods": [
-      {
-        "id": "method_1",
-        "type": "shipping",
-        "line_item_ids": ["shirt", "pants"],
-        "selected_destination_id": "dest_1",
-        "destinations": [
-          {
-            "id": "dest_1",
-            "street_address": "123 Main St",
-            "address_locality": "Springfield",
-            "address_region": "IL",
-            "postal_code": "62701",
-            "address_country": "US"
-          }
-        ],
-        "groups": [
-          {
-            "id": "package_1",
-            "line_item_ids": ["shirt", "pants"],
-            "selected_option_id": "standard",
-            "options": [
-              {
-                "id": "standard",
-                "title": "Standard Shipping",
-                "description": "Arrives Dec 12-15 via USPS",
-                "totals": [
-                  {
-                    "type": "total",
-                    "amount": 500
-                  }
+    "fulfillment": {
+        "methods": [
+            {
+                "id": "method_1",
+                "type": "shipping",
+                "line_item_ids": ["shirt", "pants"],
+                "selected_destination_id": "dest_1",
+                "destinations": [
+                    {
+                        "id": "dest_1",
+                        "street_address": "123 Main St",
+                        "address_locality": "Springfield",
+                        "address_region": "IL",
+                        "postal_code": "62701",
+                        "address_country": "US"
+                    }
+                ],
+                "groups": [
+                    {
+                        "id": "package_1",
+                        "line_item_ids": ["shirt", "pants"],
+                        "selected_option_id": "standard",
+                        "options": [
+                            {
+                                "id": "standard",
+                                "title": "Standard Shipping",
+                                "description": "Arrives Dec 12-15 via USPS",
+                                "totals": [
+                                    {
+                                        "type": "total",
+                                        "amount": 500
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "express",
+                                "title": "Express Shipping",
+                                "description": "Arrives Dec 10-11 via FedEx",
+                                "totals": [
+                                    {
+                                        "type": "total",
+                                        "amount": 1000
+                                    }
+                                ]
+                            }
+                        ]
+                    }
                 ]
-              },
-              {
-                "id": "express",
-                "title": "Express Shipping",
-                "description": "Arrives Dec 10-11 via FedEx",
-                "totals": [
-                  {
-                    "type": "total",
-                    "amount": 1000
-                  }
-                ]
-              }
-            ]
-          }
+            }
         ]
-      }
-    ]
-  }
+    }
 }
 ```
 
@@ -6296,62 +6338,62 @@ Business splits items into multiple packages; buyer selects shipping rate per pa
 
 ```json
 {
-  "fulfillment": {
-    "methods": [
-      {
-        "id": "method_1",
-        "type": "shipping",
-        "line_item_ids": ["shirt", "pants"],
-        "selected_destination_id": "dest_1",
-        "destinations": [
-          {
-            "id": "dest_1",
-            "street_address": "123 Main St",
-            "address_locality": "Springfield",
-            "address_region": "IL",
-            "postal_code": "62701",
-            "address_country": "US"
-          }
-        ],
-        "groups": [
-          {
-            "id": "package_1",
-            "line_item_ids": ["shirt"],
-            "selected_option_id": "standard",
-            "options": [
-              {
-                "id": "standard",
-                "title": "Standard",
-                "totals": [ {"type": "total", "amount": 500} ]
-              },
-              {
-                "id": "express",
-                "title": "Express",
-                "totals": [ {"type": "total", "amount": 1000} ]
-              }
-            ]
-          },
-          {
-            "id": "package_2",
-            "line_item_ids": ["pants"],
-            "selected_option_id": "express",
-            "options": [
-              {
-                "id": "standard",
-                "title": "Standard",
-                "totals": [ {"type": "total", "amount": 500} ]
-              },
-              {
-                "id": "express",
-                "title": "Express",
-                "totals": [ {"type": "total", "amount": 1000} ]
-              }
-            ]
-          }
+    "fulfillment": {
+        "methods": [
+            {
+                "id": "method_1",
+                "type": "shipping",
+                "line_item_ids": ["shirt", "pants"],
+                "selected_destination_id": "dest_1",
+                "destinations": [
+                    {
+                        "id": "dest_1",
+                        "street_address": "123 Main St",
+                        "address_locality": "Springfield",
+                        "address_region": "IL",
+                        "postal_code": "62701",
+                        "address_country": "US"
+                    }
+                ],
+                "groups": [
+                    {
+                        "id": "package_1",
+                        "line_item_ids": ["shirt"],
+                        "selected_option_id": "standard",
+                        "options": [
+                            {
+                                "id": "standard",
+                                "title": "Standard",
+                                "totals": [{ "type": "total", "amount": 500 }]
+                            },
+                            {
+                                "id": "express",
+                                "title": "Express",
+                                "totals": [{ "type": "total", "amount": 1000 }]
+                            }
+                        ]
+                    },
+                    {
+                        "id": "package_2",
+                        "line_item_ids": ["pants"],
+                        "selected_option_id": "express",
+                        "options": [
+                            {
+                                "id": "standard",
+                                "title": "Standard",
+                                "totals": [{ "type": "total", "amount": 500 }]
+                            },
+                            {
+                                "id": "express",
+                                "title": "Express",
+                                "totals": [{ "type": "total", "amount": 1000 }]
+                            }
+                        ]
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  }
+    }
 }
 ```
 
@@ -6363,98 +6405,98 @@ Shirt ships to mom (US), pants ship to grandma (Hong Kong). Two methods of the s
 
 ```json
 {
-  "fulfillment": {
-    "methods": [
-      {
-        "id": "method_1",
-        "type": "shipping",
-        "line_item_ids": ["shirt"],
-        "selected_destination_id": "dest_mom",
-        "destinations": [
-          {
-            "id": "dest_mom",
-            "street_address": "123 Mom St",
-            "address_locality": "Springfield",
-            "address_region": "IL",
-            "postal_code": "62701",
-            "address_country": "US"
-          }
-        ],
-        "groups": [
-          {
-            "id": "package_1",
-            "line_item_ids": ["shirt"],
-            "selected_option_id": "standard",
-            "options": [
-              {
-                "id": "standard",
-                "title": "Standard",
-                "totals": [
-                  {
-                    "type": "total",
-                    "amount": 500
-                  }
+    "fulfillment": {
+        "methods": [
+            {
+                "id": "method_1",
+                "type": "shipping",
+                "line_item_ids": ["shirt"],
+                "selected_destination_id": "dest_mom",
+                "destinations": [
+                    {
+                        "id": "dest_mom",
+                        "street_address": "123 Mom St",
+                        "address_locality": "Springfield",
+                        "address_region": "IL",
+                        "postal_code": "62701",
+                        "address_country": "US"
+                    }
+                ],
+                "groups": [
+                    {
+                        "id": "package_1",
+                        "line_item_ids": ["shirt"],
+                        "selected_option_id": "standard",
+                        "options": [
+                            {
+                                "id": "standard",
+                                "title": "Standard",
+                                "totals": [
+                                    {
+                                        "type": "total",
+                                        "amount": 500
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "express",
+                                "title": "Express",
+                                "totals": [
+                                    {
+                                        "type": "total",
+                                        "amount": 1000
+                                    }
+                                ]
+                            }
+                        ]
+                    }
                 ]
-              },
-              {
-                "id": "express",
-                "title": "Express",
-                "totals": [
-                  {
-                    "type": "total",
-                    "amount": 1000
-                  }
+            },
+            {
+                "id": "method_2",
+                "type": "shipping",
+                "line_item_ids": ["pants"],
+                "selected_destination_id": "dest_grandma",
+                "destinations": [
+                    {
+                        "id": "dest_grandma",
+                        "street_address": "88 Queensway",
+                        "address_locality": "Hong Kong",
+                        "address_country": "HK"
+                    }
+                ],
+                "groups": [
+                    {
+                        "id": "package_2",
+                        "line_item_ids": ["pants"],
+                        "selected_option_id": "standard",
+                        "options": [
+                            {
+                                "id": "standard",
+                                "title": "Standard",
+                                "totals": [
+                                    {
+                                        "type": "total",
+                                        "amount": 500
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "express",
+                                "title": "Express",
+                                "totals": [
+                                    {
+                                        "type": "total",
+                                        "amount": 1000
+                                    }
+                                ]
+                            }
+                        ]
+                    }
                 ]
-              }
-            ]
-          }
+            }
         ]
-      },
-      {
-        "id": "method_2",
-        "type": "shipping",
-        "line_item_ids": ["pants"],
-        "selected_destination_id": "dest_grandma",
-        "destinations": [
-          {
-            "id": "dest_grandma",
-            "street_address": "88 Queensway",
-            "address_locality": "Hong Kong",
-            "address_country": "HK"
-          }
-        ],
-        "groups": [
-          {
-            "id": "package_2",
-            "line_item_ids": ["pants"],
-            "selected_option_id": "standard",
-            "options": [
-              {
-                "id": "standard",
-                "title": "Standard",
-                "totals": [
-                  {
-                    "type": "total",
-                    "amount": 500
-                  }
-                ]
-              },
-              {
-                "id": "express",
-                "title": "Express",
-                "totals": [
-                  {
-                    "type": "total",
-                    "amount": 1000
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
+    }
 }
 ```
 
@@ -6563,8 +6605,8 @@ Line items reflect what was purchased at checkout and their current state. Statu
 
 ```json
 {
-  "total": 3,      // Current total quantity
-  "fulfilled": 2   // What has been fulfilled
+    "total": 3, // Current total quantity
+    "fulfilled": 2 // What has been fulfilled
 }
 ```
 
@@ -6626,97 +6668,105 @@ Examples: `refund`, `return`, `credit`, `price_adjustment`, `dispute`, `cancella
 
 ```json
 {
-  "ucp": {
-    "version": "2026-01-11",
-    "capabilities": [
-      {"name": "dev.ucp.shopping.order", "version": "2026-01-11"}
-    ]
-  },
-  "id": "order_abc123",
-  "checkout_id": "checkout_xyz789",
-  "permalink_url": "https://business.com/orders/abc123",
-  "line_items": [
-    {
-      "id": "li_shoes",
-      "item": { "id": "prod_shoes", "title": "Running Shoes", "price": 3000 },
-      "quantity": { "total": 3, "fulfilled": 3 },
-      "totals": [
-        {"type": "subtotal", "amount": 9000},
-        {"type": "total", "amount": 9000}
-      ],
-      "status": "fulfilled"
+    "ucp": {
+        "version": "2026-01-11",
+        "capabilities": [
+            { "name": "dev.ucp.shopping.order", "version": "2026-01-11" }
+        ]
     },
-    {
-      "id": "li_shirts",
-      "item": { "id": "prod_shirts", "title": "Cotton T-Shirt", "price": 2000 },
-      "quantity": { "total": 2, "fulfilled": 0 },
-      "totals": [
-        {"type": "subtotal", "amount": 4000},
-        {"type": "total", "amount": 4000}
-      ],
-      "status": "processing"
-    }
-  ],
-  "fulfillment": {
-    "expectations": [
-      {
-        "id": "exp_1",
-        "line_items": [{ "id": "li_shoes", "quantity": 3 }],
-        "method_type": "shipping",
-        "destination": {
-          "street_address": "123 Main St",
-          "address_locality": "Austin",
-          "address_region": "TX",
-          "address_country": "US",
-          "postal_code": "78701"
+    "id": "order_abc123",
+    "checkout_id": "checkout_xyz789",
+    "permalink_url": "https://business.com/orders/abc123",
+    "line_items": [
+        {
+            "id": "li_shoes",
+            "item": {
+                "id": "prod_shoes",
+                "title": "Running Shoes",
+                "price": 3000
+            },
+            "quantity": { "total": 3, "fulfilled": 3 },
+            "totals": [
+                { "type": "subtotal", "amount": 9000 },
+                { "type": "total", "amount": 9000 }
+            ],
+            "status": "fulfilled"
         },
-        "description": "Arrives in 2-3 business days",
-        "fulfillable_on": "now"
-      },
-      {
-        "id": "exp_2",
-        "line_items": [{ "id": "li_shirts", "quantity": 2 }],
-        "method_type": "shipping",
-        "destination": {
-          "street_address": "123 Main St",
-          "address_locality": "Austin",
-          "address_region": "TX",
-          "address_country": "US",
-          "postal_code": "78701"
-        },
-        "description": "Backordered - ships Jan 15, arrives in 7-10 days",
-        "fulfillable_on": "2025-01-15T00:00:00Z"
-      }
+        {
+            "id": "li_shirts",
+            "item": {
+                "id": "prod_shirts",
+                "title": "Cotton T-Shirt",
+                "price": 2000
+            },
+            "quantity": { "total": 2, "fulfilled": 0 },
+            "totals": [
+                { "type": "subtotal", "amount": 4000 },
+                { "type": "total", "amount": 4000 }
+            ],
+            "status": "processing"
+        }
     ],
-    "events": [
-      {
-        "id": "evt_1",
-        "occurred_at": "2025-01-08T10:30:00Z",
-        "type": "delivered",
-        "line_items": [{ "id": "li_shoes", "quantity": 3 }],
-        "tracking_number": "123456789",
-        "tracking_url": "https://fedex.com/track/123456789",
-        "description": "Delivered to front door"
-      }
+    "fulfillment": {
+        "expectations": [
+            {
+                "id": "exp_1",
+                "line_items": [{ "id": "li_shoes", "quantity": 3 }],
+                "method_type": "shipping",
+                "destination": {
+                    "street_address": "123 Main St",
+                    "address_locality": "Austin",
+                    "address_region": "TX",
+                    "address_country": "US",
+                    "postal_code": "78701"
+                },
+                "description": "Arrives in 2-3 business days",
+                "fulfillable_on": "now"
+            },
+            {
+                "id": "exp_2",
+                "line_items": [{ "id": "li_shirts", "quantity": 2 }],
+                "method_type": "shipping",
+                "destination": {
+                    "street_address": "123 Main St",
+                    "address_locality": "Austin",
+                    "address_region": "TX",
+                    "address_country": "US",
+                    "postal_code": "78701"
+                },
+                "description": "Backordered - ships Jan 15, arrives in 7-10 days",
+                "fulfillable_on": "2025-01-15T00:00:00Z"
+            }
+        ],
+        "events": [
+            {
+                "id": "evt_1",
+                "occurred_at": "2025-01-08T10:30:00Z",
+                "type": "delivered",
+                "line_items": [{ "id": "li_shoes", "quantity": 3 }],
+                "tracking_number": "123456789",
+                "tracking_url": "https://fedex.com/track/123456789",
+                "description": "Delivered to front door"
+            }
+        ]
+    },
+    "adjustments": [
+        {
+            "id": "adj_1",
+            "type": "refund",
+            "occurred_at": "2025-01-10T14:30:00Z",
+            "status": "completed",
+            "line_items": [{ "id": "li_shoes", "quantity": 1 }],
+            "amount": 3000,
+            "description": "Defective item"
+        }
+    ],
+    "totals": [
+        { "type": "subtotal", "amount": 13000 },
+        { "type": "shipping", "amount": 1200 },
+        { "type": "tax", "amount": 1142 },
+        { "type": "total", "amount": 15342 }
     ]
-  },
-  "adjustments": [
-    {
-      "id": "adj_1",
-      "type": "refund",
-      "occurred_at": "2025-01-10T14:30:00Z",
-      "status": "completed",
-      "line_items": [{ "id": "li_shoes", "quantity": 1 }],
-      "amount": 3000,
-      "description": "Defective item"
-    }
-  ],
-  "totals": [
-    { "type": "subtotal", "amount": 13000 },
-    { "type": "shipping", "amount": 1200 },
-    { "type": "tax", "amount": 1142 },
-    { "type": "total", "amount": 15342 }
-  ]
 }
 ```
 
@@ -6765,11 +6815,11 @@ The platform provides its webhook URL in the order capability's `config` field d
 
 ```json
 {
-  "name": "dev.ucp.shopping.order",
-  "version": "2026-01-11",
-  "config": {
-    "webhook_url": "https://platform.example.com/webhooks/ucp/orders"
-  }
+    "name": "dev.ucp.shopping.order",
+    "version": "2026-01-11",
+    "config": {
+        "webhook_url": "https://platform.example.com/webhooks/ucp/orders"
+    }
 }
 ```
 
@@ -6777,14 +6827,14 @@ The platform provides its webhook URL in the order capability's `config` field d
 
 Webhook payloads **MUST** be signed by the business and verified by the platform to ensure authenticity and integrity.
 
-### Signing (Business)\\n
+**Signing (Business)**
 
 1. Select a key from the `signing_keys` array in UCP profile.
 1. Create a detached JWT (RFC 7797) over the request body using the selected key.
 1. Include the JWT in the `Request-Signature` header.
 1. Include the key ID in the JWT header's `kid` claim to allow the receiver to identify which key to use for verification.
 
-### Verification (Platform)
+**Verification (Platform)**
 
 1. Extract the `Request-Signature` header from the incoming webhook request.
 1. Parse the JWT header to retrieve the `kid` (key ID).
@@ -6793,7 +6843,7 @@ Webhook payloads **MUST** be signed by the business and verified by the platform
 1. Verify the JWT signature against the request body using the public key.
 1. If verification fails, reject the webhook with an appropriate error response.
 
-### Key Rotation
+**Key Rotation**
 
 The `signing_keys` array supports multiple keys to enable zero-downtime rotation:
 
@@ -6860,7 +6910,7 @@ The `signing_keys` array supports multiple keys to enable zero-downtime rotation
 | display_text | string  | No       | Text to display against the amount. Should reflect appropriate method (e.g., 'Shipping', 'Delivery').                         |
 | amount       | integer | **Yes**  | If type == total, sums subtotal - discount + fulfillment + tax + fee. Should be >= 0. Amount in minor (cents) currency units. |
 
-### UCP Metadata
+### UCP Response Order
 
 | Name         | Type       | Required | Description                                |
 | ------------ | ---------- | -------- | ------------------------------------------ |
@@ -6883,7 +6933,7 @@ This linkage is foundational for commerce experiences, such as accessing loyalty
 
 (In addition to the overarching guidelines)
 
-### For platforms\\n
+**For platforms**
 
 - **MUST** authenticate using their `client_id` and `client_secret` ([RFC 6749 2.3.1](https://datatracker.ietf.org/doc/html/rfc6749#section-2.3.1)) through HTTP Basic Authentication ([RFC 7617](https://datatracker.ietf.org/doc/html/rfc7617)) when exchanging codes for tokens.
   - **MAY** support Client Metadata
@@ -6895,7 +6945,7 @@ This linkage is foundational for commerce experiences, such as accessing loyalty
   - **SHOULD** call the business's revocation endpoint ([RFC 7009](https://datatracker.ietf.org/doc/html/rfc7009)) when a user initiates an unlink action on the platform side.
   - **SHOULD** support [OpenID RISC Profile 1.0](https://openid.net/specs/openid-risc-1_0-final.html) to handle asynchronous account updates, unlinking events, and cross-account protection.
 
-### For businesses
+**For businesses**
 
 - **MUST** implement OAuth 2.0 ([RFC 6749](https://datatracker.ietf.org/doc/html/rfc6749))
 - **MUST** adhere to [RFC 8414](https://datatracker.ietf.org/doc/html/rfc8414) to declare the location of their OAuth 2.0 endpoints (`/.well-known/oauth-authorization-server`)
@@ -6941,24 +6991,15 @@ Example of [metadata](https://datatracker.ietf.org/doc/html/rfc8414#section-2) s
 
 ```json
 {
-  "issuer": "https://merchant.example.com",
-  "authorization_endpoint": "https://merchant.example.com/oauth2/authorize",
-  "token_endpoint": "https://merchant.example.com/oauth2/token",
-  "revocation_endpoint": "https://merchant.example.com/oauth2/revoke",
-  "scopes_supported": [
-    "ucp:scopes:checkout_session",
-  ],
-  "response_types_supported": [
-    "code"
-  ],
-  "grant_types_supported": [
-    "authorization_code",
-    "refresh_token"
-  ],
-  "token_endpoint_auth_methods_supported": [
-    "client_secret_basic"
-  ],
-  "service_documentation": "https://merchant.example.com/docs/oauth2"
+    "issuer": "https://merchant.example.com",
+    "authorization_endpoint": "https://merchant.example.com/oauth2/authorize",
+    "token_endpoint": "https://merchant.example.com/oauth2/token",
+    "revocation_endpoint": "https://merchant.example.com/oauth2/revoke",
+    "scopes_supported": ["ucp:scopes:checkout_session"],
+    "response_types_supported": ["code"],
+    "grant_types_supported": ["authorization_code", "refresh_token"],
+    "token_endpoint_auth_methods_supported": ["client_secret_basic"],
+    "service_documentation": "https://merchant.example.com/docs/oauth2"
 }
 ```
 
@@ -7057,7 +7098,7 @@ PREREQUISITES(participant, onboarding_input) → prerequisites_output
 
 **Prerequisites Output:**
 
-The `prerequisites_output` contains what a participant receives from onboarding. At minimum, this includes an **identity** (see [Payment Identity](/ucp/2026-01-11/schemas/shopping/types/payment_identity.json)). It **MAY** also include additional configuration, credentials, or settings specific to the handler.
+The `prerequisites_output` contains what a participant receives from onboarding. At minimum, this includes an **identity** (see [Payment Identity](https://ucp.dev/2026-01-11/schemas/shopping/types/payment_identity.json)). It **MAY** also include additional configuration, credentials, or settings specific to the handler.
 
 Payment handler specifications **are not required** to define a formal schema for `prerequisites_output`. Instead, the specification **SHOULD** clearly document:
 
@@ -7089,21 +7130,21 @@ HANDLER_DECLARATION(prerequisites_output) → handler_declaration
 
 **Output Structure:**
 
-The handler declaration conforms to the [`PaymentHandler`](/ucp/2026-01-11/schemas/shopping/types/payment_handler.json) schema. The specification **SHOULD** define the available config and instrument schemas, and how to construct each based on the business's prerequisites output and desired configuration.
+The handler declaration conforms to the [`PaymentHandler`](https://ucp.dev/2026-01-11/schemas/shopping/types/payment_handler.json) schema. The specification **SHOULD** define the available config and instrument schemas, and how to construct each based on the business's prerequisites output and desired configuration.
 
 ```json
 {
-  "id": "handler_instance_id",
-  "name": "com.example.handler",
-  "version": "2026-01-11",
-  "spec": "https://example.com/ucp/handler",
-  "config_schema": "https://example.com/ucp/handler/config.json",
-  "instrument_schemas": [
-    "https://example.com/ucp/handler/instruments/card.json"
-  ],
-  "config": {
-    // Handler-specific configuration (see 2.3.1)
-  }
+    "id": "handler_instance_id",
+    "name": "com.example.handler",
+    "version": "2026-01-11",
+    "spec": "https://example.com/ucp/handler",
+    "config_schema": "https://example.com/ucp/handler/config.json",
+    "instrument_schemas": [
+        "https://example.com/ucp/handler/instruments/card.json"
+    ],
+    "config": {
+        // Handler-specific configuration (see 2.3.1)
+    }
 }
 ```
 
@@ -7119,19 +7160,19 @@ The `config_schema` field points to a JSON schema that validates the `config` ob
 
 ```json
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com/ucp/handlers/my_handler/config.json",
-  "title": "MyHandlerConfig",
-  "description": "Configuration for the com.example.my_handler payment handler.",
-  "type": "object",
-  "properties": {
-    "environment": {
-      "type": "string",
-      "enum": ["sandbox", "production"],
-      "description": "The API environment this business supports for the example handler.",
-      "default": "production"
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.com/ucp/handlers/my_handler/config.json",
+    "title": "MyHandlerConfig",
+    "description": "Configuration for the com.example.my_handler payment handler.",
+    "type": "object",
+    "properties": {
+        "environment": {
+            "type": "string",
+            "enum": ["sandbox", "production"],
+            "description": "The API environment this business supports for the example handler.",
+            "default": "production"
+        }
     }
-  }
 }
 ```
 
@@ -7141,27 +7182,29 @@ ______________________________________________________________________
 
 **Base Instrument Schemas:**
 
-| Schema                                                                                                | Description                                             |
-| ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| [`payment_instrument.json`](/ucp/2026-01-11/schemas/shopping/types/payment_instrument.json)           | Base: id, handler_id, type, credential, billing_address |
-| [`card_payment_instrument.json`](/ucp/2026-01-11/schemas/shopping/types/card_payment_instrument.json) | Card display: brand, last_digits, expiry                |
+| Schema                                                                                                           | Description                                             |
+| ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| [`payment_instrument.json`](https://ucp.dev/2026-01-11/schemas/shopping/types/payment_instrument.json)           | Base: id, handler_id, type, credential, billing_address |
+| [`card_payment_instrument.json`](https://ucp.dev/2026-01-11/schemas/shopping/types/card_payment_instrument.json) | Card display: brand, last_digits, expiry                |
 
 UCP provides base schemas for universal payment instruments like `card`. Spec authors **MAY** extend any of the basic payment instruments to add additional handler-specific display data.
 
 ```json
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com/ucp/handlers/my_wallet/instrument.json",
-  "title": "MyWalletInstrument",
-  "allOf": [
-    { "$ref": "https://ucp.dev/schemas/shopping/types/payment_instrument.json" }
-  ],
-  "type": "object",
-  "required": ["type", "account_type"],
-  "properties": {
-    "type": { "const": "my_wallet" },
-    // base payment instrument or specific payment instrument defined by handler
-  }
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.com/ucp/handlers/my_wallet/instrument.json",
+    "title": "MyWalletInstrument",
+    "allOf": [
+        {
+            "$ref": "https://ucp.dev/2026-01-11/schemas/shopping/types/payment_instrument.json"
+        }
+    ],
+    "type": "object",
+    "required": ["type", "account_type"],
+    "properties": {
+        "type": { "const": "my_wallet" }
+        // base payment instrument or specific payment instrument defined by handler
+    }
 }
 ```
 
@@ -7169,10 +7212,10 @@ UCP provides base schemas for universal payment instruments like `card`. Spec au
 
 **Base Credential Schemas:**
 
-| Schema                                                                                      | Description                   |
-| ------------------------------------------------------------------------------------------- | ----------------------------- |
-| [`payment_credential.json`](/ucp/2026-01-11/schemas/shopping/types/payment_credential.json) | Base: type discriminator only |
-| [`token_credential.json`](/ucp/2026-01-11/schemas/shopping/types/token_credential.json)     | Token: type + token string    |
+| Schema                                                                                                 | Description                   |
+| ------------------------------------------------------------------------------------------------------ | ----------------------------- |
+| [`payment_credential.json`](https://ucp.dev/2026-01-11/schemas/shopping/types/payment_credential.json) | Base: type discriminator only |
+| [`token_credential.json`](https://ucp.dev/2026-01-11/schemas/shopping/types/token_credential.json)     | Token: type + token string    |
 
 UCP provides base schemas for universal payment credentials like `card` and `token`. Authors **MAY** extend these schemas to include handler-specific credential context.
 
@@ -7182,14 +7225,14 @@ The specification **MUST** define which credential types are accepted by the han
 
 ```json
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com/ucp/handlers/my_wallet/credential.json",
-  "title": "MyWalletCredential",
-  "type": "object",
-  "required": ["type", "token"],
-  "properties": {
-    // base credential object or credential context defined by handler
-  }
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.com/ucp/handlers/my_wallet/credential.json",
+    "title": "MyWalletCredential",
+    "type": "object",
+    "required": ["type", "token"],
+    "properties": {
+        // base credential object or credential context defined by handler
+    }
 }
 ```
 
@@ -7363,8 +7406,8 @@ ______________________________________________________________________
 ## See Also
 
 - **[Tokenization Guide](https://ucp.dev/2026-01-11/specification/tokenization-guide/index.md)** — Guide for building tokenization payment handlers
-- **[Google Pay Handler](https://developers.google.com/merchant/ucp/guides/google-pay-payment-handler)** — Handler for Google Pay integration
-- **[Shop Pay Handler](https://shopify.dev/docs/agents/checkout/shop-pay-handler)** — Handler for Shop Pay integration
+- **[Google Pay Handler](https://developers.google.com/merchant/ucp/guides/google-pay-payment-handler){ target="\_blank" }** — Handler for Google Pay integration
+- **[Shop Pay Handler](https://shopify.dev/docs/agents/checkout/shop-pay-handler){ target="\_blank" }** — Handler for Shop Pay integration
 
 # {Handler Name} Payment Handler
 
@@ -7453,23 +7496,21 @@ Businesses advertise support for this handler in the checkout's `payment.handler
 
 ```json
 {
-  "payment": {
-    "handlers": [
-      {
-        "id": "{handler_id}",
-        "name": "{handler_name}",
-        "version": "2026-01-11",
-        "spec": "{spec_url}",
-        "config_schema": "{config_schema_url}",
-        "instrument_schemas": [
-          "{instrument_schema_url}"
-        ],
-        "config": {
-          // Handler-specific configuration
-        }
-      }
-    ]
-  }
+    "payment": {
+        "handlers": [
+            {
+                "id": "{handler_id}",
+                "name": "{handler_name}",
+                "version": "2026-01-11",
+                "spec": "{spec_url}",
+                "config_schema": "{config_schema_url}",
+                "instrument_schemas": ["{instrument_schema_url}"],
+                "config": {
+                    // Handler-specific configuration
+                }
+            }
+        ]
+    }
 }
 ```
 
@@ -7513,11 +7554,11 @@ The Platform identifies `{handler_name}` in the business's `payment.handlers` ar
 
 ```json
 {
-  "id": "{handler_id}",
-  "name": "{handler_name}",
-  "config": {
-    // Business's configuration
-  }
+    "id": "{handler_id}",
+    "name": "{handler_name}",
+    "config": {
+        // Business's configuration
+    }
 }
 ```
 
@@ -7608,7 +7649,7 @@ ______________________________________________________________________
 
 # Tokenization Guide
 
-**OpenAPI:** [Tokenization API](/ucp/2026-01-11/handlers/tokenization/openapi.json)
+**OpenAPI:** [Tokenization API](https://ucp.dev/2026-01-11/handlers/tokenization/openapi.json)
 
 ## Overview
 
@@ -7681,7 +7722,7 @@ All tokenization requests require a `binding` object that ties the token to a sp
 | `checkout_id` | Yes         | The checkout session this token is valid for                                                    |
 | `identity`    | Conditional | The participant identity to bind to; required when caller acts on behalf of another participant |
 
-The tokenizer **MUST** verify binding matches on `/detokenize`. See [Binding Schema](/ucp/2026-01-11/schemas/shopping/types/binding.json).
+The tokenizer **MUST** verify binding matches on `/detokenize`. See [Binding Schema](https://ucp.dev/2026-01-11/schemas/shopping/types/binding.json).
 
 ______________________________________________________________________
 
@@ -7721,7 +7762,7 @@ Content-Type: application/json
 
 ```json
 {
-  "token": "tok_abc123xyz789"
+    "token": "tok_abc123xyz789"
 }
 ```
 
@@ -7748,18 +7789,18 @@ Authorization: Bearer {caller_access_token}
 
 ```json
 {
-  "type": "card",
-  "card_number_type": "fpan",
-  "number": "4111111111111111",
-  "expiry_month": 12,
-  "expiry_year": 2026,
-  "cvc": "123"
+    "type": "card",
+    "card_number_type": "fpan",
+    "number": "4111111111111111",
+    "expiry_month": 12,
+    "expiry_year": 2026,
+    "cvc": "123"
 }
 ```
 
 **Note:** `binding.identity` is omitted when the authenticated caller is the binding target. Include it when acting on behalf of another participant (e.g., PSP detokenizing for business).
 
-See the full [OpenAPI specification](/ucp/2026-01-11/handlers/tokenization/openapi.json) for complete request/response schemas.
+See the full [OpenAPI specification](https://ucp.dev/2026-01-11/handlers/tokenization/openapi.json) for complete request/response schemas.
 
 ______________________________________________________________________
 
@@ -7795,8 +7836,8 @@ When publishing your handler, your specification document **MUST** include:
 ### Example Specification Outline
 
 ```markdown
-**Handler Name:** `com.acme.tokenization_payment`
-**OpenAPI:** [Tokenization API](site:handlers/tokenization/openapi.json)
+**Handler Name:** `com.acme.tokenization_payment` **OpenAPI:**
+[Tokenization API](https://ucp.dev/2026-01-11/handlers/tokenization/openapi.json)
 
 | Environment | Base URL                           |
 | :---------- | :--------------------------------- |
@@ -7813,7 +7854,8 @@ When publishing your handler, your specification document **MUST** include:
 
 **Authentication:** OAuth 2.0 client credentials
 
-**Onboarding:** Register at portal.acme.com. Businesses receive `access_token` for handler identity.
+**Onboarding:** Register at portal.acme.com. Businesses receive `access_token`
+for handler identity.
 ```
 
 ______________________________________________________________________
@@ -7837,13 +7879,13 @@ ______________________________________________________________________
 
 ## References
 
-| Resource                | URL                                                               |
-| ----------------------- | ----------------------------------------------------------------- |
-| Tokenization OpenAPI    | `/2026-01-11/handlers/tokenization/openapi.json`                  |
-| Identity Schema         | `/2026-01-11/schemas/shopping/types/payment_identity.json`        |
-| Binding Schema          | `/2026-01-11/schemas/shopping/types/binding.json`                 |
-| Token Credential Schema | `/2026-01-11/schemas/shopping/types/token_credential.json`        |
-| Card Instrument Schema  | `/2026-01-11/schemas/shopping/types/card_payment_instrument.json` |
+| Resource                | URL                                                                              |
+| ----------------------- | -------------------------------------------------------------------------------- |
+| Tokenization OpenAPI    | `https://ucp.dev/2026-01-11/handlers/tokenization/openapi.json`                  |
+| Identity Schema         | `https://ucp.dev/2026-01-11/schemas/shopping/types/payment_identity.json`        |
+| Binding Schema          | `https://ucp.dev/2026-01-11/schemas/shopping/types/binding.json`                 |
+| Token Credential Schema | `https://ucp.dev/2026-01-11/schemas/shopping/types/token_credential.json`        |
+| Card Instrument Schema  | `https://ucp.dev/2026-01-11/schemas/shopping/types/card_payment_instrument.json` |
 
 ______________________________________________________________________
 
@@ -7925,24 +7967,24 @@ The Business advertises this handler in the checkout's `payment.handlers` array.
 
 ```json
 {
-  "payment": {
-    "handlers": [
-      {
-        "id": "processor_tokenizer",
-        "name": "com.example.processor_tokenizer",
-        "spec": "https://example.com/ucp/processor-tokenizer.json",
-        "instrument_schemas": [
-           "https://ucp.dev/schemas/shopping/types/card_payment_instrument.json"
-        ],
-        "config": {
-          "endpoint": "https://api.psp.com/v1/tokenize",
-          "identity": {
-            "access_token": "merchant_xyz789"
-          }
-        }
-      }
-    ]
-  }
+    "payment": {
+        "handlers": [
+            {
+                "id": "processor_tokenizer",
+                "name": "com.example.processor_tokenizer",
+                "spec": "https://example.com/ucp/processor-tokenizer.json",
+                "instrument_schemas": [
+                    "https://ucp.dev/schemas/shopping/types/card_payment_instrument.json"
+                ],
+                "config": {
+                    "endpoint": "https://api.psp.com/v1/tokenize",
+                    "identity": {
+                        "access_token": "merchant_xyz789"
+                    }
+                }
+            }
+        ]
+    }
 }
 ```
 
@@ -7970,15 +8012,15 @@ Platform identifies the processor tokenizer handler and retrieves the configurat
 
 ```json
 {
-  "id": "processor_tokenizer",
-  "name": "com.example.processor_tokenizer",
-  "spec": "https://example.com/ucp/processor-tokenizer.json",
-  "config": {
-    "endpoint": "https://api.processor.com/v1/tokenize",
-    "identity": {
-      "access_token": "merchant_xyz789"
+    "id": "processor_tokenizer",
+    "name": "com.example.processor_tokenizer",
+    "spec": "https://example.com/ucp/processor-tokenizer.json",
+    "config": {
+        "endpoint": "https://api.processor.com/v1/tokenize",
+        "identity": {
+            "access_token": "merchant_xyz789"
+        }
     }
-  }
 }
 ```
 
@@ -7996,7 +8038,7 @@ Response:
 
 ```json
 {
-  "token": "tok_a1b2c3d4e5f6"
+    "token": "tok_a1b2c3d4e5f6"
 }
 ```
 
@@ -8178,7 +8220,7 @@ ______________________________________________________________________
 
 ### Prerequisites
 
-### CRITICAL: Security & Compliance Required\\n
+**CRITICAL: Security & Compliance Required**
 
 Before accepting this handler, businesses must register with the platform to obtain authentication credentials for calling `/detokenize`.
 
@@ -8201,7 +8243,7 @@ Optionally, businesses may configure their PSP to detokenize on their behalf (PS
 
 Businesses advertise the platform's tokenization handler. The `config` contains the business's identity with the platform for token binding. The platform's handler specification (referenced via `spec`) documents the `/detokenize` endpoint URL exposed by the platform's **payment credential provider**.
 
-The handler accepts [CardCredential](/ucp/2026-01-11/schemas/shopping/types/card_credential.json) for tokenization and produces [TokenCredential](/ucp/2026-01-11/schemas/shopping/types/token_credential.json) for checkout.
+The handler accepts [CardCredential](https://ucp.dev/2026-01-11/schemas/shopping/types/card_credential.json) for tokenization and produces [TokenCredential](https://ucp.dev/2026-01-11/schemas/shopping/types/token_credential.json) for checkout.
 
 **Note:** The result of `/detokenize` contains **sensitive payment data**. Both the sender (platform's credential provider) and receiver (business or PSP) **MUST** be PCI DSS compliant.
 
@@ -8209,24 +8251,24 @@ The handler accepts [CardCredential](/ucp/2026-01-11/schemas/shopping/types/card
 
 ```json
 {
-  "payment": {
-    "handlers": [
-      {
-        "id": "platform_wallet",
-        "name": "com.example.platform_tokenizer",
-        "version": "2026-01-12",
-        "spec": "https://platform.example.com/ucp/handler.json",
-        "config_schema": "https://platform.example.com/ucp/handler/config.json",
-        "instrument_schemas": [
-          "https://ucp.dev/schemas/shopping/types/card_payment_instrument.json"
-        ],
-        "config": {
-          "business_id": "business_abc123",
-          "environment": "production"
-        }
-      }
-    ]
-  }
+    "payment": {
+        "handlers": [
+            {
+                "id": "platform_wallet",
+                "name": "com.example.platform_tokenizer",
+                "version": "2026-01-12",
+                "spec": "https://platform.example.com/ucp/handler.json",
+                "config_schema": "https://platform.example.com/ucp/handler/config.json",
+                "instrument_schemas": [
+                    "https://ucp.dev/2026-01-11/schemas/shopping/types/card_payment_instrument.json"
+                ],
+                "config": {
+                    "business_id": "business_abc123",
+                    "environment": "production"
+                }
+            }
+        ]
+    }
 }
 ```
 
@@ -8236,8 +8278,8 @@ Upon receiving a checkout with a token credential:
 
 1. **Validate Handler:** Confirm `instrument.handler_id` matches the expected handler ID.
 1. **Detokenize or Delegate:**
-1. **Option A (Direct):** Call the platform's **credential provider** `/detokenize` endpoint directly, then process payments.
-1. **Option B (Delegated):** Forward the token to a PSP for detokenization and payment processing.
+   - **Option A (Direct):** Call the platform's **credential provider** `/detokenize` endpoint directly, then process payments.
+   - **Option B (Delegated):** Forward the token to a PSP for detokenization and payment processing.
 1. **Return Response:** Respond with the finalized checkout state.
 
 For option B, see section [PSP Integration](#psp-integration).
@@ -8324,7 +8366,7 @@ ______________________________________________________________________
 
 ### Prerequisites
 
-### CRITICAL: Security & Compliance Required
+**CRITICAL: Security & Compliance Required**
 
 Before detokenizing on behalf of businesses, PSPs must register with the platform, providing the list of businesses they process for.
 
@@ -8398,9 +8440,9 @@ ______________________________________________________________________
 
 ## References
 
-- **Pattern:** [Tokenization Payment Handler](https://ucp.dev/2026-01-11/specification/payment-handler-guide/index.md)
-- **API Pattern:** `/2026-01-11/handlers/tokenization/openapi.json`
-- **Identity Schema:** `/2026-01-11/schemas/shopping/types/payment_identity.json`
+- **Pattern:** [Tokenization Payment Handler](https://ucp.dev/specification/payment-handler-guide)
+- **API Pattern:** `https://ucp.dev/2026-01-11/handlers/tokenization/openapi.json`
+- **Identity Schema:** `https://ucp.dev/2026-01-11/schemas/shopping/types/payment_identity.json`
 
 # Encrypted Credential Handler
 
@@ -8473,7 +8515,7 @@ ______________________________________________________________________
 
 ### Prerequisites
 
-### CRITICAL: PCI DSS Compliance Required\\n
+**CRITICAL: PCI DSS Compliance Required**
 
 Before accepting this handler, businesses must register their public encryption key with the platform.
 
@@ -8494,9 +8536,9 @@ While businesses receive only encrypted `EncryptedCredential` payloads during ch
 
 Businesses advertise the platform's handler. The `identity` field contains the **business's identity**, which the platform uses to look up the correct public key for encryption.
 
-The only supported identity schema is [PaymentIdentity](/ucp/2026-01-11/schemas/shopping/types/payment_identity.json).
+The only supported identity schema is [PaymentIdentity](https://ucp.dev/2026-01-11/schemas/shopping/types/payment_identity.json).
 
-The only supported instrument schema is [CardPaymentInstrument](/ucp/2026-01-11/schemas/shopping/types/card_payment_instrument.json), the only supported checkout credential schema is `EncryptedCredential`, and the only supported source credential schema is [CardCredential](/ucp/2026-01-11/schemas/shopping/types/card_credential.json).
+The only supported instrument schema is [CardPaymentInstrument](https://ucp.dev/2026-01-11/schemas/shopping/types/card_payment_instrument.json), the only supported checkout credential schema is `EncryptedCredential`, and the only supported source credential schema is [CardCredential](https://ucp.dev/2026-01-11/schemas/shopping/types/card_credential.json).
 
 **Note:** `CardCredential` contains raw PANs. The platform's **PCI DSS compliant** vaulting service handles these credentials and encrypts them before transmission. Businesses receive only encrypted payloads but MUST be PCI DSS compliant once they decrypt the credentials locally.
 
@@ -8504,24 +8546,24 @@ The only supported instrument schema is [CardPaymentInstrument](/ucp/2026-01-11/
 
 ```json
 {
-  "payment": {
-    "handlers": [
-      {
-        "id": "platform_encrypted",
-        "name": "com.example.platform_encrypted",
-        "version": "2026-01-11",
-        "spec": "https://platform.example.com/ucp/encrypted-handler.json",
-        "config_schema": "https://platform.example.com/ucp/encrypted-handler/config.json",
-        "instrument_schemas": [
-          "https://ucp.dev/schemas/shopping/types/card_payment_instrument.json"
-        ],
-        "config": {
-          "merchant_id": "merchant_abc123",
-          "environment": "production"
-        }
-      }
-    ]
-  }
+    "payment": {
+        "handlers": [
+            {
+                "id": "platform_encrypted",
+                "name": "com.example.platform_encrypted",
+                "version": "2026-01-11",
+                "spec": "https://platform.example.com/ucp/encrypted-handler.json",
+                "config_schema": "https://platform.example.com/ucp/encrypted-handler/config.json",
+                "instrument_schemas": [
+                    "https://ucp.dev/2026-01-11/schemas/shopping/types/card_payment_instrument.json"
+                ],
+                "config": {
+                    "merchant_id": "merchant_abc123",
+                    "environment": "production"
+                }
+            }
+        ]
+    }
 }
 ```
 
@@ -8613,8 +8655,8 @@ ______________________________________________________________________
 
 ## References
 
-- **Identity Schema:** `/2026-01-11/schemas/shopping/types/payment_identity.json`
-- **Instrument Schema:** `/2026-01-11/schemas/shopping/types/card_payment_instrument.json`
+- **Identity Schema:** `https://ucp.dev/2026-01-11/schemas/shopping/types/payment_identity.json`
+- **Instrument Schema:** `https://ucp.dev/2026-01-11/schemas/shopping/types/card_payment_instrument.json`
 
 # Schema Reference
 
@@ -9357,6 +9399,8 @@ As seen in response messages.
 | schema  | string | No       | URL to JSON Schema for this capability's payload.                                                                          |
 | extends | string | No       | Parent capability this extends. Present for extensions, absent for root capabilities.                                      |
 | config  | object | No       | Capability-specific configuration (structure defined by each capability).                                                  |
+
+UCP Playground
 
 # UCP Playground
 

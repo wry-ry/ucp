@@ -6,7 +6,7 @@ Embedded Checkout Protocol (ECP) is a checkout-specific implementation of UCP's 
 
 ### W3C Payment Request Conceptual Alignment
 
-ECP draws inspiration from the **[W3C Payment Request API](https://www.w3.org/TR/payment-request/)**, adapting its mental model for embedded checkout scenarios. Developers familiar with Payment Request will recognize similar patterns, though the execution model differs:
+ECP draws inspiration from the **[W3C Payment Request API](https://www.w3.org/TR/payment-request/){ target="\_blank" }**, adapting its mental model for embedded checkout scenarios. Developers familiar with Payment Request will recognize similar patterns, though the execution model differs:
 
 **W3C Payment Request:** Browser-controlled. The business calls `show()` and the browser renders a native payment sheet. Events flow from the payment handler to the business.
 
@@ -435,10 +435,18 @@ Signals that checkout is visible and ready for interaction.
                     "severity": "recoverable"
                 }
             ],
-            "totals": [/* ... */],
-            "line_items": [/* ... */],
-            "buyer": {/* ... */},
-            "payment": {/* ... */}
+            "totals": [
+                /* ... */
+            ],
+            "line_items": [
+                /* ... */
+            ],
+            "buyer": {
+                /* ... */
+            },
+            "payment": {
+                /* ... */
+            }
         }
     }
 }

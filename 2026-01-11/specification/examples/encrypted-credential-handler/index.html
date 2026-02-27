@@ -1186,15 +1186,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#critical-pci-dss-compliance-requiredn" class="md-nav__link">
-    <span class="md-ellipsis">
-      CRITICAL: PCI DSS Compliance Required\n
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#handler-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       Handler Configuration
@@ -1473,15 +1464,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#critical-pci-dss-compliance-requiredn" class="md-nav__link">
-    <span class="md-ellipsis">
-      CRITICAL: PCI DSS Compliance Required\n
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#handler-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       Handler Configuration
@@ -1622,14 +1604,15 @@
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
 <p>This example demonstrates a payment handler where the <strong>platform encrypts
 credentials directly for the business</strong>. Unlike tokenization patterns, there is
-no <code>/tokenize</code> or <code>/detokenize</code>
-endpoint—the platform's <strong>PCI DSS compliant credential vault</strong> encrypts credentials
-using the business's public key, and the business decrypts them locally.</p>
+no <code>/tokenize</code> or <code>/detokenize</code> endpoint—the platform's <strong>PCI DSS compliant
+credential vault</strong> encrypts credentials using the business's public key, and the
+business decrypts them locally.</p>
 <p>This pattern is ideal when businesses want to avoid round-trip latency to a
 tokenizer at payment time.</p>
 <h3 id="key-benefits">Key Benefits<a class="headerlink" href="#key-benefits" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>No runtime round-trips:</strong> Business decrypts locally, no <code>/detokenize</code> call needed</li>
+<li><strong>No runtime round-trips:</strong> Business decrypts locally, no <code>/detokenize</code> call
+  needed</li>
 <li><strong>Simpler architecture:</strong> No token storage or token-to-credential mapping</li>
 <li><strong>Business-controlled keys:</strong> Business manages their own decryption keys</li>
 </ul>
@@ -1707,7 +1690,7 @@ tokenizer at payment time.</p>
 <hr />
 <h2 id="business-integration">Business Integration<a class="headerlink" href="#business-integration" title="Permanent link">&para;</a></h2>
 <h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
-<h3 id="critical-pci-dss-compliance-requiredn">CRITICAL: PCI DSS Compliance Required\n<a class="headerlink" href="#critical-pci-dss-compliance-requiredn" title="Permanent link">&para;</a></h3>
+<p><strong>CRITICAL: PCI DSS Compliance Required</strong></p>
 <p>Before accepting this handler, businesses must register their public encryption
 key with the platform.</p>
 <p>While businesses receive only encrypted <code>EncryptedCredential</code> payloads during
@@ -1716,7 +1699,8 @@ locally to obtain raw <code>CardCredential</code> for payment processing. This i
 <ul>
 <li>Secure key management for decryption keys</li>
 <li>Secure handling of raw credentials after decryption</li>
-<li>Compliance with all PCI DSS requirements for handling Primary Account Numbers (PANs)</li>
+<li>Compliance with all PCI DSS requirements for handling Primary Account Numbers
+  (PANs)</li>
 </ul>
 <p><strong>Prerequisites Output:</strong></p>
 <table>
@@ -1741,40 +1725,47 @@ locally to obtain raw <code>CardCredential</code> for payment processing. This i
 <p>Businesses advertise the platform's handler. The <code>identity</code> field contains the
 <strong>business's identity</strong>, which the platform uses to look up the correct public
 key for encryption.</p>
-<p>The only supported identity schema is <a href="/ucp/2026-01-11/schemas/shopping/types/payment_identity.json">PaymentIdentity</a>.</p>
-<p>The only supported instrument schema is <a href="/ucp/2026-01-11/schemas/shopping/types/card_payment_instrument.json">CardPaymentInstrument</a>, the only supported checkout credential schema is <code>EncryptedCredential</code>, and the only supported source credential schema is <a href="/ucp/2026-01-11/schemas/shopping/types/card_credential.json">CardCredential</a>.</p>
-<p><strong>Note:</strong> <code>CardCredential</code> contains raw PANs. The platform's
-<strong>PCI DSS compliant</strong> vaulting service handles these credentials and encrypts
-them before transmission. Businesses receive only encrypted payloads but
-MUST be PCI DSS compliant once they decrypt the credentials locally.</p>
+<p>The only supported identity schema is
+<a href="https://ucp.dev/2026-01-11/schemas/shopping/types/payment_identity.json">PaymentIdentity</a>.</p>
+<p>The only supported instrument schema is
+<a href="https://ucp.dev/2026-01-11/schemas/shopping/types/card_payment_instrument.json">CardPaymentInstrument</a>,
+the only supported checkout credential schema is <code>EncryptedCredential</code>, and the
+only supported source credential schema is
+<a href="https://ucp.dev/2026-01-11/schemas/shopping/types/card_credential.json">CardCredential</a>.</p>
+<p><strong>Note:</strong> <code>CardCredential</code> contains raw PANs. The platform's <strong>PCI DSS
+compliant</strong> vaulting service handles these credentials and encrypts them before
+transmission. Businesses receive only encrypted payloads but MUST be PCI DSS
+compliant once they decrypt the credentials locally.</p>
 <h4 id="example-handler-declaration">Example Handler Declaration<a class="headerlink" href="#example-handler-declaration" title="Permanent link">&para;</a></h4>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">&quot;payment&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">&quot;handlers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">      </span><span class="p">{</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;platform_encrypted&quot;</span><span class="p">,</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;com.example.platform_encrypted&quot;</span><span class="p">,</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">        </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-01-11&quot;</span><span class="p">,</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">        </span><span class="nt">&quot;spec&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://platform.example.com/ucp/encrypted-handler.json&quot;</span><span class="p">,</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">        </span><span class="nt">&quot;config_schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://platform.example.com/ucp/encrypted-handler/config.json&quot;</span><span class="p">,</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">        </span><span class="nt">&quot;instrument_schemas&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">          </span><span class="s2">&quot;https://ucp.dev/schemas/shopping/types/card_payment_instrument.json&quot;</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">        </span><span class="p">],</span>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">        </span><span class="nt">&quot;config&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">          </span><span class="nt">&quot;merchant_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;merchant_abc123&quot;</span><span class="p">,</span>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">          </span><span class="nt">&quot;environment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;production&quot;</span>
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">        </span><span class="p">}</span>
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">      </span><span class="p">}</span>
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">    </span><span class="p">]</span>
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nt">&quot;payment&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">        </span><span class="nt">&quot;handlers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">            </span><span class="p">{</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">                </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;platform_encrypted&quot;</span><span class="p">,</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;com.example.platform_encrypted&quot;</span><span class="p">,</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">                </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-01-11&quot;</span><span class="p">,</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">                </span><span class="nt">&quot;spec&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://platform.example.com/ucp/encrypted-handler.json&quot;</span><span class="p">,</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">                </span><span class="nt">&quot;config_schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://platform.example.com/ucp/encrypted-handler/config.json&quot;</span><span class="p">,</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">                </span><span class="nt">&quot;instrument_schemas&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">                    </span><span class="s2">&quot;https://ucp.dev/2026-01-11/schemas/shopping/types/card_payment_instrument.json&quot;</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">                </span><span class="p">],</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">                </span><span class="nt">&quot;config&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">                    </span><span class="nt">&quot;merchant_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;merchant_abc123&quot;</span><span class="p">,</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">                    </span><span class="nt">&quot;environment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;production&quot;</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">                </span><span class="p">}</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">        </span><span class="p">]</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="p">}</span>
 </span></code></pre></div>
 <h3 id="processing-payments">Processing Payments<a class="headerlink" href="#processing-payments" title="Permanent link">&para;</a></h3>
 <p>Upon receiving a checkout with an encrypted credential:</p>
 <ol>
-<li><strong>Validate Handler:</strong> Confirm <code>instrument.handler_id</code> matches the expected handler ID</li>
+<li><strong>Validate Handler:</strong> Confirm <code>instrument.handler_id</code> matches the expected
+   handler ID</li>
 <li><strong>Decrypt Credential:</strong> Use business's private key to decrypt the credential</li>
-<li><strong>Verify Binding:</strong> Confirm the decrypted <code>checkout_id</code> matches the current checkout</li>
+<li><strong>Verify Binding:</strong> Confirm the decrypted <code>checkout_id</code> matches the current
+   checkout</li>
 <li><strong>Process Payment:</strong> Use the decrypted credential to complete payment</li>
 <li><strong>Return Response:</strong> Respond with the finalized checkout state</li>
 </ol>
@@ -1787,7 +1778,8 @@ platforms must:</p>
 <ol>
 <li>Maintain PCI DSS compliance for credential storage and handling</li>
 <li>Store business public keys during onboarding</li>
-<li>Encrypt credentials using the correct business's key based on handler identity</li>
+<li>Encrypt credentials using the correct business's key based on handler
+   identity</li>
 </ol>
 <p><strong>Implementation Requirements:</strong></p>
 <table>
@@ -1809,15 +1801,17 @@ platforms must:</p>
 </tbody>
 </table>
 <h3 id="credential-encryption">Credential Encryption<a class="headerlink" href="#credential-encryption" title="Permanent link">&para;</a></h3>
-<p>The platform application orchestrates the payment flow but
-<strong>never has access to raw credentials</strong>. Instead:</p>
+<p>The platform application orchestrates the payment flow but <strong>never has access to
+raw credentials</strong>. Instead:</p>
 <ol>
 <li>The platform's <strong>PCI-compliant card vaulting service</strong> receives the raw
    credential from the user</li>
 <li>The vaulting service encrypts the credential along with binding context using
    the business's public key</li>
-<li>The vaulting service returns the encrypted payload to the platform application</li>
-<li>The platform application includes this encrypted payload in the checkout submission</li>
+<li>The vaulting service returns the encrypted payload to the platform
+   application</li>
+<li>The platform application includes this encrypted payload in the checkout
+   submission</li>
 </ol>
 <p>This separation ensures the platform application itself never handles or has
 access to raw PANs.</p>
@@ -1894,8 +1888,10 @@ access to raw PANs.</p>
 <hr />
 <h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Identity Schema:</strong> <code>/2026-01-11/schemas/shopping/types/payment_identity.json</code></li>
-<li><strong>Instrument Schema:</strong> <code>/2026-01-11/schemas/shopping/types/card_payment_instrument.json</code></li>
+<li><strong>Identity Schema:</strong>
+  <code>https://ucp.dev/2026-01-11/schemas/shopping/types/payment_identity.json</code></li>
+<li><strong>Instrument Schema:</strong>
+  <code>https://ucp.dev/2026-01-11/schemas/shopping/types/card_payment_instrument.json</code></li>
 </ul>
 
 
