@@ -93,7 +93,7 @@ PREREQUISITES(participant, onboarding_input) → prerequisites_output
 
 **Prerequisites Output:**
 
-The `prerequisites_output` contains what a participant receives from onboarding. At minimum, this includes an **identity** (see [Payment Identity](/2026-01-11/schemas/shopping/types/payment_identity.json)). It **MAY** also include additional configuration, credentials, or settings specific to the handler.
+The `prerequisites_output` contains what a participant receives from onboarding. At minimum, this includes an **identity** (see [Payment Identity](/ucp/2026-01-11/schemas/shopping/types/payment_identity.json)). It **MAY** also include additional configuration, credentials, or settings specific to the handler.
 
 Payment handler specifications **are not required** to define a formal schema for `prerequisites_output`. Instead, the specification **SHOULD** clearly document:
 
@@ -125,7 +125,7 @@ HANDLER_DECLARATION(prerequisites_output) → handler_declaration
 
 **Output Structure:**
 
-The handler declaration conforms to the [`PaymentHandler`](/2026-01-11/schemas/shopping/types/payment_handler.json) schema. The specification **SHOULD** define the available config and instrument schemas, and how to construct each based on the business's prerequisites output and desired configuration.
+The handler declaration conforms to the [`PaymentHandler`](/ucp/2026-01-11/schemas/shopping/types/payment_handler.json) schema. The specification **SHOULD** define the available config and instrument schemas, and how to construct each based on the business's prerequisites output and desired configuration.
 
 ```json
 {
@@ -177,10 +177,10 @@ ______________________________________________________________________
 
 **Base Instrument Schemas:**
 
-| Schema                                                                                            | Description                                             |
-| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| [`payment_instrument.json`](/2026-01-11/schemas/shopping/types/payment_instrument.json)           | Base: id, handler_id, type, credential, billing_address |
-| [`card_payment_instrument.json`](/2026-01-11/schemas/shopping/types/card_payment_instrument.json) | Card display: brand, last_digits, expiry                |
+| Schema                                                                                                | Description                                             |
+| ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| [`payment_instrument.json`](/ucp/2026-01-11/schemas/shopping/types/payment_instrument.json)           | Base: id, handler_id, type, credential, billing_address |
+| [`card_payment_instrument.json`](/ucp/2026-01-11/schemas/shopping/types/card_payment_instrument.json) | Card display: brand, last_digits, expiry                |
 
 UCP provides base schemas for universal payment instruments like `card`. Spec authors **MAY** extend any of the basic payment instruments to add additional handler-specific display data.
 
@@ -205,10 +205,10 @@ UCP provides base schemas for universal payment instruments like `card`. Spec au
 
 **Base Credential Schemas:**
 
-| Schema                                                                                  | Description                   |
-| --------------------------------------------------------------------------------------- | ----------------------------- |
-| [`payment_credential.json`](/2026-01-11/schemas/shopping/types/payment_credential.json) | Base: type discriminator only |
-| [`token_credential.json`](/2026-01-11/schemas/shopping/types/token_credential.json)     | Token: type + token string    |
+| Schema                                                                                      | Description                   |
+| ------------------------------------------------------------------------------------------- | ----------------------------- |
+| [`payment_credential.json`](/ucp/2026-01-11/schemas/shopping/types/payment_credential.json) | Base: type discriminator only |
+| [`token_credential.json`](/ucp/2026-01-11/schemas/shopping/types/token_credential.json)     | Token: type + token string    |
 
 UCP provides base schemas for universal payment credentials like `card` and `token`. Authors **MAY** extend these schemas to include handler-specific credential context.
 

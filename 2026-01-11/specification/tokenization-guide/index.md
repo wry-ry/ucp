@@ -1,6 +1,6 @@
 # Tokenization Guide
 
-**OpenAPI:** [Tokenization API](/2026-01-11/handlers/tokenization/openapi.json)
+**OpenAPI:** [Tokenization API](/ucp/2026-01-11/handlers/tokenization/openapi.json)
 
 ## Overview
 
@@ -73,7 +73,7 @@ All tokenization requests require a `binding` object that ties the token to a sp
 | `checkout_id` | Yes         | The checkout session this token is valid for                                                    |
 | `identity`    | Conditional | The participant identity to bind to; required when caller acts on behalf of another participant |
 
-The tokenizer **MUST** verify binding matches on `/detokenize`. See [Binding Schema](/2026-01-11/schemas/shopping/types/binding.json).
+The tokenizer **MUST** verify binding matches on `/detokenize`. See [Binding Schema](/ucp/2026-01-11/schemas/shopping/types/binding.json).
 
 ______________________________________________________________________
 
@@ -151,7 +151,7 @@ Authorization: Bearer {caller_access_token}
 
 **Note:** `binding.identity` is omitted when the authenticated caller is the binding target. Include it when acting on behalf of another participant (e.g., PSP detokenizing for business).
 
-See the full [OpenAPI specification](/2026-01-11/handlers/tokenization/openapi.json) for complete request/response schemas.
+See the full [OpenAPI specification](/ucp/2026-01-11/handlers/tokenization/openapi.json) for complete request/response schemas.
 
 ______________________________________________________________________
 
@@ -188,7 +188,7 @@ When publishing your handler, your specification document **MUST** include:
 
 ```markdown
 **Handler Name:** `com.acme.tokenization_payment`
-**OpenAPI:** [Tokenization API](/2026-01-11/handlers/tokenization/openapi.json)
+**OpenAPI:** [Tokenization API](site:handlers/tokenization/openapi.json)
 
 | Environment | Base URL                           |
 | :---------- | :--------------------------------- |
