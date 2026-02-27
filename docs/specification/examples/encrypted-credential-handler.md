@@ -119,13 +119,13 @@ Businesses advertise the platform's handler. The `identity` field contains the
 key for encryption.
 
 The only supported identity schema is
-[PaymentIdentity](https://ucp.dev/schemas/shopping/types/payment_identity.json).
+[PaymentIdentity](site:schemas/shopping/types/payment_identity.json).
 
 The only supported instrument schema is
-[CardPaymentInstrument](https://ucp.dev/schemas/shopping/types/card_payment_instrument.json),
+[CardPaymentInstrument](site:schemas/shopping/types/card_payment_instrument.json),
 the only supported checkout credential schema is `EncryptedCredential`, and the
 only supported source credential schema is
-[CardCredential](https://ucp.dev/schemas/shopping/types/card_credential.json).
+[CardCredential](site:schemas/shopping/types/card_credential.json).
 
 **Note:** `CardCredential` contains raw PANs. The platform's **PCI DSS
 compliant** vaulting service handles these credentials and encrypts them before
@@ -145,7 +145,7 @@ compliant once they decrypt the credentials locally.
                 "spec": "https://platform.example.com/ucp/encrypted-handler.json",
                 "config_schema": "https://platform.example.com/ucp/encrypted-handler/config.json",
                 "instrument_schemas": [
-                    "https://ucp.dev/schemas/shopping/types/card_payment_instrument.json"
+                    "https://ucp.dev/{{ ucp_version }}/schemas/shopping/types/card_payment_instrument.json"
                 ],
                 "config": {
                     "merchant_id": "merchant_abc123",
@@ -258,6 +258,6 @@ Content-Type: application/json
 ## References
 
 - **Identity Schema:**
-  `https://ucp.dev/schemas/shopping/types/payment_identity.json`
+  `https://ucp.dev/{{ ucp_version }}/schemas/shopping/types/payment_identity.json`
 - **Instrument Schema:**
-  `https://ucp.dev/schemas/shopping/types/card_payment_instrument.json`
+  `https://ucp.dev/{{ ucp_version }}/schemas/shopping/types/card_payment_instrument.json`

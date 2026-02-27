@@ -436,9 +436,9 @@ const UcpData = {
       name: "com.google.pay",
       version: "2026-01-11",
       spec: "https://pay.google.com/gp/p/ucp/2026-01-11/",
-      config_schema: "https://pay.google.com/gp/p/ucp/2026-01-11/schemas/config.json",
+      config_schema: "https://pay.google.com/gp/p/ucp/{{ ucp_version }}/schemas/config.json",
       instrument_schemas: [
-        "https://pay.google.com/gp/p/ucp/2026-01-11/schemas/card_payment_instrument.json"
+        "https://pay.google.com/gp/p/ucp/{{ ucp_version }}/schemas/card_payment_instrument.json"
       ],
       config: {
         api_version: 2,
@@ -474,45 +474,45 @@ const UcpData = {
     core: [
       {
         name: "dev.ucp.shopping.checkout",
-        version: "2026-01-11",
-        spec: "https://ucp.dev/specs/checkout",
-        schema: "https://ucp.dev/schemas/shopping/checkout.json"
+        version: "{{ ucp_version }}",
+        spec: "https://ucp.dev/{{ ucp_version }}/specification/checkout",
+        schema: "https://ucp.dev/{{ ucp_version }}/schemas/shopping/checkout.json"
       },
       {
         name: "dev.ucp.shopping.order",
-        version: "2026-01-11",
-        spec: "https://ucp.dev/specs/order",
-        schema: "https://ucp.dev/schemas/shopping/order.json"
+        version: "{{ ucp_version }}",
+        spec: "https://ucp.dev/{{ ucp_version }}/specification/order",
+        schema: "https://ucp.dev/{{ ucp_version }}/schemas/shopping/order.json"
       }
     ],
     extensions: [
       {
         name: "dev.ucp.shopping.fulfillment",
         extends: "dev.ucp.shopping.checkout",
-        version: "2026-01-11",
-        spec: "https://ucp.dev/specs/fulfillment",
-        schema: "https://ucp.dev/schemas/shopping/fulfillment.json"
+        version: "{{ ucp_version }}",
+        spec: "https://ucp.dev/{{ ucp_version }}/specification/fulfillment",
+        schema: "https://ucp.dev/{{ ucp_version }}/schemas/shopping/fulfillment.json"
       },
       {
         name: "dev.ucp.shopping.discount",
         extends: "dev.ucp.shopping.checkout",
-        version: "2026-01-11",
-        spec: "https://ucp.dev/specs/discount",
-        schema: "https://ucp.dev/schemas/shopping/discount.json"
+        version: "{{ ucp_version }}",
+        spec: "https://ucp.dev/{{ ucp_version }}/specification/discount",
+        schema: "https://ucp.dev/{{ ucp_version }}/schemas/shopping/discount.json"
       },
       {
         name: "dev.ucp.shopping.buyer_consent",
         extends: "dev.ucp.shopping.checkout",
-        version: "2026-01-11",
-        spec: "https://ucp.dev/specs/buyer_consent",
-        schema: "https://ucp.dev/schemas/shopping/buyer_consent.json"
+        version: "{{ ucp_version }}",
+        spec: "https://ucp.dev/{{ ucp_version }}/specification/buyer_consent",
+        schema: "https://ucp.dev/{{ ucp_version }}/schemas/shopping/buyer_consent.json"
       },
       {
         name: "dev.ucp.shopping.ap2_mandates",
         extends: "dev.ucp.shopping.checkout",
-        version: "2026-01-11",
-        spec: "https://ucp.dev/specs/ap2_mandates",
-        schema: "https://ucp.dev/schemas/shopping/ap2_mandates.json"
+        version: "{{ ucp_version }}",
+        spec: "https://ucp.dev/{{ ucp_version }}/specification/ap2_mandates",
+        schema: "https://ucp.dev/{{ ucp_version }}/schemas/shopping/ap2_mandates.json"
       },
     ]
   },

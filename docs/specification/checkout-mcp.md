@@ -33,9 +33,9 @@ Businesses advertise MCP transport availability through their UCP profile at
         "services": {
             "dev.ucp.shopping": {
                 "version": "2026-01-11",
-                "spec": "https://ucp.dev/specification/overview",
+                "spec": "https://ucp.dev/{{ ucp_version }}/specification/overview",
                 "mcp": {
-                    "schema": "https://ucp.dev/services/shopping/mcp.openrpc.json",
+                    "schema": "https://ucp.dev/{{ ucp_version }}/services/shopping/openrpc.json",
                     "endpoint": "https://business.example.com/ucp/mcp"
                 }
             }
@@ -44,14 +44,14 @@ Businesses advertise MCP transport availability through their UCP profile at
             {
                 "name": "dev.ucp.shopping.checkout",
                 "version": "2026-01-11",
-                "spec": "https://ucp.dev/specification/checkout",
-                "schema": "https://ucp.dev/schemas/shopping/checkout.json"
+                "spec": "https://ucp.dev/{{ ucp_version }}/specification/checkout",
+                "schema": "https://ucp.dev/{{ ucp_version }}/schemas/shopping/checkout.json"
             },
             {
                 "name": "dev.ucp.shopping.fulfillment",
                 "version": "2026-01-11",
-                "spec": "https://ucp.dev/specification/fulfillment",
-                "schema": "https://ucp.dev/schemas/shopping/fulfillment.json",
+                "spec": "https://ucp.dev/{{ ucp_version }}/specification/fulfillment",
+                "schema": "https://ucp.dev/{{ ucp_version }}/schemas/shopping/fulfillment.json",
                 "extends": "dev.ucp.shopping.checkout"
             }
         ]

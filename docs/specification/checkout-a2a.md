@@ -32,7 +32,7 @@ platforms to interact with the business services over A2A Protocol.
         "services": {
             "dev.ucp.shopping": {
                 "version": "2026-01-11",
-                "spec": "https://ucp.dev/specification/overview",
+                "spec": "https://ucp.dev/{{ ucp_version }}/specification/overview",
                 "a2a": {
                     "endpoint": "https://example-business.com/.well-known/agent-card.json"
                 }

@@ -71,14 +71,14 @@ Businesses declare support by adding `dev.ucp.shopping.ap2_mandate` to their
         {
             "name": "dev.ucp.shopping.checkout",
             "version": "2026-01-11",
-            "spec": "https://ucp.dev/specification/checkout",
-            "schema": "https://ucp.dev/schemas/shopping/checkout.json"
+            "spec": "https://ucp.dev/{{ ucp_version }}/specification/checkout",
+            "schema": "https://ucp.dev/{{ ucp_version }}/schemas/shopping/checkout.json"
         },
         {
             "name": "dev.ucp.shopping.ap2_mandate",
             "version": "2026-01-11",
-            "spec": "https://ucp.dev/specification/ap2-mandates",
-            "schema": "https://ucp.dev/schemas/shopping/ap2_mandate.json",
+            "spec": "https://ucp.dev/{{ ucp_version }}/specification/ap2-mandates",
+            "schema": "https://ucp.dev/{{ ucp_version }}/schemas/shopping/ap2_mandate.json",
             "extends": "dev.ucp.shopping.checkout",
             "config": {
                 "vp_formats_supported": {
@@ -374,7 +374,7 @@ Upon receiving the `complete` request, the business **MUST**:
 1. **Verify Business Authorization:** Confirm `ap2.merchant_authorization` in
    the embedded checkout is the business's own valid signature:
 
-````json
+```json
     jws = embedded_checkout.ap2.merchant_authorization
     [encoded_header, _, encoded_signature] = jws.split(".")
     header = json_decode(base64url_decode(encoded_header))
@@ -384,7 +384,7 @@ Upon receiving the `complete` request, the business **MUST**:
 
     my_key = get_key_by_kid(my_signing_keys, header.kid)
     verify(encoded_signature, signing_input, my_key, header.alg)
-    ```
+```
 
 2. **Verify Terms Match:** Confirm the embedded checkout terms match the current
    session state (id, totals, line items).
@@ -398,7 +398,7 @@ signature validation, expiration, and correlation with the checkout.
 
 ## Schema
 
-### Business Authorization
+### Business Authorization {: #merchant-authorization }
 
 {{ extension_schema_fields('ap2_mandate.json#/$defs/merchant_authorization', 'ap2-mandates') }}
 

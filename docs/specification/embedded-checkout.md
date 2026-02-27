@@ -89,15 +89,15 @@ the `embedded` transport in their `/.well-known/ucp` profile, all checkout
         "dev.ucp.shopping": {
             "version": "2026-01-11",
             "rest": {
-                "schema": "https://ucp.dev/services/shopping/openapi.json",
+                "schema": "https://ucp.dev/{{ ucp_version }}/services/shopping/openapi.json",
                 "endpoint": "https://merchant.example.com/ucp/v1"
             },
             "mcp": {
-                "schema": "https://ucp.dev/services/shopping/mcp.openrpc.json",
+                "schema": "https://ucp.dev/{{ ucp_version }}/services/shopping/openrpc.json",
                 "endpoint": "https://merchant.example.com/ucp/mcp"
             },
             "embedded": {
-                "schema": "https://ucp.dev/services/shopping/embedded.openrpc.json"
+                "schema": "https://ucp.dev/{{ ucp_version }}/services/shopping/embedded.json"
             }
         }
     }
@@ -1149,6 +1149,8 @@ rather than attempting to merge the new data with existing state.
 The address object uses the UCP
 [PostalAddress](site:specification/checkout/#postal-address) format:
 
+### Postal Address
+
 {{ schema_fields('postal_address', 'embedded-checkout') }}
 
 ## Security & Error Handling
@@ -1266,6 +1268,22 @@ Represents a specific method of payment (e.g., a specific credit card, bank
 account, or wallet credential) available to the buyer.
 
 {{ schema_fields('payment_instrument', 'embedded-checkout') }}
+
+### Card Payment Instrument
+
+{{ schema_fields('types/card_payment_instrument', 'embedded-checkout') }}
+
+### Payment Credential
+
+{{ schema_fields('types/payment_credential', 'embedded-checkout') }}
+
+### Token Credential Response
+
+{{ schema_fields('types/token_credential_resp', 'embedded-checkout') }}
+
+### Card Credential
+
+{{ schema_fields('types/card_credential', 'embedded-checkout') }}
 
 ### Payment Handler Response
 

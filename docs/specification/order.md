@@ -367,6 +367,6 @@ rotation:
 
 {{ schema_fields('types/total_resp', 'order') }}
 
-### UCP Response Order
+### UCP Response Order <span id="ucp"></span>
 
 {{ extension_schema_fields('ucp.json#/$defs/response_order', 'order') }}
