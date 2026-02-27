@@ -6817,7 +6817,7 @@ The `signing_keys` array supports multiple keys to enable zero-downtime rotation
 | display_text | string  | No       | Text to display against the amount. Should reflect appropriate method (e.g., 'Shipping', 'Delivery').                         |
 | amount       | integer | **Yes**  | If type == total, sums subtotal - discount + fulfillment + tax + fee. Should be >= 0. Amount in minor (cents) currency units. |
 
-### UCP Metadata {: #ucp } {: #ucp-response-order }
+### UCP Metadata
 
 | Name         | Type       | Required | Description                                |
 | ------------ | ---------- | -------- | ------------------------------------------ |
