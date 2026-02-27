@@ -1199,12 +1199,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 --&gt;</p>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UCP Playground</title>
+<!-- markdownlint-disable-file MD041 -->
 
 <style>
 /* ============================================
@@ -1365,8 +1360,6 @@ select, input {
 .callout { background: var(--success-bg); border: 1px solid var(--success); color: #0d652d; padding: 12px; border-radius: 8px; margin-top: 16px; font-size: 0.9rem; }
 .badge { background: #e8f0fe; color: var(--accent); padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; white-space: nowrap; flex-shrink: 0; }
 </style>
-</head>
-<body>
 
 <div class="container">
   <div class="sectionDescription">
@@ -1752,7 +1745,7 @@ class UcpBackend {
   }
 
   genId(prefix) {
-    const r = crypto.randomUUID ? crypto.randomUUID().split['-'](0) : Math.random().toString(36).substr(2, 9);
+    const r = crypto.randomUUID ? crypto.randomUUID().substring(0, 8) : Math.random().toString(36).substr(2, 9);
     return `${prefix}_${r}`;
   }
 
@@ -2258,8 +2251,6 @@ if (document.readyState === 'loading') {
 window.addEventListener('popstate', startUcpPlayground);
 })();
 </script>
-</body>
-</html>
 
 
 
