@@ -960,7 +960,7 @@ The following changes **MAY** be introduced without a new version:
 - Changing the order of fields in responses
 - Changing the length or format of opaque strings (IDs, tokens)
 
-#### Breaking Changes:
+#### Breaking Changes
 
 The following changes **MUST NOT** be introduced without a new version:
 

@@ -2988,13 +2988,11 @@ actions.</p>
 <ul>
 <li><strong>Direction:</strong> Embedded Checkout → host</li>
 <li><strong>Type:</strong> Request</li>
-<li><strong>Payload:</strong><ul>
+<li><strong>Payload:</strong></li>
 <li><code>delegate</code> (array of strings, <strong>REQUIRED</strong>): List of delegation
-    identifiers accepted by the Embedded Checkout. This is a subset of the
-    delegations requested via the <code>ec_delegate</code> URL parameter. Omitted or
-    empty array means no delegations were accepted.</li>
-</ul>
-</li>
+        identifiers accepted by the Embedded Checkout. This is a subset of the
+        delegations requested via the <code>ec_delegate</code> URL parameter. Omitted or
+        empty array means no delegations were accepted.</li>
 </ul>
 <p><strong>Example Message (no delegations accepted):</strong></p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span>
@@ -3021,18 +3019,16 @@ to complete the handshake.</p>
 <ul>
 <li><strong>Direction:</strong> host → Embedded Checkout</li>
 <li><strong>Type:</strong> Response</li>
-<li><strong>Result Payload:</strong><ul>
+<li><strong>Result Payload:</strong></li>
 <li><code>upgrade</code> (object, <strong>OPTIONAL</strong>): An object describing how the Embedded
-    Checkout should update the communication channel it uses to communicate
-    with the host.</li>
+        Checkout should update the communication channel it uses to communicate
+        with the host.</li>
 <li><code>checkout</code> (object, <strong>OPTIONAL</strong>): Additional, display-only state for
-    the checkout that was not communicated over UCP checkout actions. This
-    is used to populate the checkout UI, and may only be used to populate
-    the following fields, under specific conditions:<ul>
+        the checkout that was not communicated over UCP checkout actions. This
+        is used to populate the checkout UI, and may only be used to populate
+        the following fields, under specific conditions:<ul>
 <li><code>payment.instruments</code>: can be overwritten when the host and Embedded
-    Checkout both accept the <code>payment.instruments_change</code> delegation.</li>
-</ul>
-</li>
+        Checkout both accept the <code>payment.instruments_change</code> delegation.</li>
 </ul>
 </li>
 </ul>
@@ -3101,11 +3097,9 @@ information:</strong></p>
 <ul>
 <li><strong>Direction:</strong> Embedded Checkout → host</li>
 <li><strong>Type:</strong> Notification</li>
-<li><strong>Payload:</strong><ul>
+<li><strong>Payload:</strong></li>
 <li><code>checkout</code>: The latest state of the checkout, using the same structure
-    as the <code>checkout</code> object in UCP responses.</li>
-</ul>
-</li>
+        as the <code>checkout</code> object in UCP responses.</li>
 </ul>
 <p><strong>Example Message:</strong></p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="p">{</span>
@@ -3137,11 +3131,9 @@ information:</strong></p>
 <ul>
 <li><strong>Direction:</strong> Embedded Checkout → host</li>
 <li><strong>Type:</strong> Notification</li>
-<li><strong>Payload:</strong><ul>
+<li><strong>Payload:</strong></li>
 <li><code>checkout</code>: The latest state of the checkout, using the same structure
-    as the <code>checkout</code> object in UCP responses.</li>
-</ul>
-</li>
+        as the <code>checkout</code> object in UCP responses.</li>
 </ul>
 <p><strong>Example Message:</strong></p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="p">{</span>
@@ -3169,10 +3161,8 @@ checkout UI.</p>
 <ul>
 <li><strong>Direction:</strong> Embedded Checkout → host</li>
 <li><strong>Type:</strong> Notification</li>
-<li><strong>Payload:</strong><ul>
+<li><strong>Payload:</strong></li>
 <li><code>checkout</code>: The latest state of the checkout</li>
-</ul>
-</li>
 </ul>
 <p><strong>Example Message:</strong></p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="p">{</span>
@@ -3198,10 +3188,8 @@ checkout UI.</p>
 <ul>
 <li><strong>Direction:</strong> Embedded Checkout → host</li>
 <li><strong>Type:</strong> Notification</li>
-<li><strong>Payload:</strong><ul>
+<li><strong>Payload:</strong></li>
 <li><code>checkout</code>: The latest state of the checkout</li>
-</ul>
-</li>
 </ul>
 <p><strong>Example Message:</strong></p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="p">{</span>
@@ -3225,10 +3213,8 @@ informational notices about the checkout state.</p>
 <ul>
 <li><strong>Direction:</strong> Embedded Checkout → host</li>
 <li><strong>Type:</strong> Notification</li>
-<li><strong>Payload:</strong><ul>
+<li><strong>Payload:</strong></li>
 <li><code>checkout</code>: The latest state of the checkout</li>
-</ul>
-</li>
 </ul>
 <p><strong>Example Message:</strong></p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="p">{</span>
@@ -3277,22 +3263,18 @@ non-delegated flow.</p>
 informing the Embedded Checkout to delegate payment UI and token acquisition to
 the host. When delegated:</p>
 <ul>
-<li><strong>Embedded Checkout responsibilities</strong>:<ul>
+<li><strong>Embedded Checkout responsibilities</strong>:</li>
 <li>Display current payment method with a change intent (e.g., "Change
-    Payment Method" button)</li>
+        Payment Method" button)</li>
 <li>Wait for a response to the <code>ec.payment.credential_request</code> message
-    before submitting the payment</li>
-</ul>
-</li>
-<li><strong>Host responsibilities</strong>:<ul>
+        before submitting the payment</li>
+<li><strong>Host responsibilities</strong>:</li>
 <li>Respond to the <code>ec.payment.instruments_change_request</code> by rendering
-    native UI for the buyer to select alternative payment methods, then
-    respond with the selected method</li>
+        native UI for the buyer to select alternative payment methods, then
+        respond with the selected method</li>
 <li>Respond to the <code>ec.payment.credential_request</code> by obtaining a payment
-    token for the selected payment method, and sending that token to the
-    Embedded Checkout</li>
-</ul>
-</li>
+        token for the selected payment method, and sending that token to the
+        Embedded Checkout</li>
 </ul>
 <h3 id="payment-message-api-reference">Payment Message API Reference<a class="headerlink" href="#payment-message-api-reference" title="Permanent link">&para;</a></h3>
 <h4 id="ecpaymentchange_1"><code>ec.payment.change</code><a class="headerlink" href="#ecpaymentchange_1" title="Permanent link">&para;</a></h4>
@@ -3301,10 +3283,8 @@ checkout UI, such as a new payment method being selected.</p>
 <ul>
 <li><strong>Direction:</strong> Embedded Checkout → host</li>
 <li><strong>Type:</strong> Notification</li>
-<li><strong>Payload:</strong><ul>
+<li><strong>Payload:</strong></li>
 <li><code>checkout</code>: The latest state of the checkout</li>
-</ul>
-</li>
 </ul>
 <p><strong>Example Message:</strong></p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="p">{</span>
@@ -3333,10 +3313,8 @@ checkout UI, such as a new payment method being selected.</p>
 <ul>
 <li><strong>Direction:</strong> Embedded Checkout → host</li>
 <li><strong>Type:</strong> Request</li>
-<li><strong>Payload:</strong><ul>
+<li><strong>Payload:</strong></li>
 <li><code>checkout</code>: The latest state of the checkout</li>
-</ul>
-</li>
 </ul>
 <p><strong>Example Message:</strong></p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="p">{</span>
@@ -3365,10 +3343,8 @@ existing state.</p>
 <ul>
 <li><strong>Direction:</strong> host → Embedded Checkout</li>
 <li><strong>Type:</strong> Response</li>
-<li><strong>Payload:</strong><ul>
+<li><strong>Payload:</strong></li>
 <li><code>checkout</code>: The update to apply to the checkout object</li>
-</ul>
-</li>
 </ul>
 <p><strong>Example Success Response:</strong></p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="p">{</span>
@@ -3414,10 +3390,8 @@ submission.</p>
 <ul>
 <li><strong>Direction:</strong> Embedded Checkout → Host</li>
 <li><strong>Type:</strong> Request</li>
-<li><strong>Payload:</strong><ul>
+<li><strong>Payload:</strong></li>
 <li><code>checkout</code>: The latest state of the checkout</li>
-</ul>
-</li>
 </ul>
 <p><strong>Example Message:</strong></p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="p">{</span>
@@ -3452,10 +3426,8 @@ to merge the new data with existing state.</p>
 <ul>
 <li><strong>Direction:</strong> host → Embedded Checkout</li>
 <li><strong>Type:</strong> Response</li>
-<li><strong>Payload:</strong><ul>
+<li><strong>Payload:</strong></li>
 <li><code>checkout</code>: The update to apply to the checkout object</li>
-</ul>
-</li>
 </ul>
 <p><strong>Example Success Response:</strong></p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="p">{</span>
@@ -3543,10 +3515,8 @@ UI.</p>
 <ul>
 <li><strong>Direction:</strong> Embedded Checkout → Host</li>
 <li><strong>Type:</strong> Notification</li>
-<li><strong>Payload:</strong><ul>
+<li><strong>Payload:</strong></li>
 <li><code>checkout</code>: The latest state of the checkout</li>
-</ul>
-</li>
 </ul>
 <p><strong>Example Message:</strong></p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="p">{</span>
@@ -3570,10 +3540,8 @@ method.</p>
 <ul>
 <li><strong>Direction:</strong> Embedded Checkout → Host</li>
 <li><strong>Type:</strong> Request</li>
-<li><strong>Payload:</strong><ul>
+<li><strong>Payload:</strong></li>
 <li><code>checkout</code>: The latest state of the checkout</li>
-</ul>
-</li>
 </ul>
 <p><strong>Example Message:</strong></p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="p">{</span>
@@ -3616,10 +3584,8 @@ rather than attempting to merge the new data with existing state.</p>
 <ul>
 <li><strong>Direction:</strong> host → Embedded Checkout</li>
 <li><strong>Type:</strong> Response</li>
-<li><strong>Payload:</strong><ul>
+<li><strong>Payload:</strong></li>
 <li><code>checkout</code>: The update to apply to the checkout object</li>
-</ul>
-</li>
 </ul>
 <p><strong>Example Success Response:</strong></p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="p">{</span>
@@ -3782,26 +3748,24 @@ directives:</p>
 </li>
 <li>
 <p><strong>Host:</strong></p>
-<ul>
-<li><strong>Direct Embedding:</strong> If the host directly embeds the business's page,
-    specifying a <code>frame-src</code> directive listing every potential business
-    origin can be impractical, especially if there are many businesses. In
-    this scenario, while a strict <code>frame-src</code> is ideal, other security
-    measures like those in <a href="#iframe-sandbox-attributes">Iframe Sandbox Attributes</a>
-    and <a href="#credentialless-iframes">Credentialless Iframes</a> are critical.</li>
-<li><strong>Intermediate Iframe:</strong> The host <strong>MAY</strong> use an intermediate iframe
-    (e.g., on a host-controlled subdomain) to embed the business's page.
-    This offers better control:<ul>
-<li>The host's main page only needs to allow the origin of the
-    intermediate iframe in its <code>frame-src</code> (e.g.,
-    <code>frame-src &lt;intermediate_iframe_origin&gt;;</code>).</li>
-<li>The intermediate iframe <strong>MUST</strong> implement a strict <code>frame-src</code>
-    policy, dynamically set to allow <em>only</em> the specific
-    <code>&lt;merchant_origin&gt;</code> for the current embedded session (e.g.,
-    <code>frame-src &lt;merchant_origin&gt;;</code>). This can be set via HTTP headers
-    when serving the intermediate iframe content.</li>
-</ul>
 </li>
+<li><strong>Direct Embedding:</strong> If the host directly embeds the business's page,
+        specifying a <code>frame-src</code> directive listing every potential business
+        origin can be impractical, especially if there are many businesses. In
+        this scenario, while a strict <code>frame-src</code> is ideal, other security
+        measures like those in <a href="#iframe-sandbox-attributes">Iframe Sandbox Attributes</a>
+        and <a href="#credentialless-iframes">Credentialless Iframes</a> are critical.</li>
+<li><strong>Intermediate Iframe:</strong> The host <strong>MAY</strong> use an intermediate iframe
+        (e.g., on a host-controlled subdomain) to embed the business's page.
+        This offers better control:<ul>
+<li>The host's main page only needs to allow the origin of the
+        intermediate iframe in its <code>frame-src</code> (e.g.,
+        <code>frame-src &lt;intermediate_iframe_origin&gt;;</code>).</li>
+<li>The intermediate iframe <strong>MUST</strong> implement a strict <code>frame-src</code>
+        policy, dynamically set to allow <em>only</em> the specific
+        <code>&lt;merchant_origin&gt;</code> for the current embedded session (e.g.,
+        <code>frame-src &lt;merchant_origin&gt;;</code>). This can be set via HTTP headers
+        when serving the intermediate iframe content.</li>
 </ul>
 </li>
 </ul>

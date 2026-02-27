@@ -308,7 +308,7 @@ Upon rendering, the Embedded Checkout **MUST** broadcast readiness to the parent
 - **Direction:** Embedded Checkout → host
 - **Type:** Request
 - **Payload:**
-  - `delegate` (array of strings, **REQUIRED**): List of delegation identifiers accepted by the Embedded Checkout. This is a subset of the delegations requested via the `ec_delegate` URL parameter. Omitted or empty array means no delegations were accepted.
+- `delegate` (array of strings, **REQUIRED**): List of delegation identifiers accepted by the Embedded Checkout. This is a subset of the delegations requested via the `ec_delegate` URL parameter. Omitted or empty array means no delegations were accepted.
 
 **Example Message (no delegations accepted):**
 
@@ -341,9 +341,9 @@ The `ec.ready` message is a request, which means that the host **MUST** respond 
 - **Direction:** host → Embedded Checkout
 - **Type:** Response
 - **Result Payload:**
-  - `upgrade` (object, **OPTIONAL**): An object describing how the Embedded Checkout should update the communication channel it uses to communicate with the host.
-  - `checkout` (object, **OPTIONAL**): Additional, display-only state for the checkout that was not communicated over UCP checkout actions. This is used to populate the checkout UI, and may only be used to populate the following fields, under specific conditions:
-    - `payment.instruments`: can be overwritten when the host and Embedded Checkout both accept the `payment.instruments_change` delegation.
+- `upgrade` (object, **OPTIONAL**): An object describing how the Embedded Checkout should update the communication channel it uses to communicate with the host.
+- `checkout` (object, **OPTIONAL**): Additional, display-only state for the checkout that was not communicated over UCP checkout actions. This is used to populate the checkout UI, and may only be used to populate the following fields, under specific conditions:
+  - `payment.instruments`: can be overwritten when the host and Embedded Checkout both accept the `payment.instruments_change` delegation.
 
 **Example Message:**
 
@@ -414,7 +414,7 @@ Signals that checkout is visible and ready for interaction.
 - **Direction:** Embedded Checkout → host
 - **Type:** Notification
 - **Payload:**
-  - `checkout`: The latest state of the checkout, using the same structure as the `checkout` object in UCP responses.
+- `checkout`: The latest state of the checkout, using the same structure as the `checkout` object in UCP responses.
 
 **Example Message:**
 
@@ -451,7 +451,7 @@ Indicates successful checkout completion.
 - **Direction:** Embedded Checkout → host
 - **Type:** Notification
 - **Payload:**
-  - `checkout`: The latest state of the checkout, using the same structure as the `checkout` object in UCP responses.
+- `checkout`: The latest state of the checkout, using the same structure as the `checkout` object in UCP responses.
 
 **Example Message:**
 
@@ -483,7 +483,7 @@ Line items have been modified (quantity changed, items added/removed) in the che
 - **Direction:** Embedded Checkout → host
 - **Type:** Notification
 - **Payload:**
-  - `checkout`: The latest state of the checkout
+- `checkout`: The latest state of the checkout
 
 **Example Message:**
 
@@ -514,7 +514,7 @@ Buyer information has been updated in the checkout UI.
 - **Direction:** Embedded Checkout → host
 - **Type:** Notification
 - **Payload:**
-  - `checkout`: The latest state of the checkout
+- `checkout`: The latest state of the checkout
 
 **Example Message:**
 
@@ -542,7 +542,7 @@ Checkout messages have been updated. Messages include errors, warnings, and info
 - **Direction:** Embedded Checkout → host
 - **Type:** Notification
 - **Payload:**
-  - `checkout`: The latest state of the checkout
+- `checkout`: The latest state of the checkout
 
 **Example Message:**
 
@@ -590,11 +590,11 @@ Payment delegation allows for two different patterns of orchestrating the host a
 **Option B: Host Takes Control** The host includes `ec_delegate=payment.instruments_change,payment.credential` in the Checkout URL, informing the Embedded Checkout to delegate payment UI and token acquisition to the host. When delegated:
 
 - **Embedded Checkout responsibilities**:
-  - Display current payment method with a change intent (e.g., "Change Payment Method" button)
-  - Wait for a response to the `ec.payment.credential_request` message before submitting the payment
+- Display current payment method with a change intent (e.g., "Change Payment Method" button)
+- Wait for a response to the `ec.payment.credential_request` message before submitting the payment
 - **Host responsibilities**:
-  - Respond to the `ec.payment.instruments_change_request` by rendering native UI for the buyer to select alternative payment methods, then respond with the selected method
-  - Respond to the `ec.payment.credential_request` by obtaining a payment token for the selected payment method, and sending that token to the Embedded Checkout
+- Respond to the `ec.payment.instruments_change_request` by rendering native UI for the buyer to select alternative payment methods, then respond with the selected method
+- Respond to the `ec.payment.credential_request` by obtaining a payment token for the selected payment method, and sending that token to the Embedded Checkout
 
 ### Payment Message API Reference
 
@@ -605,7 +605,7 @@ Informs the host that something has changed in the payment section of the checko
 - **Direction:** Embedded Checkout → host
 - **Type:** Notification
 - **Payload:**
-  - `checkout`: The latest state of the checkout
+- `checkout`: The latest state of the checkout
 
 **Example Message:**
 
@@ -639,7 +639,7 @@ Requests the host to present payment instrument selection UI.
 - **Direction:** Embedded Checkout → host
 - **Type:** Request
 - **Payload:**
-  - `checkout`: The latest state of the checkout
+- `checkout`: The latest state of the checkout
 
 **Example Message:**
 
@@ -666,7 +666,7 @@ The host **MUST** respond with either an error, or the newly-selected payment in
 - **Direction:** host → Embedded Checkout
 - **Type:** Response
 - **Payload:**
-  - `checkout`: The update to apply to the checkout object
+- `checkout`: The update to apply to the checkout object
 
 **Example Success Response:**
 
@@ -719,7 +719,7 @@ Requests a credential for the selected payment instrument during checkout submis
 - **Direction:** Embedded Checkout → Host
 - **Type:** Request
 - **Payload:**
-  - `checkout`: The latest state of the checkout
+- `checkout`: The latest state of the checkout
 
 **Example Message:**
 
@@ -752,7 +752,7 @@ The host **MUST** respond with either an error, or the credential for the select
 - **Direction:** host → Embedded Checkout
 - **Type:** Response
 - **Payload:**
-  - `checkout`: The update to apply to the checkout object
+- `checkout`: The update to apply to the checkout object
 
 **Example Success Response:**
 
@@ -839,7 +839,7 @@ Informs the host that the fulfillment details have been changed in the checkout 
 - **Direction:** Embedded Checkout → Host
 - **Type:** Notification
 - **Payload:**
-  - `checkout`: The latest state of the checkout
+- `checkout`: The latest state of the checkout
 
 **Example Message:**
 
@@ -867,7 +867,7 @@ Requests the host to present address selection UI for a shipping fulfillment met
 - **Direction:** Embedded Checkout → Host
 - **Type:** Request
 - **Payload:**
-  - `checkout`: The latest state of the checkout
+- `checkout`: The latest state of the checkout
 
 **Example Message:**
 
@@ -908,7 +908,7 @@ The host **MUST** respond with either an error, or the newly-selected address. I
 - **Direction:** host → Embedded Checkout
 - **Type:** Response
 - **Payload:**
-  - `checkout`: The update to apply to the checkout object
+- `checkout`: The update to apply to the checkout object
 
 **Example Success Response:**
 
@@ -991,13 +991,11 @@ Responses to delegation request messages from the embedded checkout may resolve 
 To ensure security, both parties **MUST** implement appropriate **[Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)** directives:
 
 - **Business:** **MUST** set `frame-ancestors <host_origin>;` to ensure it's only embedded by trusted hosts.
-
 - **Host:**
-
-  - **Direct Embedding:** If the host directly embeds the business's page, specifying a `frame-src` directive listing every potential business origin can be impractical, especially if there are many businesses. In this scenario, while a strict `frame-src` is ideal, other security measures like those in [Iframe Sandbox Attributes](#iframe-sandbox-attributes) and [Credentialless Iframes](#credentialless-iframes) are critical.
-  - **Intermediate Iframe:** The host **MAY** use an intermediate iframe (e.g., on a host-controlled subdomain) to embed the business's page. This offers better control:
-    - The host's main page only needs to allow the origin of the intermediate iframe in its `frame-src` (e.g., `frame-src <intermediate_iframe_origin>;`).
-    - The intermediate iframe **MUST** implement a strict `frame-src` policy, dynamically set to allow *only* the specific `<merchant_origin>` for the current embedded session (e.g., `frame-src <merchant_origin>;`). This can be set via HTTP headers when serving the intermediate iframe content.
+- **Direct Embedding:** If the host directly embeds the business's page, specifying a `frame-src` directive listing every potential business origin can be impractical, especially if there are many businesses. In this scenario, while a strict `frame-src` is ideal, other security measures like those in [Iframe Sandbox Attributes](#iframe-sandbox-attributes) and [Credentialless Iframes](#credentialless-iframes) are critical.
+- **Intermediate Iframe:** The host **MAY** use an intermediate iframe (e.g., on a host-controlled subdomain) to embed the business's page. This offers better control:
+  - The host's main page only needs to allow the origin of the intermediate iframe in its `frame-src` (e.g., `frame-src <intermediate_iframe_origin>;`).
+  - The intermediate iframe **MUST** implement a strict `frame-src` policy, dynamically set to allow *only* the specific `<merchant_origin>` for the current embedded session (e.g., `frame-src <merchant_origin>;`). This can be set via HTTP headers when serving the intermediate iframe content.
 
 #### Iframe Sandbox Attributes
 

@@ -90,11 +90,11 @@ Maps to the [Create Checkout](https://ucp.dev/2026-01-11/specification/checkout/
 #### Input Schema
 
 - [Checkout](https://ucp.dev/2026-01-11/specification/checkout/#create-checkout) object.
-  - Extensions (Optional):
-    - `dev.ucp.shopping.buyer_consent`: [Buyer Consent](https://ucp.dev/2026-01-11/specification/buyer-consent/index.md)
-    - `dev.ucp.shopping.fulfillment`: [Fulfillment](https://ucp.dev/2026-01-11/specification/fulfillment/index.md)
-    - `dev.ucp.shopping.discount`: [Discount](https://ucp.dev/2026-01-11/specification/discount/index.md)
-    - `dev.ucp.shopping.ap2_mandate`: [AP2 Mandates](https://ucp.dev/2026-01-11/specification/ap2-mandates/index.md)
+- Extensions (Optional):
+  - `dev.ucp.shopping.buyer_consent`: [Buyer Consent](https://ucp.dev/2026-01-11/specification/buyer-consent/index.md)
+  - `dev.ucp.shopping.fulfillment`: [Fulfillment](https://ucp.dev/2026-01-11/specification/fulfillment/index.md)
+  - `dev.ucp.shopping.discount`: [Discount](https://ucp.dev/2026-01-11/specification/discount/index.md)
+  - `dev.ucp.shopping.ap2_mandate`: [AP2 Mandates](https://ucp.dev/2026-01-11/specification/ap2-mandates/index.md)
 
 #### Output Schema
 
@@ -307,11 +307,11 @@ Maps to the [Update Checkout](https://ucp.dev/2026-01-11/specification/checkout/
 
 - `id` (String): The ID of the checkout session to update.
 - [Checkout](https://ucp.dev/2026-01-11/specification/checkout/#update-checkout) object.
-  - Extensions (Optional):
-    - `dev.ucp.shopping.buyer_consent`: [Buyer Consent](https://ucp.dev/2026-01-11/specification/buyer-consent/index.md)
-    - `dev.ucp.shopping.fulfillment`: [Fulfillment](https://ucp.dev/2026-01-11/specification/fulfillment/index.md)
-    - `dev.ucp.shopping.discount`: [Discount](https://ucp.dev/2026-01-11/specification/discount/index.md)
-    - `dev.ucp.shopping.ap2_mandate`: [AP2 Mandates](https://ucp.dev/2026-01-11/specification/ap2-mandates/index.md)
+- Extensions (Optional):
+  - `dev.ucp.shopping.buyer_consent`: [Buyer Consent](https://ucp.dev/2026-01-11/specification/buyer-consent/index.md)
+  - `dev.ucp.shopping.fulfillment`: [Fulfillment](https://ucp.dev/2026-01-11/specification/fulfillment/index.md)
+  - `dev.ucp.shopping.discount`: [Discount](https://ucp.dev/2026-01-11/specification/discount/index.md)
+  - `dev.ucp.shopping.ap2_mandate`: [AP2 Mandates](https://ucp.dev/2026-01-11/specification/ap2-mandates/index.md)
 
 #### Output Schema
 

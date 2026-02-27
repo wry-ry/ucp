@@ -967,7 +967,7 @@ The following changes **MAY** be introduced without a new version:
 - Changing the order of fields in responses
 - Changing the length or format of opaque strings (IDs, tokens)
 
-#### Breaking Changes:
+#### Breaking Changes
 
 The following changes **MUST NOT** be introduced without a new version:
 
@@ -3055,11 +3055,11 @@ Maps to the [Create Checkout](https://ucp.dev/2026-01-11/specification/checkout/
 #### Input Schema
 
 - [Checkout](https://ucp.dev/2026-01-11/specification/checkout/#create-checkout) object.
-  - Extensions (Optional):
-    - `dev.ucp.shopping.buyer_consent`: [Buyer Consent](https://ucp.dev/2026-01-11/specification/buyer-consent/index.md)
-    - `dev.ucp.shopping.fulfillment`: [Fulfillment](https://ucp.dev/2026-01-11/specification/fulfillment/index.md)
-    - `dev.ucp.shopping.discount`: [Discount](https://ucp.dev/2026-01-11/specification/discount/index.md)
-    - `dev.ucp.shopping.ap2_mandate`: [AP2 Mandates](https://ucp.dev/2026-01-11/specification/ap2-mandates/index.md)
+- Extensions (Optional):
+  - `dev.ucp.shopping.buyer_consent`: [Buyer Consent](https://ucp.dev/2026-01-11/specification/buyer-consent/index.md)
+  - `dev.ucp.shopping.fulfillment`: [Fulfillment](https://ucp.dev/2026-01-11/specification/fulfillment/index.md)
+  - `dev.ucp.shopping.discount`: [Discount](https://ucp.dev/2026-01-11/specification/discount/index.md)
+  - `dev.ucp.shopping.ap2_mandate`: [AP2 Mandates](https://ucp.dev/2026-01-11/specification/ap2-mandates/index.md)
 
 #### Output Schema
 
@@ -3272,11 +3272,11 @@ Maps to the [Update Checkout](https://ucp.dev/2026-01-11/specification/checkout/
 
 - `id` (String): The ID of the checkout session to update.
 - [Checkout](https://ucp.dev/2026-01-11/specification/checkout/#update-checkout) object.
-  - Extensions (Optional):
-    - `dev.ucp.shopping.buyer_consent`: [Buyer Consent](https://ucp.dev/2026-01-11/specification/buyer-consent/index.md)
-    - `dev.ucp.shopping.fulfillment`: [Fulfillment](https://ucp.dev/2026-01-11/specification/fulfillment/index.md)
-    - `dev.ucp.shopping.discount`: [Discount](https://ucp.dev/2026-01-11/specification/discount/index.md)
-    - `dev.ucp.shopping.ap2_mandate`: [AP2 Mandates](https://ucp.dev/2026-01-11/specification/ap2-mandates/index.md)
+- Extensions (Optional):
+  - `dev.ucp.shopping.buyer_consent`: [Buyer Consent](https://ucp.dev/2026-01-11/specification/buyer-consent/index.md)
+  - `dev.ucp.shopping.fulfillment`: [Fulfillment](https://ucp.dev/2026-01-11/specification/fulfillment/index.md)
+  - `dev.ucp.shopping.discount`: [Discount](https://ucp.dev/2026-01-11/specification/discount/index.md)
+  - `dev.ucp.shopping.ap2_mandate`: [AP2 Mandates](https://ucp.dev/2026-01-11/specification/ap2-mandates/index.md)
 
 #### Output Schema
 
@@ -4143,7 +4143,7 @@ Upon rendering, the Embedded Checkout **MUST** broadcast readiness to the parent
 - **Direction:** Embedded Checkout → host
 - **Type:** Request
 - **Payload:**
-  - `delegate` (array of strings, **REQUIRED**): List of delegation identifiers accepted by the Embedded Checkout. This is a subset of the delegations requested via the `ec_delegate` URL parameter. Omitted or empty array means no delegations were accepted.
+- `delegate` (array of strings, **REQUIRED**): List of delegation identifiers accepted by the Embedded Checkout. This is a subset of the delegations requested via the `ec_delegate` URL parameter. Omitted or empty array means no delegations were accepted.
 
 **Example Message (no delegations accepted):**
 
@@ -4176,9 +4176,9 @@ The `ec.ready` message is a request, which means that the host **MUST** respond 
 - **Direction:** host → Embedded Checkout
 - **Type:** Response
 - **Result Payload:**
-  - `upgrade` (object, **OPTIONAL**): An object describing how the Embedded Checkout should update the communication channel it uses to communicate with the host.
-  - `checkout` (object, **OPTIONAL**): Additional, display-only state for the checkout that was not communicated over UCP checkout actions. This is used to populate the checkout UI, and may only be used to populate the following fields, under specific conditions:
-    - `payment.instruments`: can be overwritten when the host and Embedded Checkout both accept the `payment.instruments_change` delegation.
+- `upgrade` (object, **OPTIONAL**): An object describing how the Embedded Checkout should update the communication channel it uses to communicate with the host.
+- `checkout` (object, **OPTIONAL**): Additional, display-only state for the checkout that was not communicated over UCP checkout actions. This is used to populate the checkout UI, and may only be used to populate the following fields, under specific conditions:
+  - `payment.instruments`: can be overwritten when the host and Embedded Checkout both accept the `payment.instruments_change` delegation.
 
 **Example Message:**
 
@@ -4249,7 +4249,7 @@ Signals that checkout is visible and ready for interaction.
 - **Direction:** Embedded Checkout → host
 - **Type:** Notification
 - **Payload:**
-  - `checkout`: The latest state of the checkout, using the same structure as the `checkout` object in UCP responses.
+- `checkout`: The latest state of the checkout, using the same structure as the `checkout` object in UCP responses.
 
 **Example Message:**
 
@@ -4286,7 +4286,7 @@ Indicates successful checkout completion.
 - **Direction:** Embedded Checkout → host
 - **Type:** Notification
 - **Payload:**
-  - `checkout`: The latest state of the checkout, using the same structure as the `checkout` object in UCP responses.
+- `checkout`: The latest state of the checkout, using the same structure as the `checkout` object in UCP responses.
 
 **Example Message:**
 
@@ -4318,7 +4318,7 @@ Line items have been modified (quantity changed, items added/removed) in the che
 - **Direction:** Embedded Checkout → host
 - **Type:** Notification
 - **Payload:**
-  - `checkout`: The latest state of the checkout
+- `checkout`: The latest state of the checkout
 
 **Example Message:**
 
@@ -4349,7 +4349,7 @@ Buyer information has been updated in the checkout UI.
 - **Direction:** Embedded Checkout → host
 - **Type:** Notification
 - **Payload:**
-  - `checkout`: The latest state of the checkout
+- `checkout`: The latest state of the checkout
 
 **Example Message:**
 
@@ -4377,7 +4377,7 @@ Checkout messages have been updated. Messages include errors, warnings, and info
 - **Direction:** Embedded Checkout → host
 - **Type:** Notification
 - **Payload:**
-  - `checkout`: The latest state of the checkout
+- `checkout`: The latest state of the checkout
 
 **Example Message:**
 
@@ -4425,11 +4425,11 @@ Payment delegation allows for two different patterns of orchestrating the host a
 **Option B: Host Takes Control** The host includes `ec_delegate=payment.instruments_change,payment.credential` in the Checkout URL, informing the Embedded Checkout to delegate payment UI and token acquisition to the host. When delegated:
 
 - **Embedded Checkout responsibilities**:
-  - Display current payment method with a change intent (e.g., "Change Payment Method" button)
-  - Wait for a response to the `ec.payment.credential_request` message before submitting the payment
+- Display current payment method with a change intent (e.g., "Change Payment Method" button)
+- Wait for a response to the `ec.payment.credential_request` message before submitting the payment
 - **Host responsibilities**:
-  - Respond to the `ec.payment.instruments_change_request` by rendering native UI for the buyer to select alternative payment methods, then respond with the selected method
-  - Respond to the `ec.payment.credential_request` by obtaining a payment token for the selected payment method, and sending that token to the Embedded Checkout
+- Respond to the `ec.payment.instruments_change_request` by rendering native UI for the buyer to select alternative payment methods, then respond with the selected method
+- Respond to the `ec.payment.credential_request` by obtaining a payment token for the selected payment method, and sending that token to the Embedded Checkout
 
 ### Payment Message API Reference
 
@@ -4440,7 +4440,7 @@ Informs the host that something has changed in the payment section of the checko
 - **Direction:** Embedded Checkout → host
 - **Type:** Notification
 - **Payload:**
-  - `checkout`: The latest state of the checkout
+- `checkout`: The latest state of the checkout
 
 **Example Message:**
 
@@ -4474,7 +4474,7 @@ Requests the host to present payment instrument selection UI.
 - **Direction:** Embedded Checkout → host
 - **Type:** Request
 - **Payload:**
-  - `checkout`: The latest state of the checkout
+- `checkout`: The latest state of the checkout
 
 **Example Message:**
 
@@ -4501,7 +4501,7 @@ The host **MUST** respond with either an error, or the newly-selected payment in
 - **Direction:** host → Embedded Checkout
 - **Type:** Response
 - **Payload:**
-  - `checkout`: The update to apply to the checkout object
+- `checkout`: The update to apply to the checkout object
 
 **Example Success Response:**
 
@@ -4554,7 +4554,7 @@ Requests a credential for the selected payment instrument during checkout submis
 - **Direction:** Embedded Checkout → Host
 - **Type:** Request
 - **Payload:**
-  - `checkout`: The latest state of the checkout
+- `checkout`: The latest state of the checkout
 
 **Example Message:**
 
@@ -4587,7 +4587,7 @@ The host **MUST** respond with either an error, or the credential for the select
 - **Direction:** host → Embedded Checkout
 - **Type:** Response
 - **Payload:**
-  - `checkout`: The update to apply to the checkout object
+- `checkout`: The update to apply to the checkout object
 
 **Example Success Response:**
 
@@ -4674,7 +4674,7 @@ Informs the host that the fulfillment details have been changed in the checkout 
 - **Direction:** Embedded Checkout → Host
 - **Type:** Notification
 - **Payload:**
-  - `checkout`: The latest state of the checkout
+- `checkout`: The latest state of the checkout
 
 **Example Message:**
 
@@ -4702,7 +4702,7 @@ Requests the host to present address selection UI for a shipping fulfillment met
 - **Direction:** Embedded Checkout → Host
 - **Type:** Request
 - **Payload:**
-  - `checkout`: The latest state of the checkout
+- `checkout`: The latest state of the checkout
 
 **Example Message:**
 
@@ -4743,7 +4743,7 @@ The host **MUST** respond with either an error, or the newly-selected address. I
 - **Direction:** host → Embedded Checkout
 - **Type:** Response
 - **Payload:**
-  - `checkout`: The update to apply to the checkout object
+- `checkout`: The update to apply to the checkout object
 
 **Example Success Response:**
 
@@ -4826,13 +4826,11 @@ Responses to delegation request messages from the embedded checkout may resolve 
 To ensure security, both parties **MUST** implement appropriate **[Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)** directives:
 
 - **Business:** **MUST** set `frame-ancestors <host_origin>;` to ensure it's only embedded by trusted hosts.
-
 - **Host:**
-
-  - **Direct Embedding:** If the host directly embeds the business's page, specifying a `frame-src` directive listing every potential business origin can be impractical, especially if there are many businesses. In this scenario, while a strict `frame-src` is ideal, other security measures like those in [Iframe Sandbox Attributes](#iframe-sandbox-attributes) and [Credentialless Iframes](#credentialless-iframes) are critical.
-  - **Intermediate Iframe:** The host **MAY** use an intermediate iframe (e.g., on a host-controlled subdomain) to embed the business's page. This offers better control:
-    - The host's main page only needs to allow the origin of the intermediate iframe in its `frame-src` (e.g., `frame-src <intermediate_iframe_origin>;`).
-    - The intermediate iframe **MUST** implement a strict `frame-src` policy, dynamically set to allow *only* the specific `<merchant_origin>` for the current embedded session (e.g., `frame-src <merchant_origin>;`). This can be set via HTTP headers when serving the intermediate iframe content.
+- **Direct Embedding:** If the host directly embeds the business's page, specifying a `frame-src` directive listing every potential business origin can be impractical, especially if there are many businesses. In this scenario, while a strict `frame-src` is ideal, other security measures like those in [Iframe Sandbox Attributes](#iframe-sandbox-attributes) and [Credentialless Iframes](#credentialless-iframes) are critical.
+- **Intermediate Iframe:** The host **MAY** use an intermediate iframe (e.g., on a host-controlled subdomain) to embed the business's page. This offers better control:
+  - The host's main page only needs to allow the origin of the intermediate iframe in its `frame-src` (e.g., `frame-src <intermediate_iframe_origin>;`).
+  - The intermediate iframe **MUST** implement a strict `frame-src` policy, dynamically set to allow *only* the specific `<merchant_origin>` for the current embedded session (e.g., `frame-src <merchant_origin>;`). This can be set via HTTP headers when serving the intermediate iframe content.
 
 #### Iframe Sandbox Attributes
 
@@ -5832,25 +5830,25 @@ The fulfillment extension enables businesses to advertise support for physical g
 This extension adds a `fulfillment` field to Checkout containing:
 
 - `methods[]` — fulfillment methods applicable to cart items (shipping, pickup, etc.)
-  - `line_item_ids` — which items this method fulfills
-  - `destinations[]` — where to fulfill (address, store location)
-  - `groups[]` — business-generated packages, each with selectable `options[]`
+- `line_item_ids` — which items this method fulfills
+- `destinations[]` — where to fulfill (address, store location)
+- `groups[]` — business-generated packages, each with selectable `options[]`
 - `available_methods[]` — inventory availability per item (optional)
 
 **Mental model:**
 
 - `methods[0]` Shipping
-  - `line_item_ids` 👕👖
-  - `selected_destination_id` = `destinations[0].id` 🔘✅ 123 Fake St
-  - `groups[0]` 📦👕👖
-    - `selected_option_id` = `options[0].id` 🔘✅ Standard $5
-    - `options[1]` 🔘 Express $10
+- `line_item_ids` 👕👖
+- `selected_destination_id` = `destinations[0].id` 🔘✅ 123 Fake St
+- `groups[0]` 📦👕👖
+  - `selected_option_id` = `options[0].id` 🔘✅ Standard $5
+  - `options[1]` 🔘 Express $10
 - `methods[1]` Pick Up in Store
-  - `line_item_ids` 👞
-  - `selected_destination_id` = `destinations[0].id` 🔘✅ Uptown Store
-  - `groups[0]` 📦👞
-    - `selected_option_id` = `options[0].id` 🔘✅ In-Store Pickup
-    - `options[1]` 🔘 Curbside Pickup
+- `line_item_ids` 👞
+- `selected_destination_id` = `destinations[0].id` 🔘✅ Uptown Store
+- `groups[0]` 📦👞
+  - `selected_option_id` = `options[0].id` 🔘✅ In-Store Pickup
+  - `options[1]` 🔘 Curbside Pickup
 
 ## Schema
 
@@ -6849,31 +6847,31 @@ This linkage is foundational for commerce experiences, such as accessing loyalty
 **For platforms**
 
 - **MUST** authenticate using their `client_id` and `client_secret` ([RFC 6749 2.3.1](https://datatracker.ietf.org/doc/html/rfc6749#section-2.3.1)) through HTTP Basic Authentication ([RFC 7617](https://datatracker.ietf.org/doc/html/rfc7617)) when exchanging codes for tokens.
-  - **MAY** support Client Metadata
-  - **MAY** support Dynamic Client Registration mechanisms to supersede static credential exchange.
+- **MAY** support Client Metadata
+- **MAY** support Dynamic Client Registration mechanisms to supersede static credential exchange.
 - The platform must include the token in the HTTP Authorization header using the Bearer schema (`Authorization: Bearer <access_token>`)
 - **MUST** implement the OAuth 2.0 Authorization Code flow ([RFC 6749 4.1](https://datatracker.ietf.org/doc/html/rfc6749#section-4.1)) as the primary linking mechanism.
 - **SHOULD** include a unique, unguessable state parameter in the authorization request to prevent Cross-Site Request Forgery (CSRF) ([RFC 6749 10.12](https://datatracker.ietf.org/doc/html/rfc6749#section-10.12)) (part of [OAuth 2.1 draft](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-14#name-preventing-csrf-attacks)) .
 - Revocation and security events
-  - **SHOULD** call the business's revocation endpoint ([RFC 7009](https://datatracker.ietf.org/doc/html/rfc7009)) when a user initiates an unlink action on the platform side.
-  - **SHOULD** support [OpenID RISC Profile 1.0](https://openid.net/specs/openid-risc-1_0-final.html) to handle asynchronous account updates, unlinking events, and cross-account protection.
+- **SHOULD** call the business's revocation endpoint ([RFC 7009](https://datatracker.ietf.org/doc/html/rfc7009)) when a user initiates an unlink action on the platform side.
+- **SHOULD** support [OpenID RISC Profile 1.0](https://openid.net/specs/openid-risc-1_0-final.html) to handle asynchronous account updates, unlinking events, and cross-account protection.
 
 **For businesses**
 
 - **MUST** implement OAuth 2.0 ([RFC 6749](https://datatracker.ietf.org/doc/html/rfc6749))
 - **MUST** adhere to [RFC 8414](https://datatracker.ietf.org/doc/html/rfc8414) to declare the location of their OAuth 2.0 endpoints (`/.well-known/oauth-authorization-server`)
-  - **SHOULD** implement [RFC 9728](https://datatracker.ietf.org/doc/html/rfc9728/) (HTTP Resource Metadata) to allow platforms to discover the Authorization Server associated with specific resources.
-  - **SHOULD** fill in `scopes_supported` as part of [RFC 8414](https://datatracker.ietf.org/doc/html/rfc8414).
+- **SHOULD** implement [RFC 9728](https://datatracker.ietf.org/doc/html/rfc9728/) (HTTP Resource Metadata) to allow platforms to discover the Authorization Server associated with specific resources.
+- **SHOULD** fill in `scopes_supported` as part of [RFC 8414](https://datatracker.ietf.org/doc/html/rfc8414).
 - **MUST** enforce Client Authentication at the Token Endpoint.
 - **MUST** provide an account creation flow if the user does not already have an account.
 - **MUST** support standard UCP scopes, as defined in the Scopes section, granting the tokens permission to all associated Operations for a given resource.
 - Additional permissions **MAY** be granted beyond those explicitly requested, provided that the requested scopes are, at minimum, included.
 - The platform and business **MAY** define additional custom scopes beyond the minimum scope requirements.
 - Revocation and security events
-  - **MUST** implement standard Token Revocation as defined in [RFC 7009](https://datatracker.ietf.org/doc/html/rfc7009).
-  - **MUST** revoke the specified token and **SHOULD** recursively revoke all associated tokens (e.g., revoking a `refresh_token` **MUST** also immediately revoke all active `access_token`s issued from it).
-  - **MUST** support revocation requests authenticated with the same client credentials used for the token endpoint.
-  - **SHOULD** support [OpenID RISC Profile 1.0](https://openid.net/specs/openid-risc-1_0-final.html) to enable Cross-Account Protection and securely signal revocation or account state changes initiated by the business side. ([See Cross-Account protection](https://developers.google.com/identity/account-linking/unlinking#cross-account_protection_risc))
+- **MUST** implement standard Token Revocation as defined in [RFC 7009](https://datatracker.ietf.org/doc/html/rfc7009).
+- **MUST** revoke the specified token and **SHOULD** recursively revoke all associated tokens (e.g., revoking a `refresh_token` **MUST** also immediately revoke all active `access_token`s issued from it).
+- **MUST** support revocation requests authenticated with the same client credentials used for the token endpoint.
+- **SHOULD** support [OpenID RISC Profile 1.0](https://openid.net/specs/openid-risc-1_0-final.html) to enable Cross-Account Protection and securely signal revocation or account state changes initiated by the business side. ([See Cross-Account protection](https://developers.google.com/identity/account-linking/unlinking#cross-account_protection_risc))
 
 ## Scopes
 

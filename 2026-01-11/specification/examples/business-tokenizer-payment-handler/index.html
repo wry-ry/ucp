@@ -1635,11 +1635,13 @@
 <p>This handler implements a <strong>"Tokenize to Process"</strong> flow where the entity
 that generates the token (the Tokenizer) is the same entity that processes
 the final payment (the Processor).</p>
-<p>This specification unifies two common implementation scenarios:
-1.  <strong>Business-Hosted:</strong> An enterprise Business hosts their own secure vault.
-    The Business tokenizes and processes.
-2.  <strong>PSP-Hosted:</strong> The Business uses a third-party PSP. The PSP tokenizes
-    and processes.</p>
+<p>This specification unifies two common implementation scenarios:</p>
+<ol>
+<li><strong>Business-Hosted:</strong> An enterprise Business hosts their own secure vault.
+    The Business tokenizes and processes.</li>
+<li><strong>PSP-Hosted:</strong> The Business uses a third-party PSP. The PSP tokenizes
+    and processes.</li>
+</ol>
 <p>In both cases, <strong>no API detokenization step is required</strong>. The token resolution
 happens internally within the Processor's secure environment.</p>
 <h3 id="comparison-of-scenarios">Comparison of Scenarios<a class="headerlink" href="#comparison-of-scenarios" title="Permanent link">&para;</a></h3>

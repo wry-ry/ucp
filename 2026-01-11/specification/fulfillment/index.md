@@ -7,25 +7,25 @@ The fulfillment extension enables businesses to advertise support for physical g
 This extension adds a `fulfillment` field to Checkout containing:
 
 - `methods[]` — fulfillment methods applicable to cart items (shipping, pickup, etc.)
-  - `line_item_ids` — which items this method fulfills
-  - `destinations[]` — where to fulfill (address, store location)
-  - `groups[]` — business-generated packages, each with selectable `options[]`
+- `line_item_ids` — which items this method fulfills
+- `destinations[]` — where to fulfill (address, store location)
+- `groups[]` — business-generated packages, each with selectable `options[]`
 - `available_methods[]` — inventory availability per item (optional)
 
 **Mental model:**
 
 - `methods[0]` Shipping
-  - `line_item_ids` 👕👖
-  - `selected_destination_id` = `destinations[0].id` 🔘✅ 123 Fake St
-  - `groups[0]` 📦👕👖
-    - `selected_option_id` = `options[0].id` 🔘✅ Standard $5
-    - `options[1]` 🔘 Express $10
+- `line_item_ids` 👕👖
+- `selected_destination_id` = `destinations[0].id` 🔘✅ 123 Fake St
+- `groups[0]` 📦👕👖
+  - `selected_option_id` = `options[0].id` 🔘✅ Standard $5
+  - `options[1]` 🔘 Express $10
 - `methods[1]` Pick Up in Store
-  - `line_item_ids` 👞
-  - `selected_destination_id` = `destinations[0].id` 🔘✅ Uptown Store
-  - `groups[0]` 📦👞
-    - `selected_option_id` = `options[0].id` 🔘✅ In-Store Pickup
-    - `options[1]` 🔘 Curbside Pickup
+- `line_item_ids` 👞
+- `selected_destination_id` = `destinations[0].id` 🔘✅ Uptown Store
+- `groups[0]` 📦👞
+  - `selected_option_id` = `options[0].id` 🔘✅ In-Store Pickup
+  - `options[1]` 🔘 Curbside Pickup
 
 ## Schema
 
