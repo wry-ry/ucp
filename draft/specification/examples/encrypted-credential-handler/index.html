@@ -2219,7 +2219,7 @@ compliant</strong> because they will handle raw PANs. This includes:</p>
 <p>Businesses advertise the platform's handler. The <code>business_id</code> field identifies
 the business, which the platform uses to look up the correct public key for
 encryption.</p>
-<p>The only supported instrument schema is <a href="https://ucp.dev/schemas/shopping/types/card_payment_instrument.json">CardPaymentInstrument</a>, the only supported checkout credential schema is <code>EncryptedCredential</code>, and the only supported source credential schema is <a href="https://ucp.dev/schemas/shopping/types/card_credential.json">CardCredential</a>.</p>
+<p>The only supported instrument schema is <a href="/ucp/draft/schemas/shopping/types/card_payment_instrument.json">CardPaymentInstrument</a>, the only supported checkout credential schema is <code>EncryptedCredential</code>, and the only supported source credential schema is <a href="/ucp/draft/schemas/shopping/types/card_credential.json">CardCredential</a>.</p>
 <p><strong>Note:</strong> The <code>EncryptedCredential</code> shape would be formally defined in the handler's schema (referenced via the <code>schema</code> field in the handler declaration).</p>
 <p><strong>Note:</strong> <code>CardCredential</code> contains raw PANs. For card credentials, the
 platform's vaulting service must be <strong>PCI DSS compliant</strong> when handling these
@@ -2540,8 +2540,8 @@ access to raw PANs.</p>
 <hr />
 <h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Identity Schema:</strong> <code>https://ucp.dev/schemas/shopping/types/payment_identity.json</code></li>
-<li><strong>Instrument Schema:</strong> <code>https://ucp.dev/schemas/shopping/types/card_payment_instrument.json</code></li>
+<li><strong>Identity Schema:</strong> <code>https://ucp.dev/draft/schemas/shopping/types/payment_identity.json</code></li>
+<li><strong>Instrument Schema:</strong> <code>https://ucp.dev/draft/schemas/shopping/types/card_payment_instrument.json</code></li>
 </ul>
 
 
