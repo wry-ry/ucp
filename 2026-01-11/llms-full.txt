@@ -4786,6 +4786,8 @@ The host **MUST** respond with either an error, or the newly-selected address. I
 
 The address object uses the UCP [PostalAddress](/ucp/2026-01-11/specification/checkout/#postal-address) format:
 
+### Postal Address
+
 | Name             | Type   | Required | Description                                                                                                                                                                                                                               |
 | ---------------- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | extended_address | string | No       | An address extension such as an apartment number, C/O or alternative name.                                                                                                                                                                |
@@ -4906,6 +4908,47 @@ The object returned upon successful completion of a checkout, containing confirm
 Represents a specific method of payment (e.g., a specific credit card, bank account, or wallet credential) available to the buyer.
 
 This object MUST be one of the following types: [Card Payment Instrument](/ucp/2026-01-11/specification/embedded-checkout/#card-payment-instrument).
+
+### Card Payment Instrument
+
+| Name                  | Type                                                                                      | Required | Description                                                                                                                                                        |
+| --------------------- | ----------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| id                    | string                                                                                    | **Yes**  | A unique identifier for this instrument instance, assigned by the Agent. Used to reference this specific instrument in the 'payment.selected_instrument_id' field. |
+| handler_id            | string                                                                                    | **Yes**  | The unique identifier for the handler instance that produced this instrument. This corresponds to the 'id' field in the Payment Handler definition.                |
+| type                  | string                                                                                    | **Yes**  | The broad category of the instrument (e.g., 'card', 'tokenized_card'). Specific schemas will constrain this to a constant value.                                   |
+| billing_address       | [Postal Address](/ucp/2026-01-11/specification/embedded-checkout/#postal-address)         | No       | The billing address associated with this payment method.                                                                                                           |
+| credential            | [Payment Credential](/ucp/2026-01-11/specification/embedded-checkout/#payment-credential) | No       | Container for sensitive payment data. Use the specific schema matching the 'type' field.                                                                           |
+| type                  | string                                                                                    | **Yes**  | **Constant = card**. Indicates this is a card payment instrument.                                                                                                  |
+| brand                 | string                                                                                    | **Yes**  | The card brand/network (e.g., visa, mastercard, amex).                                                                                                             |
+| last_digits           | string                                                                                    | **Yes**  | Last 4 digits of the card number.                                                                                                                                  |
+| expiry_month          | integer                                                                                   | No       | The month of the card's expiration date (1-12).                                                                                                                    |
+| expiry_year           | integer                                                                                   | No       | The year of the card's expiration date.                                                                                                                            |
+| rich_text_description | string                                                                                    | No       | An optional rich text description of the card to display to the user (e.g., 'Visa ending in 1234, expires 12/2025').                                               |
+| rich_card_art         | string                                                                                    | No       | An optional URI to a rich image representing the card (e.g., card art provided by the issuer).                                                                     |
+
+### Payment Credential
+
+This object MUST be one of the following types: [Token Credential](/ucp/2026-01-11/specification/embedded-checkout/#token-credential), [Card Credential](/ucp/2026-01-11/specification/embedded-checkout/#card-credential).
+
+### Token Credential Response
+
+| Name | Type   | Required | Description                                                                |
+| ---- | ------ | -------- | -------------------------------------------------------------------------- |
+| type | string | **Yes**  | The specific type of token produced by the handler (e.g., 'stripe_token'). |
+
+### Card Credential
+
+| Name             | Type    | Required | Description                                                                                                                                            |
+| ---------------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| type             | any     | **Yes**  | **Constant = card**. The credential type identifier for card credentials.                                                                              |
+| card_number_type | string  | **Yes**  | The type of card number. Network tokens are preferred with fallback to FPAN. See PCI Scope for more details. **Enum:** `fpan`, `network_token`, `dpan` |
+| number           | string  | No       | Card number.                                                                                                                                           |
+| expiry_month     | integer | No       | The month of the card's expiration date (1-12).                                                                                                        |
+| expiry_year      | integer | No       | The year of the card's expiration date.                                                                                                                |
+| name             | string  | No       | Cardholder name.                                                                                                                                       |
+| cvc              | string  | No       | Card CVC number.                                                                                                                                       |
+| cryptogram       | string  | No       | Cryptogram provided with network tokens.                                                                                                               |
+| eci_value        | string  | No       | Electronic Commerce Indicator / Security Level Indicator provided with network tokens.                                                                 |
 
 ### Payment Handler Response
 
@@ -7014,7 +7057,7 @@ PREREQUISITES(participant, onboarding_input) → prerequisites_output
 
 **Prerequisites Output:**
 
-The `prerequisites_output` contains what a participant receives from onboarding. At minimum, this includes an **identity** (see [Payment Identity](/%7Bversion%7D/schemas/shopping/types/payment_identity.json)). It **MAY** also include additional configuration, credentials, or settings specific to the handler.
+The `prerequisites_output` contains what a participant receives from onboarding. At minimum, this includes an **identity** (see [Payment Identity](/2026-01-11/schemas/shopping/types/payment_identity.json)). It **MAY** also include additional configuration, credentials, or settings specific to the handler.
 
 Payment handler specifications **are not required** to define a formal schema for `prerequisites_output`. Instead, the specification **SHOULD** clearly document:
 
@@ -7046,7 +7089,7 @@ HANDLER_DECLARATION(prerequisites_output) → handler_declaration
 
 **Output Structure:**
 
-The handler declaration conforms to the [`PaymentHandler`](/%7Bversion%7D/schemas/shopping/types/payment_handler.json) schema. The specification **SHOULD** define the available config and instrument schemas, and how to construct each based on the business's prerequisites output and desired configuration.
+The handler declaration conforms to the [`PaymentHandler`](/2026-01-11/schemas/shopping/types/payment_handler.json) schema. The specification **SHOULD** define the available config and instrument schemas, and how to construct each based on the business's prerequisites output and desired configuration.
 
 ```json
 {
@@ -7098,10 +7141,10 @@ ______________________________________________________________________
 
 **Base Instrument Schemas:**
 
-| Schema                                                                                               | Description                                             |
-| ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| [`payment_instrument.json`](/%7Bversion%7D/schemas/shopping/types/payment_instrument.json)           | Base: id, handler_id, type, credential, billing_address |
-| [`card_payment_instrument.json`](/%7Bversion%7D/schemas/shopping/types/card_payment_instrument.json) | Card display: brand, last_digits, expiry                |
+| Schema                                                                                            | Description                                             |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| [`payment_instrument.json`](/2026-01-11/schemas/shopping/types/payment_instrument.json)           | Base: id, handler_id, type, credential, billing_address |
+| [`card_payment_instrument.json`](/2026-01-11/schemas/shopping/types/card_payment_instrument.json) | Card display: brand, last_digits, expiry                |
 
 UCP provides base schemas for universal payment instruments like `card`. Spec authors **MAY** extend any of the basic payment instruments to add additional handler-specific display data.
 
@@ -7126,10 +7169,10 @@ UCP provides base schemas for universal payment instruments like `card`. Spec au
 
 **Base Credential Schemas:**
 
-| Schema                                                                                     | Description                   |
-| ------------------------------------------------------------------------------------------ | ----------------------------- |
-| [`payment_credential.json`](/%7Bversion%7D/schemas/shopping/types/payment_credential.json) | Base: type discriminator only |
-| [`token_credential.json`](/%7Bversion%7D/schemas/shopping/types/token_credential.json)     | Token: type + token string    |
+| Schema                                                                                  | Description                   |
+| --------------------------------------------------------------------------------------- | ----------------------------- |
+| [`payment_credential.json`](/2026-01-11/schemas/shopping/types/payment_credential.json) | Base: type discriminator only |
+| [`token_credential.json`](/2026-01-11/schemas/shopping/types/token_credential.json)     | Token: type + token string    |
 
 UCP provides base schemas for universal payment credentials like `card` and `token`. Authors **MAY** extend these schemas to include handler-specific credential context.
 
@@ -7415,7 +7458,7 @@ Businesses advertise support for this handler in the checkout's `payment.handler
       {
         "id": "{handler_id}",
         "name": "{handler_name}",
-        "version": "{version}",
+        "version": "2026-01-11",
         "spec": "{spec_url}",
         "config_schema": "{config_schema_url}",
         "instrument_schemas": [
@@ -7565,7 +7608,7 @@ ______________________________________________________________________
 
 # Tokenization Guide
 
-**OpenAPI:** [Tokenization API](/%7Bversion%7D/handlers/tokenization/openapi.json)
+**OpenAPI:** [Tokenization API](/2026-01-11/handlers/tokenization/openapi.json)
 
 ## Overview
 
@@ -7638,7 +7681,7 @@ All tokenization requests require a `binding` object that ties the token to a sp
 | `checkout_id` | Yes         | The checkout session this token is valid for                                                    |
 | `identity`    | Conditional | The participant identity to bind to; required when caller acts on behalf of another participant |
 
-The tokenizer **MUST** verify binding matches on `/detokenize`. See [Binding Schema](/%7Bversion%7D/schemas/shopping/types/binding.json).
+The tokenizer **MUST** verify binding matches on `/detokenize`. See [Binding Schema](/2026-01-11/schemas/shopping/types/binding.json).
 
 ______________________________________________________________________
 
@@ -7716,7 +7759,7 @@ Authorization: Bearer {caller_access_token}
 
 **Note:** `binding.identity` is omitted when the authenticated caller is the binding target. Include it when acting on behalf of another participant (e.g., PSP detokenizing for business).
 
-See the full [OpenAPI specification](/%7Bversion%7D/handlers/tokenization/openapi.json) for complete request/response schemas.
+See the full [OpenAPI specification](/2026-01-11/handlers/tokenization/openapi.json) for complete request/response schemas.
 
 ______________________________________________________________________
 
@@ -7753,7 +7796,7 @@ When publishing your handler, your specification document **MUST** include:
 
 ```markdown
 **Handler Name:** `com.acme.tokenization_payment`
-**OpenAPI:** [Tokenization API](/{version}/handlers/tokenization/openapi.json)
+**OpenAPI:** [Tokenization API](/2026-01-11/handlers/tokenization/openapi.json)
 
 | Environment | Base URL                           |
 | :---------- | :--------------------------------- |
@@ -7794,13 +7837,13 @@ ______________________________________________________________________
 
 ## References
 
-| Resource                | URL                                                              |
-| ----------------------- | ---------------------------------------------------------------- |
-| Tokenization OpenAPI    | `/{version}/handlers/tokenization/openapi.json`                  |
-| Identity Schema         | `/{version}/schemas/shopping/types/payment_identity.json`        |
-| Binding Schema          | `/{version}/schemas/shopping/types/binding.json`                 |
-| Token Credential Schema | `/{version}/schemas/shopping/types/token_credential.json`        |
-| Card Instrument Schema  | `/{version}/schemas/shopping/types/card_payment_instrument.json` |
+| Resource                | URL                                                               |
+| ----------------------- | ----------------------------------------------------------------- |
+| Tokenization OpenAPI    | `/2026-01-11/handlers/tokenization/openapi.json`                  |
+| Identity Schema         | `/2026-01-11/schemas/shopping/types/payment_identity.json`        |
+| Binding Schema          | `/2026-01-11/schemas/shopping/types/binding.json`                 |
+| Token Credential Schema | `/2026-01-11/schemas/shopping/types/token_credential.json`        |
+| Card Instrument Schema  | `/2026-01-11/schemas/shopping/types/card_payment_instrument.json` |
 
 ______________________________________________________________________
 
@@ -8158,7 +8201,7 @@ Optionally, businesses may configure their PSP to detokenize on their behalf (PS
 
 Businesses advertise the platform's tokenization handler. The `config` contains the business's identity with the platform for token binding. The platform's handler specification (referenced via `spec`) documents the `/detokenize` endpoint URL exposed by the platform's **payment credential provider**.
 
-The handler accepts [CardCredential](/%7Bversion%7D/schemas/shopping/types/card_credential.json) for tokenization and produces [TokenCredential](/%7Bversion%7D/schemas/shopping/types/token_credential.json) for checkout.
+The handler accepts [CardCredential](/2026-01-11/schemas/shopping/types/card_credential.json) for tokenization and produces [TokenCredential](/2026-01-11/schemas/shopping/types/token_credential.json) for checkout.
 
 **Note:** The result of `/detokenize` contains **sensitive payment data**. Both the sender (platform's credential provider) and receiver (business or PSP) **MUST** be PCI DSS compliant.
 
@@ -8356,8 +8399,8 @@ ______________________________________________________________________
 ## References
 
 - **Pattern:** [Tokenization Payment Handler](https://ucp.dev/2026-01-11/specification/payment-handler-guide/index.md)
-- **API Pattern:** `/{version}/handlers/tokenization/openapi.json`
-- **Identity Schema:** `/{version}/schemas/shopping/types/payment_identity.json`
+- **API Pattern:** `/2026-01-11/handlers/tokenization/openapi.json`
+- **Identity Schema:** `/2026-01-11/schemas/shopping/types/payment_identity.json`
 
 # Encrypted Credential Handler
 
@@ -8451,9 +8494,9 @@ While businesses receive only encrypted `EncryptedCredential` payloads during ch
 
 Businesses advertise the platform's handler. The `identity` field contains the **business's identity**, which the platform uses to look up the correct public key for encryption.
 
-The only supported identity schema is [PaymentIdentity](/%7Bversion%7D/schemas/shopping/types/payment_identity.json).
+The only supported identity schema is [PaymentIdentity](/2026-01-11/schemas/shopping/types/payment_identity.json).
 
-The only supported instrument schema is [CardPaymentInstrument](/%7Bversion%7D/schemas/shopping/types/card_payment_instrument.json), the only supported checkout credential schema is `EncryptedCredential`, and the only supported source credential schema is [CardCredential](/%7Bversion%7D/schemas/shopping/types/card_credential.json).
+The only supported instrument schema is [CardPaymentInstrument](/2026-01-11/schemas/shopping/types/card_payment_instrument.json), the only supported checkout credential schema is `EncryptedCredential`, and the only supported source credential schema is [CardCredential](/2026-01-11/schemas/shopping/types/card_credential.json).
 
 **Note:** `CardCredential` contains raw PANs. The platform's **PCI DSS compliant** vaulting service handles these credentials and encrypts them before transmission. Businesses receive only encrypted payloads but MUST be PCI DSS compliant once they decrypt the credentials locally.
 
@@ -8570,8 +8613,8 @@ ______________________________________________________________________
 
 ## References
 
-- **Identity Schema:** `/{version}/schemas/shopping/types/payment_identity.json`
-- **Instrument Schema:** `/{version}/schemas/shopping/types/card_payment_instrument.json`
+- **Identity Schema:** `/2026-01-11/schemas/shopping/types/payment_identity.json`
+- **Instrument Schema:** `/2026-01-11/schemas/shopping/types/card_payment_instrument.json`
 
 # Schema Reference
 

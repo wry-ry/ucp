@@ -1246,6 +1246,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#postal-address" class="md-nav__link">
+    <span class="md-ellipsis">
+      Postal Address
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1376,6 +1385,42 @@
   <a href="#payment-instrument" class="md-nav__link">
     <span class="md-ellipsis">
       Payment Instrument
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#card-payment-instrument" class="md-nav__link">
+    <span class="md-ellipsis">
+      Card Payment Instrument
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#payment-credential" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payment Credential
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#token-credential-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      Token Credential Response
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#card-credential" class="md-nav__link">
+    <span class="md-ellipsis">
+      Card Credential
     </span>
   </a>
   
@@ -2406,6 +2451,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#postal-address" class="md-nav__link">
+    <span class="md-ellipsis">
+      Postal Address
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2536,6 +2590,42 @@
   <a href="#payment-instrument" class="md-nav__link">
     <span class="md-ellipsis">
       Payment Instrument
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#card-payment-instrument" class="md-nav__link">
+    <span class="md-ellipsis">
+      Card Payment Instrument
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#payment-credential" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payment Credential
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#token-credential-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      Token Credential Response
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#card-credential" class="md-nav__link">
+    <span class="md-ellipsis">
+      Card Credential
     </span>
   </a>
   
@@ -3661,6 +3751,7 @@ rather than attempting to merge the new data with existing state.</p>
 <h3 id="address-format">Address Format<a class="headerlink" href="#address-format" title="Permanent link">&para;</a></h3>
 <p>The address object uses the UCP
 <a href="/ucp/2026-01-11/specification/checkout/#postal-address">PostalAddress</a> format:</p>
+<h3 id="postal-address">Postal Address<a class="headerlink" href="#postal-address" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -4023,6 +4114,179 @@ confirmation details.</p>
 <p>Represents a specific method of payment (e.g., a specific credit card, bank
 account, or wallet credential) available to the buyer.</p>
 <p>This object MUST be one of the following types: <a href="/ucp/2026-01-11/specification/embedded-checkout/#card-payment-instrument">Card Payment Instrument</a>.</p>
+<h3 id="card-payment-instrument">Card Payment Instrument<a class="headerlink" href="#card-payment-instrument" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">id</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">A unique identifier for this instrument instance, assigned by the Agent. Used to reference this specific instrument in the 'payment.selected_instrument_id' field.</td>
+</tr>
+<tr>
+<td style="text-align: left;">handler_id</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">The unique identifier for the handler instance that produced this instrument. This corresponds to the 'id' field in the Payment Handler definition.</td>
+</tr>
+<tr>
+<td style="text-align: left;">type</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">The broad category of the instrument (e.g., 'card', 'tokenized_card'). Specific schemas will constrain this to a constant value.</td>
+</tr>
+<tr>
+<td style="text-align: left;">billing_address</td>
+<td style="text-align: left;"><a href="/ucp/2026-01-11/specification/embedded-checkout/#postal-address">Postal Address</a></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">The billing address associated with this payment method.</td>
+</tr>
+<tr>
+<td style="text-align: left;">credential</td>
+<td style="text-align: left;"><a href="/ucp/2026-01-11/specification/embedded-checkout/#payment-credential">Payment Credential</a></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Container for sensitive payment data. Use the specific schema matching the 'type' field.</td>
+</tr>
+<tr>
+<td style="text-align: left;">type</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;"><strong>Constant = card</strong>. Indicates this is a card payment instrument.</td>
+</tr>
+<tr>
+<td style="text-align: left;">brand</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">The card brand/network (e.g., visa, mastercard, amex).</td>
+</tr>
+<tr>
+<td style="text-align: left;">last_digits</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Last 4 digits of the card number.</td>
+</tr>
+<tr>
+<td style="text-align: left;">expiry_month</td>
+<td style="text-align: left;">integer</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">The month of the card's expiration date (1-12).</td>
+</tr>
+<tr>
+<td style="text-align: left;">expiry_year</td>
+<td style="text-align: left;">integer</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">The year of the card's expiration date.</td>
+</tr>
+<tr>
+<td style="text-align: left;">rich_text_description</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">An optional rich text description of the card to display to the user (e.g., 'Visa ending in 1234, expires 12/2025').</td>
+</tr>
+<tr>
+<td style="text-align: left;">rich_card_art</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">An optional URI to a rich image representing the card (e.g., card art provided by the issuer).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="payment-credential">Payment Credential<a class="headerlink" href="#payment-credential" title="Permanent link">&para;</a></h3>
+<p>This object MUST be one of the following types: <a href="/ucp/2026-01-11/specification/embedded-checkout/#token-credential">Token Credential</a>, <a href="/ucp/2026-01-11/specification/embedded-checkout/#card-credential">Card Credential</a>.</p>
+<h3 id="token-credential-response">Token Credential Response<a class="headerlink" href="#token-credential-response" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">type</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">The specific type of token produced by the handler (e.g., 'stripe_token').</td>
+</tr>
+</tbody>
+</table>
+<h3 id="card-credential">Card Credential<a class="headerlink" href="#card-credential" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">type</td>
+<td style="text-align: left;">any</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;"><strong>Constant = card</strong>. The credential type identifier for card credentials.</td>
+</tr>
+<tr>
+<td style="text-align: left;">card_number_type</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">The type of card number. Network tokens are preferred with fallback to FPAN. See PCI Scope for more details.<br><strong>Enum:</strong> <code>fpan</code>, <code>network_token</code>, <code>dpan</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Card number.</td>
+</tr>
+<tr>
+<td style="text-align: left;">expiry_month</td>
+<td style="text-align: left;">integer</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">The month of the card's expiration date (1-12).</td>
+</tr>
+<tr>
+<td style="text-align: left;">expiry_year</td>
+<td style="text-align: left;">integer</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">The year of the card's expiration date.</td>
+</tr>
+<tr>
+<td style="text-align: left;">name</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Cardholder name.</td>
+</tr>
+<tr>
+<td style="text-align: left;">cvc</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Card CVC number.</td>
+</tr>
+<tr>
+<td style="text-align: left;">cryptogram</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Cryptogram provided with network tokens.</td>
+</tr>
+<tr>
+<td style="text-align: left;">eci_value</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Electronic Commerce Indicator / Security Level Indicator provided with network tokens.</td>
+</tr>
+</tbody>
+</table>
 <h3 id="payment-handler-response">Payment Handler Response<a class="headerlink" href="#payment-handler-response" title="Permanent link">&para;</a></h3>
 <p>Represents the processor or wallet provider responsible for authenticating and
 processing a specific payment instrument (e.g., Google Pay, Stripe, or a Bank

@@ -957,6 +957,8 @@ The host **MUST** respond with either an error, or the newly-selected address. I
 
 The address object uses the UCP [PostalAddress](/ucp/2026-01-11/specification/checkout/#postal-address) format:
 
+### Postal Address
+
 | Name             | Type   | Required | Description                                                                                                                                                                                                                               |
 | ---------------- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | extended_address | string | No       | An address extension such as an apartment number, C/O or alternative name.                                                                                                                                                                |
@@ -1077,6 +1079,47 @@ The object returned upon successful completion of a checkout, containing confirm
 Represents a specific method of payment (e.g., a specific credit card, bank account, or wallet credential) available to the buyer.
 
 This object MUST be one of the following types: [Card Payment Instrument](/ucp/2026-01-11/specification/embedded-checkout/#card-payment-instrument).
+
+### Card Payment Instrument
+
+| Name                  | Type                                                                                      | Required | Description                                                                                                                                                        |
+| --------------------- | ----------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| id                    | string                                                                                    | **Yes**  | A unique identifier for this instrument instance, assigned by the Agent. Used to reference this specific instrument in the 'payment.selected_instrument_id' field. |
+| handler_id            | string                                                                                    | **Yes**  | The unique identifier for the handler instance that produced this instrument. This corresponds to the 'id' field in the Payment Handler definition.                |
+| type                  | string                                                                                    | **Yes**  | The broad category of the instrument (e.g., 'card', 'tokenized_card'). Specific schemas will constrain this to a constant value.                                   |
+| billing_address       | [Postal Address](/ucp/2026-01-11/specification/embedded-checkout/#postal-address)         | No       | The billing address associated with this payment method.                                                                                                           |
+| credential            | [Payment Credential](/ucp/2026-01-11/specification/embedded-checkout/#payment-credential) | No       | Container for sensitive payment data. Use the specific schema matching the 'type' field.                                                                           |
+| type                  | string                                                                                    | **Yes**  | **Constant = card**. Indicates this is a card payment instrument.                                                                                                  |
+| brand                 | string                                                                                    | **Yes**  | The card brand/network (e.g., visa, mastercard, amex).                                                                                                             |
+| last_digits           | string                                                                                    | **Yes**  | Last 4 digits of the card number.                                                                                                                                  |
+| expiry_month          | integer                                                                                   | No       | The month of the card's expiration date (1-12).                                                                                                                    |
+| expiry_year           | integer                                                                                   | No       | The year of the card's expiration date.                                                                                                                            |
+| rich_text_description | string                                                                                    | No       | An optional rich text description of the card to display to the user (e.g., 'Visa ending in 1234, expires 12/2025').                                               |
+| rich_card_art         | string                                                                                    | No       | An optional URI to a rich image representing the card (e.g., card art provided by the issuer).                                                                     |
+
+### Payment Credential
+
+This object MUST be one of the following types: [Token Credential](/ucp/2026-01-11/specification/embedded-checkout/#token-credential), [Card Credential](/ucp/2026-01-11/specification/embedded-checkout/#card-credential).
+
+### Token Credential Response
+
+| Name | Type   | Required | Description                                                                |
+| ---- | ------ | -------- | -------------------------------------------------------------------------- |
+| type | string | **Yes**  | The specific type of token produced by the handler (e.g., 'stripe_token'). |
+
+### Card Credential
+
+| Name             | Type    | Required | Description                                                                                                                                            |
+| ---------------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| type             | any     | **Yes**  | **Constant = card**. The credential type identifier for card credentials.                                                                              |
+| card_number_type | string  | **Yes**  | The type of card number. Network tokens are preferred with fallback to FPAN. See PCI Scope for more details. **Enum:** `fpan`, `network_token`, `dpan` |
+| number           | string  | No       | Card number.                                                                                                                                           |
+| expiry_month     | integer | No       | The month of the card's expiration date (1-12).                                                                                                        |
+| expiry_year      | integer | No       | The year of the card's expiration date.                                                                                                                |
+| name             | string  | No       | Cardholder name.                                                                                                                                       |
+| cvc              | string  | No       | Card CVC number.                                                                                                                                       |
+| cryptogram       | string  | No       | Cryptogram provided with network tokens.                                                                                                               |
+| eci_value        | string  | No       | Electronic Commerce Indicator / Security Level Indicator provided with network tokens.                                                                 |
 
 ### Payment Handler Response
 
