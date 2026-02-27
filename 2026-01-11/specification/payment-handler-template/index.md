@@ -90,7 +90,7 @@ Businesses advertise support for this handler in the checkout's `payment.handler
             {
                 "id": "{handler_id}",
                 "name": "{handler_name}",
-                "version": "2026-01-11",
+                "version": "{version}",
                 "spec": "{spec_url}",
                 "config_schema": "{config_schema_url}",
                 "instrument_schemas": ["{instrument_schema_url}"],

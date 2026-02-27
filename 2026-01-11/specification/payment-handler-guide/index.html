@@ -1990,9 +1990,9 @@ complete before participating in the handler's flows.</p>
 <p><strong>Prerequisites Output:</strong></p>
 <p>The <code>prerequisites_output</code> contains what a participant receives from onboarding.
 At minimum, this includes an <strong>identity</strong> (see
-<a href="https://ucp.dev/2026-01-11/schemas/shopping/types/payment_identity.json">Payment Identity</a>).
-It <strong>MAY</strong> also include additional configuration, credentials, or settings
-specific to the handler.</p>
+<a href="/ucp/2026-01-11/schemas/shopping/types/payment_identity.json">Payment Identity</a>). It
+<strong>MAY</strong> also include additional configuration, credentials, or settings specific
+to the handler.</p>
 <p>Payment handler specifications <strong>are not required</strong> to define a formal schema
 for <code>prerequisites_output</code>. Instead, the specification <strong>SHOULD</strong> clearly
 document:</p>
@@ -2038,10 +2038,10 @@ this handler and enable platforms to invoke it.</p>
 </table>
 <p><strong>Output Structure:</strong></p>
 <p>The handler declaration conforms to the
-<a href="https://ucp.dev/2026-01-11/schemas/shopping/types/payment_handler.json"><code>PaymentHandler</code></a>
-schema. The specification <strong>SHOULD</strong> define the available config and instrument
-schemas, and how to construct each based on the business's prerequisites output
-and desired configuration.</p>
+<a href="/ucp/2026-01-11/schemas/shopping/types/payment_handler.json"><code>PaymentHandler</code></a> schema. The
+specification <strong>SHOULD</strong> define the available config and instrument schemas, and
+how to construct each based on the business's prerequisites output and desired
+configuration.</p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;handler_instance_id&quot;</span><span class="p">,</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;com.example.handler&quot;</span><span class="p">,</span>
@@ -2092,11 +2092,11 @@ vs. Production). It is recommended to include this in the config schema to
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><a href="https://ucp.dev/2026-01-11/schemas/shopping/types/payment_instrument.json"><code>payment_instrument.json</code></a></td>
+<td style="text-align: left;"><a href="/ucp/2026-01-11/schemas/shopping/types/payment_instrument.json"><code>payment_instrument.json</code></a></td>
 <td style="text-align: left;">Base: id, handler_id, type, credential, billing_address</td>
 </tr>
 <tr>
-<td style="text-align: left;"><a href="https://ucp.dev/2026-01-11/schemas/shopping/types/card_payment_instrument.json"><code>card_payment_instrument.json</code></a></td>
+<td style="text-align: left;"><a href="/ucp/2026-01-11/schemas/shopping/types/card_payment_instrument.json"><code>card_payment_instrument.json</code></a></td>
 <td style="text-align: left;">Card display: brand, last_digits, expiry</td>
 </tr>
 </tbody>
@@ -2132,11 +2132,11 @@ handler-specific display data.</p>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><a href="https://ucp.dev/2026-01-11/schemas/shopping/types/payment_credential.json"><code>payment_credential.json</code></a></td>
+<td style="text-align: left;"><a href="/ucp/2026-01-11/schemas/shopping/types/payment_credential.json"><code>payment_credential.json</code></a></td>
 <td style="text-align: left;">Base: type discriminator only</td>
 </tr>
 <tr>
-<td style="text-align: left;"><a href="https://ucp.dev/2026-01-11/schemas/shopping/types/token_credential.json"><code>token_credential.json</code></a></td>
+<td style="text-align: left;"><a href="/ucp/2026-01-11/schemas/shopping/types/token_credential.json"><code>token_credential.json</code></a></td>
 <td style="text-align: left;">Token: type + token string</td>
 </tr>
 </tbody>
