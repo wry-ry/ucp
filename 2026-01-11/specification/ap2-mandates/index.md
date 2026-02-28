@@ -36,14 +36,14 @@ Businesses declare support by adding `dev.ucp.shopping.ap2_mandate` to their `ca
         {
             "name": "dev.ucp.shopping.checkout",
             "version": "2026-01-11",
-            "spec": "https://ucp.dev/specification/checkout",
-            "schema": "https://ucp.dev/schemas/shopping/checkout.json"
+            "spec": "https://ucp.dev/2026-01-11/specification/checkout",
+            "schema": "https://ucp.dev/2026-01-11/schemas/shopping/checkout.json"
         },
         {
             "name": "dev.ucp.shopping.ap2_mandate",
             "version": "2026-01-11",
-            "spec": "https://ucp.dev/specification/ap2-mandates",
-            "schema": "https://ucp.dev/schemas/shopping/ap2_mandate.json",
+            "spec": "https://ucp.dev/2026-01-11/specification/ap2-mandates",
+            "schema": "https://ucp.dev/2026-01-11/schemas/shopping/ap2_mandate.json",
             "extends": "dev.ucp.shopping.checkout",
             "config": {
                 "vp_formats_supported": {
@@ -312,7 +312,7 @@ Upon receiving the `complete` request, the business **MUST**:
 
 1. **Verify Business Authorization:** Confirm `ap2.merchant_authorization` in the embedded checkout is the business's own valid signature:
 
-````json
+```json
     jws = embedded_checkout.ap2.merchant_authorization
     [encoded_header, _, encoded_signature] = jws.split(".")
     header = json_decode(base64url_decode(encoded_header))
@@ -322,21 +322,17 @@ Upon receiving the `complete` request, the business **MUST**:
 
     my_key = get_key_by_kid(my_signing_keys, header.kid)
     verify(encoded_signature, signing_input, my_key, header.alg)
-    ```
+```
 
-2. **Verify Terms Match:** Confirm the embedded checkout terms match the current
-   session state (id, totals, line items).
+1. **Verify Terms Match:** Confirm the embedded checkout terms match the current session state (id, totals, line items).
 
 ### PSP Verification
 
-The business passes the `token` (composite object) to their Payment Handler /
-PSP. The PSP verifies the `payment_mandate` per the
-[AP2 Protocol Specification](https://ap2-protocol.org/specification), including
-signature validation, expiration, and correlation with the checkout.
+The business passes the `token` (composite object) to their Payment Handler / PSP. The PSP verifies the `payment_mandate` per the [AP2 Protocol Specification](https://ap2-protocol.org/specification), including signature validation, expiration, and correlation with the checkout.
 
 ## Schema
 
-### Business Authorization {: #merchant-authorization }
+### Business Authorization
 
 JWS Detached Content signature (RFC 7515 Appendix F) over the checkout response body (excluding ap2 field). Format: `<base64url-header>..<base64url-signature>`. The header MUST contain 'alg' (ES256/ES384/ES512) and 'kid' claims. The signature covers both the header and JCS-canonicalized checkout payload.
 
@@ -346,17 +342,17 @@ JWS Detached Content signature (RFC 7515 Appendix F) over the checkout response 
 
 The `ap2` object included in CREATE / UPDATE checkout responses.
 
-| Name | Type | Required | Description |
-| :--- | :--- | :--- | :--- |
-| merchant_authorization | string | **Yes** | Merchant's signature proving checkout terms are authentic. |
+| Name                   | Type   | Required | Description                                                |
+| ---------------------- | ------ | -------- | ---------------------------------------------------------- |
+| merchant_authorization | string | **Yes**  | Merchant's signature proving checkout terms are authentic. |
 
 ### AP2 Complete Request
 
 The `ap2` object included in COMPLETE checkout requests.
 
-| Name | Type | Required | Description |
-| :--- | :--- | :--- | :--- |
-| checkout_mandate | string | **Yes** | SD-JWT+kb proving user authorized this checkout. |
+| Name             | Type   | Required | Description                                      |
+| ---------------- | ------ | -------- | ------------------------------------------------ |
+| checkout_mandate | string | **Yes**  | SD-JWT+kb proving user authorized this checkout. |
 
 ### Checkout Mandate
 
@@ -371,7 +367,7 @@ Error codes specific to AP2 mandate verification.
 **Enum:** `mandate_required`, `agent_missing_key`, `mandate_invalid_signature`, `mandate_expired`, `mandate_scope_mismatch`, `merchant_authorization_invalid`, `merchant_authorization_missing`
 
 | Error Code                       | Description                                                       |
-| :------------------------------- | :---------------------------------------------------------------- |
+| -------------------------------- | ----------------------------------------------------------------- |
 | `mandate_required`               | AP2 was negotiated, but the request lacks `ap2.checkout_mandate`. |
 | `agent_missing_key`              | Platform profile lacks a valid `signing_keys` entry.              |
 | `mandate_invalid_signature`      | The mandate signature cannot be verified.                         |
@@ -379,4 +375,4 @@ Error codes specific to AP2 mandate verification.
 | `mandate_scope_mismatch`         | The mandate is bound to a different checkout.                     |
 | `merchant_authorization_invalid` | The business authorization signature could not be verified.       |
 | `merchant_authorization_missing` | AP2 negotiated but response lacks `ap2.merchant_authorization`.   |
-````
+| \`\`\`\`                         |                                                                   |

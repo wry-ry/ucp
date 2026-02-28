@@ -28,8 +28,8 @@ Businesses advertise discount support in their profile:
                 "name": "dev.ucp.shopping.discount",
                 "version": "2026-01-11",
                 "extends": "dev.ucp.shopping.checkout",
-                "spec": "https://ucp.dev/specification/discount",
-                "schema": "https://ucp.dev/schemas/shopping/discount.json"
+                "spec": "https://ucp.dev/2026-01-11/specification/discount",
+                "schema": "https://ucp.dev/2026-01-11/schemas/shopping/discount.json"
             }
         ]
     }

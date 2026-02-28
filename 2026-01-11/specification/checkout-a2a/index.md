@@ -13,7 +13,7 @@ Businesses that support A2A transport must specify the agent card endpoint as pa
         "services": {
             "dev.ucp.shopping": {
                 "version": "2026-01-11",
-                "spec": "https://ucp.dev/specification/overview",
+                "spec": "https://ucp.dev/2026-01-11/specification/overview",
                 "a2a": {
                     "endpoint": "https://example-business.com/.well-known/agent-card.json"
                 }

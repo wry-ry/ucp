@@ -104,7 +104,7 @@ The `endpoint` field provides the base URL for API calls. OpenAPI paths are appe
 
 ```json
 "rest": {
-  "schema": "https://ucp.dev/services/shopping/openapi.json",
+  "schema": "https://ucp.dev/2026-01-11/services/shopping/openapi.json",
   "endpoint": "https://business.example.com/api/v2"
 }
 ```
@@ -146,8 +146,8 @@ An **extension** is an optional module that augments another capability. Extensi
 {
     "name": "dev.ucp.shopping.fulfillment",
     "version": "2026-01-11",
-    "spec": "https://ucp.dev/specification/fulfillment",
-    "schema": "https://ucp.dev/schemas/shopping/fulfillment.json",
+    "spec": "https://ucp.dev/2026-01-11/specification/fulfillment",
+    "schema": "https://ucp.dev/2026-01-11/schemas/shopping/fulfillment.json",
     "extends": "dev.ucp.shopping.checkout"
 }
 ```
@@ -217,20 +217,20 @@ Businesses publish their profile at `/.well-known/ucp`. An example:
         "services": {
             "dev.ucp.shopping": {
                 "version": "2026-01-11",
-                "spec": "https://ucp.dev/specification/overview",
+                "spec": "https://ucp.dev/2026-01-11/specification/overview",
                 "rest": {
-                    "schema": "https://ucp.dev/services/shopping/openapi.json",
+                    "schema": "https://ucp.dev/2026-01-11/services/shopping/openapi.json",
                     "endpoint": "https://business.example.com/ucp/v1"
                 },
                 "mcp": {
-                    "schema": "https://ucp.dev/services/shopping/mcp.openrpc.json",
+                    "schema": "https://ucp.dev/2026-01-11/services/shopping/openrpc.json",
                     "endpoint": "https://business.example.com/ucp/mcp"
                 },
                 "a2a": {
                     "endpoint": "https://business.example.com/.well-known/agent-card.json"
                 },
                 "embedded": {
-                    "schema": "https://ucp.dev/services/shopping/embedded.openrpc.json"
+                    "schema": "https://ucp.dev/2026-01-11/services/shopping/embedded.json"
                 }
             }
         },
@@ -238,21 +238,21 @@ Businesses publish their profile at `/.well-known/ucp`. An example:
             {
                 "name": "dev.ucp.shopping.checkout",
                 "version": "2026-01-11",
-                "spec": "https://ucp.dev/specification/checkout",
-                "schema": "https://ucp.dev/schemas/shopping/checkout.json"
+                "spec": "https://ucp.dev/2026-01-11/specification/checkout",
+                "schema": "https://ucp.dev/2026-01-11/schemas/shopping/checkout.json"
             },
             {
                 "name": "dev.ucp.shopping.fulfillment",
                 "version": "2026-01-11",
-                "spec": "https://ucp.dev/specification/fulfillment",
-                "schema": "https://ucp.dev/schemas/shopping/fulfillment.json",
+                "spec": "https://ucp.dev/2026-01-11/specification/fulfillment",
+                "schema": "https://ucp.dev/2026-01-11/schemas/shopping/fulfillment.json",
                 "extends": "dev.ucp.shopping.checkout"
             },
             {
                 "name": "dev.ucp.shopping.discount",
                 "version": "2026-01-11",
-                "spec": "https://ucp.dev/specification/discount",
-                "schema": "https://ucp.dev/schemas/shopping/discount.json",
+                "spec": "https://ucp.dev/2026-01-11/specification/discount",
+                "schema": "https://ucp.dev/2026-01-11/schemas/shopping/discount.json",
                 "extends": "dev.ucp.shopping.checkout"
             }
         ]
@@ -266,7 +266,7 @@ Businesses publish their profile at `/.well-known/ucp`. An example:
                 "spec": "https://example.com/specs/payments/business_tokenizer",
                 "config_schema": "https://example.com/specs/payments/merchant_tokenizer.json",
                 "instrument_schemas": [
-                    "https://ucp.dev/schemas/shopping/types/card_payment_instrument.json"
+                    "https://ucp.dev/2026-01-11/schemas/shopping/types/card_payment_instrument.json"
                 ],
                 "config": {
                     "type": "CARD",
@@ -308,21 +308,21 @@ Platform profiles are similar and include signing keys for capabilities requirin
             {
                 "name": "dev.ucp.shopping.checkout",
                 "version": "2026-01-11",
-                "spec": "https://ucp.dev/specification/checkout",
-                "schema": "https://ucp.dev/schemas/shopping/checkout.json"
+                "spec": "https://ucp.dev/2026-01-11/specification/checkout",
+                "schema": "https://ucp.dev/2026-01-11/schemas/shopping/checkout.json"
             },
             {
                 "name": "dev.ucp.shopping.fulfillment",
                 "version": "2026-01-11",
-                "spec": "https://ucp.dev/specification/fulfillment",
-                "schema": "https://ucp.dev/schemas/shopping/fulfillment.json",
+                "spec": "https://ucp.dev/2026-01-11/specification/fulfillment",
+                "schema": "https://ucp.dev/2026-01-11/schemas/shopping/fulfillment.json",
                 "extends": "dev.ucp.shopping.checkout"
             },
             {
                 "name": "dev.ucp.shopping.order",
                 "version": "2026-01-11",
-                "spec": "https://ucp.dev/specification/order",
-                "schema": "https://ucp.dev/schemas/shopping/order.json",
+                "spec": "https://ucp.dev/2026-01-11/specification/order",
+                "schema": "https://ucp.dev/2026-01-11/schemas/shopping/order.json",
                 "config": {
                     "webhook_url": "https://platform.example.com/webhooks/ucp/orders"
                 }
@@ -346,9 +346,9 @@ Platform profiles are similar and include signing keys for capabilities requirin
                 "name": "dev.ucp.business_tokenizer",
                 "version": "2026-01-11",
                 "spec": "https://example.com/specs/payments/business_tokenizer-payment",
-                "config_schema": "https://ucp.dev/schemas/payments/delegate-payment.json",
+                "config_schema": "https://ucp.dev/2026-01-11/schemas/payments/delegate-payment.json...",
                 "instrument_schemas": [
-                    "https://ucp.dev/schemas/shopping/types/card_payment_instrument.json"
+                    "https://ucp.dev/2026-01-11/schemas/shopping/types/card_payment_instrument.json"
                 ]
             }
         ]
@@ -850,11 +850,11 @@ Initiation comes through a `continue_url` that is returned by the business.
 
 UCP defines a set of standard capabilities:
 
-| Capability Name      | ID (URI)                                         | Description                                                                                                  |
-| -------------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
-| **Checkout**         | `https://ucp.dev/schemas/shopping/checkout.json` | Facilitates the creation and management of checkout sessions, including cart management and tax calculation. |
-| **Identity Linking** | -                                                | Enables platforms to obtain authorization via OAuth 2.0 to perform actions on a user's behalf.               |
-| **Order**            | `https://ucp.dev/schemas/shopping/order.json`    | Allows businesses to push asynchronous updates about an order's lifecycle (shipping, delivery, returns).     |
+| Capability Name      | ID (URI)                                                    | Description                                                                                                  |
+| -------------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| **Checkout**         | `https://ucp.dev/2026-01-11/schemas/shopping/checkout.json` | Facilitates the creation and management of checkout sessions, including cart management and tax calculation. |
+| **Identity Linking** | -                                                           | Enables platforms to obtain authorization via OAuth 2.0 to perform actions on a user's behalf.               |
+| **Order**            | `https://ucp.dev/2026-01-11/schemas/shopping/order.json`    | Allows businesses to push asynchronous updates about an order's lifecycle (shipping, delivery, returns).     |
 
 ### Definition & Extensions
 
@@ -1933,7 +1933,7 @@ Content-Type: application/json
         "id": "com.google.pay",
         "name": "gpay",
         "version": "2024-12-03",
-        "spec": "https://ucp.dev/handlers/google_pay",
+        "spec": "https://ucp.dev/2026-01-11/handlers/google_pay...",
         "config_schema": "https://pay.google.com/gp/p/ucp/2026-01-11/schemas/gpay_config.json",
         "instrument_schemas": [
           "https://pay.google.com/gp/p/ucp/2026-01-11/schemas/gpay_card_payment_instrument.json"
@@ -2138,10 +2138,10 @@ Content-Type: application/json
         "id": "com.google.pay",
         "name": "gpay",
         "version": "2024-12-03",
-        "spec": "https://ucp.dev/handlers/google_pay",
-        "config_schema": "https://ucp.dev/handlers/google_pay/config.json",
+        "spec": "https://ucp.dev/2026-01-11/handlers/google_pay...",
+        "config_schema": "https://ucp.dev/2026-01-11/handlers/google_pay/config.json...",
         "instrument_schemas": [
-          "https://ucp.dev/handlers/google_pay/card_payment_instrument.json"
+          "https://ucp.dev/2026-01-11/handlers/google_pay/card_payment_instrument.json..."
         ],
         "config": {
           "allowed_payment_methods": [
@@ -2344,10 +2344,10 @@ Content-Type: application/json
         "id": "com.google.pay",
         "name": "gpay",
         "version": "2024-12-03",
-        "spec": "https://ucp.dev/handlers/google_pay",
-        "config_schema": "https://ucp.dev/handlers/google_pay/config.json",
+        "spec": "https://ucp.dev/2026-01-11/handlers/google_pay...",
+        "config_schema": "https://ucp.dev/2026-01-11/handlers/google_pay/config.json...",
         "instrument_schemas": [
-          "https://ucp.dev/handlers/google_pay/card_payment_instrument.json"
+          "https://ucp.dev/2026-01-11/handlers/google_pay/card_payment_instrument.json..."
         ],
         "config": {
           "allowed_payment_methods": [
@@ -2534,10 +2534,10 @@ Content-Type: application/json
         "id": "com.google.pay",
         "name": "gpay",
         "version": "2024-12-03",
-        "spec": "https://ucp.dev/handlers/google_pay",
-        "config_schema": "https://ucp.dev/handlers/google_pay/config.json",
+        "spec": "https://ucp.dev/2026-01-11/handlers/google_pay...",
+        "config_schema": "https://ucp.dev/2026-01-11/handlers/google_pay/config.json...",
         "instrument_schemas": [
-          "https://ucp.dev/handlers/google_pay/card_payment_instrument.json"
+          "https://ucp.dev/2026-01-11/handlers/google_pay/card_payment_instrument.json..."
         ],
         "config": {
           "allowed_payment_methods": [
@@ -2698,10 +2698,10 @@ Content-Type: application/json
         "id": "com.google.pay",
         "name": "gpay",
         "version": "2024-12-03",
-        "spec": "https://ucp.dev/handlers/google_pay",
-        "config_schema": "https://ucp.dev/handlers/google_pay/config.json",
+        "spec": "https://ucp.dev/2026-01-11/handlers/google_pay...",
+        "config_schema": "https://ucp.dev/2026-01-11/handlers/google_pay/config.json...",
         "instrument_schemas": [
-          "https://ucp.dev/handlers/google_pay/card_payment_instrument.json"
+          "https://ucp.dev/2026-01-11/handlers/google_pay/card_payment_instrument.json..."
         ],
         "config": {
           "allowed_payment_methods": [
@@ -2858,10 +2858,10 @@ Content-Type: application/json
         "id": "com.google.pay",
         "name": "gpay",
         "version": "2024-12-03",
-        "spec": "https://ucp.dev/handlers/google_pay",
-        "config_schema": "https://ucp.dev/handlers/google_pay/config.json",
+        "spec": "https://ucp.dev/2026-01-11/handlers/google_pay...",
+        "config_schema": "https://ucp.dev/2026-01-11/handlers/google_pay/config.json...",
         "instrument_schemas": [
-          "https://ucp.dev/handlers/google_pay/card_payment_instrument.json"
+          "https://ucp.dev/2026-01-11/handlers/google_pay/card_payment_instrument.json..."
         ],
         "config": {
           "allowed_payment_methods": [
@@ -2988,9 +2988,9 @@ Businesses advertise MCP transport availability through their UCP profile at `/.
         "services": {
             "dev.ucp.shopping": {
                 "version": "2026-01-11",
-                "spec": "https://ucp.dev/specification/overview",
+                "spec": "https://ucp.dev/2026-01-11/specification/overview",
                 "mcp": {
-                    "schema": "https://ucp.dev/services/shopping/mcp.openrpc.json",
+                    "schema": "https://ucp.dev/2026-01-11/services/shopping/openrpc.json",
                     "endpoint": "https://business.example.com/ucp/mcp"
                 }
             }
@@ -2999,14 +2999,14 @@ Businesses advertise MCP transport availability through their UCP profile at `/.
             {
                 "name": "dev.ucp.shopping.checkout",
                 "version": "2026-01-11",
-                "spec": "https://ucp.dev/specification/checkout",
-                "schema": "https://ucp.dev/schemas/shopping/checkout.json"
+                "spec": "https://ucp.dev/2026-01-11/specification/checkout",
+                "schema": "https://ucp.dev/2026-01-11/schemas/shopping/checkout.json"
             },
             {
                 "name": "dev.ucp.shopping.fulfillment",
                 "version": "2026-01-11",
-                "spec": "https://ucp.dev/specification/fulfillment",
-                "schema": "https://ucp.dev/schemas/shopping/fulfillment.json",
+                "spec": "https://ucp.dev/2026-01-11/specification/fulfillment",
+                "schema": "https://ucp.dev/2026-01-11/schemas/shopping/fulfillment.json",
                 "extends": "dev.ucp.shopping.checkout"
             }
         ]
@@ -3555,7 +3555,7 @@ Businesses that support A2A transport must specify the agent card endpoint as pa
         "services": {
             "dev.ucp.shopping": {
                 "version": "2026-01-11",
-                "spec": "https://ucp.dev/specification/overview",
+                "spec": "https://ucp.dev/2026-01-11/specification/overview",
                 "a2a": {
                     "endpoint": "https://example-business.com/.well-known/agent-card.json"
                 }
@@ -3894,15 +3894,15 @@ ECP availability is signaled via service discovery. When a business advertises t
         "dev.ucp.shopping": {
             "version": "2026-01-11",
             "rest": {
-                "schema": "https://ucp.dev/services/shopping/openapi.json",
+                "schema": "https://ucp.dev/2026-01-11/services/shopping/openapi.json",
                 "endpoint": "https://merchant.example.com/ucp/v1"
             },
             "mcp": {
-                "schema": "https://ucp.dev/services/shopping/mcp.openrpc.json",
+                "schema": "https://ucp.dev/2026-01-11/services/shopping/openrpc.json",
                 "endpoint": "https://merchant.example.com/ucp/mcp"
             },
             "embedded": {
-                "schema": "https://ucp.dev/services/shopping/embedded.openrpc.json"
+                "schema": "https://ucp.dev/2026-01-11/services/shopping/embedded.json"
             }
         }
     }
@@ -5030,14 +5030,14 @@ Businesses declare support by adding `dev.ucp.shopping.ap2_mandate` to their `ca
         {
             "name": "dev.ucp.shopping.checkout",
             "version": "2026-01-11",
-            "spec": "https://ucp.dev/specification/checkout",
-            "schema": "https://ucp.dev/schemas/shopping/checkout.json"
+            "spec": "https://ucp.dev/2026-01-11/specification/checkout",
+            "schema": "https://ucp.dev/2026-01-11/schemas/shopping/checkout.json"
         },
         {
             "name": "dev.ucp.shopping.ap2_mandate",
             "version": "2026-01-11",
-            "spec": "https://ucp.dev/specification/ap2-mandates",
-            "schema": "https://ucp.dev/schemas/shopping/ap2_mandate.json",
+            "spec": "https://ucp.dev/2026-01-11/specification/ap2-mandates",
+            "schema": "https://ucp.dev/2026-01-11/schemas/shopping/ap2_mandate.json",
             "extends": "dev.ucp.shopping.checkout",
             "config": {
                 "vp_formats_supported": {
@@ -5306,7 +5306,7 @@ Upon receiving the `complete` request, the business **MUST**:
 
 1. **Verify Business Authorization:** Confirm `ap2.merchant_authorization` in the embedded checkout is the business's own valid signature:
 
-````json
+```json
     jws = embedded_checkout.ap2.merchant_authorization
     [encoded_header, _, encoded_signature] = jws.split(".")
     header = json_decode(base64url_decode(encoded_header))
@@ -5316,21 +5316,17 @@ Upon receiving the `complete` request, the business **MUST**:
 
     my_key = get_key_by_kid(my_signing_keys, header.kid)
     verify(encoded_signature, signing_input, my_key, header.alg)
-    ```
+```
 
-2. **Verify Terms Match:** Confirm the embedded checkout terms match the current
-   session state (id, totals, line items).
+1. **Verify Terms Match:** Confirm the embedded checkout terms match the current session state (id, totals, line items).
 
 ### PSP Verification
 
-The business passes the `token` (composite object) to their Payment Handler /
-PSP. The PSP verifies the `payment_mandate` per the
-[AP2 Protocol Specification](https://ap2-protocol.org/specification), including
-signature validation, expiration, and correlation with the checkout.
+The business passes the `token` (composite object) to their Payment Handler / PSP. The PSP verifies the `payment_mandate` per the [AP2 Protocol Specification](https://ap2-protocol.org/specification), including signature validation, expiration, and correlation with the checkout.
 
 ## Schema
 
-### Business Authorization {: #merchant-authorization }
+### Business Authorization
 
 JWS Detached Content signature (RFC 7515 Appendix F) over the checkout response body (excluding ap2 field). Format: `<base64url-header>..<base64url-signature>`. The header MUST contain 'alg' (ES256/ES384/ES512) and 'kid' claims. The signature covers both the header and JCS-canonicalized checkout payload.
 
@@ -5340,17 +5336,17 @@ JWS Detached Content signature (RFC 7515 Appendix F) over the checkout response 
 
 The `ap2` object included in CREATE / UPDATE checkout responses.
 
-| Name | Type | Required | Description |
-| :--- | :--- | :--- | :--- |
-| merchant_authorization | string | **Yes** | Merchant's signature proving checkout terms are authentic. |
+| Name                   | Type   | Required | Description                                                |
+| ---------------------- | ------ | -------- | ---------------------------------------------------------- |
+| merchant_authorization | string | **Yes**  | Merchant's signature proving checkout terms are authentic. |
 
 ### AP2 Complete Request
 
 The `ap2` object included in COMPLETE checkout requests.
 
-| Name | Type | Required | Description |
-| :--- | :--- | :--- | :--- |
-| checkout_mandate | string | **Yes** | SD-JWT+kb proving user authorized this checkout. |
+| Name             | Type   | Required | Description                                      |
+| ---------------- | ------ | -------- | ------------------------------------------------ |
+| checkout_mandate | string | **Yes**  | SD-JWT+kb proving user authorized this checkout. |
 
 ### Checkout Mandate
 
@@ -5365,7 +5361,7 @@ Error codes specific to AP2 mandate verification.
 **Enum:** `mandate_required`, `agent_missing_key`, `mandate_invalid_signature`, `mandate_expired`, `mandate_scope_mismatch`, `merchant_authorization_invalid`, `merchant_authorization_missing`
 
 | Error Code                       | Description                                                       |
-| :------------------------------- | :---------------------------------------------------------------- |
+| -------------------------------- | ----------------------------------------------------------------- |
 | `mandate_required`               | AP2 was negotiated, but the request lacks `ap2.checkout_mandate`. |
 | `agent_missing_key`              | Platform profile lacks a valid `signing_keys` entry.              |
 | `mandate_invalid_signature`      | The mandate signature cannot be verified.                         |
@@ -5373,7 +5369,7 @@ Error codes specific to AP2 mandate verification.
 | `mandate_scope_mismatch`         | The mandate is bound to a different checkout.                     |
 | `merchant_authorization_invalid` | The business authorization signature could not be verified.       |
 | `merchant_authorization_missing` | AP2 negotiated but response lacks `ap2.merchant_authorization`.   |
-````
+| \`\`\`\`                         |                                                                   |
 
 # Buyer Consent Extension
 
@@ -5522,8 +5518,8 @@ Businesses advertise discount support in their profile:
                 "name": "dev.ucp.shopping.discount",
                 "version": "2026-01-11",
                 "extends": "dev.ucp.shopping.checkout",
-                "spec": "https://ucp.dev/specification/discount",
-                "schema": "https://ucp.dev/schemas/shopping/discount.json"
+                "spec": "https://ucp.dev/2026-01-11/specification/discount",
+                "schema": "https://ucp.dev/2026-01-11/schemas/shopping/discount.json"
             }
         ]
     }
@@ -7989,7 +7985,7 @@ The Business advertises this handler in the checkout's `payment.handlers` array.
                 "name": "com.example.processor_tokenizer",
                 "spec": "https://example.com/ucp/processor-tokenizer.json",
                 "instrument_schemas": [
-                    "https://ucp.dev/schemas/shopping/types/card_payment_instrument.json"
+                    "https://ucp.dev/2026-01-11/schemas/shopping/types/card_payment_instrument.json"
                 ],
                 "config": {
                     "endpoint": "https://api.psp.com/v1/tokenize",

@@ -97,7 +97,7 @@ The `endpoint` field provides the base URL for API calls. OpenAPI paths are appe
 
 ```json
 "rest": {
-  "schema": "https://ucp.dev/services/shopping/openapi.json",
+  "schema": "https://ucp.dev/2026-01-11/services/shopping/openapi.json",
   "endpoint": "https://business.example.com/api/v2"
 }
 ```
@@ -139,8 +139,8 @@ An **extension** is an optional module that augments another capability. Extensi
 {
     "name": "dev.ucp.shopping.fulfillment",
     "version": "2026-01-11",
-    "spec": "https://ucp.dev/specification/fulfillment",
-    "schema": "https://ucp.dev/schemas/shopping/fulfillment.json",
+    "spec": "https://ucp.dev/2026-01-11/specification/fulfillment",
+    "schema": "https://ucp.dev/2026-01-11/schemas/shopping/fulfillment.json",
     "extends": "dev.ucp.shopping.checkout"
 }
 ```
@@ -210,20 +210,20 @@ Businesses publish their profile at `/.well-known/ucp`. An example:
         "services": {
             "dev.ucp.shopping": {
                 "version": "2026-01-11",
-                "spec": "https://ucp.dev/specification/overview",
+                "spec": "https://ucp.dev/2026-01-11/specification/overview",
                 "rest": {
-                    "schema": "https://ucp.dev/services/shopping/openapi.json",
+                    "schema": "https://ucp.dev/2026-01-11/services/shopping/openapi.json",
                     "endpoint": "https://business.example.com/ucp/v1"
                 },
                 "mcp": {
-                    "schema": "https://ucp.dev/services/shopping/mcp.openrpc.json",
+                    "schema": "https://ucp.dev/2026-01-11/services/shopping/openrpc.json",
                     "endpoint": "https://business.example.com/ucp/mcp"
                 },
                 "a2a": {
                     "endpoint": "https://business.example.com/.well-known/agent-card.json"
                 },
                 "embedded": {
-                    "schema": "https://ucp.dev/services/shopping/embedded.openrpc.json"
+                    "schema": "https://ucp.dev/2026-01-11/services/shopping/embedded.json"
                 }
             }
         },
@@ -231,21 +231,21 @@ Businesses publish their profile at `/.well-known/ucp`. An example:
             {
                 "name": "dev.ucp.shopping.checkout",
                 "version": "2026-01-11",
-                "spec": "https://ucp.dev/specification/checkout",
-                "schema": "https://ucp.dev/schemas/shopping/checkout.json"
+                "spec": "https://ucp.dev/2026-01-11/specification/checkout",
+                "schema": "https://ucp.dev/2026-01-11/schemas/shopping/checkout.json"
             },
             {
                 "name": "dev.ucp.shopping.fulfillment",
                 "version": "2026-01-11",
-                "spec": "https://ucp.dev/specification/fulfillment",
-                "schema": "https://ucp.dev/schemas/shopping/fulfillment.json",
+                "spec": "https://ucp.dev/2026-01-11/specification/fulfillment",
+                "schema": "https://ucp.dev/2026-01-11/schemas/shopping/fulfillment.json",
                 "extends": "dev.ucp.shopping.checkout"
             },
             {
                 "name": "dev.ucp.shopping.discount",
                 "version": "2026-01-11",
-                "spec": "https://ucp.dev/specification/discount",
-                "schema": "https://ucp.dev/schemas/shopping/discount.json",
+                "spec": "https://ucp.dev/2026-01-11/specification/discount",
+                "schema": "https://ucp.dev/2026-01-11/schemas/shopping/discount.json",
                 "extends": "dev.ucp.shopping.checkout"
             }
         ]
@@ -259,7 +259,7 @@ Businesses publish their profile at `/.well-known/ucp`. An example:
                 "spec": "https://example.com/specs/payments/business_tokenizer",
                 "config_schema": "https://example.com/specs/payments/merchant_tokenizer.json",
                 "instrument_schemas": [
-                    "https://ucp.dev/schemas/shopping/types/card_payment_instrument.json"
+                    "https://ucp.dev/2026-01-11/schemas/shopping/types/card_payment_instrument.json"
                 ],
                 "config": {
                     "type": "CARD",
@@ -301,21 +301,21 @@ Platform profiles are similar and include signing keys for capabilities requirin
             {
                 "name": "dev.ucp.shopping.checkout",
                 "version": "2026-01-11",
-                "spec": "https://ucp.dev/specification/checkout",
-                "schema": "https://ucp.dev/schemas/shopping/checkout.json"
+                "spec": "https://ucp.dev/2026-01-11/specification/checkout",
+                "schema": "https://ucp.dev/2026-01-11/schemas/shopping/checkout.json"
             },
             {
                 "name": "dev.ucp.shopping.fulfillment",
                 "version": "2026-01-11",
-                "spec": "https://ucp.dev/specification/fulfillment",
-                "schema": "https://ucp.dev/schemas/shopping/fulfillment.json",
+                "spec": "https://ucp.dev/2026-01-11/specification/fulfillment",
+                "schema": "https://ucp.dev/2026-01-11/schemas/shopping/fulfillment.json",
                 "extends": "dev.ucp.shopping.checkout"
             },
             {
                 "name": "dev.ucp.shopping.order",
                 "version": "2026-01-11",
-                "spec": "https://ucp.dev/specification/order",
-                "schema": "https://ucp.dev/schemas/shopping/order.json",
+                "spec": "https://ucp.dev/2026-01-11/specification/order",
+                "schema": "https://ucp.dev/2026-01-11/schemas/shopping/order.json",
                 "config": {
                     "webhook_url": "https://platform.example.com/webhooks/ucp/orders"
                 }
@@ -339,9 +339,9 @@ Platform profiles are similar and include signing keys for capabilities requirin
                 "name": "dev.ucp.business_tokenizer",
                 "version": "2026-01-11",
                 "spec": "https://example.com/specs/payments/business_tokenizer-payment",
-                "config_schema": "https://ucp.dev/schemas/payments/delegate-payment.json",
+                "config_schema": "https://ucp.dev/2026-01-11/schemas/payments/delegate-payment.json...",
                 "instrument_schemas": [
-                    "https://ucp.dev/schemas/shopping/types/card_payment_instrument.json"
+                    "https://ucp.dev/2026-01-11/schemas/shopping/types/card_payment_instrument.json"
                 ]
             }
         ]
@@ -843,11 +843,11 @@ Initiation comes through a `continue_url` that is returned by the business.
 
 UCP defines a set of standard capabilities:
 
-| Capability Name      | ID (URI)                                         | Description                                                                                                  |
-| -------------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
-| **Checkout**         | `https://ucp.dev/schemas/shopping/checkout.json` | Facilitates the creation and management of checkout sessions, including cart management and tax calculation. |
-| **Identity Linking** | -                                                | Enables platforms to obtain authorization via OAuth 2.0 to perform actions on a user's behalf.               |
-| **Order**            | `https://ucp.dev/schemas/shopping/order.json`    | Allows businesses to push asynchronous updates about an order's lifecycle (shipping, delivery, returns).     |
+| Capability Name      | ID (URI)                                                    | Description                                                                                                  |
+| -------------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| **Checkout**         | `https://ucp.dev/2026-01-11/schemas/shopping/checkout.json` | Facilitates the creation and management of checkout sessions, including cart management and tax calculation. |
+| **Identity Linking** | -                                                           | Enables platforms to obtain authorization via OAuth 2.0 to perform actions on a user's behalf.               |
+| **Order**            | `https://ucp.dev/2026-01-11/schemas/shopping/order.json`    | Allows businesses to push asynchronous updates about an order's lifecycle (shipping, delivery, returns).     |
 
 ### Definition & Extensions
 

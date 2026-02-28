@@ -51,15 +51,15 @@ ECP availability is signaled via service discovery. When a business advertises t
         "dev.ucp.shopping": {
             "version": "2026-01-11",
             "rest": {
-                "schema": "https://ucp.dev/services/shopping/openapi.json",
+                "schema": "https://ucp.dev/2026-01-11/services/shopping/openapi.json",
                 "endpoint": "https://merchant.example.com/ucp/v1"
             },
             "mcp": {
-                "schema": "https://ucp.dev/services/shopping/mcp.openrpc.json",
+                "schema": "https://ucp.dev/2026-01-11/services/shopping/openrpc.json",
                 "endpoint": "https://merchant.example.com/ucp/mcp"
             },
             "embedded": {
-                "schema": "https://ucp.dev/services/shopping/embedded.openrpc.json"
+                "schema": "https://ucp.dev/2026-01-11/services/shopping/embedded.json"
             }
         }
     }
