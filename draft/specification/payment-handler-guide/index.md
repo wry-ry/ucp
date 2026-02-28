@@ -134,7 +134,7 @@ The handler declaration conforms to the [`PaymentHandler`](/ucp/draft/schemas/pa
       "com.example.handler": [
         {
           "id": "processor_tokenizer_1234",
-          "version": "2026-01-11",
+          "version": "draft",
           "spec": "https://example.com/ucp/handler",
           "schema": "https://example.com/ucp/handler/schema.json",
           "available_instruments": [
@@ -169,7 +169,7 @@ The `PaymentHandler` schema defines three variants for different contexts. While
 ```json
 {
   "id": "processor_tokenizer_1234",
-  "version": "2026-01-11",
+  "version": "draft",
   "spec": "https://example.com/ucp/handler",
   "schema": "https://example.com/ucp/handler/schema.json",
   "available_instruments": [
@@ -192,7 +192,7 @@ The `PaymentHandler` schema defines three variants for different contexts. While
 ```json
 {
   "id": "platform_tokenizer_2345", // note: ids are for disambiguation, they may differ between business and platform
-  "version": "2026-01-11",
+  "version": "draft",
   "spec": "https://example.com/ucp/handler",
   "schema": "https://example.com/ucp/handler/schema.json",
   "available_instruments": [
@@ -215,7 +215,7 @@ The `PaymentHandler` schema defines three variants for different contexts. While
 ```json
 {
   "id": "processor_tokenizer_1234",
-  "version": "2026-01-11",
+  "version": "draft",
   "available_instruments": [
     {
       "type": "card",

@@ -141,9 +141,9 @@ An **extension** is an optional module that augments another capability. Extensi
 {
   "dev.ucp.shopping.fulfillment": [
     {
-      "version": "2026-01-23",
-      "spec": "https://ucp.dev/2026-01-23/specification/fulfillment",
-      "schema": "https://ucp.dev/2026-01-23/schemas/shopping/fulfillment.json",
+      "version": "draft",
+      "spec": "https://ucp.dev/draft/specification/fulfillment",
+      "schema": "https://ucp.dev//draft/schemas/shopping/fulfillment.json",
       "extends": "dev.ucp.shopping.checkout"
     }
   ]
@@ -158,9 +158,9 @@ Extensions **MAY** extend multiple parent capabilities by using an array:
 {
   "dev.ucp.shopping.discount": [
     {
-      "version": "2026-01-23",
-      "spec": "https://ucp.dev/2026-01-23/specification/discount",
-      "schema": "https://ucp.dev/2026-01-23/schemas/shopping/discount.json",
+      "version": "draft",
+      "spec": "https://ucp.dev//draft/specification/discount",
+      "schema": "https://ucp.dev//draft/schemas/shopping/discount.json",
       "extends": ["dev.ucp.shopping.checkout", "dev.ucp.shopping.cart"]
     }
   ]
@@ -600,7 +600,7 @@ Content-Type: application/json
 
 {
   "ucp": {
-    "version": "2026-01-11",
+    "version": "draft",
     "capabilities": {}
   },
   "messages": [
@@ -658,7 +658,7 @@ Protocol errors use standard HTTP status codes and headers. Response bodies are 
   "result": {
     "structuredContent": {
       "ucp": {
-        "version": "2026-01-11",
+        "version": "draft",
         "capabilities": {}
       },
       "messages": [
@@ -928,12 +928,12 @@ In this scenario, the platform identifies a payment credential provider (e.g., `
 ```json
 {
   "ucp": {
-    "version": "2026-01-11",
+    "version": "draft",
     "payment_handlers": {
       "com.google.pay": [
         {
           "id": "8c9202bd-63cc-4241-8d24-d57ce69ea31c",
-          "version": "2026-01-11",
+          "version": "draft",
           "config": {
             "api_version": 2,
             "api_version_minor": 0,
@@ -965,7 +965,7 @@ In this scenario, the platform identifies a payment credential provider (e.g., `
       "dev.shopify.shop_pay": [
         {
           "id": "shop_pay_1234",
-          "version": "2026-01-11",
+          "version": "draft",
           "available_instruments": [
             {"type": "shop_pay"}
           ],
@@ -1039,7 +1039,7 @@ In this scenario, the platform uses a generic tokenizer to request a session tok
       "com.example.tokenizer": [
         {
           "id": "merchant_tokenizer",
-          "version": "2026-01-11",
+          "version": "draft",
           "spec": "https://example.com/specs/tokenizer",
           "schema": "https://example.com/schemas/tokenizer.json",
           "available_instruments": [
@@ -1293,7 +1293,7 @@ MCP tool responses use a dual-output pattern for backward compatibility. UCP MCP
   "result": {
     "structuredContent": {
       "checkout": {
-        "ucp": {"version": "2026-01-11", "capabilities": {...}},
+        "ucp": {"version": "draft", "capabilities": {...}},
         "id": "checkout_abc123",
         "status": "incomplete",
         ...
@@ -1368,7 +1368,7 @@ Both businesses and platforms declare a single version in their profiles:
 ```json
 {
   "ucp": {
-    "version": "2026-01-11",
+    "version": "draft",
     "services": { ... },
     "capabilities": { ... },
     "payment_handlers": { ... }
@@ -1379,7 +1379,7 @@ Both businesses and platforms declare a single version in their profiles:
 ```json
 {
   "ucp": {
-    "version": "2026-01-11",
+    "version": "draft",
     "services": { ... },
     "capabilities": { ... },
     "payment_handlers": { ... }
@@ -1402,7 +1402,7 @@ Response with version confirmation:
 ```json
 {
   "ucp": {
-    "version": "2026-01-11",
+    "version": "draft",
     "capabilities": { ... },
     "payment_handlers": { ... }
   },

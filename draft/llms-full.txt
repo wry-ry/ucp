@@ -148,9 +148,9 @@ An **extension** is an optional module that augments another capability. Extensi
 {
   "dev.ucp.shopping.fulfillment": [
     {
-      "version": "2026-01-23",
-      "spec": "https://ucp.dev/2026-01-23/specification/fulfillment",
-      "schema": "https://ucp.dev/2026-01-23/schemas/shopping/fulfillment.json",
+      "version": "draft",
+      "spec": "https://ucp.dev/draft/specification/fulfillment",
+      "schema": "https://ucp.dev//draft/schemas/shopping/fulfillment.json",
       "extends": "dev.ucp.shopping.checkout"
     }
   ]
@@ -165,9 +165,9 @@ Extensions **MAY** extend multiple parent capabilities by using an array:
 {
   "dev.ucp.shopping.discount": [
     {
-      "version": "2026-01-23",
-      "spec": "https://ucp.dev/2026-01-23/specification/discount",
-      "schema": "https://ucp.dev/2026-01-23/schemas/shopping/discount.json",
+      "version": "draft",
+      "spec": "https://ucp.dev//draft/specification/discount",
+      "schema": "https://ucp.dev//draft/schemas/shopping/discount.json",
       "extends": ["dev.ucp.shopping.checkout", "dev.ucp.shopping.cart"]
     }
   ]
@@ -607,7 +607,7 @@ Content-Type: application/json
 
 {
   "ucp": {
-    "version": "2026-01-11",
+    "version": "draft",
     "capabilities": {}
   },
   "messages": [
@@ -665,7 +665,7 @@ Protocol errors use standard HTTP status codes and headers. Response bodies are 
   "result": {
     "structuredContent": {
       "ucp": {
-        "version": "2026-01-11",
+        "version": "draft",
         "capabilities": {}
       },
       "messages": [
@@ -935,12 +935,12 @@ In this scenario, the platform identifies a payment credential provider (e.g., `
 ```json
 {
   "ucp": {
-    "version": "2026-01-11",
+    "version": "draft",
     "payment_handlers": {
       "com.google.pay": [
         {
           "id": "8c9202bd-63cc-4241-8d24-d57ce69ea31c",
-          "version": "2026-01-11",
+          "version": "draft",
           "config": {
             "api_version": 2,
             "api_version_minor": 0,
@@ -972,7 +972,7 @@ In this scenario, the platform identifies a payment credential provider (e.g., `
       "dev.shopify.shop_pay": [
         {
           "id": "shop_pay_1234",
-          "version": "2026-01-11",
+          "version": "draft",
           "available_instruments": [
             {"type": "shop_pay"}
           ],
@@ -1046,7 +1046,7 @@ In this scenario, the platform uses a generic tokenizer to request a session tok
       "com.example.tokenizer": [
         {
           "id": "merchant_tokenizer",
-          "version": "2026-01-11",
+          "version": "draft",
           "spec": "https://example.com/specs/tokenizer",
           "schema": "https://example.com/schemas/tokenizer.json",
           "available_instruments": [
@@ -1300,7 +1300,7 @@ MCP tool responses use a dual-output pattern for backward compatibility. UCP MCP
   "result": {
     "structuredContent": {
       "checkout": {
-        "ucp": {"version": "2026-01-11", "capabilities": {...}},
+        "ucp": {"version": "draft", "capabilities": {...}},
         "id": "checkout_abc123",
         "status": "incomplete",
         ...
@@ -1375,7 +1375,7 @@ Both businesses and platforms declare a single version in their profiles:
 ```json
 {
   "ucp": {
-    "version": "2026-01-11",
+    "version": "draft",
     "services": { ... },
     "capabilities": { ... },
     "payment_handlers": { ... }
@@ -1386,7 +1386,7 @@ Both businesses and platforms declare a single version in their profiles:
 ```json
 {
   "ucp": {
-    "version": "2026-01-11",
+    "version": "draft",
     "services": { ... },
     "capabilities": { ... },
     "payment_handlers": { ... }
@@ -1409,7 +1409,7 @@ Response with version confirmation:
 ```json
 {
   "ucp": {
-    "version": "2026-01-11",
+    "version": "draft",
     "capabilities": { ... },
     "payment_handlers": { ... }
   },
@@ -9939,7 +9939,7 @@ The handler declaration conforms to the [`PaymentHandler`](/ucp/draft/schemas/pa
       "com.example.handler": [
         {
           "id": "processor_tokenizer_1234",
-          "version": "2026-01-11",
+          "version": "draft",
           "spec": "https://example.com/ucp/handler",
           "schema": "https://example.com/ucp/handler/schema.json",
           "available_instruments": [
@@ -9974,7 +9974,7 @@ The `PaymentHandler` schema defines three variants for different contexts. While
 ```json
 {
   "id": "processor_tokenizer_1234",
-  "version": "2026-01-11",
+  "version": "draft",
   "spec": "https://example.com/ucp/handler",
   "schema": "https://example.com/ucp/handler/schema.json",
   "available_instruments": [
@@ -9997,7 +9997,7 @@ The `PaymentHandler` schema defines three variants for different contexts. While
 ```json
 {
   "id": "platform_tokenizer_2345", // note: ids are for disambiguation, they may differ between business and platform
-  "version": "2026-01-11",
+  "version": "draft",
   "spec": "https://example.com/ucp/handler",
   "schema": "https://example.com/ucp/handler/schema.json",
   "available_instruments": [
@@ -10020,7 +10020,7 @@ The `PaymentHandler` schema defines three variants for different contexts. While
 ```json
 {
   "id": "processor_tokenizer_1234",
-  "version": "2026-01-11",
+  "version": "draft",
   "available_instruments": [
     {
       "type": "card",
@@ -10694,7 +10694,7 @@ The handler schema defines three config variants for different contexts. See [Pa
 ```json
 {
   "ucp": {
-    "version": "2026-01-11",
+    "version": "draft",
     "payment_handlers": {
       "{handler_name}": [
         {
@@ -10765,7 +10765,7 @@ Platforms advertise support for this handler in their UCP profile's `payment_han
 ```json
 {
   "ucp": {
-    "version": "2026-01-11",
+    "version": "draft",
     "payment_handlers": {
       "{handler_name}": [
         {
@@ -11240,12 +11240,12 @@ The business advertises their tokenization endpoint and identity during discover
 ```json
 {
   "ucp": {
-    "version": "2026-01-11",
+    "version": "draft",
     "payment_handlers": {
       "com.example.processor_tokenizer": [
         {
           "id": "processor_tokenizer",
-          "version": "2026-01-11",
+          "version": "draft",
           "spec": "https://example.com/ucp/processor-tokenizer.json",
           "schema": "https://example.com/ucp/processor-tokenizer/schema.json",
           "available_instruments": [
@@ -11281,7 +11281,7 @@ The response config includes runtime information about what's available for this
 ```json
 {
   "id": "processor_tokenizer",
-  "version": "2026-01-11",
+  "version": "draft",
   "available_instruments": [
     {
       "type": "card",
@@ -11326,7 +11326,7 @@ Platform identifies the processor tokenizer handler and retrieves the business's
       "com.example.processor_tokenizer": [
         {
           "id": "processor_tokenizer",
-          "version": "2026-01-11",
+          "version": "draft",
           "available_instruments": [
             {"type": "card", "constraints": {"brands": ["visa", "mastercard", "amex"]}}
           ],
@@ -11587,12 +11587,12 @@ The handler accepts [CardCredential](/ucp/draft/schemas/shopping/types/card_cred
 ```json
 {
   "ucp": {
-    "version": "2026-01-11",
+    "version": "draft",
     "payment_handlers": {
       "com.example.platform_tokenizer": [
         {
           "id": "platform_wallet",
-          "version": "2026-01-11",
+          "version": "draft",
           "spec": "https://platform.example.com/ucp/handler.json",
           "schema": "https://platform.example.com/ucp/handler/schema.json",
           "available_instruments": [
@@ -11629,7 +11629,7 @@ The response config includes runtime token lifecycle information.
 ```json
 {
   "id": "platform_wallet",
-  "version": "2026-01-11",
+  "version": "draft",
   "available_instruments": [
     {
       "type": "card",
@@ -11713,12 +11713,12 @@ Platforms advertise this handler in their UCP profile's `payment_handlers` regis
 ```json
 {
   "ucp": {
-    "version": "2026-01-11",
+    "version": "draft",
     "payment_handlers": {
       "com.example.platform_tokenizer": [
         {
           "id": "platform_wallet",
-          "version": "2026-01-11",
+          "version": "draft",
           "spec": "https://platform.example.com/ucp/handler.json",
           "schema": "https://platform.example.com/ucp/handler/schema.json",
           "available_instruments": [
@@ -11983,12 +11983,12 @@ The only supported instrument schema is [CardPaymentInstrument](/ucp/draft/schem
 ```json
 {
   "ucp": {
-    "version": "2026-01-11",
+    "version": "draft",
     "payment_handlers": {
       "com.example.platform_encrypted": [
         {
           "id": "platform_encrypted",
-          "version": "2026-01-11",
+          "version": "draft",
           "spec": "https://platform.example.com/ucp/encrypted-handler.json",
           "schema": "https://platform.example.com/ucp/encrypted-handler/schema.json",
           "available_instruments": [
@@ -12027,7 +12027,7 @@ The response config includes information about the encryption used.
 ```json
 {
   "id": "platform_encrypted",
-  "version": "2026-01-11",
+  "version": "draft",
   "available_instruments": [
     {
       "type": "card",
@@ -12091,12 +12091,12 @@ Platforms advertise this handler in their UCP profile's `payment_handlers` regis
 ```json
 {
   "ucp": {
-    "version": "2026-01-11",
+    "version": "draft",
     "payment_handlers": {
       "com.example.platform_encrypted": [
         {
           "id": "platform_encrypted",
-          "version": "2026-01-11",
+          "version": "draft",
           "spec": "https://platform.example.com/ucp/encrypted-handler.json",
           "schema": "https://platform.example.com/ucp/encrypted-handler/schema.json",
           "available_instruments": [

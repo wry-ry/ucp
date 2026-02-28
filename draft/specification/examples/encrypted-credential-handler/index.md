@@ -111,12 +111,12 @@ The only supported instrument schema is [CardPaymentInstrument](/ucp/draft/schem
 ```json
 {
   "ucp": {
-    "version": "2026-01-11",
+    "version": "draft",
     "payment_handlers": {
       "com.example.platform_encrypted": [
         {
           "id": "platform_encrypted",
-          "version": "2026-01-11",
+          "version": "draft",
           "spec": "https://platform.example.com/ucp/encrypted-handler.json",
           "schema": "https://platform.example.com/ucp/encrypted-handler/schema.json",
           "available_instruments": [
@@ -155,7 +155,7 @@ The response config includes information about the encryption used.
 ```json
 {
   "id": "platform_encrypted",
-  "version": "2026-01-11",
+  "version": "draft",
   "available_instruments": [
     {
       "type": "card",
@@ -219,12 +219,12 @@ Platforms advertise this handler in their UCP profile's `payment_handlers` regis
 ```json
 {
   "ucp": {
-    "version": "2026-01-11",
+    "version": "draft",
     "payment_handlers": {
       "com.example.platform_encrypted": [
         {
           "id": "platform_encrypted",
-          "version": "2026-01-11",
+          "version": "draft",
           "spec": "https://platform.example.com/ucp/encrypted-handler.json",
           "schema": "https://platform.example.com/ucp/encrypted-handler/schema.json",
           "available_instruments": [

@@ -158,12 +158,12 @@ The handler accepts [CardCredential](/ucp/draft/schemas/shopping/types/card_cred
 ```json
 {
   "ucp": {
-    "version": "2026-01-11",
+    "version": "draft",
     "payment_handlers": {
       "com.example.platform_tokenizer": [
         {
           "id": "platform_wallet",
-          "version": "2026-01-11",
+          "version": "draft",
           "spec": "https://platform.example.com/ucp/handler.json",
           "schema": "https://platform.example.com/ucp/handler/schema.json",
           "available_instruments": [
@@ -200,7 +200,7 @@ The response config includes runtime token lifecycle information.
 ```json
 {
   "id": "platform_wallet",
-  "version": "2026-01-11",
+  "version": "draft",
   "available_instruments": [
     {
       "type": "card",
@@ -284,12 +284,12 @@ Platforms advertise this handler in their UCP profile's `payment_handlers` regis
 ```json
 {
   "ucp": {
-    "version": "2026-01-11",
+    "version": "draft",
     "payment_handlers": {
       "com.example.platform_tokenizer": [
         {
           "id": "platform_wallet",
-          "version": "2026-01-11",
+          "version": "draft",
           "spec": "https://platform.example.com/ucp/handler.json",
           "schema": "https://platform.example.com/ucp/handler/schema.json",
           "available_instruments": [
