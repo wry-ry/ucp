@@ -143,7 +143,7 @@ An **extension** is an optional module that augments another capability. Extensi
     {
       "version": "draft",
       "spec": "https://ucp.dev/draft/specification/fulfillment",
-      "schema": "https://ucp.dev//draft/schemas/shopping/fulfillment.json",
+      "schema": "https://ucp.dev/draft/schemas/shopping/fulfillment.json",
       "extends": "dev.ucp.shopping.checkout"
     }
   ]
@@ -159,8 +159,8 @@ Extensions **MAY** extend multiple parent capabilities by using an array:
   "dev.ucp.shopping.discount": [
     {
       "version": "draft",
-      "spec": "https://ucp.dev//draft/specification/discount",
-      "schema": "https://ucp.dev//draft/schemas/shopping/discount.json",
+      "spec": "https://ucp.dev/draft/specification/discount",
+      "schema": "https://ucp.dev/draft/schemas/shopping/discount.json",
       "extends": ["dev.ucp.shopping.checkout", "dev.ucp.shopping.cart"]
     }
   ]
