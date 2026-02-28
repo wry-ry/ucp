@@ -2107,7 +2107,11 @@ contains the business's identity with the platform for token binding. The
 platform's handler specification (referenced via <code>spec</code>) documents the
 <code>/detokenize</code> endpoint URL exposed by the platform's
 <strong>payment credential provider</strong>.</p>
-<p>The handler accepts <a href="/{version}/schemas/shopping/types/card_credential.json">CardCredential</a> for tokenization and produces <a href="/{version}/schemas/shopping/types/token_credential.json">TokenCredential</a> for checkout.</p>
+<p>The handler accepts
+<a href="/ucp/2026-01-23/schemas/shopping/types/card_credential.json">CardCredential</a> for
+tokenization and produces
+<a href="/ucp/2026-01-23/schemas/shopping/types/token_credential.json">TokenCredential</a> for
+checkout.</p>
 <p><strong>Note:</strong> The result of <code>/detokenize</code> contains <strong>sensitive payment data</strong>.
 Both the sender (platform's credential provider) and receiver
 (business or PSP) <strong>MUST</strong> be compliant with relevant standards for the
@@ -2489,8 +2493,10 @@ business, so they must specify which businesses' token they are retrieving.</p>
 <h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Pattern:</strong> <a href="../../payment-handler-guide/">Tokenization Payment Handler</a></li>
-<li><strong>API Pattern:</strong> <code>/{version}/handlers/tokenization/openapi.json</code></li>
-<li><strong>Identity Schema:</strong> <code>/{version}/schemas/shopping/types/payment_identity.json</code></li>
+<li><strong>API Pattern:</strong>
+  <code>https://ucp.dev/2026-01-23/handlers/tokenization/openapi.json</code></li>
+<li><strong>Identity Schema:</strong>
+  <code>https://ucp.dev/2026-01-23/schemas/shopping/types/payment_identity.json</code></li>
 </ul>
 
 

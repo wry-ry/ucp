@@ -1098,9 +1098,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#item-response" class="md-nav__link">
+  <a href="#item" class="md-nav__link">
     <span class="md-ellipsis">
-      Item Response
+      Item
     </span>
   </a>
   
@@ -1125,18 +1125,18 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#total-response" class="md-nav__link">
+  <a href="#total" class="md-nav__link">
     <span class="md-ellipsis">
-      Total Response
+      Total
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#ucp-response-order" class="md-nav__link">
+  <a href="#ucp-response-order-schema" class="md-nav__link">
     <span class="md-ellipsis">
-      UCP Response Order
+      UCP Response Order Schema
     </span>
   </a>
   
@@ -1766,9 +1766,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#item-response" class="md-nav__link">
+  <a href="#item" class="md-nav__link">
     <span class="md-ellipsis">
-      Item Response
+      Item
     </span>
   </a>
   
@@ -1793,18 +1793,18 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#total-response" class="md-nav__link">
+  <a href="#total" class="md-nav__link">
     <span class="md-ellipsis">
-      Total Response
+      Total
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#ucp-response-order" class="md-nav__link">
+  <a href="#ucp-response-order-schema" class="md-nav__link">
     <span class="md-ellipsis">
-      UCP Response Order
+      UCP Response Order Schema
     </span>
   </a>
   
@@ -1957,7 +1957,7 @@ fulfillment:</p>
 </tr>
 <tr>
 <td style="text-align: left;">line_items</td>
-<td style="text-align: left;">Array[<a href="/ucp/2026-01-23/specification/order/#order-line-item">Order Line Item</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/2026-01-23/specification/reference/#order-line-item">Order Line Item</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Immutable line items — source of truth for what was ordered.</td>
 </tr>
@@ -1969,13 +1969,13 @@ fulfillment:</p>
 </tr>
 <tr>
 <td style="text-align: left;">adjustments</td>
-<td style="text-align: left;">Array[<a href="/ucp/2026-01-23/specification/order/#adjustment">Adjustment</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/2026-01-23/specification/reference/#adjustment">Adjustment</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Append-only event log of money movements (refunds, returns, credits, disputes, cancellations, etc.) that exist independently of fulfillment.</td>
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;">Array[<a href="/ucp/2026-01-23/specification/order/#total-response">Total Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/2026-01-23/specification/reference/#total">Total Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Different totals for the order.</td>
 </tr>
@@ -2002,7 +2002,7 @@ Status and quantity counts should reflect the event logs.</p>
 </tr>
 <tr>
 <td style="text-align: left;">item</td>
-<td style="text-align: left;"><a href="/ucp/2026-01-23/specification/order/#item">Item</a></td>
+<td style="text-align: left;"><a href="/ucp/2026-01-23/specification/reference/#item">Item</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Product data (id, title, price, image_url).</td>
 </tr>
@@ -2014,7 +2014,7 @@ Status and quantity counts should reflect the event logs.</p>
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;">Array[<a href="/ucp/2026-01-23/specification/order/#total">Total</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/2026-01-23/specification/reference/#total">Total</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Line item totals breakdown.</td>
 </tr>
@@ -2077,7 +2077,7 @@ split, merged, or adjusted post-order.</p>
 </tr>
 <tr>
 <td style="text-align: left;">destination</td>
-<td style="text-align: left;"><a href="/ucp/2026-01-23/specification/order/#postal-address">Postal Address</a></td>
+<td style="text-align: left;"><a href="/ucp/2026-01-23/specification/reference/#postal-address">Postal Address</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Delivery destination address.</td>
 </tr>
@@ -2376,7 +2376,7 @@ during partner onboarding. The URL format is platform-specific.</p>
 </tr>
 <tr>
 <td style="text-align: left;">line_items</td>
-<td style="text-align: left;">Array[<a href="/ucp/2026-01-23/specification/order/#order-line-item">Order Line Item</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/2026-01-23/specification/reference/#order-line-item">Order Line Item</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Immutable line items — source of truth for what was ordered.</td>
 </tr>
@@ -2388,13 +2388,13 @@ during partner onboarding. The URL format is platform-specific.</p>
 </tr>
 <tr>
 <td style="text-align: left;">adjustments</td>
-<td style="text-align: left;">Array[<a href="/ucp/2026-01-23/specification/order/#adjustment">Adjustment</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/2026-01-23/specification/reference/#adjustment">Adjustment</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Append-only event log of money movements (refunds, returns, credits, disputes, cancellations, etc.) that exist independently of fulfillment.</td>
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;">Array[<a href="/ucp/2026-01-23/specification/order/#total">Total</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/2026-01-23/specification/reference/#total">Total</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Different totals for the order.</td>
 </tr>
@@ -2511,7 +2511,7 @@ rotation:</p>
 <li><strong>MUST</strong> include business identifier in webhook path or headers</li>
 </ul>
 <h2 id="entities">Entities<a class="headerlink" href="#entities" title="Permanent link">&para;</a></h2>
-<h3 id="item-response">Item Response<a class="headerlink" href="#item-response" title="Permanent link">&para;</a></h3>
+<h3 id="item">Item<a class="headerlink" href="#item" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -2664,7 +2664,7 @@ rotation:</p>
 </tr>
 </tbody>
 </table>
-<h3 id="total-response">Total Response<a class="headerlink" href="#total-response" title="Permanent link">&para;</a></h3>
+<h3 id="total">Total<a class="headerlink" href="#total" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -2695,7 +2695,7 @@ rotation:</p>
 </tr>
 </tbody>
 </table>
-<h3 id="ucp-response-order">UCP Response Order<a class="headerlink" href="#ucp-response-order" title="Permanent link">&para;</a></h3>
+<h3 id="ucp-response-order-schema">UCP Response Order Schema <span id="ucp"></span><a class="headerlink" href="#ucp-response-order-schema" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>

@@ -81,23 +81,23 @@ Expectations can be split, merged, or adjusted post-order. For example:
 | id            | string                                                                                      | **Yes**  | Unique order identifier.                                                                                                                     |
 | checkout_id   | string                                                                                      | **Yes**  | Associated checkout ID for reconciliation.                                                                                                   |
 | permalink_url | string                                                                                      | **Yes**  | Permalink to access the order on merchant site.                                                                                              |
-| line_items    | Array\[[Order Line Item](/ucp/2026-01-23/specification/order/#order-line-item)\]            | **Yes**  | Immutable line items — source of truth for what was ordered.                                                                                 |
+| line_items    | Array\[[Order Line Item](/ucp/2026-01-23/specification/reference/#order-line-item)\]        | **Yes**  | Immutable line items — source of truth for what was ordered.                                                                                 |
 | fulfillment   | object                                                                                      | **Yes**  | Fulfillment data: buyer expectations and what actually happened.                                                                             |
-| adjustments   | Array\[[Adjustment](/ucp/2026-01-23/specification/order/#adjustment)\]                      | No       | Append-only event log of money movements (refunds, returns, credits, disputes, cancellations, etc.) that exist independently of fulfillment. |
-| totals        | Array\[[Total Response](/ucp/2026-01-23/specification/order/#total-response)\]              | **Yes**  | Different totals for the order.                                                                                                              |
+| adjustments   | Array\[[Adjustment](/ucp/2026-01-23/specification/reference/#adjustment)\]                  | No       | Append-only event log of money movements (refunds, returns, credits, disputes, cancellations, etc.) that exist independently of fulfillment. |
+| totals        | Array\[[Total Response](/ucp/2026-01-23/specification/reference/#total)\]                   | **Yes**  | Different totals for the order.                                                                                                              |
 
 ### Order Line Item
 
 Line items reflect what was purchased at checkout and their current state. Status and quantity counts should reflect the event logs.
 
-| Name      | Type                                                         | Required | Description                                                                                                                                                                |
-| --------- | ------------------------------------------------------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| id        | string                                                       | **Yes**  | Line item identifier.                                                                                                                                                      |
-| item      | [Item](/ucp/2026-01-23/specification/order/#item)            | **Yes**  | Product data (id, title, price, image_url).                                                                                                                                |
-| quantity  | object                                                       | **Yes**  | Quantity tracking. Both total and fulfilled are derived from events.                                                                                                       |
-| totals    | Array\[[Total](/ucp/2026-01-23/specification/order/#total)\] | **Yes**  | Line item totals breakdown.                                                                                                                                                |
-| status    | string                                                       | **Yes**  | Derived status: fulfilled if quantity.fulfilled == quantity.total, partial if quantity.fulfilled > 0, otherwise processing. **Enum:** `processing`, `partial`, `fulfilled` |
-| parent_id | string                                                       | No       | Parent line item identifier for any nested structures.                                                                                                                     |
+| Name      | Type                                                             | Required | Description                                                                                                                                                                |
+| --------- | ---------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id        | string                                                           | **Yes**  | Line item identifier.                                                                                                                                                      |
+| item      | [Item](/ucp/2026-01-23/specification/reference/#item)            | **Yes**  | Product data (id, title, price, image_url).                                                                                                                                |
+| quantity  | object                                                           | **Yes**  | Quantity tracking. Both total and fulfilled are derived from events.                                                                                                       |
+| totals    | Array\[[Total](/ucp/2026-01-23/specification/reference/#total)\] | **Yes**  | Line item totals breakdown.                                                                                                                                                |
+| status    | string                                                           | **Yes**  | Derived status: fulfilled if quantity.fulfilled == quantity.total, partial if quantity.fulfilled > 0, otherwise processing. **Enum:** `processing`, `partial`, `fulfilled` |
+| parent_id | string                                                           | No       | Parent line item identifier for any nested structures.                                                                                                                     |
 
 **Quantity Structure:**
 
@@ -120,14 +120,14 @@ else → "processing"
 
 Expectations are buyer-facing groupings representing when/how items will be delivered. They represent the current promise to the buyer and can be split, merged, or adjusted post-order.
 
-| Name           | Type                                                                  | Required | Description                                                                                                 |
-| -------------- | --------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------- |
-| id             | string                                                                | **Yes**  | Expectation identifier.                                                                                     |
-| line_items     | Array[object]                                                         | **Yes**  | Which line items and quantities are in this expectation.                                                    |
-| method_type    | string                                                                | **Yes**  | Delivery method type (shipping, pickup, digital). **Enum:** `shipping`, `pickup`, `digital`                 |
-| destination    | [Postal Address](/ucp/2026-01-23/specification/order/#postal-address) | **Yes**  | Delivery destination address.                                                                               |
-| description    | string                                                                | No       | Human-readable delivery description (e.g., 'Arrives in 5-8 business days').                                 |
-| fulfillable_on | string                                                                | No       | When this expectation can be fulfilled: 'now' or ISO 8601 timestamp for future date (backorder, pre-order). |
+| Name           | Type                                                                      | Required | Description                                                                                                 |
+| -------------- | ------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------- |
+| id             | string                                                                    | **Yes**  | Expectation identifier.                                                                                     |
+| line_items     | Array[object]                                                             | **Yes**  | Which line items and quantities are in this expectation.                                                    |
+| method_type    | string                                                                    | **Yes**  | Delivery method type (shipping, pickup, digital). **Enum:** `shipping`, `pickup`, `digital`                 |
+| destination    | [Postal Address](/ucp/2026-01-23/specification/reference/#postal-address) | **Yes**  | Delivery destination address.                                                                               |
+| description    | string                                                                    | No       | Human-readable delivery description (e.g., 'Arrives in 5-8 business days').                                 |
+| fulfillable_on | string                                                                    | No       | When this expectation can be fulfilled: 'now' or ISO 8601 timestamp for future date (backorder, pre-order). |
 
 ### Fulfillment Event
 
@@ -280,10 +280,10 @@ Businesses POST order events to a webhook URL provided by the platform during pa
 | id            | string                                                                                      | **Yes**  | Unique order identifier.                                                                                                                     |
 | checkout_id   | string                                                                                      | **Yes**  | Associated checkout ID for reconciliation.                                                                                                   |
 | permalink_url | string                                                                                      | **Yes**  | Permalink to access the order on merchant site.                                                                                              |
-| line_items    | Array\[[Order Line Item](/ucp/2026-01-23/specification/order/#order-line-item)\]            | **Yes**  | Immutable line items — source of truth for what was ordered.                                                                                 |
+| line_items    | Array\[[Order Line Item](/ucp/2026-01-23/specification/reference/#order-line-item)\]        | **Yes**  | Immutable line items — source of truth for what was ordered.                                                                                 |
 | fulfillment   | object                                                                                      | **Yes**  | Fulfillment data: buyer expectations and what actually happened.                                                                             |
-| adjustments   | Array\[[Adjustment](/ucp/2026-01-23/specification/order/#adjustment)\]                      | No       | Append-only event log of money movements (refunds, returns, credits, disputes, cancellations, etc.) that exist independently of fulfillment. |
-| totals        | Array\[[Total](/ucp/2026-01-23/specification/order/#total)\]                                | **Yes**  | Different totals for the order.                                                                                                              |
+| adjustments   | Array\[[Adjustment](/ucp/2026-01-23/specification/reference/#adjustment)\]                  | No       | Append-only event log of money movements (refunds, returns, credits, disputes, cancellations, etc.) that exist independently of fulfillment. |
+| totals        | Array\[[Total](/ucp/2026-01-23/specification/reference/#total)\]                            | **Yes**  | Different totals for the order.                                                                                                              |
 | event_id      | string                                                                                      | **Yes**  | Unique event identifier.                                                                                                                     |
 | created_time  | string                                                                                      | **Yes**  | Event creation timestamp in RFC 3339 format.                                                                                                 |
 
@@ -360,7 +360,7 @@ The `signing_keys` array supports multiple keys to enable zero-downtime rotation
 
 ## Entities
 
-### Item Response
+### Item
 
 | Name      | Type    | Required | Description                                                                                                                                    |
 | --------- | ------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -394,7 +394,7 @@ The `signing_keys` array supports multiple keys to enable zero-downtime rotation
 | config  | object | No       | Entity-specific configuration. Structure defined by each entity's schema.                       |
 | extends | string | No       | Parent capability this extends. Present for extensions, absent for root capabilities.           |
 
-### Total Response
+### Total
 
 | Name         | Type    | Required | Description                                                                                                                   |
 | ------------ | ------- | -------- | ----------------------------------------------------------------------------------------------------------------------------- |
@@ -402,7 +402,7 @@ The `signing_keys` array supports multiple keys to enable zero-downtime rotation
 | display_text | string  | No       | Text to display against the amount. Should reflect appropriate method (e.g., 'Shipping', 'Delivery').                         |
 | amount       | integer | **Yes**  | If type == total, sums subtotal - discount + fulfillment + tax + fee. Should be >= 0. Amount in minor (cents) currency units. |
 
-### UCP Response Order
+### UCP Response Order Schema
 
 | Name             | Type   | Required | Description                                            |
 | ---------------- | ------ | -------- | ------------------------------------------------------ |

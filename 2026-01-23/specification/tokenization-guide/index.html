@@ -1535,7 +1535,7 @@
 -->
 
 <h1 id="tokenization-guide">Tokenization Guide<a class="headerlink" href="#tokenization-guide" title="Permanent link">&para;</a></h1>
-<p><strong>OpenAPI:</strong> <a href="/{version}/handlers/tokenization/openapi.json">Tokenization API</a></p>
+<p><strong>OpenAPI:</strong> <a href="/ucp/2026-01-23/handlers/tokenization/openapi.json">Tokenization API</a></p>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>This guide is for <strong>implementers building tokenization payment handlers</strong>. It
 defines the shared API, security requirements, and conformance criteria that all
@@ -1652,7 +1652,8 @@ specific context:</p>
 </tr>
 </tbody>
 </table>
-<p>The tokenizer <strong>MUST</strong> verify binding matches on <code>/detokenize</code>. See <a href="/{version}/schemas/shopping/types/binding.json">Binding Schema</a>.</p>
+<p>The tokenizer <strong>MUST</strong> verify binding matches on <code>/detokenize</code>. See
+<a href="/ucp/2026-01-23/schemas/shopping/types/binding.json">Binding Schema</a>.</p>
 <hr />
 <h2 id="openapi">OpenAPI<a class="headerlink" href="#openapi" title="Permanent link">&para;</a></h2>
 <p>Tokenization handlers implement two endpoints. Your handler <strong>MAY</strong> implement
@@ -1715,7 +1716,8 @@ processing (see PSP example).</p>
 <p><strong>Note:</strong> <code>binding.identity</code> is omitted when the authenticated caller is the
 binding target. Include it when acting on behalf of another participant (e.g.,
 PSP detokenizing for business).</p>
-<p>See the full <a href="/{version}/handlers/tokenization/openapi.json">OpenAPI specification</a> for complete request/response schemas.</p>
+<p>See the full <a href="/ucp/2026-01-23/handlers/tokenization/openapi.json">OpenAPI specification</a>
+for complete request/response schemas.</p>
 <hr />
 <h2 id="security-requirements">Security Requirements<a class="headerlink" href="#security-requirements" title="Permanent link">&para;</a></h2>
 <table>
@@ -1802,8 +1804,8 @@ PSP detokenizing for business).</p>
 </tbody>
 </table>
 <h3 id="example-specification-outline">Example Specification Outline<a class="headerlink" href="#example-specification-outline" title="Permanent link">&para;</a></h3>
-<div class="language-markdown highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="gs">**Handler Name:**</span> <span class="sb">`com.acme.tokenization_payment`</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="gs">**OpenAPI:**</span> [<span class="nt">Tokenization API</span>](<span class="na">/{version}/handlers/tokenization/openapi.json</span>)
+<div class="language-markdown highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="gs">**Handler Name:**</span> <span class="sb">`com.acme.tokenization_payment`</span> <span class="gs">**OpenAPI:**</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>[<span class="nt">Tokenization API</span>](<span class="na">site:handlers/tokenization/openapi.json</span>)
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
 </span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>| Environment | Base URL                           |
 </span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>| :---------- | :--------------------------------- |
@@ -1849,23 +1851,23 @@ PSP detokenizing for business).</p>
 <tbody>
 <tr>
 <td style="text-align: left;">Tokenization OpenAPI</td>
-<td style="text-align: left;"><code>/{version}/handlers/tokenization/openapi.json</code></td>
+<td style="text-align: left;"><code>https://ucp.dev/2026-01-23/handlers/tokenization/openapi.json</code></td>
 </tr>
 <tr>
 <td style="text-align: left;">Identity Schema</td>
-<td style="text-align: left;"><code>/{version}/schemas/shopping/types/payment_identity.json</code></td>
+<td style="text-align: left;"><code>https://ucp.dev/2026-01-23/schemas/shopping/types/payment_identity.json</code></td>
 </tr>
 <tr>
 <td style="text-align: left;">Binding Schema</td>
-<td style="text-align: left;"><code>/{version}/schemas/shopping/types/binding.json</code></td>
+<td style="text-align: left;"><code>https://ucp.dev/2026-01-23/schemas/shopping/types/binding.json</code></td>
 </tr>
 <tr>
 <td style="text-align: left;">Token Credential Schema</td>
-<td style="text-align: left;"><code>/{version}/schemas/shopping/types/token_credential.json</code></td>
+<td style="text-align: left;"><code>https://ucp.dev/2026-01-23/schemas/shopping/types/token_credential.json</code></td>
 </tr>
 <tr>
 <td style="text-align: left;">Card Instrument Schema</td>
-<td style="text-align: left;"><code>/{version}/schemas/shopping/types/card_payment_instrument.json</code></td>
+<td style="text-align: left;"><code>https://ucp.dev/2026-01-23/schemas/shopping/types/card_payment_instrument.json</code></td>
 </tr>
 </tbody>
 </table>

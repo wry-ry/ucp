@@ -982,7 +982,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#business-authorization_1" class="md-nav__link">
+  <a href="#merchant-authorization" class="md-nav__link">
     <span class="md-ellipsis">
       Business Authorization
     </span>
@@ -1732,7 +1732,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#business-authorization_1" class="md-nav__link">
+  <a href="#merchant-authorization" class="md-nav__link">
     <span class="md-ellipsis">
       Business Authorization
     </span>
@@ -2309,7 +2309,7 @@ Handler / PSP. The PSP verifies the <code>payment_mandate</code> per the
 including signature validation, expiration, and correlation with the
 checkout.</p>
 <h2 id="schema">Schema<a class="headerlink" href="#schema" title="Permanent link">&para;</a></h2>
-<h3 id="business-authorization_1">Business Authorization<a class="headerlink" href="#business-authorization_1" title="Permanent link">&para;</a></h3>
+<h3 id="merchant-authorization">Business Authorization<a class="headerlink" href="#merchant-authorization" title="Permanent link">&para;</a></h3>
 <p>JWS Detached Content signature (RFC 7515 Appendix F) over the checkout response body (excluding ap2 field). Format: <code>&lt;base64url-header&gt;..&lt;base64url-signature&gt;</code>. The header MUST contain 'alg' (ES256/ES384/ES512) and 'kid' claims. The signature covers both the header and JCS-canonicalized checkout payload.</p>
 <p><strong>Pattern:</strong> <code>^[A-Za-z0-9_-]+\.\.[A-Za-z0-9_-]+$</code></p>
 <h3 id="ap2-checkout-response">AP2 Checkout Response<a class="headerlink" href="#ap2-checkout-response" title="Permanent link">&para;</a></h3>
