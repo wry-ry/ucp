@@ -62,13 +62,13 @@ When a business advertises the `embedded` transport in their `/.well-known/ucp` 
             {
                 "version": "2026-01-23",
                 "transport": "mcp",
-                "schema": "https://ucp.dev/2026-01-23/services/shopping/mcp.openrpc.json",
+                "schema": "https://ucp.dev/2026-01-23/services/shopping/openrpc.json",
                 "endpoint": "https://merchant.example.com/ucp/mcp"
             },
             {
                 "version": "2026-01-23",
                 "transport": "embedded",
-                "schema": "https://ucp.dev/2026-01-23/services/shopping/embedded.openrpc.json"
+                "schema": "https://ucp.dev/2026-01-23/services/shopping/embedded.json"
             }
         ]
     }
