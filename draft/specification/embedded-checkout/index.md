@@ -1162,6 +1162,7 @@ The object returned upon successful completion of a checkout, containing confirm
 | line_items    | Array\[[Order Line Item](/ucp/draft/specification/reference/#order-line-item)\]        | **Yes**  | Immutable line items — source of truth for what was ordered.                                                                                 |
 | fulfillment   | object                                                                                 | **Yes**  | Fulfillment data: buyer expectations and what actually happened.                                                                             |
 | adjustments   | Array\[[Adjustment](/ucp/draft/specification/reference/#adjustment)\]                  | No       | Append-only event log of money movements (refunds, returns, credits, disputes, cancellations, etc.) that exist independently of fulfillment. |
+| currency      | string                                                                                 | No       | ISO 4217 currency code. MUST match the currency from the originating checkout session.                                                       |
 | totals        | Array\[[Total Response](/ucp/draft/specification/reference/#total)\]                   | **Yes**  | Different totals for the order.                                                                                                              |
 
 ### Payment

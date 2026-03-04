@@ -6188,6 +6188,7 @@ The object returned upon successful completion of a checkout, containing confirm
 | line_items    | Array\[[Order Line Item](/ucp/draft/specification/reference/#order-line-item)\]        | **Yes**  | Immutable line items — source of truth for what was ordered.                                                                                 |
 | fulfillment   | object                                                                                 | **Yes**  | Fulfillment data: buyer expectations and what actually happened.                                                                             |
 | adjustments   | Array\[[Adjustment](/ucp/draft/specification/reference/#adjustment)\]                  | No       | Append-only event log of money movements (refunds, returns, credits, disputes, cancellations, etc.) that exist independently of fulfillment. |
+| currency      | string                                                                                 | No       | ISO 4217 currency code. MUST match the currency from the originating checkout session.                                                       |
 | totals        | Array\[[Total Response](/ucp/draft/specification/reference/#total)\]                   | **Yes**  | Different totals for the order.                                                                                                              |
 
 ### Payment
@@ -9338,6 +9339,7 @@ Expectations can be split, merged, or adjusted post-order. For example:
 | line_items    | Array\[[Order Line Item](/ucp/draft/specification/reference/#order-line-item)\]        | **Yes**  | Immutable line items — source of truth for what was ordered.                                                                                 |
 | fulfillment   | object                                                                                 | **Yes**  | Fulfillment data: buyer expectations and what actually happened.                                                                             |
 | adjustments   | Array\[[Adjustment](/ucp/draft/specification/reference/#adjustment)\]                  | No       | Append-only event log of money movements (refunds, returns, credits, disputes, cancellations, etc.) that exist independently of fulfillment. |
+| currency      | string                                                                                 | No       | ISO 4217 currency code. MUST match the currency from the originating checkout session.                                                       |
 | totals        | Array\[[Total Response](/ucp/draft/specification/reference/#total)\]                   | **Yes**  | Different totals for the order.                                                                                                              |
 
 ### Order Line Item
@@ -9537,6 +9539,7 @@ Businesses POST order events to a webhook URL provided by the platform during pa
 | line_items    | Array\[[Order Line Item](/ucp/draft/specification/reference/#order-line-item)\]        | **Yes**  | Immutable line items — source of truth for what was ordered.                                                                                 |
 | fulfillment   | object                                                                                 | **Yes**  | Fulfillment data: buyer expectations and what actually happened.                                                                             |
 | adjustments   | Array\[[Adjustment](/ucp/draft/specification/reference/#adjustment)\]                  | No       | Append-only event log of money movements (refunds, returns, credits, disputes, cancellations, etc.) that exist independently of fulfillment. |
+| currency      | string                                                                                 | No       | ISO 4217 currency code. MUST match the currency from the originating checkout session.                                                       |
 | totals        | Array\[[Total](/ucp/draft/specification/reference/#total)\]                            | **Yes**  | Different totals for the order.                                                                                                              |
 | event_id      | string                                                                                 | **Yes**  | Unique event identifier.                                                                                                                     |
 | created_time  | string                                                                                 | **Yes**  | Event creation timestamp in RFC 3339 format.                                                                                                 |
@@ -12237,6 +12240,7 @@ ______________________________________________________________________
 | line_items    | Array\[[Order Line Item](/ucp/draft/specification/reference/#order-line-item)\]            | **Yes**  | Immutable line items — source of truth for what was ordered.                                                                                 |
 | fulfillment   | object                                                                                     | **Yes**  | Fulfillment data: buyer expectations and what actually happened.                                                                             |
 | adjustments   | Array\[[Adjustment](/ucp/draft/specification/reference/#adjustment)\]                      | No       | Append-only event log of money movements (refunds, returns, credits, disputes, cancellations, etc.) that exist independently of fulfillment. |
+| currency      | string                                                                                     | No       | ISO 4217 currency code. MUST match the currency from the originating checkout session.                                                       |
 | totals        | Array\[[Total](/ucp/draft/specification/reference/#total)\]                                | **Yes**  | Different totals for the order.                                                                                                              |
 
 ______________________________________________________________________
