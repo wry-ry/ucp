@@ -54,25 +54,66 @@ An example:
 
 ```json
 {
+<<<<<<< conflict 3 of 3
++++++++ xpxqrxvk 1a207f72 "docs: resolve remaining absolute URLs and broken anchors on main" (rebase destination)
   "extensions": [
     {
-      "uri": "https://ucp.dev/draft/specification/reference?v=2026-01-11",
+      "uri": "https://ucp.dev/draft/specification/reference",
       "description": "Business agent supporting UCP",
       "params": {
-        "capabilities": {
-          "dev.ucp.shopping.checkout": [
-            {"version": "draft"}
-          ],
-          "dev.ucp.shopping.fulfillment": [
-            {
-              "version": "draft",
-              "extends": "dev.ucp.shopping.checkout"
-            }
-          ]
-        }
+        "capabilities": [
+          {
+            "name": "dev.ucp.shopping.checkout",
+            "version": "2026-01-11"
+          },
+          {
+            "name": "dev.ucp.shopping.fulfillment",
+            "version": "2026-01-11",
+            "extends": "dev.ucp.shopping.checkout"
+          }
+        ]
       }
     }
   ]
+%%%%%%% diff from: xpxqrxvk cedcac83 "docs: resolve remaining absolute URLs and broken anchors on main" (parents of rebased revision)
+\\\\\\\        to: zvmolxrp 2c6b0634 "ci: fix ruff formatting for check_links.py" (rebased revision)
+-    "extensions": [
+-        {
+-            "uri": "https://ucp.dev/draft/specification/reference?v=2026-01-11",
+-            "description": "Business agent supporting UCP",
+-            "params": {
+-                "capabilities": [
+-                    {
+-                        "name": "dev.ucp.shopping.checkout",
+-                        "version": "2026-01-11"
+-                    },
+-                    {
+-                        "name": "dev.ucp.shopping.fulfillment",
+-                        "version": "2026-01-11",
+-                        "extends": "dev.ucp.shopping.checkout"
+-                    }
+-                ]
++  "extensions": [
++    {
++      "uri": "https://ucp.dev/draft/specification/reference",
++      "description": "Business agent supporting UCP",
++      "params": {
++        "capabilities": {
++          "dev.ucp.shopping.checkout": [
++            {"version": "draft"}
++          ],
++          "dev.ucp.shopping.fulfillment": [
++            {
++              "version": "draft",
++              "extends": "dev.ucp.shopping.checkout"
+             }
++          ]
+         }
+-    ]
++      }
++    }
++  ]
+>>>>>>> conflict 3 of 3 ends
 }
 ```
 
@@ -102,18 +143,18 @@ Examples:
 
 ```json
 {
-    "message": {
-        "role": "user",
-        "parts": [
-            {
-                "type": "text",
-                "text": "add Pixel 10 Pro to my checkout"
-            }
-        ],
-        "messageId": "69da8f87-991b-479e-80dc-ed92fcb57cbe",
-        "kind": "message",
-        "contextId": "aad14abc-4082-4748-84ca-4afff85aedfa"
-    }
+  "message": {
+    "role": "user",
+    "parts": [
+      {
+        "type": "text",
+        "text": "add Pixel 10 Pro to my checkout"
+      }
+    ],
+    "messageId": "69da8f87-991b-479e-80dc-ed92fcb57cbe",
+    "kind": "message",
+    "contextId": "aad14abc-4082-4748-84ca-4afff85aedfa"
+  }
 }
 ```
 
@@ -121,22 +162,22 @@ Examples:
 
 ```json
 {
-    "message": {
-        "role": "user",
-        "parts": [
-            {
-                "type": "data",
-                "data": {
-                    "action": "add_to_checkout",
-                    "product_id": "PIXEL-10-PRO",
-                    "quantity": 1
-                }
-            }
-        ],
-        "messageId": "e94a8c10-69f4-4c4c-b988-21a298302da6",
-        "kind": "message",
-        "contextId": "aad14abc-4082-4748-84ca-4afff85aedfa"
-    }
+  "message": {
+    "role": "user",
+    "parts": [
+      {
+        "type": "data",
+        "data": {
+          "action": "add_to_checkout",
+          "product_id": "PIXEL-10-PRO",
+          "quantity": 1
+        }
+      }
+    ],
+    "messageId": "e94a8c10-69f4-4c4c-b988-21a298302da6",
+    "kind": "message",
+    "contextId": "aad14abc-4082-4748-84ca-4afff85aedfa"
+  }
 }
 ```
 
@@ -258,44 +299,44 @@ When the user confirms the payment on a platform, the user signed checkout and p
 
 ```json
 {
-    "message": {
-        "role": "user",
-        "parts": [
-            {
-                "type": "data",
-                "data": {
-                    "action": "complete_checkout"
-                }
+  "message": {
+    "role": "user",
+    "parts": [
+      {
+        "type": "data",
+        "data": {
+          "action": "complete_checkout"
+        }
+      },
+      {
+        "kind": "data",
+        "data": {
+          "a2a.ucp.checkout.payment_data": {
+            "id": "instr_1",
+            "handler_id": "gpay",
+            "type": "card",
+            "description": "Visa •••• 1234",
+            "billing_address": {
+              "street_address": "123 Main St",
+              "address_locality": "Anytown",
+              "address_region": "CA",
+              "address_country": "US",
+              "postal_code": "12345"
             },
-            {
-                "kind": "data",
-                "data": {
-                    "a2a.ucp.checkout.payment_data": {
-                        "id": "instr_1",
-                        "handler_id": "gpay",
-                        "type": "card",
-                        "description": "Visa •••• 1234",
-                        "billing_address": {
-                            "street_address": "123 Main St",
-                            "address_locality": "Anytown",
-                            "address_region": "CA",
-                            "address_country": "US",
-                            "postal_code": "12345"
-                        },
-                        "credential": {
-                            "type": "PAYMENT_GATEWAY",
-                            "token": "examplePaymentMethodToken"
-                        }
-                    },
-                    "ap2": {
-                        "checkout_mandate": "eyJhbGciOiJFUz..."
-                    }
-                }
+            "credential": {
+              "type": "PAYMENT_GATEWAY",
+              "token": "examplePaymentMethodToken"
             }
-        ],
-        "messageId": "e94a8c10-69f4-4c4c-b988-21a298302da6",
-        "kind": "message",
-        "contextId": "aad14abc-4082-4748-84ca-4afff85aedfa"
-    }
+          },
+          "ap2": {
+            "checkout_mandate": "eyJhbGciOiJFUz..."
+          }
+        }
+      }
+    ],
+    "messageId": "e94a8c10-69f4-4c4c-b988-21a298302da6",
+    "kind": "message",
+    "contextId": "aad14abc-4082-4748-84ca-4afff85aedfa"
+  }
 }
 ```

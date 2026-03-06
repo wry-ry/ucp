@@ -438,5 +438,5 @@ ______________________________________________________________________
 ## References
 
 - **Pattern:** [Tokenization Payment Handler](https://ucp.dev/draft/specification/payment-handler-guide/index.md)
-- **API Pattern:** `https://ucp.dev/draft/handlers/tokenization/openapi.json`
-- **Identity Schema:** `https://ucp.dev/draft/schemas/shopping/types/payment_identity.json`
+- **API Pattern:** [handlers/tokenization/openapi.json](/ucp/draft/handlers/tokenization/openapi.json)
+- **Identity Schema:** [schemas/shopping/types/payment_identity.json](/ucp/draft/schemas/shopping/types/payment_identity.json)
