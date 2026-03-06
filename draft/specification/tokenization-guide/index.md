@@ -231,13 +231,13 @@ ______________________________________________________________________
 
 ## References
 
-| Resource                | URL                                                                         |
-| ----------------------- | --------------------------------------------------------------------------- |
-| Tokenization OpenAPI    | `https://ucp.dev/draft/handlers/tokenization/openapi.json`                  |
-| Identity Schema         | `https://ucp.dev/draft/schemas/shopping/types/payment_identity.json`        |
-| Binding Schema          | `https://ucp.dev/draft/schemas/shopping/types/binding.json`                 |
-| Token Credential Schema | `https://ucp.dev/draft/schemas/shopping/types/token_credential.json`        |
-| Card Instrument Schema  | `https://ucp.dev/draft/schemas/shopping/types/card_payment_instrument.json` |
+| Resource                | URL                                                                                                                   |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Tokenization OpenAPI    | [handlers/tokenization/openapi.json](/ucp/draft/handlers/tokenization/openapi.json)                                   |
+| Identity Schema         | [schemas/shopping/types/payment_identity.json](/ucp/draft/schemas/shopping/types/payment_identity.json)               |
+| Binding Schema          | [schemas/shopping/types/binding.json](/ucp/draft/schemas/shopping/types/binding.json)                                 |
+| Token Credential Schema | [schemas/shopping/types/token_credential.json](/ucp/draft/schemas/shopping/types/token_credential.json)               |
+| Card Instrument Schema  | [schemas/shopping/types/card_payment_instrument.json](/ucp/draft/schemas/shopping/types/card_payment_instrument.json) |
 
 ______________________________________________________________________
 
