@@ -1969,12 +1969,12 @@ implementing Checkout functionality:</p>
 </span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="p">}</span>
 </span></code></pre></div>
 <h3 id="checkout-completion">Checkout Completion<a class="headerlink" href="#checkout-completion" title="Permanent link">&para;</a></h3>
-<p>When a user is ready to make a payment, <code>payment_data</code> must be submitted to the
-business agent to complete the checkout process. <code>payment_data</code> is a structured
-data type specified as part of UCP. When processing a payment to complete the
-checkout, <code>payment_data</code> must be submitted to the business agent as a <code>DataPart</code>
-with attribute name <code>a2a.ucp.checkout.payment_data</code>. Any associated risk signals
-should be sent with attribute name <code>a2a.ucp.checkout.risk_signals</code>.</p>
+<p>When a user is ready to make a payment, <code>payment</code> must be submitted to the
+business agent to complete the checkout process. <code>payment</code> is a structured data
+type specified as part of UCP. When processing a payment to complete the
+checkout, <code>payment</code> must be submitted to the business agent as a <code>DataPart</code> with
+attribute name <code>a2a.ucp.checkout.payment</code>. Any associated risk signals should be
+sent with attribute name <code>a2a.ucp.checkout.risk_signals</code>.</p>
 <p>Upon completion of the checkout process, the business agent must return the
 checkout object containing an <code>order</code> attribute with <code>id</code> and <code>permalink_url</code>.</p>
 <h3 id="request-format">Request format<a class="headerlink" href="#request-format" title="Permanent link">&para;</a></h3>
@@ -1989,7 +1989,7 @@ checkout object containing an <code>order</code> attribute with <code>id</code> 
 </span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">      </span><span class="p">{</span>
 </span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">        </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;data&quot;</span><span class="p">,</span>
 </span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">        </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">          </span><span class="nt">&quot;a2a.ucp.checkout.payment_data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">          </span><span class="nt">&quot;a2a.ucp.checkout.payment&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">            </span><span class="err">...payme</span><span class="kc">nt</span><span class="err">Da</span><span class="kc">ta</span><span class="err">Objec</span><span class="kc">t</span>
 </span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">          </span><span class="p">},</span>
 </span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">          </span><span class="nt">&quot;a2a.ucp.checkout.risk_signals&quot;</span><span class="p">:{</span><span class="err">...co</span><span class="kc">ntent</span><span class="p">}</span>
@@ -2082,7 +2082,7 @@ verification and processing of the mandates to complete the checkout.</p>
 </span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">      </span><span class="p">{</span>
 </span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">        </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;data&quot;</span><span class="p">,</span>
 </span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">        </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">          </span><span class="nt">&quot;a2a.ucp.checkout.payment_data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">          </span><span class="nt">&quot;a2a.ucp.checkout.payment&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;instr_1&quot;</span><span class="p">,</span>
 </span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="w">            </span><span class="nt">&quot;handler_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gpay&quot;</span><span class="p">,</span>
 </span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;card&quot;</span><span class="p">,</span>

@@ -2376,19 +2376,19 @@ cart capability is defined in the <code>rest.endpoint</code> field of the busine
 <tbody>
 <tr>
 <td style="text-align: left;">line_items</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#line-item">Line Item</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/cart/#line-item">Line Item</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Cart line items. Same structure as checkout. Full replacement on update.</td>
 </tr>
 <tr>
 <td style="text-align: left;">context</td>
-<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#context">Context</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/cart/#context">Context</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Buyer signals for localization (country, region, postal_code). Merchant uses for pricing, availability, currency. Falls back to geo-IP if omitted.</td>
 </tr>
 <tr>
 <td style="text-align: left;">buyer</td>
-<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#buyer">Buyer</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/cart/#buyer">Buyer</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Optional buyer information for personalized estimates.</td>
 </tr>
@@ -2419,19 +2419,19 @@ cart capability is defined in the <code>rest.endpoint</code> field of the busine
 </tr>
 <tr>
 <td style="text-align: left;">line_items</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#line-item">Line Item Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/cart/#line-item">Line Item Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Cart line items. Same structure as checkout. Full replacement on update.</td>
 </tr>
 <tr>
 <td style="text-align: left;">context</td>
-<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#context">Context</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/cart/#context">Context</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Buyer signals for localization (country, region, postal_code). Merchant uses for pricing, availability, currency. Falls back to geo-IP if omitted.</td>
 </tr>
 <tr>
 <td style="text-align: left;">buyer</td>
-<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#buyer">Buyer</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/cart/#buyer">Buyer</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Optional buyer information for personalized estimates.</td>
 </tr>
@@ -2443,19 +2443,19 @@ cart capability is defined in the <code>rest.endpoint</code> field of the busine
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#total">Total Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/cart/#total">Total Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Estimated cost breakdown. May be partial if shipping/tax not yet calculable.</td>
 </tr>
 <tr>
 <td style="text-align: left;">messages</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#message">Message</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/cart/#message">Message</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Validation messages, warnings, or informational notices.</td>
 </tr>
 <tr>
 <td style="text-align: left;">links</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#link">Link</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/cart/#link">Link</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Optional merchant links (policies, FAQs).</td>
 </tr>
@@ -2581,19 +2581,19 @@ cart capability is defined in the <code>rest.endpoint</code> field of the busine
 </tr>
 <tr>
 <td style="text-align: left;">line_items</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#line-item">Line Item Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/cart/#line-item">Line Item Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Cart line items. Same structure as checkout. Full replacement on update.</td>
 </tr>
 <tr>
 <td style="text-align: left;">context</td>
-<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#context">Context</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/cart/#context">Context</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Buyer signals for localization (country, region, postal_code). Merchant uses for pricing, availability, currency. Falls back to geo-IP if omitted.</td>
 </tr>
 <tr>
 <td style="text-align: left;">buyer</td>
-<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#buyer">Buyer</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/cart/#buyer">Buyer</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Optional buyer information for personalized estimates.</td>
 </tr>
@@ -2605,19 +2605,19 @@ cart capability is defined in the <code>rest.endpoint</code> field of the busine
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#total">Total Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/cart/#total">Total Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Estimated cost breakdown. May be partial if shipping/tax not yet calculable.</td>
 </tr>
 <tr>
 <td style="text-align: left;">messages</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#message">Message</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/cart/#message">Message</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Validation messages, warnings, or informational notices.</td>
 </tr>
 <tr>
 <td style="text-align: left;">links</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#link">Link</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/cart/#link">Link</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Optional merchant links (policies, FAQs).</td>
 </tr>
@@ -2743,19 +2743,19 @@ cart capability is defined in the <code>rest.endpoint</code> field of the busine
 </tr>
 <tr>
 <td style="text-align: left;">line_items</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#line-item">Line Item</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/cart/#line-item">Line Item</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Cart line items. Same structure as checkout. Full replacement on update.</td>
 </tr>
 <tr>
 <td style="text-align: left;">context</td>
-<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#context">Context</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/cart/#context">Context</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Buyer signals for localization (country, region, postal_code). Merchant uses for pricing, availability, currency. Falls back to geo-IP if omitted.</td>
 </tr>
 <tr>
 <td style="text-align: left;">buyer</td>
-<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#buyer">Buyer</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/cart/#buyer">Buyer</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Optional buyer information for personalized estimates.</td>
 </tr>
@@ -2786,19 +2786,19 @@ cart capability is defined in the <code>rest.endpoint</code> field of the busine
 </tr>
 <tr>
 <td style="text-align: left;">line_items</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#line-item">Line Item Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/cart/#line-item">Line Item Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Cart line items. Same structure as checkout. Full replacement on update.</td>
 </tr>
 <tr>
 <td style="text-align: left;">context</td>
-<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#context">Context</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/cart/#context">Context</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Buyer signals for localization (country, region, postal_code). Merchant uses for pricing, availability, currency. Falls back to geo-IP if omitted.</td>
 </tr>
 <tr>
 <td style="text-align: left;">buyer</td>
-<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#buyer">Buyer</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/cart/#buyer">Buyer</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Optional buyer information for personalized estimates.</td>
 </tr>
@@ -2810,19 +2810,19 @@ cart capability is defined in the <code>rest.endpoint</code> field of the busine
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#total">Total Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/cart/#total">Total Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Estimated cost breakdown. May be partial if shipping/tax not yet calculable.</td>
 </tr>
 <tr>
 <td style="text-align: left;">messages</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#message">Message</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/cart/#message">Message</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Validation messages, warnings, or informational notices.</td>
 </tr>
 <tr>
 <td style="text-align: left;">links</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#link">Link</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/cart/#link">Link</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Optional merchant links (policies, FAQs).</td>
 </tr>
@@ -2969,19 +2969,19 @@ cart capability is defined in the <code>rest.endpoint</code> field of the busine
 </tr>
 <tr>
 <td style="text-align: left;">line_items</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#line-item">Line Item Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/cart/#line-item">Line Item Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Cart line items. Same structure as checkout. Full replacement on update.</td>
 </tr>
 <tr>
 <td style="text-align: left;">context</td>
-<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#context">Context</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/cart/#context">Context</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Buyer signals for localization (country, region, postal_code). Merchant uses for pricing, availability, currency. Falls back to geo-IP if omitted.</td>
 </tr>
 <tr>
 <td style="text-align: left;">buyer</td>
-<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#buyer">Buyer</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/cart/#buyer">Buyer</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Optional buyer information for personalized estimates.</td>
 </tr>
@@ -2993,19 +2993,19 @@ cart capability is defined in the <code>rest.endpoint</code> field of the busine
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#total">Total Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/cart/#total">Total Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Estimated cost breakdown. May be partial if shipping/tax not yet calculable.</td>
 </tr>
 <tr>
 <td style="text-align: left;">messages</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#message">Message</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/cart/#message">Message</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Validation messages, warnings, or informational notices.</td>
 </tr>
 <tr>
 <td style="text-align: left;">links</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#link">Link</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/cart/#link">Link</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Optional merchant links (policies, FAQs).</td>
 </tr>

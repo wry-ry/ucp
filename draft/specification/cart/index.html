@@ -2287,19 +2287,19 @@ SHOULD be linked for the duration of the checkout.</p>
 </tr>
 <tr>
 <td style="text-align: left;">line_items</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#line-item">Line Item Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/cart/#line-item">Line Item Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Cart line items. Same structure as checkout. Full replacement on update.</td>
 </tr>
 <tr>
 <td style="text-align: left;">context</td>
-<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#context">Context</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/cart/#context">Context</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Buyer signals for localization (country, region, postal_code). Merchant uses for pricing, availability, currency. Falls back to geo-IP if omitted.</td>
 </tr>
 <tr>
 <td style="text-align: left;">buyer</td>
-<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#buyer">Buyer</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/cart/#buyer">Buyer</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Optional buyer information for personalized estimates.</td>
 </tr>
@@ -2311,19 +2311,19 @@ SHOULD be linked for the duration of the checkout.</p>
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#total">Total Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/cart/#total">Total Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Estimated cost breakdown. May be partial if shipping/tax not yet calculable.</td>
 </tr>
 <tr>
 <td style="text-align: left;">messages</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#message">Message</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/cart/#message">Message</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Validation messages, warnings, or informational notices.</td>
 </tr>
 <tr>
 <td style="text-align: left;">links</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#link">Link</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/cart/#link">Link</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Optional merchant links (policies, FAQs).</td>
 </tr>
@@ -2458,7 +2458,7 @@ consistent data structures when converting a cart to a checkout session.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">item</td>
-<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#item">Item</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#item">Item</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;"></td>
 </tr>
@@ -2489,7 +2489,7 @@ consistent data structures when converting a cart to a checkout session.</p>
 </tr>
 <tr>
 <td style="text-align: left;">item</td>
-<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#item">Item</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#item">Item</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;"></td>
 </tr>
@@ -2526,7 +2526,7 @@ consistent data structures when converting a cart to a checkout session.</p>
 </tr>
 <tr>
 <td style="text-align: left;">item</td>
-<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#item">Item</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/cart/#item">Item</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;"></td>
 </tr>
@@ -2538,7 +2538,7 @@ consistent data structures when converting a cart to a checkout session.</p>
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#total">Total</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/cart/#total">Total</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Line item totals breakdown.</td>
 </tr>
@@ -2695,7 +2695,7 @@ consistent data structures when converting a cart to a checkout session.</p>
 <p>Taxes MAY be included where calculable. Platforms SHOULD assume cart totals
 are estimates; accurate taxes are computed at checkout.</p>
 <h3 id="message">Message<a class="headerlink" href="#message" title="Permanent link">&para;</a></h3>
-<p>This object MUST be one of the following types: <a href="/ucp/draft/specification/reference/#message-error">Message Error</a>, <a href="/ucp/draft/specification/reference/#message-warning">Message Warning</a>, <a href="/ucp/draft/specification/reference/#message-info">Message Info</a>.</p>
+<p>This object MUST be one of the following types: <a href="/ucp/draft/specification/checkout/#message-error">Message Error</a>, <a href="/ucp/draft/specification/checkout/#message-warning">Message Warning</a>, <a href="/ucp/draft/specification/checkout/#message-info">Message Info</a>.</p>
 <h4 id="message-error">Message Error<a class="headerlink" href="#message-error" title="Permanent link">&para;</a></h4>
 <table>
 <thead>
@@ -2715,7 +2715,7 @@ are estimates; accurate taxes are computed at checkout.</p>
 </tr>
 <tr>
 <td style="text-align: left;">code</td>
-<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#error-code">Error Code</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#error-code">Error Code</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Error code identifying the type of error. Standard errors are defined in specification (see examples), and have standardized semantics; freeform codes are permitted.</td>
 </tr>

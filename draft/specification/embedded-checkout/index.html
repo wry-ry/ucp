@@ -4714,13 +4714,13 @@ line items, totals, and buyer information.</p>
 </tr>
 <tr>
 <td style="text-align: left;">line_items</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#line-item">Line Item Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#line-item">Line Item Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">List of line items being checked out.</td>
 </tr>
 <tr>
 <td style="text-align: left;">buyer</td>
-<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#buyer">Buyer</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#buyer">Buyer</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Representation of the buyer.</td>
 </tr>
@@ -4738,19 +4738,19 @@ line items, totals, and buyer information.</p>
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#total">Total Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#total">Total Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Different cart totals.</td>
 </tr>
 <tr>
 <td style="text-align: left;">messages</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#message">Message</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#message">Message</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">List of messages with error and info about the checkout session state.</td>
 </tr>
 <tr>
 <td style="text-align: left;">links</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#link">Link</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/checkout/#link">Link</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Links to be displayed by the platform (Privacy Policy, TOS). Mandatory for legal compliance.</td>
 </tr>
@@ -4774,7 +4774,7 @@ line items, totals, and buyer information.</p>
 </tr>
 <tr>
 <td style="text-align: left;">order</td>
-<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#order-confirmation">Order Confirmation</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#order-confirmation">Order Confirmation</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Details about an order created for this checkout session.</td>
 </tr>
@@ -4819,7 +4819,7 @@ confirmation details.</p>
 </tr>
 <tr>
 <td style="text-align: left;">line_items</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#order-line-item">Order Line Item</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/order/#order-line-item">Order Line Item</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Immutable line items — source of truth for what was ordered.</td>
 </tr>
@@ -4831,7 +4831,7 @@ confirmation details.</p>
 </tr>
 <tr>
 <td style="text-align: left;">adjustments</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#adjustment">Adjustment</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/order/#adjustment">Adjustment</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Append-only event log of money movements (refunds, returns, credits, disputes, cancellations, etc.) that exist independently of fulfillment.</td>
 </tr>
@@ -4843,7 +4843,7 @@ confirmation details.</p>
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#total">Total Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/order/#total">Total Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Different totals for the order.</td>
 </tr>
@@ -4862,7 +4862,7 @@ confirmation details.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">instruments</td>
-<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#selected-payment-instrument">Selected Payment Instrument</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/embedded-checkout/#selected-payment-instrument">Selected Payment Instrument</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">The payment instruments available for this payment. Each instrument is associated with a specific handler via the handler_id field. Handlers can extend the base payment_instrument schema to add handler-specific fields.</td>
 </tr>
@@ -4901,13 +4901,13 @@ account, or wallet credential) available to the buyer.</p>
 </tr>
 <tr>
 <td style="text-align: left;">billing_address</td>
-<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#postal-address">Postal Address</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/embedded-checkout/#postal-address">Postal Address</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">The billing address associated with this payment method.</td>
 </tr>
 <tr>
 <td style="text-align: left;">credential</td>
-<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#payment-credential">Payment Credential</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/embedded-checkout/#payment-credential">Payment Credential</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">The base definition for any payment credential. Handlers define specific credential types.</td>
 </tr>
@@ -5005,13 +5005,13 @@ account, or wallet credential) available to the buyer.</p>
 </tr>
 <tr>
 <td style="text-align: left;">billing_address</td>
-<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#postal-address">Postal Address</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/embedded-checkout/#postal-address">Postal Address</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">The billing address associated with this payment method.</td>
 </tr>
 <tr>
 <td style="text-align: left;">credential</td>
-<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#payment-credential">Payment Credential</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/embedded-checkout/#payment-credential">Payment Credential</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">The base definition for any payment credential. Handlers define specific credential types.</td>
 </tr>
@@ -5156,7 +5156,49 @@ account, or wallet credential) available to the buyer.</p>
 <p>Represents the processor or wallet provider responsible for authenticating and
 processing a specific payment instrument (e.g., Google Pay, Stripe, or a Bank
 App).</p>
-<p><em>No properties defined.</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">version</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Entity version in YYYY-MM-DD format.</td>
+</tr>
+<tr>
+<td style="text-align: left;">spec</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">URL to human-readable specification document.</td>
+</tr>
+<tr>
+<td style="text-align: left;">schema</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">URL to JSON Schema defining this entity's structure and payloads.</td>
+</tr>
+<tr>
+<td style="text-align: left;">id</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Unique identifier for this entity instance. Used to disambiguate when multiple instances exist.</td>
+</tr>
+<tr>
+<td style="text-align: left;">config</td>
+<td style="text-align: left;">object</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Entity-specific configuration. Structure defined by each entity's schema.</td>
+</tr>
+</tbody>
+</table>
+<p>| available_instruments | Array[object] | No | Instrument types this handler supports, with optional constraints. When absent, every instrument should be considered available. |</p>
 
 
 
