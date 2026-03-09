@@ -165,6 +165,26 @@ Content-Type: application/json
 }
 ```
 
+All items out of stock — no cart resource is created:
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "ucp": { "version": "2026-01-15", "status": "error" },
+  "messages": [
+    {
+      "type": "error",
+      "code": "out_of_stock",
+      "content": "All requested items are currently out of stock",
+      "severity": "unrecoverable"
+    }
+  ],
+  "continue_url": "https://merchant.com/"
+}
+```
+
 ### Get Cart
 
 #### Input Schema
@@ -251,6 +271,7 @@ Content-Type: application/json
 {
   "ucp": {
     "version": "draft",
+    "status": "error",
     "capabilities": [
       {
         "name": "dev.ucp.shopping.cart",
@@ -262,7 +283,8 @@ Content-Type: application/json
     {
       "type": "error",
       "code": "not_found",
-      "content": "Cart not found or has expired"
+      "content": "Cart not found or has expired",
+      "severity": "unrecoverable"
     }
   ],
   "continue_url": "https://merchant.com/"
@@ -537,6 +559,7 @@ Business outcomes (including not found and validation errors) are returned with 
 {
   "ucp": {
     "version": "draft",
+    "status": "error",
     "capabilities": {
       "dev.ucp.shopping.cart": [{"version": "draft"}]
     }
@@ -545,7 +568,8 @@ Business outcomes (including not found and validation errors) are returned with 
     {
       "type": "error",
       "code": "not_found",
-      "content": "Cart not found or has expired"
+      "content": "Cart not found or has expired",
+      "severity": "unrecoverable"
     }
   ],
   "continue_url": "https://merchant.com/"

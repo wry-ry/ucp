@@ -208,6 +208,32 @@ Maps to the [Create Cart](https://ucp.dev/draft/specification/cart/#create-cart)
 }
 ```
 
+All items out of stock — no cart resource is created:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "structuredContent": {
+      "ucp": { "version": "2026-01-15", "status": "error" },
+      "messages": [
+        {
+          "type": "error",
+          "code": "out_of_stock",
+          "content": "All requested items are currently out of stock",
+          "severity": "unrecoverable"
+        }
+      ],
+      "continue_url": "https://merchant.com/"
+    },
+    "content": [
+      {"type": "text", "text": "{\"ucp\":{...},\"messages\":[...]}"}
+    ]
+  }
+}
+```
+
 ### `get_cart`
 
 Maps to the [Get Cart](https://ucp.dev/draft/specification/cart/#get-cart) operation.
@@ -334,7 +360,8 @@ Maps to the [Get Cart](https://ucp.dev/draft/specification/cart/#get-cart) opera
           {
             "type": "error",
             "code": "not_found",
-            "content": "Cart not found or has expired"
+            "content": "Cart not found or has expired",
+            "severity": "unrecoverable"
           }
         ],
         "continue_url": "https://merchant.com/"
@@ -343,7 +370,7 @@ Maps to the [Get Cart](https://ucp.dev/draft/specification/cart/#get-cart) opera
     "content": [
       {
         "type": "text",
-        "text": "{\"cart\":{\"ucp\":{...},\"messages\":[...],\"continue_url\":\"...\"}}"
+        "text": "{\"ucp\":{...},\"messages\":[...],\"continue_url\":\"...\"}"
       }
     ]
   }
@@ -631,14 +658,15 @@ Business outcomes (including not found and validation errors) are returned as JS
           {
             "type": "error",
             "code": "not_found",
-            "content": "Cart not found or has expired"
+            "content": "Cart not found or has expired",
+            "severity": "unrecoverable"
           }
         ],
         "continue_url": "https://merchant.com/"
       }
     },
     "content": [
-      {"type": "text", "text": "{\"cart\":{...}}"}
+      {"type": "text", "text": "{\"ucp\":{...},\"messages\":[...]}"}
     ]
   }
 }
