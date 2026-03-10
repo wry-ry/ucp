@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Tokenization API",
-    "version": "2026-01-23",
-    "description": "Shared API for tokenization payment handlers. Tokenizer services implement these endpoints to enable secure credential exchange. See the Tokenization Guide for implementation details."
+    "description": "Shared API for tokenization payment handlers. Tokenizer services implement these endpoints to enable secure credential exchange. See the Tokenization Guide for implementation details.",
+    "version": "2026-01-23"
   },
   "paths": {
     "/tokenize": {
