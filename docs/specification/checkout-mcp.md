@@ -26,6 +26,7 @@ This document specifies the Model Context Protocol (MCP) binding for the
 Businesses advertise MCP transport availability through their UCP profile at
 `/.well-known/ucp`.
 
+<!-- schema: ignore -->
 ```json
 {
   "ucp": {
@@ -36,7 +37,7 @@ Businesses advertise MCP transport availability through their UCP profile at
           "version": "{{ ucp_version }}",
           "spec": "https://ucp.dev/{{ ucp_version }}/specification/overview",
           "transport": "mcp",
-          "schema": "https://ucp.dev/{{ ucp_version }}/services/shopping/mcp.openrpc.json",
+          "schema": "https://ucp.dev/{{ ucp_version }}/services/shopping/openrpc.json",
           "endpoint": "https://business.example.com/ucp/mcp"
         }
       ]
@@ -81,6 +82,7 @@ Businesses advertise MCP transport availability through their UCP profile at
 MCP clients **MUST** include a `meta` object in every request containing
 protocol metadata:
 
+<!-- schema: ignore -->
 ```json
 {
   "jsonrpc": "2.0",
@@ -152,6 +154,7 @@ Maps to the [Create Checkout](checkout.md#create-checkout) operation.
 
 === "Request"
 
+    <!-- schema: ignore -->
     ```json
     {
       "jsonrpc": "2.0",
@@ -204,6 +207,7 @@ Maps to the [Create Checkout](checkout.md#create-checkout) operation.
 
 === "Response"
 
+    <!-- schema: ignore -->
     ```json
     {
       "jsonrpc": "2.0",
@@ -344,6 +348,7 @@ Maps to the [Create Checkout](checkout.md#create-checkout) operation.
 
     All items out of stock — no checkout resource is created:
 
+    <!-- schema: ignore -->
     ```json
     {
       "jsonrpc": "2.0",
@@ -403,6 +408,7 @@ Maps to the [Update Checkout](checkout.md#update-checkout) operation.
 
 === "Request"
 
+    <!-- schema: ignore -->
     ```json
     {
       "jsonrpc": "2.0",
@@ -454,6 +460,7 @@ Maps to the [Update Checkout](checkout.md#update-checkout) operation.
 
 === "Response"
 
+    <!-- schema: ignore -->
     ```json
     {
       "jsonrpc": "2.0",
@@ -641,6 +648,7 @@ Business outcomes (including errors like unavailable merchandise) are returned
 as JSON-RPC `result` with `structuredContent` containing the UCP envelope and
 `messages`:
 
+<!-- schema: ignore -->
 ```json
 {
   "jsonrpc": "2.0",
@@ -684,6 +692,7 @@ as JSON-RPC `result` with `structuredContent` containing the UCP envelope and
 For `create_checkout`, when all items unavailable and no checkout can be created,
 JSON-RPC `result` with `structuredContent` containing the UCP envelope and `messages`:
 
+<!-- schema: ignore -->
 ```json
 {
   "jsonrpc": "2.0",
@@ -815,6 +824,7 @@ transformation:
 
 **Example:** Given the `complete_checkout` operation defined in OpenRPC:
 
+<!-- schema: ignore -->
 ```json
 {
   "method": "complete_checkout",
@@ -831,6 +841,7 @@ transformation:
 
 Implementers **MUST** expose this as an MCP `tools/call` endpoint:
 
+<!-- schema: ignore -->
 ```json
 {
   "jsonrpc": "2.0",
