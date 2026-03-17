@@ -1,6 +1,6 @@
 # Tokenization Guide
 
-**OpenAPI:** [Tokenization API](/ucp/draft/handlers/tokenization/openapi.json)
+**OpenAPI:** [Tokenization API](/draft/handlers/tokenization/openapi.json)
 
 ## Overview
 
@@ -75,7 +75,7 @@ All tokenization requests require a `binding` object that ties the token to a sp
 | `checkout_id` | Yes         | The checkout session this token is valid for                                                    |
 | `identity`    | Conditional | The participant identity to bind to; required when caller acts on behalf of another participant |
 
-The tokenizer **MUST** verify binding matches on `/detokenize`. See [Binding Schema](/ucp/draft/schemas/shopping/types/binding.json).
+The tokenizer **MUST** verify binding matches on `/detokenize`. See [Binding Schema](/draft/schemas/shopping/types/binding.json).
 
 ______________________________________________________________________
 
@@ -153,7 +153,7 @@ Authorization: Bearer {caller_access_token}
 
 **Note:** `binding.identity` is omitted when the authenticated caller is the binding target. Include it when acting on behalf of another participant (e.g., PSP detokenizing for business).
 
-See the full [OpenAPI specification](/ucp/draft/handlers/tokenization/openapi.json) for complete request/response schemas.
+See the full [OpenAPI specification](/draft/handlers/tokenization/openapi.json) for complete request/response schemas.
 
 ______________________________________________________________________
 
@@ -231,13 +231,13 @@ ______________________________________________________________________
 
 ## References
 
-| Resource                | URL                                                                                                                   |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| Tokenization OpenAPI    | [handlers/tokenization/openapi.json](/ucp/draft/handlers/tokenization/openapi.json)                                   |
-| Identity Schema         | [schemas/shopping/types/payment_identity.json](/ucp/draft/schemas/shopping/types/payment_identity.json)               |
-| Binding Schema          | [schemas/shopping/types/binding.json](/ucp/draft/schemas/shopping/types/binding.json)                                 |
-| Token Credential Schema | [schemas/shopping/types/token_credential.json](/ucp/draft/schemas/shopping/types/token_credential.json)               |
-| Card Instrument Schema  | [schemas/shopping/types/card_payment_instrument.json](/ucp/draft/schemas/shopping/types/card_payment_instrument.json) |
+| Resource                | URL                                                                                                               |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Tokenization OpenAPI    | [handlers/tokenization/openapi.json](/draft/handlers/tokenization/openapi.json)                                   |
+| Identity Schema         | [schemas/shopping/types/payment_identity.json](/draft/schemas/shopping/types/payment_identity.json)               |
+| Binding Schema          | [schemas/shopping/types/binding.json](/draft/schemas/shopping/types/binding.json)                                 |
+| Token Credential Schema | [schemas/shopping/types/token_credential.json](/draft/schemas/shopping/types/token_credential.json)               |
+| Card Instrument Schema  | [schemas/shopping/types/card_payment_instrument.json](/draft/schemas/shopping/types/card_payment_instrument.json) |
 
 ______________________________________________________________________
 

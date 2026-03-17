@@ -33,33 +33,33 @@ Fulfillment applies only to items requiring physical delivery. Items not requiri
 
 ### Properties
 
-| Name        | Type                                                             | Required | Description          |
-| ----------- | ---------------------------------------------------------------- | -------- | -------------------- |
-| fulfillment | [Fulfillment](/ucp/draft/specification/fulfillment/#fulfillment) | No       | Fulfillment details. |
+| Name        | Type                                                         | Required | Description          |
+| ----------- | ------------------------------------------------------------ | -------- | -------------------- |
+| fulfillment | [Fulfillment](/draft/specification/fulfillment/#fulfillment) | No       | Fulfillment details. |
 
 ### Entities
 
 #### Fulfillment
 
-| Name              | Type                                                                                                      | Required | Description                         |
-| ----------------- | --------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------- |
-| methods           | Array\[[Fulfillment Method](/ucp/draft/specification/reference/#fulfillment-method)\]                     | No       | Fulfillment methods for cart items. |
-| available_methods | Array\[[Fulfillment Available Method](/ucp/draft/specification/reference/#fulfillment-available-method)\] | No       | Inventory availability hints.       |
+| Name              | Type                                                                                                  | Required | Description                         |
+| ----------------- | ----------------------------------------------------------------------------------------------------- | -------- | ----------------------------------- |
+| methods           | Array\[[Fulfillment Method](/draft/specification/reference/#fulfillment-method)\]                     | No       | Fulfillment methods for cart items. |
+| available_methods | Array\[[Fulfillment Available Method](/draft/specification/reference/#fulfillment-available-method)\] | No       | Inventory availability hints.       |
 
 #### Fulfillment Method
 
-| Name                    | Type                                                                                            | Required | Description                                                                                                  |
-| ----------------------- | ----------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------ |
-| id                      | string                                                                                          | **Yes**  | Unique fulfillment method identifier.                                                                        |
-| type                    | string                                                                                          | **Yes**  | Fulfillment method type. **Enum:** `shipping`, `pickup`                                                      |
-| line_item_ids           | Array[string]                                                                                   | **Yes**  | Line item IDs fulfilled via this method.                                                                     |
-| destinations            | Array\[[Fulfillment Destination](/ucp/draft/specification/reference/#fulfillment-destination)\] | No       | Available destinations. For shipping: addresses. For pickup: retail locations.                               |
-| selected_destination_id | ['string', 'null']                                                                              | No       | ID of the selected destination.                                                                              |
-| groups                  | Array\[[Fulfillment Group](/ucp/draft/specification/reference/#fulfillment-group)\]             | No       | Fulfillment groups for selecting options. Agent sets selected_option_id on groups to choose shipping method. |
+| Name                    | Type                                                                                        | Required | Description                                                                                                  |
+| ----------------------- | ------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------ |
+| id                      | string                                                                                      | **Yes**  | Unique fulfillment method identifier.                                                                        |
+| type                    | string                                                                                      | **Yes**  | Fulfillment method type. **Enum:** `shipping`, `pickup`                                                      |
+| line_item_ids           | Array[string]                                                                               | **Yes**  | Line item IDs fulfilled via this method.                                                                     |
+| destinations            | Array\[[Fulfillment Destination](/draft/specification/reference/#fulfillment-destination)\] | No       | Available destinations. For shipping: addresses. For pickup: retail locations.                               |
+| selected_destination_id | ['string', 'null']                                                                          | No       | ID of the selected destination.                                                                              |
+| groups                  | Array\[[Fulfillment Group](/draft/specification/reference/#fulfillment-group)\]             | No       | Fulfillment groups for selecting options. Agent sets selected_option_id on groups to choose shipping method. |
 
 #### Fulfillment Destination
 
-This object MUST be one of the following types: [Shipping Destination](/ucp/draft/specification/reference/#shipping-destination), [Retail Location](/ucp/draft/specification/reference/#retail-location).
+This object MUST be one of the following types: [Shipping Destination](/draft/specification/reference/#shipping-destination), [Retail Location](/draft/specification/reference/#retail-location).
 
 #### Shipping Destination
 
@@ -78,32 +78,32 @@ This object MUST be one of the following types: [Shipping Destination](/ucp/draf
 
 #### Retail Location
 
-| Name    | Type                                                                 | Required | Description                       |
-| ------- | -------------------------------------------------------------------- | -------- | --------------------------------- |
-| id      | string                                                               | **Yes**  | Unique location identifier.       |
-| name    | string                                                               | **Yes**  | Location name (e.g., store name). |
-| address | [Postal Address](/ucp/draft/specification/reference/#postal-address) | No       | Physical address of the location. |
+| Name    | Type                                                             | Required | Description                       |
+| ------- | ---------------------------------------------------------------- | -------- | --------------------------------- |
+| id      | string                                                           | **Yes**  | Unique location identifier.       |
+| name    | string                                                           | **Yes**  | Location name (e.g., store name). |
+| address | [Postal Address](/draft/specification/reference/#postal-address) | No       | Physical address of the location. |
 
 #### Fulfillment Group
 
-| Name               | Type                                                                                  | Required | Description                                                            |
-| ------------------ | ------------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------- |
-| id                 | string                                                                                | **Yes**  | Group identifier for referencing merchant-generated groups in updates. |
-| line_item_ids      | Array[string]                                                                         | **Yes**  | Line item IDs included in this group/package.                          |
-| options            | Array\[[Fulfillment Option](/ucp/draft/specification/reference/#fulfillment-option)\] | No       | Available fulfillment options for this group.                          |
-| selected_option_id | ['string', 'null']                                                                    | No       | ID of the selected fulfillment option for this group.                  |
+| Name               | Type                                                                              | Required | Description                                                            |
+| ------------------ | --------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------- |
+| id                 | string                                                                            | **Yes**  | Group identifier for referencing merchant-generated groups in updates. |
+| line_item_ids      | Array[string]                                                                     | **Yes**  | Line item IDs included in this group/package.                          |
+| options            | Array\[[Fulfillment Option](/draft/specification/reference/#fulfillment-option)\] | No       | Available fulfillment options for this group.                          |
+| selected_option_id | ['string', 'null']                                                                | No       | ID of the selected fulfillment option for this group.                  |
 
 #### Fulfillment Option
 
-| Name                      | Type                                                        | Required | Description                                                                |
-| ------------------------- | ----------------------------------------------------------- | -------- | -------------------------------------------------------------------------- |
-| id                        | string                                                      | **Yes**  | Unique fulfillment option identifier.                                      |
-| title                     | string                                                      | **Yes**  | Short label (e.g., 'Express Shipping', 'Curbside Pickup').                 |
-| description               | string                                                      | No       | Complete context for buyer decision (e.g., 'Arrives Dec 12-15 via FedEx'). |
-| carrier                   | string                                                      | No       | Carrier name (for shipping).                                               |
-| earliest_fulfillment_time | string                                                      | No       | Earliest fulfillment date.                                                 |
-| latest_fulfillment_time   | string                                                      | No       | Latest fulfillment date.                                                   |
-| totals                    | Array\[[Total](/ucp/draft/specification/reference/#total)\] | **Yes**  | Fulfillment option totals breakdown.                                       |
+| Name                      | Type                                                    | Required | Description                                                                |
+| ------------------------- | ------------------------------------------------------- | -------- | -------------------------------------------------------------------------- |
+| id                        | string                                                  | **Yes**  | Unique fulfillment option identifier.                                      |
+| title                     | string                                                  | **Yes**  | Short label (e.g., 'Express Shipping', 'Curbside Pickup').                 |
+| description               | string                                                  | No       | Complete context for buyer decision (e.g., 'Arrives Dec 12-15 via FedEx'). |
+| carrier                   | string                                                  | No       | Carrier name (for shipping).                                               |
+| earliest_fulfillment_time | string                                                  | No       | Earliest fulfillment date.                                                 |
+| latest_fulfillment_time   | string                                                  | No       | Latest fulfillment date.                                                   |
+| totals                    | Array\[[Total](/draft/specification/reference/#total)\] | **Yes**  | Fulfillment option totals breakdown.                                       |
 
 #### Fulfillment Available Method
 
@@ -116,11 +116,11 @@ This object MUST be one of the following types: [Shipping Destination](/ucp/draf
 
 #### Total
 
-| Name         | Type                                                 | Required | Description                                                                                                                                                                      |
-| ------------ | ---------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| type         | string                                               | **Yes**  | Cost category. Well-known values: subtotal, items_discount, discount, fulfillment, tax, fee, total. Businesses MAY use additional values.                                        |
-| display_text | string                                               | No       | Text to display against the amount. Should reflect appropriate method (e.g., 'Shipping', 'Delivery').                                                                            |
-| amount       | [Amount](/ucp/draft/specification/reference/#amount) | **Yes**  | Monetary amount in the currency's minor unit as defined by ISO 4217. Refer to the currency's exponent to determine minor-to-major ratio (e.g., 2 for USD, 0 for JPY, 3 for KWD). |
+| Name         | Type                                             | Required | Description                                                                                                                                                                      |
+| ------------ | ------------------------------------------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| type         | string                                           | **Yes**  | Cost category. Well-known values: subtotal, items_discount, discount, fulfillment, tax, fee, total. Businesses MAY use additional values.                                        |
+| display_text | string                                           | No       | Text to display against the amount. Should reflect appropriate method (e.g., 'Shipping', 'Delivery').                                                                            |
+| amount       | [Amount](/draft/specification/reference/#amount) | **Yes**  | Monetary amount in the currency's minor unit as defined by ISO 4217. Refer to the currency's exponent to determine minor-to-major ratio (e.g., 2 for USD, 0 for JPY, 3 for KWD). |
 
 #### Postal Address
 

@@ -11,7 +11,7 @@
       
       
       
-        <link rel="canonical" href="https://wry-ry.github.io/ucp/draft/specification/payment-handler-guide/">
+        <link rel="canonical" href="https://ucp.dev/draft/specification/payment-handler-guide/">
       
       
         <link rel="prev" href="../identity-linking/">
@@ -142,16 +142,16 @@
 <meta property="og:title" content="Guide - Universal Commerce Protocol (UCP)" />
 <meta property="og:description" content="The Universal Commerce Protocol (UCP) is a solution for enabling gen AI agents to make payments on behalf of users, safely, securely, and in a decentralized and privacy protecting manner. This protocol is a part of the broader ecosystem, which includes agentic protocols like A2A and MCP, and encompasses the global nature of payments.
 " />
-<meta property="og:image" content="https://wry-ry.github.io/ucp/draft/assets/images/social/specification/payment-handler-guide.png" />
+<meta property="og:image" content="https://ucp.dev/draft/assets/images/social/specification/payment-handler-guide.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:url" content="https://wry-ry.github.io/ucp/draft/specification/payment-handler-guide/" />
+<meta property="og:url" content="https://ucp.dev/draft/specification/payment-handler-guide/" />
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:title" content="Guide - Universal Commerce Protocol (UCP)" />
 <meta property="twitter:description" content="The Universal Commerce Protocol (UCP) is a solution for enabling gen AI agents to make payments on behalf of users, safely, securely, and in a decentralized and privacy protecting manner. This protocol is a part of the broader ecosystem, which includes agentic protocols like A2A and MCP, and encompasses the global nature of payments.
 " />
-<meta property="twitter:image" content="https://wry-ry.github.io/ucp/draft/assets/images/social/specification/payment-handler-guide.png" />
+<meta property="twitter:image" content="https://ucp.dev/draft/assets/images/social/specification/payment-handler-guide.png" />
 </head>
   
   
@@ -191,7 +191,7 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/ucp/" title="Universal Commerce Protocol (UCP)" class="md-header__button md-logo" aria-label="Universal Commerce Protocol (UCP)" data-md-component="logo">
+    <a href="/" title="Universal Commerce Protocol (UCP)" class="md-header__button md-logo" aria-label="Universal Commerce Protocol (UCP)" data-md-component="logo">
       
   <img src="../../assets/updated-icon.svg" alt="logo">
 
@@ -307,7 +307,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="/ucp/" class="md-tabs__link">
+      <a href="/" class="md-tabs__link">
         
   
   
@@ -370,7 +370,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/ucp/" title="Universal Commerce Protocol (UCP)" class="md-nav__button md-logo" aria-label="Universal Commerce Protocol (UCP)" data-md-component="logo">
+    <a href="/" title="Universal Commerce Protocol (UCP)" class="md-nav__button md-logo" aria-label="Universal Commerce Protocol (UCP)" data-md-component="logo">
       
   <img src="../../assets/updated-icon.svg" alt="logo">
 
@@ -399,7 +399,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/ucp/" class="md-nav__link">
+      <a href="/" class="md-nav__link">
         
   
   
@@ -2622,7 +2622,7 @@ complete before participating in the handler's flows.</p>
 </table>
 <p><strong>Prerequisites Output:</strong></p>
 <p>The <code>prerequisites_output</code> contains what a participant receives from onboarding.
-At minimum, this includes an <strong>identity</strong> (see <a href="/ucp/draft/schemas/shopping/types/payment_identity.json">Payment Identity</a>).
+At minimum, this includes an <strong>identity</strong> (see <a href="/draft/schemas/shopping/types/payment_identity.json">Payment Identity</a>).
 It <strong>MAY</strong> also include additional configuration, credentials, or settings
 specific to the handler.</p>
 <p>Payment handler specifications <strong>are not required</strong> to define a formal schema
@@ -2666,7 +2666,7 @@ this handler and enable platforms to invoke it.</p>
 </tbody>
 </table>
 <p><strong>Output Structure:</strong></p>
-<p>The handler declaration conforms to the <a href="/ucp/draft/schemas/payment_handler.json"><code>PaymentHandler</code></a>
+<p>The handler declaration conforms to the <a href="/draft/schemas/payment_handler.json"><code>PaymentHandler</code></a>
 schema. The specification <strong>SHOULD</strong> define the available config and instrument
 schemas, and how to construct each based on the business's prerequisites output
 and desired configuration.</p>
@@ -3028,11 +3028,11 @@ Authors typically define each shape in its own file and reference them:</p>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><a href="/ucp/draft/schemas/shopping/types/payment_instrument.json"><code>payment_instrument.json</code></a></td>
+<td style="text-align: left;"><a href="/draft/schemas/shopping/types/payment_instrument.json"><code>payment_instrument.json</code></a></td>
 <td style="text-align: left;">Base: id, handler_id, type, billing_address, credential, display</td>
 </tr>
 <tr>
-<td style="text-align: left;"><a href="/ucp/draft/schemas/shopping/types/card_payment_instrument.json"><code>card_payment_instrument.json</code></a></td>
+<td style="text-align: left;"><a href="/draft/schemas/shopping/types/card_payment_instrument.json"><code>card_payment_instrument.json</code></a></td>
 <td style="text-align: left;">Extends base with display: brand, last_digits, expiry, card art</td>
 </tr>
 </tbody>
@@ -3044,7 +3044,7 @@ multiple instrument types for different payment flows.</p>
 <p><strong>Available Instrument Schemas:</strong></p>
 <p>Each instrument schema defines its own <code>available_*</code> variant in <code>$defs</code> that
 specifies what constraints are valid for that instrument type. For example,
-<a href="/ucp/draft/schemas/shopping/types/card_payment_instrument.json"><code>card_payment_instrument.json</code></a>
+<a href="/draft/schemas/shopping/types/card_payment_instrument.json"><code>card_payment_instrument.json</code></a>
 defines <code>available_card_payment_instrument</code> with a <code>brands</code> constraint.</p>
 <table>
 <thead>
@@ -3055,7 +3055,7 @@ defines <code>available_card_payment_instrument</code> with a <code>brands</code
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><a href="/ucp/draft/schemas/shopping/types/available_payment_instrument.json"><code>available_payment_instrument.json</code></a></td>
+<td style="text-align: left;"><a href="/draft/schemas/shopping/types/available_payment_instrument.json"><code>available_payment_instrument.json</code></a></td>
 <td style="text-align: left;">Base: type, constraints (open object)</td>
 </tr>
 <tr>
@@ -3158,11 +3158,11 @@ constraints are meaningful (e.g., <code>brands</code> for cards), and <strong>pl
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><a href="/ucp/draft/schemas/shopping/types/payment_credential.json"><code>payment_credential.json</code></a></td>
+<td style="text-align: left;"><a href="/draft/schemas/shopping/types/payment_credential.json"><code>payment_credential.json</code></a></td>
 <td style="text-align: left;">Base: type discriminator only</td>
 </tr>
 <tr>
-<td style="text-align: left;"><a href="/ucp/draft/schemas/shopping/types/token_credential.json"><code>token_credential.json</code></a></td>
+<td style="text-align: left;"><a href="/draft/schemas/shopping/types/token_credential.json"><code>token_credential.json</code></a></td>
 <td style="text-align: left;">Token: type + token string</td>
 </tr>
 </tbody>
