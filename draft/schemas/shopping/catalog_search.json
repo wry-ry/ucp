@@ -16,6 +16,9 @@
         "context": {
           "$ref": "https://ucp.dev/draft/schemas/shopping/types/context.json"
         },
+        "signals": {
+          "$ref": "https://ucp.dev/draft/schemas/shopping/types/signals.json"
+        },
         "filters": {
           "$ref": "https://ucp.dev/draft/schemas/shopping/types/search_filters.json"
         },
@@ -54,5 +57,5 @@
       }
     }
   },
-  "version": "2026-03-10"
+  "version": "2026-03-17"
 }
