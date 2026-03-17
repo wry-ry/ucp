@@ -226,6 +226,99 @@ For example, the Platform claims a store card benefit via `context.eligibility`.
 
 The Platform can resolve this by having the buyer switch to the qualifying payment instrument, or by removing the claim from `context.eligibility` to renegotiate the checkout (obtaining updated pricing, availability, etc.) and then resubmitting for completion.
 
+### Warning Presentation
+
+The `presentation` field on warning messages controls the rendering contract the platform **MUST** follow. When omitted, it defaults to `"notice"`.
+
+|                          | `notice` (default) | `disclosure`                |
+| ------------------------ | ------------------ | --------------------------- |
+| Display content          | **MUST**           | **MUST**                    |
+| Proximity to `path`      | **MAY**            | **MUST**                    |
+| Dismissible              | **MAY**            | **MUST NOT**                |
+| Render `image_url`       | **MAY**            | **MUST**                    |
+| Render `url`             | **MAY**            | **SHOULD**                  |
+| Escalate if cannot honor | —                  | **MUST** via `continue_url` |
+
+#### `notice` (default)
+
+The default rendering contract for warnings. Platforms **MUST** display the warning content to the buyer. Platforms **MAY** render notices in a banner, tray, or toast, and **MAY** allow the buyer to dismiss them.
+
+#### `disclosure`
+
+Warnings with `presentation: "disclosure"` carry notices — safety warnings, allergen declarations, compliance content, etc. — that **MUST** follow the prescribed rendering contract below.
+
+**Platform requirements:**
+
+- **MUST** display the warning `content` to the buyer.
+- **MUST** display the warning in proximity to the component referenced by `path`, preserving the association between the disclosure and its subject. When `path` is omitted, the disclosure applies to the response as a whole.
+- **MUST NOT** hide, collapse, or auto-dismiss the warning.
+- **MUST** render `image_url` when present (e.g., warning symbol, energy class label).
+- **SHOULD** render `url` as a navigable reference link when present.
+
+Warnings with `presentation: "disclosure"` **SHOULD** be given rendering priority over notices.
+
+Platforms that cannot honor the disclosure rendering contract **MUST** escalate to merchant UI via `continue_url` rather than silently downgrading to a notice.
+
+**Business requirements:**
+
+- **MUST** set `presentation: "disclosure"` when the warning content must be displayed alongside a specific component and must not be hidden or auto-dismissed.
+- **SHOULD** use the `path` field to associate disclosures with the relevant component in the response.
+- **SHOULD** provide a `code` that identifies the disclosure category (e.g., `prop65`, `allergens`, `energy_label`).
+- **SHOULD** provide `image_url` when the disclosure has an associated visual element (e.g., warning symbol, energy class label).
+- **SHOULD** provide `url` when a reference link is available for the buyer to learn more.
+
+#### Disclosure and Acknowledgment
+
+The `presentation` field controls how the warning is rendered, not whether the checkout can proceed. When affirmative buyer acknowledgment or authorization is also required, the business **MAY** combine the disclosure with the escalation mechanisms described in the [Checkout Status Lifecycle](#checkout-status-lifecycle) to ensure the appropriate buyer input is obtained.
+
+#### Jurisdiction and Applicability
+
+It is the business's responsibility to determine which disclosures apply to a given session and return only those that are relevant. Businesses **SHOULD** use buyer-provided data (`context` and other inputs) and product attributes to resolve jurisdiction-specific requirements. Platforms do not affect or resolve disclosure applicability — they render what they receive from the business.
+
+#### Example
+
+A checkout response containing both a recoverable error and a disclosure warning on a line item:
+
+```json
+{
+  "ucp": { "version": "draft", "status": "success" },
+  "id": "chk_abc123",
+  "status": "incomplete",
+  "currency": "USD",
+  "line_items": [
+    {
+      "id": "li_1",
+      "item": { "id": "item_456", "title": "Artisan Nut Butter Collection", "image_url": "https://merchant.com/nut-butter.jpg" },
+      "quantity": 1,
+      "totals": [{ "type": "subtotal", "amount": 1299 }]
+    }
+  ],
+  "totals": [{ "type": "total", "amount": 1299 }],
+  "messages": [
+    {
+      "type": "error",
+      "code": "field_required",
+      "path": "$.buyer.email",
+      "content": "Buyer email is required",
+      "severity": "recoverable"
+    },
+    {
+      "type": "warning",
+      "code": "allergens",
+      "path": "$.line_items[0]",
+      "content": "**Contains: tree nuts.** Produced in a facility that also processes peanuts, milk, and soy.",
+      "content_type": "markdown",
+      "presentation": "disclosure",
+      "image_url": "https://merchant.com/allergen-tree-nuts.svg",
+      "url": "https://merchant.com/allergen-info"
+    }
+  ],
+  "links": []
+}
+```
+
+The platform resolves the recoverable error programmatically while rendering the allergen disclosure in proximity to the referenced line item.
+
 ## Continue URL
 
 The `continue_url` field enables checkout handoff from platform to business UI, allowing the buyer to continue and finalize the checkout session.
@@ -291,7 +384,7 @@ A stateless URL that encodes checkout state directly, allowing reconstruction wi
 | signals      | [Signals](/ucp/draft/specification/reference/#signals)                                          | No       | Environment data provided by the platform to support authorization and abuse prevention. Values MUST NOT be buyer-asserted claims — platforms provide signals based on direct observation or independently verifiable third-party attestations. All signal keys MUST use reverse-domain naming to ensure provenance and prevent collisions when multiple extensions contribute to the shared namespace.                                                                                                                                                                                                                                                                 |
 | status       | string                                                                                          | **Yes**  | Checkout state indicating the current phase and required action. See Checkout Status lifecycle documentation for state transition details. **Enum:** `incomplete`, `requires_escalation`, `ready_for_complete`, `complete_in_progress`, `completed`, `canceled`                                                                                                                                                                                                                                                                                                                                                                                                         |
 | currency     | string                                                                                          | **Yes**  | ISO 4217 currency code reflecting the merchant's market determination. Derived from address, context, and geo IP—buyers provide signals, merchants determine currency.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| totals       | Array\[[Total Response](/ucp/draft/specification/reference/#total)\]                            | **Yes**  | Different cart totals.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| totals       | [Totals](/ucp/draft/specification/reference/#totals)                                            | **Yes**  | Different cart totals.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | messages     | Array\[[Message](/ucp/draft/specification/reference/#message)\]                                 | No       | List of messages with error and info about the checkout session state.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | links        | Array\[[Link](/ucp/draft/specification/reference/#link)\]                                       | **Yes**  | Links to be displayed by the platform (Privacy Policy, TOS). Mandatory for legal compliance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | expires_at   | string                                                                                          | No       | RFC 3339 expiry timestamp. Default TTL is 6 hours from creation if not sent.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
@@ -561,13 +654,16 @@ Error code identifying the type of error. Standard errors are defined in specifi
 
 ### Message Warning
 
-| Name         | Type   | Required | Description                                                                                                                           |
-| ------------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| type         | string | **Yes**  | **Constant = warning**. Message type discriminator.                                                                                   |
-| path         | string | No       | JSONPath (RFC 9535) to related field (e.g., $.line_items[0]).                                                                         |
-| code         | string | **Yes**  | Warning code. Machine-readable identifier for the warning type (e.g., final_sale, prop65, fulfillment_changed, age_restricted, etc.). |
-| content      | string | **Yes**  | Human-readable warning message that MUST be displayed.                                                                                |
-| content_type | string | No       | Content format, default = plain. **Enum:** `plain`, `markdown`                                                                        |
+| Name         | Type   | Required | Description                                                                                                                                                                                                                                         |
+| ------------ | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| type         | string | **Yes**  | **Constant = warning**. Message type discriminator.                                                                                                                                                                                                 |
+| path         | string | No       | JSONPath (RFC 9535) to related field (e.g., $.line_items[0]).                                                                                                                                                                                       |
+| code         | string | **Yes**  | Warning code. Machine-readable identifier for the warning type (e.g., final_sale, prop65, fulfillment_changed, age_restricted, etc.).                                                                                                               |
+| content      | string | **Yes**  | Human-readable warning message that MUST be displayed.                                                                                                                                                                                              |
+| content_type | string | No       | Content format, default = plain. **Enum:** `plain`, `markdown`                                                                                                                                                                                      |
+| presentation | string | No       | Rendering contract for this warning. 'notice' (default): platform MUST display, MAY dismiss. 'disclosure': platform MUST display in proximity to the path-referenced component, MUST NOT hide or auto-dismiss. See specification for full contract. |
+| image_url    | string | No       | URL to a required visual element (e.g., warning symbol, energy class label).                                                                                                                                                                        |
+| url          | string | No       | Reference URL for more information (e.g., regulatory site, registry entry, policy page).                                                                                                                                                            |
 
 ### Payment
 
@@ -620,13 +716,122 @@ Error code identifying the type of error. Standard errors are defined in specifi
 
 ### Total
 
-#### Total
+| Name         | Type                                                 | Required | Description                                                                                                                                                                      |
+| ------------ | ---------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| type         | string                                               | **Yes**  | Cost category. Well-known values: subtotal, items_discount, discount, fulfillment, tax, fee, total. Businesses MAY use additional values.                                        |
+| display_text | string                                               | No       | Text to display against the amount. Should reflect appropriate method (e.g., 'Shipping', 'Delivery').                                                                            |
+| amount       | [Amount](/ucp/draft/specification/reference/#amount) | **Yes**  | Monetary amount in the currency's minor unit as defined by ISO 4217. Refer to the currency's exponent to determine minor-to-major ratio (e.g., 2 for USD, 0 for JPY, 3 for KWD). |
 
-| Name         | Type                                                 | Required | Description                                                                                                            |
-| ------------ | ---------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------- |
-| type         | string                                               | **Yes**  | Type of total categorization. **Enum:** `items_discount`, `subtotal`, `discount`, `fulfillment`, `tax`, `fee`, `total` |
-| display_text | string                                               | No       | Text to display against the amount. Should reflect appropriate method (e.g., 'Shipping', 'Delivery').                  |
-| amount       | [Amount](/ucp/draft/specification/reference/#amount) | **Yes**  | If type == total, sums subtotal - discount + fulfillment + tax + fee. Should be >= 0. Amount in ISO 4217 minor units.  |
+#### Rendering Contract
+
+Businesses are the authoritative source for presented totals — their content and order — because the correct presentation is subject to regional, product, and regulatory requirements that the business is obligated to satisfy (e.g., multi-jurisdiction tax itemization, mandatory fee disclosures).
+
+Platforms MUST render all top-level entries in the order provided:
+
+```python
+for entry in totals:
+    render_line(entry.display_text, entry.amount)
+```
+
+Platforms MAY render sub-lines as supplementary detail:
+
+```python
+for entry in totals:
+    render_line(entry.display_text, entry.amount)
+    if entry.lines:
+        for sub in entry.lines:
+            render_detail_line(sub.display_text, sub.amount)
+```
+
+Platforms MUST NOT interpret, filter, reorder, aggregate, or apply display logic of their own.
+
+Invariants of `totals[]`:
+
+- Every entry carries a `type` and an `amount`. Platforms SHOULD use `display_text` when provided. Well-known types have default display labels as fallback (see table below); unknown types MUST include `display_text`.
+- Amounts are signed integers — negative values are subtractive (e.g., discounts), positive values are additive. The sign IS the direction.
+- Exactly one `type: "subtotal"` MUST be present.
+- Exactly one `type: "total"` MUST be present.
+
+#### Verification
+
+Platforms MUST NOT substitute their own computed totals for the business's values. Platforms MAY verify the provided totals:
+
+```python
+assert sum(e.amount for e in totals if e.type != "total") == total_entry.amount
+```
+
+If the computed sum does not match the `type: "total"` entry, the platform MUST NOT alter the rendered output — the business's presented totals are authoritative for display. However, platforms MUST NOT autonomously complete a checkout with mismatched totals. Platforms SHOULD reject the checkout or escalate and ask for buyer review via `continue_url`.
+
+#### Well-Known Types
+
+| Type             | Sign | Default label  | Meaning                                 |
+| ---------------- | ---- | -------------- | --------------------------------------- |
+| `subtotal`       | +    | Subtotal       | Sum of line item prices                 |
+| `discount`       | −    | Discount       | Order or line-item level discount       |
+| `items_discount` | −    | Item Discounts | Rollup of line-item discounts           |
+| `fulfillment`    | +    | Shipping       | Shipping, delivery, or pickup charges   |
+| `tax`            | +    | Tax            | Tax charges                             |
+| `fee`            | +    | Fee            | Fees and surcharges                     |
+| `total`          | =    | Total          | Authoritative grand total (exactly one) |
+
+When `display_text` is provided, platforms MUST use it. When omitted on a well-known type, platforms SHOULD use the default label above. The sign convention for well-known types is schema-enforced: subtractive types (discount, items_discount) MUST have negative amounts; additive types (subtotal, fulfillment, tax, fee) MUST have non-negative amounts.
+
+The `type` field is an open string — businesses MAY use values beyond the well-known set. Unknown types MUST include `display_text` (schema-enforced) and the sign on the amount is self-describing.
+
+#### Repeating Types
+
+All types except `subtotal` and `total` MAY appear multiple times — for example, multi-jurisdiction tax lines or itemized fees.
+
+#### Sub-Lines (`lines`)
+
+Each top-level entry MAY include a `lines` array. Sub-lines share the same base shape as top-level entries — `display_text` and `amount` — providing an itemized breakdown under the parent.
+
+**Invariant:** `sum(lines[].amount)` MUST equal the parent entry's `amount`.
+
+The business controls what MUST be rendered (top-level entries) versus what MAY be optionally surfaced (sub-lines). Platforms SHOULD render sub-lines when provided.
+
+#### Examples
+
+**Split tax, itemized at top-level:**
+
+```json
+"totals": [
+  { "type": "subtotal",    "display_text": "Subtotal",    "amount": 5750 },
+  { "type": "fulfillment", "display_text": "Shipping",    "amount": 899 },
+  { "type": "tax",         "display_text": "Federal Tax", "amount": 332 },
+  { "type": "tax",         "display_text": "State Tax",   "amount": 465 },
+  { "type": "total",       "display_text": "Total",       "amount": 7446 }
+]
+```
+
+**Collapsed fees with optional breakdown:**
+
+```json
+"totals": [
+  { "type": "subtotal", "display_text": "Subtotal", "amount": 4999 },
+  {
+    "type": "fee", "display_text": "Fees", "amount": 549,
+    "lines": [
+      { "display_text": "Service Fee", "amount": 399 },
+      { "display_text": "Recycling Fee", "amount": 150 }
+    ]
+  },
+  { "type": "tax",   "display_text": "Tax",   "amount": 444 },
+  { "type": "total", "display_text": "Total", "amount": 5992 }
+]
+```
+
+**Discount and account credit — negative amounts:**
+
+```json
+"totals": [
+  { "type": "subtotal",       "display_text": "Subtotal",       "amount": 10000 },
+  { "type": "discount",       "display_text": "Summer Sale",    "amount": -1500 },
+  { "type": "tax",            "display_text": "Tax",            "amount": 680 },
+  { "type": "account_credit", "display_text": "Account Credit", "amount": -2500 },
+  { "type": "total",          "display_text": "Amount Due",     "amount": 6680 }
+]
+```
 
 ### UCP Response Checkout
 
