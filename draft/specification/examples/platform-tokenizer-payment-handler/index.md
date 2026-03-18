@@ -142,7 +142,7 @@ Optionally, businesses may configure their PSP to detokenize on their behalf (PS
 
 Businesses advertise the platform's tokenization handler. The `config` contains the business's identity with the platform for token binding. The platform's handler specification (referenced via `spec`) documents the `/detokenize` endpoint URL exposed by the platform's **payment credential provider**.
 
-The handler accepts [CardCredential](/draft/schemas/shopping/types/card_credential.json) for tokenization and produces [TokenCredential](/draft/schemas/shopping/types/token_credential.json) for checkout.
+The handler accepts [CardCredential](/ucp/draft/schemas/shopping/types/card_credential.json) for tokenization and produces [TokenCredential](/ucp/draft/schemas/shopping/types/token_credential.json) for checkout.
 
 **Note:** The result of `/detokenize` contains **sensitive payment data**. Both the sender (platform's credential provider) and receiver (business or PSP) **MUST** be compliant with relevant standards for the credential type (e.g., PCI DSS for cards).
 
@@ -438,6 +438,6 @@ ______________________________________________________________________
 
 ## References
 
-- **Pattern:** [Tokenization Payment Handler](https://ucp.dev/draft/specification/payment-handler-guide/index.md)
-- **API Pattern:** [handlers/tokenization/openapi.json](/draft/handlers/tokenization/openapi.json)
-- **Identity Schema:** [schemas/shopping/types/payment_identity.json](/draft/schemas/shopping/types/payment_identity.json)
+- **Pattern:** [Tokenization Payment Handler](https://wry-ry.github.io/ucp/draft/specification/payment-handler-guide/index.md)
+- **API Pattern:** [handlers/tokenization/openapi.json](/ucp/draft/handlers/tokenization/openapi.json)
+- **Identity Schema:** [schemas/shopping/types/payment_identity.json](/ucp/draft/schemas/shopping/types/payment_identity.json)

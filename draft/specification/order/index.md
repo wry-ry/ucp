@@ -75,30 +75,30 @@ Expectations can be split, merged, or adjusted post-order. For example:
 
 ### Order
 
-| Name          | Type                                                                               | Required | Description                                                                                                                                  |
-| ------------- | ---------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| ucp           | [Ucp Response Order Schema](/draft/specification/order/#ucp-response-order-schema) | **Yes**  | Protocol metadata for discovery profiles and responses. Uses slim schema pattern with context-specific required fields.                      |
-| id            | string                                                                             | **Yes**  | Unique order identifier.                                                                                                                     |
-| checkout_id   | string                                                                             | **Yes**  | Associated checkout ID for reconciliation.                                                                                                   |
-| permalink_url | string                                                                             | **Yes**  | Permalink to access the order on merchant site.                                                                                              |
-| line_items    | Array\[[Order Line Item](/draft/specification/reference/#order-line-item)\]        | **Yes**  | Immutable line items — source of truth for what was ordered.                                                                                 |
-| fulfillment   | object                                                                             | **Yes**  | Fulfillment data: buyer expectations and what actually happened.                                                                             |
-| adjustments   | Array\[[Adjustment](/draft/specification/reference/#adjustment)\]                  | No       | Append-only event log of money movements (refunds, returns, credits, disputes, cancellations, etc.) that exist independently of fulfillment. |
-| currency      | string                                                                             | No       | ISO 4217 currency code. MUST match the currency from the originating checkout session.                                                       |
-| totals        | [Totals](/draft/specification/reference/#totals)                                   | **Yes**  | Different totals for the order.                                                                                                              |
+| Name          | Type                                                                                   | Required | Description                                                                                                                                  |
+| ------------- | -------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| ucp           | [Ucp Response Order Schema](/ucp/draft/specification/order/#ucp-response-order-schema) | **Yes**  | Protocol metadata for discovery profiles and responses. Uses slim schema pattern with context-specific required fields.                      |
+| id            | string                                                                                 | **Yes**  | Unique order identifier.                                                                                                                     |
+| checkout_id   | string                                                                                 | **Yes**  | Associated checkout ID for reconciliation.                                                                                                   |
+| permalink_url | string                                                                                 | **Yes**  | Permalink to access the order on merchant site.                                                                                              |
+| line_items    | Array\[[Order Line Item](/ucp/draft/specification/reference/#order-line-item)\]        | **Yes**  | Immutable line items — source of truth for what was ordered.                                                                                 |
+| fulfillment   | object                                                                                 | **Yes**  | Fulfillment data: buyer expectations and what actually happened.                                                                             |
+| adjustments   | Array\[[Adjustment](/ucp/draft/specification/reference/#adjustment)\]                  | No       | Append-only event log of money movements (refunds, returns, credits, disputes, cancellations, etc.) that exist independently of fulfillment. |
+| currency      | string                                                                                 | No       | ISO 4217 currency code. MUST match the currency from the originating checkout session.                                                       |
+| totals        | [Totals](/ucp/draft/specification/reference/#totals)                                   | **Yes**  | Different totals for the order.                                                                                                              |
 
 ### Order Line Item
 
 Line items reflect what was purchased at checkout and their current state. Status and quantity counts should reflect the event logs.
 
-| Name      | Type                                                    | Required | Description                                                                                                                                                                |
-| --------- | ------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| id        | string                                                  | **Yes**  | Line item identifier.                                                                                                                                                      |
-| item      | [Item](/draft/specification/reference/#item)            | **Yes**  | Product data (id, title, price, image_url).                                                                                                                                |
-| quantity  | object                                                  | **Yes**  | Quantity tracking. Both total and fulfilled are derived from events.                                                                                                       |
-| totals    | Array\[[Total](/draft/specification/reference/#total)\] | **Yes**  | Line item totals breakdown.                                                                                                                                                |
-| status    | string                                                  | **Yes**  | Derived status: fulfilled if quantity.fulfilled == quantity.total, partial if quantity.fulfilled > 0, otherwise processing. **Enum:** `processing`, `partial`, `fulfilled` |
-| parent_id | string                                                  | No       | Parent line item identifier for any nested structures.                                                                                                                     |
+| Name      | Type                                                        | Required | Description                                                                                                                                                                |
+| --------- | ----------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id        | string                                                      | **Yes**  | Line item identifier.                                                                                                                                                      |
+| item      | [Item](/ucp/draft/specification/reference/#item)            | **Yes**  | Product data (id, title, price, image_url).                                                                                                                                |
+| quantity  | object                                                      | **Yes**  | Quantity tracking. Both total and fulfilled are derived from events.                                                                                                       |
+| totals    | Array\[[Total](/ucp/draft/specification/reference/#total)\] | **Yes**  | Line item totals breakdown.                                                                                                                                                |
+| status    | string                                                      | **Yes**  | Derived status: fulfilled if quantity.fulfilled == quantity.total, partial if quantity.fulfilled > 0, otherwise processing. **Enum:** `processing`, `partial`, `fulfilled` |
+| parent_id | string                                                      | No       | Parent line item identifier for any nested structures.                                                                                                                     |
 
 **Quantity Structure:**
 
@@ -121,14 +121,14 @@ else → "processing"
 
 Expectations are buyer-facing groupings representing when/how items will be delivered. They represent the current promise to the buyer and can be split, merged, or adjusted post-order.
 
-| Name           | Type                                                             | Required | Description                                                                                                 |
-| -------------- | ---------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------- |
-| id             | string                                                           | **Yes**  | Expectation identifier.                                                                                     |
-| line_items     | Array[object]                                                    | **Yes**  | Which line items and quantities are in this expectation.                                                    |
-| method_type    | string                                                           | **Yes**  | Delivery method type (shipping, pickup, digital). **Enum:** `shipping`, `pickup`, `digital`                 |
-| destination    | [Postal Address](/draft/specification/reference/#postal-address) | **Yes**  | Delivery destination address.                                                                               |
-| description    | string                                                           | No       | Human-readable delivery description (e.g., 'Arrives in 5-8 business days').                                 |
-| fulfillable_on | string                                                           | No       | When this expectation can be fulfilled: 'now' or ISO 8601 timestamp for future date (backorder, pre-order). |
+| Name           | Type                                                                 | Required | Description                                                                                                 |
+| -------------- | -------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------- |
+| id             | string                                                               | **Yes**  | Expectation identifier.                                                                                     |
+| line_items     | Array[object]                                                        | **Yes**  | Which line items and quantities are in this expectation.                                                    |
+| method_type    | string                                                               | **Yes**  | Delivery method type (shipping, pickup, digital). **Enum:** `shipping`, `pickup`, `digital`                 |
+| destination    | [Postal Address](/ucp/draft/specification/reference/#postal-address) | **Yes**  | Delivery destination address.                                                                               |
+| description    | string                                                               | No       | Human-readable delivery description (e.g., 'Arrives in 5-8 business days').                                 |
+| fulfillable_on | string                                                               | No       | When this expectation can be fulfilled: 'now' or ISO 8601 timestamp for future date (backorder, pre-order). |
 
 ### Fulfillment Event
 
@@ -151,15 +151,15 @@ Examples: `processing`, `shipped`, `in_transit`, `delivered`, `failed_attempt`, 
 
 Adjustments are polymorphic events that exist independently of fulfillment. The `type` field is an open string - businesses can use any values that make sense to them.
 
-| Name        | Type                                             | Required | Description                                                                                                                                                                                     |
-| ----------- | ------------------------------------------------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| id          | string                                           | **Yes**  | Adjustment event identifier.                                                                                                                                                                    |
-| type        | string                                           | **Yes**  | Type of adjustment (open string). Typically money-related like: refund, return, credit, price_adjustment, dispute, cancellation. Can be any value that makes sense for the merchant's business. |
-| occurred_at | string                                           | **Yes**  | RFC 3339 timestamp when this adjustment occurred.                                                                                                                                               |
-| status      | string                                           | **Yes**  | Adjustment status. **Enum:** `pending`, `completed`, `failed`                                                                                                                                   |
-| line_items  | Array[object]                                    | No       | Which line items and quantities are affected (optional).                                                                                                                                        |
-| amount      | [Amount](/draft/specification/reference/#amount) | No       | Amount in ISO 4217 minor units for refunds, credits, or price adjustments.                                                                                                                      |
-| description | string                                           | No       | Human-readable reason or description (e.g., 'Defective item', 'Customer requested').                                                                                                            |
+| Name        | Type                                                 | Required | Description                                                                                                                                                                                     |
+| ----------- | ---------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id          | string                                               | **Yes**  | Adjustment event identifier.                                                                                                                                                                    |
+| type        | string                                               | **Yes**  | Type of adjustment (open string). Typically money-related like: refund, return, credit, price_adjustment, dispute, cancellation. Can be any value that makes sense for the merchant's business. |
+| occurred_at | string                                               | **Yes**  | RFC 3339 timestamp when this adjustment occurred.                                                                                                                                               |
+| status      | string                                               | **Yes**  | Adjustment status. **Enum:** `pending`, `completed`, `failed`                                                                                                                                   |
+| line_items  | Array[object]                                        | No       | Which line items and quantities are affected (optional).                                                                                                                                        |
+| amount      | [Amount](/ucp/draft/specification/reference/#amount) | No       | Amount in ISO 4217 minor units for refunds, credits, or price adjustments.                                                                                                                      |
+| description | string                                               | No       | Human-readable reason or description (e.g., 'Defective item', 'Customer requested').                                                                                                            |
 
 Examples: `refund`, `return`, `credit`, `price_adjustment`, `dispute`, `cancellation`, etc.
 
@@ -275,25 +275,25 @@ Businesses POST order events to a webhook URL provided by the platform during pa
 
 **Inputs**
 
-| Name          | Type                                                                               | Required | Description                                                                                                                                  |
-| ------------- | ---------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| ucp           | [Ucp Response Order Schema](/draft/specification/order/#ucp-response-order-schema) | **Yes**  | Protocol metadata for discovery profiles and responses. Uses slim schema pattern with context-specific required fields.                      |
-| id            | string                                                                             | **Yes**  | Unique order identifier.                                                                                                                     |
-| checkout_id   | string                                                                             | **Yes**  | Associated checkout ID for reconciliation.                                                                                                   |
-| permalink_url | string                                                                             | **Yes**  | Permalink to access the order on merchant site.                                                                                              |
-| line_items    | Array\[[Order Line Item](/draft/specification/reference/#order-line-item)\]        | **Yes**  | Immutable line items — source of truth for what was ordered.                                                                                 |
-| fulfillment   | object                                                                             | **Yes**  | Fulfillment data: buyer expectations and what actually happened.                                                                             |
-| adjustments   | Array\[[Adjustment](/draft/specification/reference/#adjustment)\]                  | No       | Append-only event log of money movements (refunds, returns, credits, disputes, cancellations, etc.) that exist independently of fulfillment. |
-| currency      | string                                                                             | No       | ISO 4217 currency code. MUST match the currency from the originating checkout session.                                                       |
-| totals        | [Totals](/draft/specification/reference/#totals)                                   | **Yes**  | Different totals for the order.                                                                                                              |
-| event_id      | string                                                                             | **Yes**  | Unique event identifier.                                                                                                                     |
-| created_time  | string                                                                             | **Yes**  | Event creation timestamp in RFC 3339 format.                                                                                                 |
+| Name          | Type                                                                                   | Required | Description                                                                                                                                  |
+| ------------- | -------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| ucp           | [Ucp Response Order Schema](/ucp/draft/specification/order/#ucp-response-order-schema) | **Yes**  | Protocol metadata for discovery profiles and responses. Uses slim schema pattern with context-specific required fields.                      |
+| id            | string                                                                                 | **Yes**  | Unique order identifier.                                                                                                                     |
+| checkout_id   | string                                                                                 | **Yes**  | Associated checkout ID for reconciliation.                                                                                                   |
+| permalink_url | string                                                                                 | **Yes**  | Permalink to access the order on merchant site.                                                                                              |
+| line_items    | Array\[[Order Line Item](/ucp/draft/specification/reference/#order-line-item)\]        | **Yes**  | Immutable line items — source of truth for what was ordered.                                                                                 |
+| fulfillment   | object                                                                                 | **Yes**  | Fulfillment data: buyer expectations and what actually happened.                                                                             |
+| adjustments   | Array\[[Adjustment](/ucp/draft/specification/reference/#adjustment)\]                  | No       | Append-only event log of money movements (refunds, returns, credits, disputes, cancellations, etc.) that exist independently of fulfillment. |
+| currency      | string                                                                                 | No       | ISO 4217 currency code. MUST match the currency from the originating checkout session.                                                       |
+| totals        | [Totals](/ucp/draft/specification/reference/#totals)                                   | **Yes**  | Different totals for the order.                                                                                                              |
+| event_id      | string                                                                                 | **Yes**  | Unique event identifier.                                                                                                                     |
+| created_time  | string                                                                                 | **Yes**  | Event creation timestamp in RFC 3339 format.                                                                                                 |
 
 **Output**
 
-| Name | Type                                   | Required | Description |
-| ---- | -------------------------------------- | -------- | ----------- |
-| ucp  | [Ucp](/draft/specification/order/#ucp) | **Yes**  |             |
+| Name | Type                                       | Required | Description |
+| ---- | ------------------------------------------ | -------- | ----------- |
+| ucp  | [Ucp](/ucp/draft/specification/order/#ucp) | **Yes**  |             |
 
 ### Webhook URL Configuration
 
@@ -320,7 +320,7 @@ The platform provides its webhook URL in the order capability's `config` field d
 
 ### Webhook Signature Verification
 
-Webhook payloads **MUST** be signed by the business and verified by the platform to ensure authenticity and integrity. Signatures follow the [Message Signatures](https://ucp.dev/draft/specification/signatures/index.md) specification using the REST binding (RFC 9421).
+Webhook payloads **MUST** be signed by the business and verified by the platform to ensure authenticity and integrity. Signatures follow the [Message Signatures](https://wry-ry.github.io/ucp/draft/specification/signatures/index.md) specification using the REST binding (RFC 9421).
 
 **Required Headers:**
 
@@ -352,7 +352,7 @@ Signature: sig1=:MEUCIQDTxNq8h7LGHpvVZQp1iHkFp9+3N8Mxk2zH1wK4YuVN8w...:
 1. Sign using a key from `signing_keys` in the business's UCP profile
 1. Set `Signature-Input` and `Signature` headers
 
-See [Message Signatures - REST Request Signing](https://ucp.dev/draft/specification/signatures/#rest-request-signing) for complete algorithm.
+See [Message Signatures - REST Request Signing](https://wry-ry.github.io/ucp/draft/specification/signatures/#rest-request-signing) for complete algorithm.
 
 #### Verification (Platform)
 
@@ -364,7 +364,7 @@ See [Message Signatures - REST Request Signing](https://ucp.dev/draft/specificat
 1. Verify `Content-Digest` matches SHA-256 of raw body
 1. Reconstruct signature base and verify signature
 
-See [Message Signatures - REST Request Verification](https://ucp.dev/draft/specification/signatures/#rest-request-verification) for complete algorithm.
+See [Message Signatures - REST Request Verification](https://wry-ry.github.io/ucp/draft/specification/signatures/#rest-request-verification) for complete algorithm.
 
 **Authorization** (order ownership):
 
@@ -378,7 +378,7 @@ This prevents a malicious business from sending fake events for another business
 
 #### Key Rotation
 
-See [Message Signatures - Key Rotation](https://ucp.dev/draft/specification/signatures/#key-rotation) for zero-downtime key rotation procedures.
+See [Message Signatures - Key Rotation](https://wry-ry.github.io/ucp/draft/specification/signatures/#key-rotation) for zero-downtime key rotation procedures.
 
 ## Guidelines
 
@@ -390,7 +390,7 @@ See [Message Signatures - Key Rotation](https://ucp.dev/draft/specification/sign
 **Business:**
 
 - **MUST** include `UCP-Agent` header with profile URL for signer identification
-- **MUST** sign all webhook payloads per the [Message Signatures](https://ucp.dev/draft/specification/signatures/index.md) specification using RFC 9421 headers (`Signature`, `Signature-Input`, `Content-Digest`).
+- **MUST** sign all webhook payloads per the [Message Signatures](https://wry-ry.github.io/ucp/draft/specification/signatures/index.md) specification using RFC 9421 headers (`Signature`, `Signature-Input`, `Content-Digest`).
 - **MUST** send "Order created" event with fully populated order entity
 - **MUST** send full order entity on updates (not incremental deltas)
 - **MUST** retry failed webhook deliveries
@@ -399,12 +399,12 @@ See [Message Signatures - Key Rotation](https://ucp.dev/draft/specification/sign
 
 ### Item
 
-| Name      | Type                                             | Required | Description                                                                                                                                                                 |
-| --------- | ------------------------------------------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| id        | string                                           | **Yes**  | The product identifier, often the SKU, required to resolve the product details associated with this line item. Should be recognized by both the Platform, and the Business. |
-| title     | string                                           | **Yes**  | Product title.                                                                                                                                                              |
-| price     | [Amount](/draft/specification/reference/#amount) | **Yes**  | Unit price in ISO 4217 minor units.                                                                                                                                         |
-| image_url | string                                           | No       | Product image URI.                                                                                                                                                          |
+| Name      | Type                                                 | Required | Description                                                                                                                                                                 |
+| --------- | ---------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id        | string                                               | **Yes**  | The product identifier, often the SKU, required to resolve the product details associated with this line item. Should be recognized by both the Platform, and the Business. |
+| title     | string                                               | **Yes**  | Product title.                                                                                                                                                              |
+| price     | [Amount](/ucp/draft/specification/reference/#amount) | **Yes**  | Unit price in ISO 4217 minor units.                                                                                                                                         |
+| image_url | string                                               | No       | Product image URI.                                                                                                                                                          |
 
 ### Postal Address
 
@@ -433,11 +433,11 @@ See [Message Signatures - Key Rotation](https://ucp.dev/draft/specification/sign
 
 ### Total
 
-| Name         | Type                                             | Required | Description                                                                                                                                                                      |
-| ------------ | ------------------------------------------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| type         | string                                           | **Yes**  | Cost category. Well-known values: subtotal, items_discount, discount, fulfillment, tax, fee, total. Businesses MAY use additional values.                                        |
-| display_text | string                                           | No       | Text to display against the amount. Should reflect appropriate method (e.g., 'Shipping', 'Delivery').                                                                            |
-| amount       | [Amount](/draft/specification/reference/#amount) | **Yes**  | Monetary amount in the currency's minor unit as defined by ISO 4217. Refer to the currency's exponent to determine minor-to-major ratio (e.g., 2 for USD, 0 for JPY, 3 for KWD). |
+| Name         | Type                                                 | Required | Description                                                                                                                                                                      |
+| ------------ | ---------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| type         | string                                               | **Yes**  | Cost category. Well-known values: subtotal, items_discount, discount, fulfillment, tax, fee, total. Businesses MAY use additional values.                                        |
+| display_text | string                                               | No       | Text to display against the amount. Should reflect appropriate method (e.g., 'Shipping', 'Delivery').                                                                            |
+| amount       | [Amount](/ucp/draft/specification/reference/#amount) | **Yes**  | Monetary amount in the currency's minor unit as defined by ISO 4217. Refer to the currency's exponent to determine minor-to-major ratio (e.g., 2 for USD, 0 for JPY, 3 for KWD). |
 
 ### UCP Response Order Schema
 

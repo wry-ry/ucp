@@ -11,7 +11,7 @@
       
       
       
-        <link rel="canonical" href="https://ucp.dev/draft/specification/checkout/">
+        <link rel="canonical" href="https://wry-ry.github.io/ucp/draft/specification/checkout/">
       
       
         <link rel="prev" href="../overview/">
@@ -142,16 +142,16 @@
 <meta property="og:title" content="Overview - Universal Commerce Protocol (UCP)" />
 <meta property="og:description" content="The Universal Commerce Protocol (UCP) is a solution for enabling gen AI agents to make payments on behalf of users, safely, securely, and in a decentralized and privacy protecting manner. This protocol is a part of the broader ecosystem, which includes agentic protocols like A2A and MCP, and encompasses the global nature of payments.
 " />
-<meta property="og:image" content="https://ucp.dev/draft/assets/images/social/specification/checkout.png" />
+<meta property="og:image" content="https://wry-ry.github.io/ucp/draft/assets/images/social/specification/checkout.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:url" content="https://ucp.dev/draft/specification/checkout/" />
+<meta property="og:url" content="https://wry-ry.github.io/ucp/draft/specification/checkout/" />
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:title" content="Overview - Universal Commerce Protocol (UCP)" />
 <meta property="twitter:description" content="The Universal Commerce Protocol (UCP) is a solution for enabling gen AI agents to make payments on behalf of users, safely, securely, and in a decentralized and privacy protecting manner. This protocol is a part of the broader ecosystem, which includes agentic protocols like A2A and MCP, and encompasses the global nature of payments.
 " />
-<meta property="twitter:image" content="https://ucp.dev/draft/assets/images/social/specification/checkout.png" />
+<meta property="twitter:image" content="https://wry-ry.github.io/ucp/draft/assets/images/social/specification/checkout.png" />
 </head>
   
   
@@ -191,7 +191,7 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/" title="Universal Commerce Protocol (UCP)" class="md-header__button md-logo" aria-label="Universal Commerce Protocol (UCP)" data-md-component="logo">
+    <a href="/ucp/" title="Universal Commerce Protocol (UCP)" class="md-header__button md-logo" aria-label="Universal Commerce Protocol (UCP)" data-md-component="logo">
       
   <img src="../../assets/updated-icon.svg" alt="logo">
 
@@ -307,7 +307,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="/" class="md-tabs__link">
+      <a href="/ucp/" class="md-tabs__link">
         
   
   
@@ -370,7 +370,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/" title="Universal Commerce Protocol (UCP)" class="md-nav__button md-logo" aria-label="Universal Commerce Protocol (UCP)" data-md-component="logo">
+    <a href="/ucp/" title="Universal Commerce Protocol (UCP)" class="md-nav__button md-logo" aria-label="Universal Commerce Protocol (UCP)" data-md-component="logo">
       
   <img src="../../assets/updated-icon.svg" alt="logo">
 
@@ -399,7 +399,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/" class="md-nav__link">
+      <a href="/ucp/" class="md-nav__link">
         
   
   
@@ -3347,7 +3347,7 @@ extension is supported.</p>
 <p>The business remains the Merchant of Record (MoR), and they don't need to become
 PCI DSS compliant to accept card payments through this Capability.</p>
 <h3 id="flow-overview">Flow overview<a class="headerlink" href="#flow-overview" title="Permanent link">&para;</a></h3>
-<p><img alt="High-level checkout flow sequence diagram" src="/draft/specification/images/ucp-checkout-flow.png" /></p>
+<p><img alt="High-level checkout flow sequence diagram" src="/ucp/draft/specification/images/ucp-checkout-flow.png" /></p>
 <h3 id="payments">Payments<a class="headerlink" href="#payments" title="Permanent link">&para;</a></h3>
 <p>Payment handlers are discovered from the business's UCP profile at
 <code>/.well-known/ucp</code> and checkout.ucp.payment_handlers. The handlers define
@@ -3896,7 +3896,7 @@ redirect to the checkout UI or renders the checkout page directly.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">ucp</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#ucp-response-checkout-schema">Ucp Response Checkout Schema</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#ucp-response-checkout-schema">Ucp Response Checkout Schema</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Protocol metadata for discovery profiles and responses. Uses slim schema pattern with context-specific required fields.</td>
 </tr>
@@ -3908,25 +3908,25 @@ redirect to the checkout UI or renders the checkout page directly.</p>
 </tr>
 <tr>
 <td style="text-align: left;">line_items</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/reference/#line-item">Line Item Response</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#line-item">Line Item Response</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">List of line items being checked out.</td>
 </tr>
 <tr>
 <td style="text-align: left;">buyer</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#buyer">Buyer</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#buyer">Buyer</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Representation of the buyer.</td>
 </tr>
 <tr>
 <td style="text-align: left;">context</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#context">Context</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#context">Context</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Provisional buyer signals for relevance and localization—not authoritative data. Businesses SHOULD use these values when verified inputs (e.g., shipping address) are absent, and MAY ignore or down-rank them if inconsistent with higher-confidence signals (authenticated account, risk detection) or regulatory constraints (export controls). Eligibility and policy enforcement MUST occur at checkout time using binding transaction data. Context SHOULD be non-identifying and can be disclosed progressively—coarse signals early, finer resolution as the session progresses. Higher-resolution data (shipping address, billing address) supersedes context.</td>
 </tr>
 <tr>
 <td style="text-align: left;">signals</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#signals">Signals</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#signals">Signals</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Environment data provided by the platform to support authorization and abuse prevention. Values MUST NOT be buyer-asserted claims — platforms provide signals based on direct observation or independently verifiable third-party attestations. All signal keys MUST use reverse-domain naming to ensure provenance and prevent collisions when multiple extensions contribute to the shared namespace.</td>
 </tr>
@@ -3944,19 +3944,19 @@ redirect to the checkout UI or renders the checkout page directly.</p>
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#totals">Totals</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#totals">Totals</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Different cart totals.</td>
 </tr>
 <tr>
 <td style="text-align: left;">messages</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/reference/#message">Message</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#message">Message</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">List of messages with error and info about the checkout session state.</td>
 </tr>
 <tr>
 <td style="text-align: left;">links</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/reference/#link">Link</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#link">Link</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Links to be displayed by the platform (Privacy Policy, TOS). Mandatory for legal compliance.</td>
 </tr>
@@ -3974,13 +3974,13 @@ redirect to the checkout UI or renders the checkout page directly.</p>
 </tr>
 <tr>
 <td style="text-align: left;">payment</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#payment">Payment</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#payment">Payment</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Payment configuration containing handlers.</td>
 </tr>
 <tr>
 <td style="text-align: left;">order</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#order-confirmation">Order Confirmation</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#order-confirmation">Order Confirmation</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Details about an order created for this checkout session.</td>
 </tr>
@@ -4037,25 +4037,25 @@ product data (price/title etc.) provided by the business through the feeds
 <tbody>
 <tr>
 <td style="text-align: left;">line_items</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/reference/#line-item">Line Item</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#line-item">Line Item</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">List of line items being checked out.</td>
 </tr>
 <tr>
 <td style="text-align: left;">buyer</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#buyer">Buyer</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#buyer">Buyer</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Representation of the buyer.</td>
 </tr>
 <tr>
 <td style="text-align: left;">context</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#context">Context</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#context">Context</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Provisional buyer signals for relevance and localization—not authoritative data. Businesses SHOULD use these values when verified inputs (e.g., shipping address) are absent, and MAY ignore or down-rank them if inconsistent with higher-confidence signals (authenticated account, risk detection) or regulatory constraints (export controls). Eligibility and policy enforcement MUST occur at checkout time using binding transaction data. Context SHOULD be non-identifying and can be disclosed progressively—coarse signals early, finer resolution as the session progresses. Higher-resolution data (shipping address, billing address) supersedes context.</td>
 </tr>
 <tr>
 <td style="text-align: left;">signals</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#signals">Signals</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#signals">Signals</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Environment data provided by the platform to support authorization and abuse prevention. Values MUST NOT be buyer-asserted claims — platforms provide signals based on direct observation or independently verifiable third-party attestations. All signal keys MUST use reverse-domain naming to ensure provenance and prevent collisions when multiple extensions contribute to the shared namespace.</td>
 </tr>
@@ -4067,14 +4067,14 @@ product data (price/title etc.) provided by the business through the feeds
 </tr>
 <tr>
 <td style="text-align: left;">payment</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#payment">Payment</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#payment">Payment</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Payment configuration containing handlers.</td>
 </tr>
 </tbody>
 </table>
 <p><strong>Output</strong></p>
-<p>This object MUST be one of the following types: <a href="/draft/specification/checkout/#checkout">Checkout</a>, <a href="/draft/specification/checkout/#error-response">Error Response</a>.</p>
+<p>This object MUST be one of the following types: <a href="/ucp/draft/specification/checkout/#checkout">Checkout</a>, <a href="/ucp/draft/specification/checkout/#error-response">Error Response</a>.</p>
 <h3 id="get-checkout">Get Checkout<a class="headerlink" href="#get-checkout" title="Permanent link">&para;</a></h3>
 <p>It provides the latest state of the checkout resource. After cancellation or
 completion it is up to the business on what to return (i.e this can be a long
@@ -4103,7 +4103,7 @@ time of checkout session creation.</p>
 </tbody>
 </table>
 <p><strong>Output</strong></p>
-<p>This object MUST be one of the following types: <a href="/draft/specification/checkout/#checkout">Checkout</a>, <a href="/draft/specification/checkout/#error-response">Error Response</a>.</p>
+<p>This object MUST be one of the following types: <a href="/ucp/draft/specification/checkout/#checkout">Checkout</a>, <a href="/ucp/draft/specification/checkout/#error-response">Error Response</a>.</p>
 <h3 id="update-checkout">Update Checkout<a class="headerlink" href="#update-checkout" title="Permanent link">&para;</a></h3>
 <p>Performs a full replacement of the checkout resource.
 The platform is <strong>REQUIRED</strong> to send the entire checkout resource containing any
@@ -4134,25 +4134,25 @@ will replace the existing checkout session state on the business side.</p>
 </tr>
 <tr>
 <td style="text-align: left;">line_items</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/reference/#line-item">Line Item</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#line-item">Line Item</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">List of line items being checked out.</td>
 </tr>
 <tr>
 <td style="text-align: left;">buyer</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#buyer">Buyer</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#buyer">Buyer</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Representation of the buyer.</td>
 </tr>
 <tr>
 <td style="text-align: left;">context</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#context">Context</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#context">Context</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Provisional buyer signals for relevance and localization—not authoritative data. Businesses SHOULD use these values when verified inputs (e.g., shipping address) are absent, and MAY ignore or down-rank them if inconsistent with higher-confidence signals (authenticated account, risk detection) or regulatory constraints (export controls). Eligibility and policy enforcement MUST occur at checkout time using binding transaction data. Context SHOULD be non-identifying and can be disclosed progressively—coarse signals early, finer resolution as the session progresses. Higher-resolution data (shipping address, billing address) supersedes context.</td>
 </tr>
 <tr>
 <td style="text-align: left;">signals</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#signals">Signals</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#signals">Signals</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Environment data provided by the platform to support authorization and abuse prevention. Values MUST NOT be buyer-asserted claims — platforms provide signals based on direct observation or independently verifiable third-party attestations. All signal keys MUST use reverse-domain naming to ensure provenance and prevent collisions when multiple extensions contribute to the shared namespace.</td>
 </tr>
@@ -4164,14 +4164,14 @@ will replace the existing checkout session state on the business side.</p>
 </tr>
 <tr>
 <td style="text-align: left;">payment</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#payment">Payment</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#payment">Payment</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Payment configuration containing handlers.</td>
 </tr>
 </tbody>
 </table>
 <p><strong>Output</strong></p>
-<p>This object MUST be one of the following types: <a href="/draft/specification/checkout/#checkout">Checkout</a>, <a href="/draft/specification/checkout/#error-response">Error Response</a>.</p>
+<p>This object MUST be one of the following types: <a href="/ucp/draft/specification/checkout/#checkout">Checkout</a>, <a href="/ucp/draft/specification/checkout/#error-response">Error Response</a>.</p>
 <h3 id="complete-checkout">Complete Checkout<a class="headerlink" href="#complete-checkout" title="Permanent link">&para;</a></h3>
 <p>This is the final checkout placement call. To be invoked when the user has
 committed to pay and place an order for the chosen items. The response of this
@@ -4202,7 +4202,7 @@ as the order, and its associated items, moves through the supply chain.</p>
 </tr>
 <tr>
 <td style="text-align: left;">signals</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#signals">Signals</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#signals">Signals</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Environment data provided by the platform to support authorization and abuse prevention. Values MUST NOT be buyer-asserted claims — platforms provide signals based on direct observation or independently verifiable third-party attestations. All signal keys MUST use reverse-domain naming to ensure provenance and prevent collisions when multiple extensions contribute to the shared namespace.</td>
 </tr>
@@ -4214,14 +4214,14 @@ as the order, and its associated items, moves through the supply chain.</p>
 </tr>
 <tr>
 <td style="text-align: left;">payment</td>
-<td style="text-align: left;"><a href="/draft/specification/checkout/#payment">Payment</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/checkout/#payment">Payment</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Payment configuration containing handlers.</td>
 </tr>
 </tbody>
 </table>
 <p><strong>Output</strong></p>
-<p>This object MUST be one of the following types: <a href="/draft/specification/checkout/#checkout">Checkout</a>, <a href="/draft/specification/checkout/#error-response">Error Response</a>.</p>
+<p>This object MUST be one of the following types: <a href="/ucp/draft/specification/checkout/#checkout">Checkout</a>, <a href="/ucp/draft/specification/checkout/#error-response">Error Response</a>.</p>
 <h3 id="cancel-checkout">Cancel Checkout<a class="headerlink" href="#cancel-checkout" title="Permanent link">&para;</a></h3>
 <p>This operation will be used to cancel a checkout session, if it can be canceled.
 If the checkout session cannot be canceled (e.g. checkout session is
@@ -4248,7 +4248,7 @@ that is not equal to <code>completed</code> or <code>canceled</code> <strong>SHO
 </tbody>
 </table>
 <p><strong>Output</strong></p>
-<p>This object MUST be one of the following types: <a href="/draft/specification/checkout/#checkout">Checkout</a>, <a href="/draft/specification/checkout/#error-response">Error Response</a>.</p>
+<p>This object MUST be one of the following types: <a href="/ucp/draft/specification/checkout/#checkout">Checkout</a>, <a href="/ucp/draft/specification/checkout/#error-response">Error Response</a>.</p>
 <h2 id="transport-bindings">Transport Bindings<a class="headerlink" href="#transport-bindings" title="Permanent link">&para;</a></h2>
 <p>The abstract operations above are bound to specific transport protocols as
 defined below:</p>
@@ -4351,7 +4351,7 @@ binding transaction data.</p>
 </tr>
 <tr>
 <td style="text-align: left;">eligibility</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/reference/#reverse-domain-name">Reverse Domain Name</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#reverse-domain-name">Reverse Domain Name</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Buyer claims about eligible benefits such as loyalty membership, payment instrument perks, and similar. Recognized claims MAY inform the Business response (e.g., member-only product availability, adjusted pricing in catalog, provisional discounts at cart or checkout). Businesses MUST ignore unrecognized values without error. Values MUST use reverse-domain naming (e.g., 'com.example.loyalty_gold', 'org.school.student') and MUST be non-identifying.</td>
 </tr>
@@ -4508,7 +4508,7 @@ requirements.</p>
 </tr>
 <tr>
 <td style="text-align: left;">price</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#amount">Amount</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#amount">Amount</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Unit price in ISO 4217 minor units.</td>
 </tr>
@@ -4534,7 +4534,7 @@ requirements.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">item</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#item">Item</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#item">Item</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;"></td>
 </tr>
@@ -4565,7 +4565,7 @@ requirements.</p>
 </tr>
 <tr>
 <td style="text-align: left;">item</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#item">Item</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#item">Item</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;"></td>
 </tr>
@@ -4602,7 +4602,7 @@ requirements.</p>
 </tr>
 <tr>
 <td style="text-align: left;">item</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#item">Item</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#item">Item</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;"></td>
 </tr>
@@ -4614,7 +4614,7 @@ requirements.</p>
 </tr>
 <tr>
 <td style="text-align: left;">totals</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/reference/#total">Total</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#total">Total</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Line item totals breakdown.</td>
 </tr>
@@ -4694,7 +4694,7 @@ following are the recommended well-known types:</p>
 <strong>SHOULD</strong> handle unknown types gracefully by displaying them using the <code>title</code>
 field or omitting them.</p>
 <h3 id="message">Message<a class="headerlink" href="#message" title="Permanent link">&para;</a></h3>
-<p>This object MUST be one of the following types: <a href="/draft/specification/reference/#message-error">Message Error</a>, <a href="/draft/specification/reference/#message-warning">Message Warning</a>, <a href="/draft/specification/reference/#message-info">Message Info</a>.</p>
+<p>This object MUST be one of the following types: <a href="/ucp/draft/specification/reference/#message-error">Message Error</a>, <a href="/ucp/draft/specification/reference/#message-warning">Message Warning</a>, <a href="/ucp/draft/specification/reference/#message-info">Message Info</a>.</p>
 <h3 id="message-error">Message Error<a class="headerlink" href="#message-error" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -4714,7 +4714,7 @@ field or omitting them.</p>
 </tr>
 <tr>
 <td style="text-align: left;">code</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#error-code">Error Code</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#error-code">Error Code</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Error code identifying the type of error. Standard errors are defined in specification (see examples), and have standardized semantics; freeform codes are permitted.</td>
 </tr>
@@ -4863,7 +4863,7 @@ field or omitting them.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">instruments</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/reference/#payment-instrument-selected-payment-instrument">Payment Instrument Selected Payment Instrument</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#payment-instrument-selected-payment-instrument">Payment Instrument Selected Payment Instrument</a>]</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">The payment instruments available for this payment. Each instrument is associated with a specific handler via the handler_id field. Handlers can extend the base payment_instrument schema to add handler-specific fields.</td>
 </tr>
@@ -5084,7 +5084,7 @@ field or omitting them.</p>
 </tr>
 <tr>
 <td style="text-align: left;">amount</td>
-<td style="text-align: left;"><a href="/draft/specification/reference/#amount">Amount</a></td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#amount">Amount</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Monetary amount in the currency's minor unit as defined by ISO 4217. Refer to the currency's exponent to determine minor-to-major ratio (e.g., 2 for USD, 0 for JPY, 3 for KWD).</td>
 </tr>
@@ -5340,7 +5340,7 @@ when provided.</p>
 </tr>
 <tr>
 <td style="text-align: left;">messages</td>
-<td style="text-align: left;">Array[<a href="/draft/specification/reference/#message">Message</a>]</td>
+<td style="text-align: left;">Array[<a href="/ucp/draft/specification/reference/#message">Message</a>]</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">Array of messages describing why the operation failed.</td>
 </tr>
