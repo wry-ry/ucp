@@ -5,10 +5,10 @@
 
 ## Overview
 
-- [Home](https://ucp.dev/index.md)
-- [Core Concepts](https://ucp.dev/documentation/core-concepts/index.md)
-- [UCP and AP2](https://ucp.dev/documentation/ucp-and-ap2/index.md)
-- [Roadmap](https://ucp.dev/documentation/roadmap/index.md)
-- [Schema Authoring](https://ucp.dev/documentation/schema-authoring/index.md)
-- [Versioning](https://ucp.dev/versioning/index.md)
+- [Home](https://wry-ry.github.io/ucp/index.md)
+- [Core Concepts](https://wry-ry.github.io/ucp/documentation/core-concepts/index.md)
+- [UCP and AP2](https://wry-ry.github.io/ucp/documentation/ucp-and-ap2/index.md)
+- [Roadmap](https://wry-ry.github.io/ucp/documentation/roadmap/index.md)
+- [Schema Authoring](https://wry-ry.github.io/ucp/documentation/schema-authoring/index.md)
+- [Versioning](https://wry-ry.github.io/ucp/versioning/index.md)
 
