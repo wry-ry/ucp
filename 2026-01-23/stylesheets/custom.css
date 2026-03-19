@@ -824,7 +824,7 @@ p.hero-description {
 }
 
 /* Prevent the site title and version selector from being hidden on scroll */
-.md-header__title .md-header__topic:first-child {
+[class~="md-header__title"] [class~="md-header__topic"]:first-child {
   opacity: 1 !important;
   transform: none !important;
   z-index: 1 !important;
@@ -832,6 +832,6 @@ p.hero-description {
 }
 
 /* Hide the page title that replaces the site title on scroll */
-.md-header__title .md-header__topic:nth-child(2) {
+[class~="md-header__title"] [class~="md-header__topic"]:nth-child(2) {
   display: none !important;
 }
