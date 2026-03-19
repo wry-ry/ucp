@@ -145,6 +145,7 @@ jobs:
           rm -rf site
 
           # Add redirects for all specification files
+          find . -name "specification" -type l -path "*/specification*" -delete || true
           rm -rf specification
           ln -s latest/specification specification
 
