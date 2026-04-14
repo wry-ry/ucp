@@ -135,7 +135,7 @@ To initiate the session, the host **MUST** augment the `continue_url` with ECP q
 
 All ECP parameters are passed via URL query string, not HTTP headers, to ensure maximum compatibility across different embedding environments. Parameters use the `ec_` prefix to avoid namespace pollution and clearly distinguish ECP parameters from business-specific query parameters:
 
-- `ec_version` (string, **REQUIRED**): The UCP version for this session (format: `YYYY-MM-DD`). Must match the version from the checkout response.
+- `ec_version` (string, **REQUIRED**): The UCP version for this session (format: `YYYY-MM-DD`). Must match the version from the checkout response. The version is negotiated at session initialization and **MUST** remain constant for the lifetime of the ECP session — neither party may change the version after the handshake.
 - `ec_auth` (string, **OPTIONAL**): Authentication token in business-defined format
 - `ec_delegate` (string, **OPTIONAL**): Comma-delimited list of delegations the host wants to handle. **SHOULD** be a subset of `config.delegate` from the embedded service binding.
 - `ec_color_scheme` (string, **OPTIONAL**): The color scheme preference for the checkout UI. Valid values: `light`, `dark`. When not provided, the Embedded Checkout follows system preference.
@@ -297,74 +297,19 @@ These exceptions **SHOULD** return the user to the checkout flow upon completion
 
 ## Transport & Messaging
 
-### Message Format
+ECP uses the shared EP transport layer. See [Embedded Protocol — Transport & Messaging](https://wry-ry.github.io/ucp/draft/specification/embedded-protocol/#transport-messaging) for message format, message types, and response handling conventions.
 
-All ECP messages **MUST** use JSON-RPC 2.0 format ([RFC 7159](https://datatracker.ietf.org/doc/html/rfc7159)). Each message **MUST** contain:
-
-- `jsonrpc`: **MUST** be `"2.0"`
-- `method`: The message name (e.g., `"ec.start"`)
-- `params`: Message-specific payload (may be empty object)
-- `id`: (Optional) Present only for requests that expect responses
-
-### Message Types
-
-**Requests** (with `id` field):
-
-- Require a response from the receiver
-- **MUST** include a unique `id` field
-- Receiver **MUST** respond with matching `id`
-- Response **MUST** be either a `result` or `error` object
-- Used for operations requiring acknowledgment or data
-
-**Notifications** (without `id` field):
-
-- Informational only, no response expected
-- **MUST NOT** include an `id` field
-- Receiver **MUST NOT** send a response
-- Used for state updates and informational events
-
-### Response Handling
-
-For requests (messages with `id`), receivers **MUST** respond with either:
-
-**Success Response:**
-
-```json
-{ "jsonrpc": "2.0", "id": "...", "result": {...} }
-```
-
-**Error Response:**
-
-```json
-{ "jsonrpc": "2.0", "id": "...", "error": {...} }
-```
+The `ucp.version` in all responses **MUST** echo the `ec_version` negotiated during session initialization and confirmed by the host in the `ec.ready` response. The version is session-bound — it **MUST NOT** change for the duration of the ECP session.
 
 ### Communication Channels
 
-#### Communication Channel for Web-Based Hosts
+ECP follows the shared EP communication channel model. See [Embedded Protocol — Communication Channels](https://wry-ry.github.io/ucp/draft/specification/embedded-protocol/#communication-channels) for the general pattern.
 
-When the host is a web application, communication starts using `postMessage` between the host and Checkout windows. The host **MUST** listen for `postMessage` calls from the embedded window, and when a message is received, they **MUST** validate the origin matches the `checkout_url` used to start the checkout.
-
-Upon validation, the host **MAY** create a `MessageChannel`, and transfer one of its ports in the result of the [`ec.ready` response](#ecready). When a host responds with a `MessagePort`, all subsequent messages **MUST** be sent over that channel. Otherwise, the host and business **MUST** continue using `postMessage()` between their `window` objects, including origin validation.
-
-#### Communication Channel for Native Hosts
-
-When the host is a native application, they MUST inject globals into the Embedded Checkout that allows `postMessage` communication between the web and native environments. The host **MUST** create at least one of the following globals:
+For native hosts, the checkout-specific globals are:
 
 - `window.EmbeddedCheckoutProtocolConsumer` (preferred)
 - `window.webkit.messageHandlers.EmbeddedCheckoutProtocolConsumer`
-
-This object **MUST** implement the following interface:
-
-```javascript
-{
-  postMessage(message: string): void
-}
-```
-
-Where `message` is a JSON-stringified JSON-RPC 2.0 message. The host **MUST** parse the JSON string before processing.
-
-For messages traveling from the host to the Embedded Checkout, the host **MUST** inject JavaScript in the webview that will call `window.EmbeddedCheckoutProtocol.postMessage()` with the JSON RPC message. The Embedded Checkout **MUST** initialize this global object — and start listening for `postMessage()` calls — before the `ec.ready` message is sent.
+- `window.EmbeddedCheckoutProtocol` (Host → Embedded Checkout)
 
 ## Message API Reference
 
@@ -374,11 +319,13 @@ For messages traveling from the host to the Embedded Checkout, the host **MUST**
 
 Core messages are defined by the ECP specification and **MUST** be supported by all implementations. All messages are sent from Embedded Checkout to host.
 
-| Category         | Purpose                                                 | Pattern      | Core Messages                                                                                            |
-| ---------------- | ------------------------------------------------------- | ------------ | -------------------------------------------------------------------------------------------------------- |
-| **Handshake**    | Establish connection between host and Embedded Checkout | Request      | `ec.ready`                                                                                               |
-| **Lifecycle**    | Inform of checkout state transitions                    | Notification | `ec.start`, `ec.complete`                                                                                |
-| **State Change** | Inform of checkout field changes                        | Notification | `ec.line_items.change`, `ec.buyer.change`, `ec.payment.change`, `ec.messages.change`, `ec.totals.change` |
+| Category           | Purpose                                                             | Pattern      | Core Messages                                                                                            |
+| ------------------ | ------------------------------------------------------------------- | ------------ | -------------------------------------------------------------------------------------------------------- |
+| **Handshake**      | Establish connection between host and Embedded Checkout             | Request      | `ec.ready`                                                                                               |
+| **Authentication** | Communicate auth data exchanges between Embedded Checkout and host. | Request      | `ec.auth`                                                                                                |
+| **Lifecycle**      | Inform of checkout state transitions                                | Notification | `ec.start`, `ec.complete`                                                                                |
+| **State Change**   | Inform of checkout field changes                                    | Notification | `ec.line_items.change`, `ec.buyer.change`, `ec.payment.change`, `ec.messages.change`, `ec.totals.change` |
+| **Session Error**  | Signal a session-level error unrelated to the checkout resource     | Notification | `ec.error`                                                                                               |
 
 #### Extension Messages
 
@@ -397,12 +344,13 @@ Where:
 
 #### `ec.ready`
 
-Upon rendering, the Embedded Checkout **MUST** broadcast readiness to the parent context using the `ec.ready` message. This message initializes a secure communication channel between the host and Embedded Checkout, communicates which delegations were accepted, and allows the host to provide additional, display-only state for the checkout that was not communicated over UCP checkout actions.
+Upon rendering, the Embedded Checkout **MUST** broadcast readiness to the parent context using the `ec.ready` message. This message initializes a secure communication channel between the host and Embedded Checkout, communicates which delegations were accepted, communicates whether or not additional auth exchange is needed, and allows the host to provide additional, display-only state for the checkout that was not communicated over UCP checkout actions.
 
-- **Direction:** Embedded Checkout → host
+- **Direction:** Embedded Checkout → Host
 - **Type:** Request
 - **Payload:**
   - `delegate` (array of strings, **REQUIRED**): List of delegation identifiers accepted by the Embedded Checkout. **MUST** be a subset of both `ec_delegate` (what host requested) and `config.delegate` from the checkout response (what business allows). An empty array means no delegations were accepted.
+  - `auth` (object, **OPTIONAL**): When `ec_auth` URL param is neither sufficient nor applicable due to additional considerations, business can request for authorization during initial handshake by specifying the `type` string within this object. This `type` string value is a mirror of the payload content included in [`ec.auth`](#ecauth).
 
 **Example Message (no delegations accepted):**
 
@@ -412,7 +360,10 @@ Upon rendering, the Embedded Checkout **MUST** broadcast readiness to the parent
     "id": "ready_1",
     "method": "ec.ready",
     "params": {
-        "delegate": []
+        "delegate": [],
+        "auth": {
+            "type": "oauth"
+        }
     }
 }
 ```
@@ -425,17 +376,22 @@ Upon rendering, the Embedded Checkout **MUST** broadcast readiness to the parent
     "id": "ready_1",
     "method": "ec.ready",
     "params": {
-        "delegate": ["payment.credential", "fulfillment.address_change", "window.open"]
+        "delegate": ["payment.credential", "fulfillment.address_change", "window.open"],
+        "auth": {
+            "type": "oauth"
+        }
     }
 }
 ```
 
 The `ec.ready` message is a request, which means that the host **MUST** respond to complete the handshake.
 
-- **Direction:** host → Embedded Checkout
+- **Direction:** Host → Embedded Checkout
 - **Type:** Response
 - **Result Payload:**
-  - `upgrade` (object, **OPTIONAL**): An object describing how the Embedded Checkout should update the communication channel it uses to communicate with the host.
+  - `ucp` (object, **REQUIRED**): UCP protocol metadata. The `version` confirms the negotiated `ec_version` and `status` **MUST** be `"success"`. This version is session-bound — the host explicitly confirms the protocol version here, and it **MUST NOT** change for the duration of the session.
+  - `upgrade` (object, **OPTIONAL**): An object describing how the Embedded Checkout should update the communication channel it uses to communicate with the host. When present, host **MUST NOT** include `credential` — the channel will be re-established and any credential sent here will be discarded.
+  - `credential` (string, **OPTIONAL**): The requested authorization data, can be in the form of an OAuth token, JWT, API keys, etc. **MUST** be set if `auth` is present in the request. **MUST NOT** be set if `upgrade` is present.
   - `checkout` (object, **OPTIONAL**): Additional, display-only state for the checkout that was not communicated over UCP checkout actions. This is used to populate the checkout UI, and may only be used to populate the following fields, under specific conditions:
     - `payment.instruments`: can be overwritten when the host and Embedded Checkout both accept the `payment.instruments_change` delegation.
 
@@ -445,7 +401,10 @@ The `ec.ready` message is a request, which means that the host **MUST** respond 
 {
     "jsonrpc": "2.0",
     "id": "ready_1",
-    "result": {}
+    "result": {
+        "ucp": { "version": "draft", "status": "success" },
+        "credential": "fake_identity_linking_oauth_token"
+    }
 }
 ```
 
@@ -458,6 +417,7 @@ Hosts **MAY** respond with an `upgrade` field to update the communication channe
     "jsonrpc": "2.0",
     "id": "ready_1",
     "result": {
+        "ucp": { "version": "draft", "status": "success" },
         "upgrade": {
             "port": "[Transferable MessagePort]"
         }
@@ -476,6 +436,7 @@ The host **MAY** also respond with a `checkout` object, which will be used to po
     "jsonrpc": "2.0",
     "id": "ready_1",
     "result": {
+        "ucp": { "version": "draft", "status": "success" },
         "checkout": {
             "payment": {
                 // The instrument structure is defined by the handler's instrument schema
@@ -501,16 +462,53 @@ The host **MAY** also respond with a `checkout` object, which will be used to po
 }
 ```
 
+**Example Error Response:**
+
+If the host cannot complete the handshake (e.g., origin validation failure or protocol state violation), it **MUST** respond with an `error_response` result:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "ready_1",
+    "result": {
+        "ucp": { "version": "draft", "status": "error" },
+        "messages": [
+            {
+                "type": "error",
+                "code": "security_error",
+                "content": "Host origin validation failed.",
+                "severity": "unrecoverable"
+            }
+        ]
+    }
+}
+```
+
+When the host responds with an error, the session cannot proceed. The host **MUST** tear down the embedded context and **MAY** redirect the buyer to `continue_url` if present. The Embedded Checkout **MUST NOT** send further messages after receiving a handshake error.
+
+### Authentication
+
+#### `ec.auth`
+
+`ec.auth` implements the shared EP authentication pattern — see [Embedded Protocol — Authentication](https://wry-ry.github.io/ucp/draft/specification/embedded-protocol/#authentication) for the request/response contract, examples, and error escalation flow.
+
+- **Method:** `ec.auth`
+- **Direction:** Embedded Checkout → Host (request); Host → Embedded Checkout (response)
+
+When error escalation is required, Embedded Checkout **MUST** issue an `ec.error` notification per the [session error pattern](https://wry-ry.github.io/ucp/draft/specification/embedded-protocol/#session-error).
+
 ### Lifecycle Messages
+
+Lifecycle notifications follow the shared EP pattern — see [Embedded Protocol — Lifecycle](https://wry-ry.github.io/ucp/draft/specification/embedded-protocol/#lifecycle). All lifecycle notifications carry the full `checkout` object as their payload.
 
 #### `ec.start`
 
-Signals that checkout is visible and ready for interaction.
+Signals that checkout is visible and ready for interaction. Sent after a successful `ec.ready` handshake.
 
-- **Direction:** Embedded Checkout → host
+- **Direction:** Embedded Checkout → Host
 - **Type:** Notification
 - **Payload:**
-  - `checkout`: The latest state of the checkout, using the same structure as the `checkout` object in UCP responses.
+  - `checkout` (object, **REQUIRED**): The full current state of the checkout.
 
 **Example Message:**
 
@@ -535,6 +533,7 @@ Signals that checkout is visible and ready for interaction.
             "line_items": [/* ... */],
             "buyer": {/* ... */},
             "payment": {/* ... */}
+            // ... other checkout fields
         }
     }
 }
@@ -544,10 +543,10 @@ Signals that checkout is visible and ready for interaction.
 
 Indicates successful checkout completion.
 
-- **Direction:** Embedded Checkout → host
+- **Direction:** Embedded Checkout → Host
 - **Type:** Notification
 - **Payload:**
-  - `checkout`: The latest state of the checkout, using the same structure as the `checkout` object in UCP responses.
+  - `checkout` (object, **REQUIRED**): The final state of the checkout, including the resulting `order` object.
 
 **Example Message:**
 
@@ -570,16 +569,16 @@ Indicates successful checkout completion.
 
 ### State Change Messages
 
-State change messages inform the embedder of changes that have already occurred in the checkout interface. These are informational only. The checkout has already applied the changes and rendered the updated UI.
+State change notifications follow the shared EP pattern — see [Embedded Protocol — State Change](https://wry-ry.github.io/ucp/draft/specification/embedded-protocol/#state-change). All state change notifications are sent from the Embedded Checkout to the host and carry the full `checkout` object as their payload.
 
 #### `ec.line_items.change`
 
-Line items have been modified (quantity changed, items added/removed) in the checkout UI.
+Line items have been modified (quantity changed, items added/removed).
 
-- **Direction:** Embedded Checkout → host
+- **Direction:** Embedded Checkout → Host
 - **Type:** Notification
 - **Payload:**
-  - `checkout`: The latest state of the checkout
+  - `checkout` (object, **REQUIRED**): The full current state of the checkout.
 
 **Example Message:**
 
@@ -605,12 +604,12 @@ Line items have been modified (quantity changed, items added/removed) in the che
 
 #### `ec.buyer.change`
 
-Buyer information has been updated in the checkout UI.
+Buyer information has been updated (email, phone, address).
 
-- **Direction:** Embedded Checkout → host
+- **Direction:** Embedded Checkout → Host
 - **Type:** Notification
 - **Payload:**
-  - `checkout`: The latest state of the checkout
+  - `checkout` (object, **REQUIRED**): The full current state of the checkout.
 
 **Example Message:**
 
@@ -635,10 +634,10 @@ Buyer information has been updated in the checkout UI.
 
 Checkout messages have been updated. Messages include errors, warnings, and informational notices about the checkout state.
 
-- **Direction:** Embedded Checkout → host
+- **Direction:** Embedded Checkout → Host
 - **Type:** Notification
 - **Payload:**
-  - `checkout`: The latest state of the checkout
+  - `checkout` (object, **REQUIRED**): The full current state of the checkout.
 
 **Example Message:**
 
@@ -675,10 +674,10 @@ Checkout totals have been updated. This message covers all total line changes in
 
 When a change also triggers a domain-specific message (e.g., `ec.line_items.change`, `ec.buyer.change`, or `ec.payment.change`), the business **MUST** send the domain-specific message first, then follow it with `ec.totals.change`.
 
-- **Direction:** Embedded Checkout → host
+- **Direction:** Embedded Checkout → Host
 - **Type:** Notification
 - **Payload:**
-  - `checkout`: The latest state of the checkout
+  - `checkout` (object, **REQUIRED**): The full current state of the checkout.
 
 **Example Message:**
 
@@ -720,7 +719,18 @@ When a change also triggers a domain-specific message (e.g., `ec.line_items.chan
 
 #### `ec.payment.change`
 
-Payment state has been updated. See [`ec.payment.change`](#ecpaymentchange) for full documentation.
+Payment state has been updated. See the [Payment Extension](#payment-extension) for full documentation.
+
+- **Direction:** Embedded Checkout → Host
+- **Type:** Notification
+- **Payload:**
+  - `checkout` (object, **REQUIRED**): The full current state of the checkout.
+
+### Session Error Messages
+
+#### `ec.error`
+
+`ec.error` implements the shared EP session error pattern — see [Embedded Protocol — Session Error](https://wry-ry.github.io/ucp/draft/specification/embedded-protocol/#session-error) for the payload specification and host handling requirements.
 
 ## Payment Extension
 
@@ -747,7 +757,7 @@ Payment delegation allows for two different patterns of orchestrating the host a
 
 Informs the host that something has changed in the payment section of the checkout UI, such as a new payment method being selected.
 
-- **Direction:** Embedded Checkout → host
+- **Direction:** Embedded Checkout → Host
 - **Type:** Notification
 - **Payload:**
   - `checkout`: The latest state of the checkout
@@ -781,7 +791,7 @@ Informs the host that something has changed in the payment section of the checko
 
 Requests the host to present payment instrument selection UI.
 
-- **Direction:** Embedded Checkout → host
+- **Direction:** Embedded Checkout → Host
 - **Type:** Request
 - **Payload:**
   - `checkout`: The latest state of the checkout
@@ -808,9 +818,10 @@ Requests the host to present payment instrument selection UI.
 
 The host **MUST** respond with either an error, or the newly-selected payment instruments. In successful responses, the host **MUST** respond with a partial update to the `checkout` object, with only the `payment.instruments` field updated. The Embedded Checkout **MUST** treat this update as a PUT-style change by entirely replacing the existing state for the provided fields, rather than attempting to merge the new data with existing state.
 
-- **Direction:** host → Embedded Checkout
+- **Direction:** Host → Embedded Checkout
 - **Type:** Response
 - **Payload:**
+  - `ucp`: UCP protocol metadata with `status: "success"`
   - `checkout`: The update to apply to the checkout object
 
 **Example Success Response:**
@@ -820,6 +831,7 @@ The host **MUST** respond with either an error, or the newly-selected payment in
     "jsonrpc": "2.0",
     "id": "payment_instruments_change_request_1",
     "result": {
+        "ucp": { "version": "draft", "status": "success" },
         "checkout": {
             "payment": {
                 // The instrument structure is defined by the handler's instrument schema
@@ -852,9 +864,16 @@ The host **MUST** respond with either an error, or the newly-selected payment in
 {
     "jsonrpc": "2.0",
     "id": "payment_instruments_change_request_1",
-    "error": {
-        "code": "abort_error",
-        "message": "User closed the payment sheet without authorizing."
+    "result": {
+        "ucp": { "version": "draft", "status": "error" },
+        "messages": [
+            {
+                "type": "error",
+                "code": "abort_error",
+                "content": "User closed the payment sheet without authorizing.",
+                "severity": "recoverable"
+            }
+        ]
     }
 }
 ```
@@ -896,9 +915,10 @@ Requests a credential for the selected payment instrument during checkout submis
 
 The host **MUST** respond with either an error, or the credential for the selected payment instrument. In successful responses, the host **MUST** supply a partial update to the `checkout` object, updating the instrument with `selected: true` with the new `credentials` field. The Embedded Checkout **MUST** treat this update as a PUT-style change by entirely replacing the existing state for `payment.instruments`, rather than attempting to merge the new data with existing state.
 
-- **Direction:** host → Embedded Checkout
+- **Direction:** Host → Embedded Checkout
 - **Type:** Response
 - **Payload:**
+  - `ucp`: UCP protocol metadata with `status: "success"`
   - `checkout`: The update to apply to the checkout object
 
 **Example Success Response:**
@@ -908,6 +928,7 @@ The host **MUST** respond with either an error, or the credential for the select
     "jsonrpc": "2.0",
     "id": "payment_credential_request_1",
     "result": {
+        "ucp": { "version": "draft", "status": "success" },
         "checkout": {
             "payment": {
                 "instruments": [
@@ -943,9 +964,16 @@ The host **MUST** respond with either an error, or the credential for the select
 {
     "jsonrpc": "2.0",
     "id": "payment_credential_request_1",
-    "error": {
-        "code": "abort_error",
-        "message": "User closed the payment sheet without authorizing."
+    "result": {
+        "ucp": { "version": "draft", "status": "error" },
+        "messages": [
+            {
+                "type": "error",
+                "code": "abort_error",
+                "content": "User closed the payment sheet without authorizing.",
+                "severity": "recoverable"
+            }
+        ]
     }
 }
 ```
@@ -1054,9 +1082,10 @@ Requests the host to present address selection UI for a shipping fulfillment met
 
 The host **MUST** respond with either an error, or the newly-selected address. In successful responses, the host **MUST** respond with an updated `fulfillment.methods` object, updating the `selected_destination_id` and `destinations` fields for fulfillment methods, and otherwise preserving the existing state. The Embedded Checkout **MUST** treat this update as a PUT-style change by entirely replacing the existing state for `fulfillment.methods`, rather than attempting to merge the new data with existing state.
 
-- **Direction:** host → Embedded Checkout
+- **Direction:** Host → Embedded Checkout
 - **Type:** Response
 - **Payload:**
+  - `ucp`: UCP protocol metadata with `status: "success"`
   - `checkout`: The update to apply to the checkout object
 
 **Example Success Response:**
@@ -1066,6 +1095,7 @@ The host **MUST** respond with either an error, or the newly-selected address. I
     "jsonrpc": "2.0",
     "id": "fulfillment_address_change_request_1",
     "result": {
+        "ucp": { "version": "draft", "status": "success" },
         "checkout": {
             "fulfillment": {
                 "methods": [
@@ -1095,9 +1125,16 @@ The host **MUST** respond with either an error, or the newly-selected address. I
 {
     "jsonrpc": "2.0",
     "id": "fulfillment_address_change_request_1",
-    "error": {
-        "code": "abort_error",
-        "message": "User cancelled address selection."
+    "result": {
+        "ucp": { "version": "draft", "status": "error" },
+        "messages": [
+            {
+                "type": "error",
+                "code": "abort_error",
+                "content": "User cancelled address selection.",
+                "severity": "recoverable"
+            }
+        ]
     }
 }
 ```
@@ -1176,7 +1213,8 @@ Requests the host to handle a link activated by the buyer within the checkout.
 
 - **Direction:** Host → Embedded Checkout
 - **Type:** Response
-- **Payload:** Empty object (`{}`).
+- **Payload:**
+  - `ucp`: UCP protocol metadata with `status: "success"`
 
 **Example Success Response:**
 
@@ -1184,7 +1222,9 @@ Requests the host to handle a link activated by the buyer within the checkout.
 {
     "jsonrpc": "2.0",
     "id": "window_1",
-    "result": {}
+    "result": {
+        "ucp": { "version": "draft", "status": "success" }
+    }
 }
 ```
 
@@ -1194,9 +1234,16 @@ Requests the host to handle a link activated by the buyer within the checkout.
 {
     "jsonrpc": "2.0",
     "id": "window_1",
-    "error": {
-        "code": "window_open_rejected_error",
-        "message": "Window open rejected by host."
+    "result": {
+        "ucp": { "version": "draft", "status": "error" },
+        "messages": [
+            {
+                "type": "error",
+                "code": "window_open_rejected_error",
+                "content": "Window open rejected by host.",
+                "severity": "unrecoverable"
+            }
+        ]
     }
 }
 ```
@@ -1205,51 +1252,18 @@ Requests the host to handle a link activated by the buyer within the checkout.
 
 ### Error Codes
 
-Responses to delegation request messages from the embedded checkout may resolve to errors. The message responder **SHOULD** use error codes mapped to **[W3C DOMException](https://webidl.spec.whatwg.org/#idl-DOMException)** names where possible.
+See [Embedded Protocol — Error Codes](https://wry-ry.github.io/ucp/draft/specification/embedded-protocol/#error-codes) for the shared error codes. Embedded Checkout defines the following additional codes for delegation-specific scenarios:
 
-| Code                         | Description                                                                                                                                    |
-| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `abort_error`                | The user cancelled the interaction (e.g., closed the sheet).                                                                                   |
-| `security_error`             | The host origin validation failed.                                                                                                             |
-| `not_supported_error`        | The requested payment method is not supported by the host.                                                                                     |
-| `invalid_state_error`        | Handshake was attempted out of order.                                                                                                          |
-| `not_allowed_error`          | The request was missing valid User Activation (see [Prevention of Unsolicited Payment Requests](#prevention-of-unsolicited-payment-requests)). |
-| `window_open_rejected_error` | Host policy prevented the navigation. The host **MAY** notify the buyer that their request was rejected.                                       |
+| Code                         | Severity        | Description                                                                                                                                    |
+| ---------------------------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `not_allowed_error`          | `recoverable`   | The request was missing valid User Activation (see [Prevention of Unsolicited Payment Requests](#prevention-of-unsolicited-payment-requests)). |
+| `window_open_rejected_error` | `unrecoverable` | Host policy prevented the navigation. The host **MAY** notify the buyer that their request was rejected.                                       |
+
+For `not_allowed_error`, recovery requires a new [user activation](https://html.spec.whatwg.org/multipage/interaction.html#activation) gesture before re-attempting the delegation.
 
 ### Security for Web-Based Hosts
 
-#### Content Security Policy (CSP)
-
-To ensure security, both parties **MUST** implement appropriate **[Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)** directives:
-
-- **Business:** **MUST** set `frame-ancestors <host_origin>;` to ensure it's only embedded by trusted hosts.
-
-- **Host:**
-
-  - **Direct Embedding:** If the host directly embeds the business's page, specifying a `frame-src` directive listing every potential business origin can be impractical, especially if there are many businesses. In this scenario, while a strict `frame-src` is ideal, other security measures like those in [Iframe Sandbox Attributes](#iframe-sandbox-attributes) and [Credentialless Iframes](#credentialless-iframes) are critical.
-  - **Intermediate Iframe:** The host **MAY** use an intermediate iframe (e.g., on a host-controlled subdomain) to embed the business's page. This offers better control:
-    - The host's main page only needs to allow the origin of the intermediate iframe in its `frame-src` (e.g., `frame-src <intermediate_iframe_origin>;`).
-    - The intermediate iframe **MUST** implement a strict `frame-src` policy, dynamically set to allow *only* the specific `<merchant_origin>` for the current embedded session (e.g., `frame-src <merchant_origin>;`). This can be set via HTTP headers when serving the intermediate iframe content.
-
-#### Iframe Sandbox Attributes
-
-All business iframes **MUST** be sandboxed to restrict their capabilities. The following sandbox attributes **SHOULD** be applied, but a host and business **MAY** negotiate additional capabilities:
-
-```html
-<iframe sandbox="allow-scripts allow-forms allow-same-origin"></iframe>
-```
-
-#### Credentialless Iframes
-
-Hosts **SHOULD** use the `credentialless` attribute on the iframe to load it in a new, ephemeral context. This prevents the business from correlating user activity across contexts or accessing existing sessions, protecting user privacy.
-
-```html
-<iframe credentialless src="https://business.example.com/checkout"></iframe>
-```
-
-#### Strict Origin Validation
-
-Enforce strict validation of the `origin` for all `postMessage` communications between frames.
+ECP inherits the shared EP security requirements for CSP, iframe sandboxing, credentialless iframes, and strict origin validation. See [Embedded Protocol — Security](https://wry-ry.github.io/ucp/draft/specification/embedded-protocol/#security) for the full specification.
 
 ### Prevention of Unsolicited Payment Requests
 
@@ -1265,39 +1279,41 @@ The following schemas define the data structures used within the Embedded Checko
 
 The core object representing the current state of the transaction, including line items, totals, and buyer information.
 
-| Name         | Type                                                                                            | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| ------------ | ----------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ucp          | [Ucp Response Checkout Schema](/ucp/draft/specification/checkout/#ucp-response-checkout-schema) | **Yes**  | Protocol metadata for discovery profiles and responses. Uses slim schema pattern with context-specific required fields.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| id           | string                                                                                          | **Yes**  | Unique identifier of the checkout session.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| line_items   | Array\[[Line Item Response](/ucp/draft/specification/reference/#line-item)\]                    | **Yes**  | List of line items being checked out.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| buyer        | [Buyer](/ucp/draft/specification/reference/#buyer)                                              | No       | Representation of the buyer.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| context      | [Context](/ucp/draft/specification/reference/#context)                                          | No       | Provisional buyer signals for relevance and localization—not authoritative data. Businesses SHOULD use these values when verified inputs (e.g., shipping address) are absent, and MAY ignore or down-rank them if inconsistent with higher-confidence signals (authenticated account, risk detection) or regulatory constraints (export controls). Eligibility and policy enforcement MUST occur at checkout time using binding transaction data. Context SHOULD be non-identifying and can be disclosed progressively—coarse signals early, finer resolution as the session progresses. Higher-resolution data (shipping address, billing address) supersedes context. |
-| signals      | [Signals](/ucp/draft/specification/reference/#signals)                                          | No       | Environment data provided by the platform to support authorization and abuse prevention. Values MUST NOT be buyer-asserted claims — platforms provide signals based on direct observation or independently verifiable third-party attestations. All signal keys MUST use reverse-domain naming to ensure provenance and prevent collisions when multiple extensions contribute to the shared namespace.                                                                                                                                                                                                                                                                 |
-| status       | string                                                                                          | **Yes**  | Checkout state indicating the current phase and required action. See Checkout Status lifecycle documentation for state transition details. **Enum:** `incomplete`, `requires_escalation`, `ready_for_complete`, `complete_in_progress`, `completed`, `canceled`                                                                                                                                                                                                                                                                                                                                                                                                         |
-| currency     | string                                                                                          | **Yes**  | ISO 4217 currency code reflecting the merchant's market determination. Derived from address, context, and geo IP—buyers provide signals, merchants determine currency.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| totals       | [Totals](/ucp/draft/specification/reference/#totals)                                            | **Yes**  | Different cart totals.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| messages     | Array\[[Message](/ucp/draft/specification/reference/#message)\]                                 | No       | List of messages with error and info about the checkout session state.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| links        | Array\[[Link](/ucp/draft/specification/reference/#link)\]                                       | **Yes**  | Links to be displayed by the platform (Privacy Policy, TOS). Mandatory for legal compliance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| expires_at   | string                                                                                          | No       | RFC 3339 expiry timestamp. Default TTL is 6 hours from creation if not sent.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| continue_url | string                                                                                          | No       | URL for checkout handoff and session recovery. MUST be provided when status is requires_escalation. See specification for format and availability requirements.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| payment      | [Payment](/ucp/draft/specification/checkout/#payment)                                           | No       | Payment configuration containing handlers.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| order        | [Order Confirmation](/ucp/draft/specification/reference/#order-confirmation)                    | No       | Details about an order created for this checkout session.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| Name         | Type                                                                         | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| ------------ | ---------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ucp          | any                                                                          | **Yes**  | UCP metadata for checkout responses.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| id           | string                                                                       | **Yes**  | Unique identifier of the checkout session.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| line_items   | Array\[[Line Item Response](/ucp/draft/specification/reference/#line-item)\] | **Yes**  | List of line items being checked out.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| buyer        | [Buyer](/ucp/draft/specification/reference/#buyer)                           | No       | Representation of the buyer.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| context      | [Context](/ucp/draft/specification/reference/#context)                       | No       | Provisional buyer signals for relevance and localization—not authoritative data. Businesses SHOULD use these values when verified inputs (e.g., shipping address) are absent, and MAY ignore or down-rank them if inconsistent with higher-confidence signals (authenticated account, risk detection) or regulatory constraints (export controls). Eligibility and policy enforcement MUST occur at checkout time using binding transaction data. Context SHOULD be non-identifying and can be disclosed progressively—coarse signals early, finer resolution as the session progresses. Higher-resolution data (shipping address, billing address) supersedes context. |
+| signals      | [Signals](/ucp/draft/specification/reference/#signals)                       | No       | Environment data provided by the platform to support authorization and abuse prevention. Values MUST NOT be buyer-asserted claims — platforms provide signals based on direct observation or independently verifiable third-party attestations. All signal keys MUST use reverse-domain naming to ensure provenance and prevent collisions when multiple extensions contribute to the shared namespace.                                                                                                                                                                                                                                                                 |
+| status       | string                                                                       | **Yes**  | Checkout state indicating the current phase and required action. See Checkout Status lifecycle documentation for state transition details. **Enum:** `incomplete`, `requires_escalation`, `ready_for_complete`, `complete_in_progress`, `completed`, `canceled`                                                                                                                                                                                                                                                                                                                                                                                                         |
+| currency     | string                                                                       | **Yes**  | ISO 4217 currency code reflecting the merchant's market determination. Derived from address, context, and geo IP—buyers provide signals, merchants determine currency.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| totals       | [Totals](/ucp/draft/specification/reference/#totals)                         | **Yes**  | Different cart totals.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| messages     | Array\[[Message](/ucp/draft/specification/reference/#message)\]              | No       | List of messages with error and info about the checkout session state.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| links        | Array\[[Link](/ucp/draft/specification/reference/#link)\]                    | **Yes**  | Links to be displayed by the platform (Privacy Policy, TOS). Mandatory for legal compliance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| expires_at   | string                                                                       | No       | RFC 3339 expiry timestamp. Default TTL is 6 hours from creation if not sent.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| continue_url | string                                                                       | No       | URL for checkout handoff and session recovery. MUST be provided when status is requires_escalation. See specification for format and availability requirements.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| payment      | [Payment](/ucp/draft/specification/checkout/#payment)                        | No       | Payment configuration containing handlers.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| order        | [Order Confirmation](/ucp/draft/specification/reference/#order-confirmation) | No       | Details about an order created for this checkout session.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 
 ### Order
 
 The object returned upon successful completion of a checkout, containing confirmation details.
 
-| Name          | Type                                                                                   | Required | Description                                                                                                             |
-| ------------- | -------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------- |
-| ucp           | [Ucp Response Order Schema](/ucp/draft/specification/order/#ucp-response-order-schema) | **Yes**  | Protocol metadata for discovery profiles and responses. Uses slim schema pattern with context-specific required fields. |
-| id            | string                                                                                 | **Yes**  | Unique order identifier.                                                                                                |
-| checkout_id   | string                                                                                 | **Yes**  | Associated checkout ID for reconciliation.                                                                              |
-| permalink_url | string                                                                                 | **Yes**  | Permalink to access the order on merchant site.                                                                         |
-| line_items    | Array\[[Order Line Item](/ucp/draft/specification/reference/#order-line-item)\]        | **Yes**  | Line items representing what was purchased — can change post-order via edits or exchanges.                              |
-| fulfillment   | object                                                                                 | **Yes**  | Fulfillment data: buyer expectations and what actually happened.                                                        |
-| adjustments   | Array\[[Adjustment](/ucp/draft/specification/reference/#adjustment)\]                  | No       | Post-order events (refunds, returns, credits, disputes, cancellations, etc.) that exist independently of fulfillment.   |
-| currency      | string                                                                                 | No       | ISO 4217 currency code. MUST match the currency from the originating checkout session.                                  |
-| totals        | [Totals](/ucp/draft/specification/reference/#totals)                                   | **Yes**  | Different totals for the order.                                                                                         |
+| Name          | Type                                                                            | Required | Description                                                                                                                                   |
+| ------------- | ------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| ucp           | any                                                                             | **Yes**  | UCP metadata for order responses. No payment handlers needed post-purchase.                                                                   |
+| id            | string                                                                          | **Yes**  | Unique order identifier.                                                                                                                      |
+| label         | string                                                                          | No       | Human-readable label for identifying the order. MUST only be provided by the business.                                                        |
+| checkout_id   | string                                                                          | **Yes**  | Associated checkout ID for reconciliation.                                                                                                    |
+| permalink_url | string                                                                          | **Yes**  | Permalink to access the order on merchant site.                                                                                               |
+| line_items    | Array\[[Order Line Item](/ucp/draft/specification/reference/#order-line-item)\] | **Yes**  | Line items representing what was purchased — can change post-order via edits or exchanges.                                                    |
+| fulfillment   | object                                                                          | **Yes**  | Fulfillment data: buyer expectations and what actually happened.                                                                              |
+| adjustments   | Array\[[Adjustment](/ucp/draft/specification/reference/#adjustment)\]           | No       | Post-order events (refunds, returns, credits, disputes, cancellations, etc.) that exist independently of fulfillment.                         |
+| currency      | string                                                                          | **Yes**  | ISO 4217 currency code. MUST match the currency from the originating checkout session.                                                        |
+| totals        | [Totals](/ucp/draft/specification/reference/#totals)                            | **Yes**  | Different totals for the order.                                                                                                               |
+| messages      | Array\[[Message](/ucp/draft/specification/reference/#message)\]                 | No       | Business outcome messages (errors, warnings, informational). Present when the business needs to communicate status or issues to the platform. |
 
 ### Payment
 
@@ -1320,6 +1336,8 @@ Represents a specific method of payment (e.g., a specific credit card, bank acco
 
 #### Selected Payment Instrument
 
+A payment instrument with selection state.
+
 | Name            | Type    | Required | Description                                                                                                                                                  |
 | --------------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | id              | string  | **Yes**  | A unique identifier for this instrument instance, assigned by the platform.                                                                                  |
@@ -1334,8 +1352,8 @@ Represents a specific method of payment (e.g., a specific credit card, bank acco
 
 | Name            | Type                                                                         | Required | Description                                                                                                                                                  |
 | --------------- | ---------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| id              | string                                                                       | **Yes**  | A unique identifier for this instrument instance, assigned by the platform.                                                                                  |
-| handler_id      | string                                                                       | **Yes**  | The unique identifier for the handler instance that produced this instrument. This corresponds to the 'id' field in the Payment Handler definition.          |
+| id              | string                                                                       | No       | A unique identifier for this instrument instance, assigned by the platform.                                                                                  |
+| handler_id      | string                                                                       | No       | The unique identifier for the handler instance that produced this instrument. This corresponds to the 'id' field in the Payment Handler definition.          |
 | type            | string                                                                       | **Yes**  | The broad category of the instrument (e.g., 'card', 'tokenized_card'). Specific schemas will constrain this to a constant value.                             |
 | billing_address | [Postal Address](/ucp/draft/specification/reference/#postal-address)         | No       | The billing address associated with this payment method.                                                                                                     |
 | credential      | [Payment Credential](/ucp/draft/specification/reference/#payment-credential) | No       | The base definition for any payment credential. Handlers define specific credential types.                                                                   |
@@ -1375,12 +1393,13 @@ Represents a specific method of payment (e.g., a specific credit card, bank acco
 
 Represents the processor or wallet provider responsible for authenticating and processing a specific payment instrument (e.g., Google Pay, Stripe, or a Bank App).
 
-| Name    | Type   | Required | Description                                                                                     |
-| ------- | ------ | -------- | ----------------------------------------------------------------------------------------------- |
-| version | string | **Yes**  | Entity version in YYYY-MM-DD format.                                                            |
-| spec    | string | No       | URL to human-readable specification document.                                                   |
-| schema  | string | No       | URL to JSON Schema defining this entity's structure and payloads.                               |
-| id      | string | No       | Unique identifier for this entity instance. Used to disambiguate when multiple instances exist. |
-| config  | object | No       | Entity-specific configuration. Structure defined by each entity's schema.                       |
+Handler reference in responses. May include full config state for runtime usage of the handler.
 
-| available_instruments | Array[object] | No | Instrument types this handler supports, with optional constraints. When absent, every instrument should be considered available. |
+| Name                  | Type          | Required | Description                                                                                                                      |
+| --------------------- | ------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| version               | string        | **Yes**  | Entity version in YYYY-MM-DD format.                                                                                             |
+| spec                  | string        | No       | URL to human-readable specification document.                                                                                    |
+| schema                | string        | No       | URL to JSON Schema defining this entity's structure and payloads.                                                                |
+| id                    | string        | **Yes**  | Unique identifier for this entity instance. Used to disambiguate when multiple instances exist.                                  |
+| config                | object        | No       | Entity-specific configuration. Structure defined by each entity's schema.                                                        |
+| available_instruments | Array[object] | No       | Instrument types this handler supports, with optional constraints. When absent, every instrument should be considered available. |

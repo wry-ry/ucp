@@ -90,26 +90,26 @@ In lookup responses, each variant carries an `inputs` array for correlation: whi
 
 `media` is an ordered array. Businesses SHOULD return the featured variant image as the first element. Platforms SHOULD treat the first element as featured.
 
-| Name             | Type                                                                            | Required | Description                                                                               |
-| ---------------- | ------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------- |
-| id               | string                                                                          | **Yes**  | Global ID (GID) uniquely identifying this variant. Used as item.id in checkout.           |
-| sku              | string                                                                          | No       | Business-assigned identifier for inventory and fulfillment.                               |
-| barcodes         | Array[object]                                                                   | No       | Industry-standard product identifiers for cross-reference and correlation.                |
-| handle           | string                                                                          | No       | URL-safe variant handle/slug.                                                             |
-| title            | string                                                                          | **Yes**  | Variant display title (e.g., 'Blue / Large').                                             |
-| description      | [Description](/ucp/draft/specification/reference/#description)                  | **Yes**  | Variant description in one or more formats.                                               |
-| url              | string                                                                          | No       | Canonical variant page URL.                                                               |
-| categories       | Array\[[Category](/ucp/draft/specification/reference/#category)\]               | No       | Variant categories with optional taxonomy identifiers.                                    |
-| price            | [Price](/ucp/draft/specification/reference/#price)                              | **Yes**  | Current selling price.                                                                    |
-| list_price       | [Price](/ucp/draft/specification/reference/#price)                              | No       | List price before discounts (for strikethrough display).                                  |
-| unit_price       | object                                                                          | No       | Price per standard unit of measurement. MAY be omitted when unit pricing does not apply.  |
-| availability     | object                                                                          | No       | Variant availability for purchase.                                                        |
-| selected_options | Array\[[Selected Option](/ucp/draft/specification/reference/#selected-option)\] | No       | Option selections that define this variant.                                               |
-| media            | Array\[[Media](/ucp/draft/specification/reference/#media)\]                     | No       | Variant media (images, videos, 3D models). First item is the featured media for listings. |
-| rating           | [Rating](/ucp/draft/specification/reference/#rating)                            | No       | Variant rating.                                                                           |
-| tags             | Array[string]                                                                   | No       | Variant tags for categorization and search.                                               |
-| metadata         | object                                                                          | No       | Business-defined custom data extending the standard variant model.                        |
-| seller           | object                                                                          | No       | Optional seller context for this variant.                                                 |
+| Name         | Type                                                                            | Required | Description                                                                               |
+| ------------ | ------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------- |
+| id           | string                                                                          | **Yes**  | Global ID (GID) uniquely identifying this variant. Used as item.id in checkout.           |
+| sku          | string                                                                          | No       | Business-assigned identifier for inventory and fulfillment.                               |
+| barcodes     | Array[object]                                                                   | No       | Industry-standard product identifiers for cross-reference and correlation.                |
+| handle       | string                                                                          | No       | URL-safe variant handle/slug.                                                             |
+| title        | string                                                                          | **Yes**  | Variant display title (e.g., 'Blue / Large').                                             |
+| description  | [Description](/ucp/draft/specification/reference/#description)                  | **Yes**  | Variant description in one or more formats.                                               |
+| url          | string                                                                          | No       | Canonical variant page URL.                                                               |
+| categories   | Array\[[Category](/ucp/draft/specification/reference/#category)\]               | No       | Variant categories with optional taxonomy identifiers.                                    |
+| price        | [Price](/ucp/draft/specification/reference/#price)                              | **Yes**  | Current selling price.                                                                    |
+| list_price   | [Price](/ucp/draft/specification/reference/#price)                              | No       | List price before discounts (for strikethrough display).                                  |
+| unit_price   | object                                                                          | No       | Price per standard unit of measurement. MAY be omitted when unit pricing does not apply.  |
+| availability | object                                                                          | No       | Variant availability for purchase.                                                        |
+| options      | Array\[[Selected Option](/ucp/draft/specification/reference/#selected-option)\] | No       | Option values that define this variant (e.g., Color: Blue, Size: Large).                  |
+| media        | Array\[[Media](/ucp/draft/specification/reference/#media)\]                     | No       | Variant media (images, videos, 3D models). First item is the featured media for listings. |
+| rating       | [Rating](/ucp/draft/specification/reference/#rating)                            | No       | Variant rating.                                                                           |
+| tags         | Array[string]                                                                   | No       | Variant tags for categorization and search.                                               |
+| metadata     | object                                                                          | No       | Business-defined custom data extending the standard variant model.                        |
+| seller       | object                                                                          | No       | Optional seller context for this variant.                                                 |
 
 ### Price
 
@@ -144,16 +144,18 @@ In lookup responses, each variant carries an `inputs` array for correlation: whi
 
 ### Option Value
 
-| Name  | Type   | Required | Description                                                 |
-| ----- | ------ | -------- | ----------------------------------------------------------- |
-| label | string | **Yes**  | Display text for this option value (e.g., 'Small', 'Blue'). |
+| Name  | Type   | Required | Description                                                                                                                                           |
+| ----- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id    | string | No       | Optional server-assigned identifier for this option value. When present in a selected_option, the server SHOULD use it for matching instead of label. |
+| label | string | **Yes**  | Display text for this option value (e.g., 'Small', 'Blue').                                                                                           |
 
 ### Selected Option
 
-| Name  | Type   | Required | Description                            |
-| ----- | ------ | -------- | -------------------------------------- |
-| name  | string | **Yes**  | Option name (e.g., 'Size').            |
-| label | string | **Yes**  | Selected option label (e.g., 'Large'). |
+| Name  | Type   | Required | Description                                                                                                                                             |
+| ----- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name  | string | **Yes**  | Option name (e.g., 'Size').                                                                                                                             |
+| id    | string | No       | Optional option value identifier from option_value.id. When present, the server SHOULD use it for matching; name and label remain required for display. |
+| label | string | **Yes**  | Selected option label (e.g., 'Large').                                                                                                                  |
 
 ### Rating
 

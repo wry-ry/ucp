@@ -72,20 +72,17 @@ A **service** defines the API surface for a vertical (shopping, common, etc.). S
 
 #### Service Definition
 
-| Field             | Type   | Required | Description                         |
-| ----------------- | ------ | -------- | ----------------------------------- |
-| `version`         | string | Yes      | Service version (YYYY-MM-DD format) |
-| `spec`            | string | Yes      | URL to service documentation        |
-| `rest`            | object | No       | REST transport binding              |
-| `rest.schema`     | string | Yes      | URL to OpenAPI spec (JSON)          |
-| `rest.endpoint`   | string | Yes      | Business's REST endpoint            |
-| `mcp`             | object | No       | MCP transport binding               |
-| `mcp.schema`      | string | Yes      | URL to OpenRPC spec (JSON)          |
-| `mcp.endpoint`    | string | Yes      | Business's MCP endpoint             |
-| `a2a`             | object | No       | A2A transport binding               |
-| `a2a.endpoint`    | string | Yes      | Business's A2A Agent Card URL       |
-| `embedded`        | string | No       | Embedded transport binding          |
-| `embedded.schema` | string | Yes      | URL to OpenRPC spec (JSON)          |
+Full service declaration for platform-level discovery. All transports require `version`, `spec`, and `transport`. REST and MCP additionally require `schema` and `endpoint`; A2A requires `endpoint`; embedded requires `schema`.
+
+| Name      | Type   | Required | Description                                                                                     |
+| --------- | ------ | -------- | ----------------------------------------------------------------------------------------------- |
+| version   | string | **Yes**  | Entity version in YYYY-MM-DD format.                                                            |
+| spec      | string | **Yes**  | URL to human-readable specification document.                                                   |
+| schema    | string | No       | URL to JSON Schema defining this entity's structure and payloads.                               |
+| id        | string | No       | Unique identifier for this entity instance. Used to disambiguate when multiple instances exist. |
+| config    | object | No       | Entity-specific configuration. Structure defined by each entity's schema.                       |
+| transport | string | **Yes**  | Transport protocol for this service binding. **Enum:** `rest`, `mcp`, `a2a`, `embedded`         |
+| endpoint  | string | No       | Endpoint URL for this transport binding.                                                        |
 
 Transport definitions **MUST** be thin: they declare method names and reference base schemas only. See [Requirements](#requirements) for details.
 
@@ -124,9 +121,11 @@ A **capability** is a feature within a service. It declares what functionality i
 
 #### Capability Definition
 
+Full capability declaration for platform-level discovery. Includes spec/schema URLs for agent fetching.
+
 | Name    | Type    | Required | Description                                                                                                                     |
 | ------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| version | string  | No       | Entity version in YYYY-MM-DD format.                                                                                            |
+| version | string  | **Yes**  | Entity version in YYYY-MM-DD format.                                                                                            |
 | spec    | string  | **Yes**  | URL to human-readable specification document.                                                                                   |
 | schema  | string  | **Yes**  | URL to JSON Schema defining this entity's structure and payloads.                                                               |
 | id      | string  | No       | Unique identifier for this entity instance. Used to disambiguate when multiple instances exist.                                 |
@@ -348,21 +347,6 @@ Businesses publish their profile at `/.well-known/ucp`. An example:
           "schema": "https://ucp.dev/draft/schemas/shopping/discount.json",
           "extends": "dev.ucp.shopping.checkout"
         }
-      ],
-      "dev.ucp.common.identity_linking": [
-        {
-          "version": "draft",
-          "spec": "https://ucp.dev/draft/specification/identity-linking",
-          "schema": "https://ucp.dev/draft/schemas/common/identity_linking.json",
-          "config": {
-            "supported_mechanisms": [
-              {
-                "type": "oauth2",
-                "issuer": "https://auth.merchant.example.com"
-              }
-            ]
-          }
-        }
       ]
     },
     "payment_handlers": {
@@ -453,13 +437,6 @@ Platform profiles are similar and include signing keys for capabilities requirin
           "config": {
             "webhook_url": "https://platform.example.com/webhooks/ucp/orders"
           }
-        }
-      ],
-      "dev.ucp.common.identity_linking": [
-        {
-          "version": "draft",
-          "spec": "https://ucp.dev/draft/specification/identity-linking",
-          "schema": "https://ucp.dev/draft/schemas/common/identity_linking.json"
         }
       ]
     },
@@ -573,16 +550,12 @@ The capability intersection algorithm determines which capabilities are active f
 
 1. **Select version**: For each capability in the intersection, compute the set of version strings present in **both** the business and platform arrays. If the set is non-empty, select the **highest** version (latest date). If the set is empty (no mutual version), **exclude** the capability from the intersection.
 
-1. **Prune orphaned extensions & unauthorized capabilities**: Remove any capability that lacks its required structural or functional dependencies:
+1. **Prune orphaned extensions**: Remove any capability where `extends` is set but **none** of its parent capabilities are in the intersection.
 
-   - **Structural Dependencies**: Remove any capability where `extends` is set but **none** of its parent capabilities are in the intersection.
-     - For single-parent extensions (`extends: "string"`): parent must be present
-     - For multi-parent extensions (`extends: ["a", "b"]`): at least one parent must be present
-   - **Scope Dependencies**: Remove any capability declaring `identity_scopes` if `dev.ucp.common.identity_linking` is not present in the intersection.
+   - For single-parent extensions (`extends: "string"`): parent must be present
+   - For multi-parent extensions (`extends: ["a", "b"]`): at least one parent must be present
 
-1. **Repeat pruning**: Continue step 3 until no more capabilities are removed (handles transitive extension chains and chained scope dependencies).
-
-1. **Derive Scopes (Final Pass)**: If `dev.ucp.common.identity_linking` is present in the negotiated capabilities, the authorization scope set **MUST ONLY** be derived from the finalized intersection list *after* all pruning loops have stabilized. Capabilities excluded during pruning MUST NOT contribute to the derived authorization scopes. If the final derived scope list is mathematically empty (no active capabilities request scopes), the agent **SHOULD** abort the identity linking process.
+1. **Repeat pruning**: Continue step 3 until no more capabilities are removed (handles transitive extension chains).
 
 The result is the set of capabilities both parties support at mutually compatible versions, with extension dependencies satisfied.
 
@@ -634,6 +607,8 @@ See [Message Signatures](https://wry-ry.github.io/ucp/draft/specification/signat
 | 503  | Server temporarily unable to handle requests   | -32000 |
 
 For MCP over HTTP, the HTTP status code is the primary signal; the JSON-RPC `error.code` provides a secondary signal. Both transports **SHOULD** include `Retry-After` header (REST) or `error.data.retry_after` (MCP) for 429 and 503 responses.
+
+The Embedded Protocol uses the same JSON-RPC error codes for peer-to-peer communication between host and embedded context. Server-specific scenarios (rate limiting, idempotency) do not apply to the embedded transport. See [Embedded Protocol — Response Handling](https://wry-ry.github.io/ucp/draft/specification/embedded-protocol/#response-handling) for the full error handling specification.
 
 ##### The `continue_url` Field
 
@@ -1589,6 +1564,12 @@ Version unsupported error — no resource is created:
   "continue_url": "https://merchant.com/"
 }
 ```
+
+##### Pre-release Versions
+
+The protocol version **MUST** be a dated release in `YYYY-MM-DD` format. Businesses **MUST NOT** advertise a non-date version string (e.g. `"draft"`) in their profile `version` field or in `supported_versions`. Pre-release implementations are not stable and MUST NOT be surfaced through public discovery — doing so would expose the general ecosystem to undefined behavior and incompatible changes without notice.
+
+Platforms and businesses **MAY** coordinate on pre-release implementations outside of public discovery. Such use carries no stability or compatibility guarantees — the underlying behavior may change at any time without notice.
 
 #### Capability Versions
 

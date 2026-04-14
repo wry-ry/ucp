@@ -29,6 +29,7 @@
     "permalink_url",
     "line_items",
     "fulfillment",
+    "currency",
     "totals"
   ],
   "properties": {
@@ -38,6 +39,10 @@
     "id": {
       "type": "string",
       "description": "Unique order identifier."
+    },
+    "label": {
+      "type": "string",
+      "description": "Human-readable label for identifying the order. MUST only be provided by the business."
     },
     "checkout_id": {
       "type": "string",
@@ -84,12 +89,20 @@
     },
     "currency": {
       "type": "string",
-      "description": "ISO 4217 currency code. MUST match the currency from the originating checkout session."
+      "description": "ISO 4217 currency code. MUST match the currency from the originating checkout session.",
+      "ucp_request": "omit"
     },
     "totals": {
       "$ref": "https://ucp.dev/draft/schemas/shopping/types/totals.json",
       "description": "Different totals for the order."
+    },
+    "messages": {
+      "type": "array",
+      "items": {
+        "$ref": "https://ucp.dev/draft/schemas/shopping/types/message.json"
+      },
+      "description": "Business outcome messages (errors, warnings, informational). Present when the business needs to communicate status or issues to the platform."
     }
   },
-  "version": "2026-04-01"
+  "version": "2026-04-14"
 }

@@ -14,29 +14,37 @@
 ## Checkout Capability
 
 - [Overview](https://wry-ry.github.io/ucp/draft/specification/checkout/index.md)
-- [HTTP/REST Binding](https://wry-ry.github.io/ucp/draft/specification/checkout-rest/index.md)
-- [MCP Binding](https://wry-ry.github.io/ucp/draft/specification/checkout-mcp/index.md)
-- [A2A Binding](https://wry-ry.github.io/ucp/draft/specification/checkout-a2a/index.md)
-- [EP Binding](https://wry-ry.github.io/ucp/draft/specification/embedded-checkout/index.md)
+- [REST](https://wry-ry.github.io/ucp/draft/specification/checkout-rest/index.md)
+- [MCP](https://wry-ry.github.io/ucp/draft/specification/checkout-mcp/index.md)
+- [A2A](https://wry-ry.github.io/ucp/draft/specification/checkout-a2a/index.md)
+- [Embedded protocol](https://wry-ry.github.io/ucp/draft/specification/embedded-protocol/index.md)
+- [Embedded](https://wry-ry.github.io/ucp/draft/specification/embedded-checkout/index.md)
 - [AP2 Mandates Extension](https://wry-ry.github.io/ucp/draft/specification/ap2-mandates/index.md)
 - [Buyer Consent Extension](https://wry-ry.github.io/ucp/draft/specification/buyer-consent/index.md)
 - [Discounts Extension](https://wry-ry.github.io/ucp/draft/specification/discount/index.md)
 - [Fulfillment Extension](https://wry-ry.github.io/ucp/draft/specification/fulfillment/index.md)
+
+## Cart Capability
+
 - [Overview](https://wry-ry.github.io/ucp/draft/specification/cart/index.md)
-- [HTTP/REST Binding](https://wry-ry.github.io/ucp/draft/specification/cart-rest/index.md)
-- [MCP Binding](https://wry-ry.github.io/ucp/draft/specification/cart-mcp/index.md)
+- [REST](https://wry-ry.github.io/ucp/draft/specification/cart-rest/index.md)
+- [MCP](https://wry-ry.github.io/ucp/draft/specification/cart-mcp/index.md)
+- [Embedded protocol](https://wry-ry.github.io/ucp/draft/specification/embedded-protocol/index.md)
+- [Embedded](https://wry-ry.github.io/ucp/draft/specification/embedded-cart/index.md)
 
 ## Catalog Capability
 
 - [Overview](https://wry-ry.github.io/ucp/draft/specification/catalog/index.md)
 - [Search](https://wry-ry.github.io/ucp/draft/specification/catalog/search/index.md)
 - [Lookup](https://wry-ry.github.io/ucp/draft/specification/catalog/lookup/index.md)
-- [HTTP/REST Binding](https://wry-ry.github.io/ucp/draft/specification/catalog/rest/index.md)
-- [MCP Binding](https://wry-ry.github.io/ucp/draft/specification/catalog/mcp/index.md)
+- [REST](https://wry-ry.github.io/ucp/draft/specification/catalog/rest/index.md)
+- [MCP](https://wry-ry.github.io/ucp/draft/specification/catalog/mcp/index.md)
 
 ## Other Capabilities
 
-- [Order Capability](https://wry-ry.github.io/ucp/draft/specification/order/index.md)
+- [Overview](https://wry-ry.github.io/ucp/draft/specification/order/index.md)
+- [REST](https://wry-ry.github.io/ucp/draft/specification/order-rest/index.md)
+- [MCP](https://wry-ry.github.io/ucp/draft/specification/order-mcp/index.md)
 - [Identity Linking Capability](https://wry-ry.github.io/ucp/draft/specification/identity-linking/index.md)
 - [Guide](https://wry-ry.github.io/ucp/draft/specification/payment-handler-guide/index.md)
 - [Template](https://wry-ry.github.io/ucp/draft/specification/payment-handler-template/index.md)
