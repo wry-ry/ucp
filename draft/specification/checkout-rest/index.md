@@ -1240,11 +1240,17 @@ Business outcomes (including errors like unavailable merchandise) are returned w
   "status": "incomplete",
   "line_items": [
     {
-      "id": "item_456",
-      "quantity": 100,
-      "available_quantity": 12
+      "id": "li_1",
+        "item": {
+          "id": "item_123",
+          "title": "Blue Jeans",
+          "price": 5000
+        },
+      "quantity": 12,
+      "totals": [...]
     }
   ],
+  "totals": [...],
   "messages": [
     {
       "type": "warning",
@@ -1339,7 +1345,7 @@ Authentication is optional and depends on business requirements. When authentica
 
 1. **Open API**: No authentication required for public operations.
 1. **API Keys**: Via `X-API-Key` header.
-1. **OAuth 2.0**: Via `Authorization: Bearer {token}` header, following [RFC 6749](https://tools.ietf.org/html/rfc6749).
+1. **OAuth 2.0**: Via `Authorization: Bearer {token}` header. Identifies the platform for agent-authenticated access, or both platform and user for user-authenticated access (see [Identity Linking](https://wry-ry.github.io/ucp/draft/specification/identity-linking/index.md)).
 1. **Mutual TLS**: For high-security environments.
 1. **HTTP Message Signatures**: Per [RFC 9421](https://www.rfc-editor.org/rfc/rfc9421) (see [Message Signing](#message-signing) above).
 

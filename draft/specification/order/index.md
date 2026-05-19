@@ -63,6 +63,10 @@ Expectations can be split, merged, or adjusted post-order. For example:
 - Include tracking information
 - Type is an open string field - businesses can use any values that make sense (common examples: `processing`, `shipped`, `in_transit`, `delivered`, `failed_attempt`, `canceled`, `undeliverable`, `returned_to_sender`)
 
+### Attribution
+
+Businesses MAY surface a snapshot of the originating checkout's `attribution` on the order. Read-only on the order — agents do not write `order.attribution`. See [Attribution](https://wry-ry.github.io/ucp/draft/specification/overview/#attribution) for the underlying contract.
+
 ### Adjustments
 
 **Adjustments** are post-order events that exist independently of fulfillment:
@@ -91,6 +95,7 @@ Expectations can be split, merged, or adjusted post-order. For example:
 | currency      | string                                                                          | **Yes**  | ISO 4217 currency code. MUST match the currency from the originating checkout session.                                                        |
 | totals        | [Totals](/ucp/draft/specification/reference/#totals)                            | **Yes**  | Different totals for the order.                                                                                                               |
 | messages      | Array\[[Message](/ucp/draft/specification/reference/#message)\]                 | No       | Business outcome messages (errors, warnings, informational). Present when the business needs to communicate status or issues to the platform. |
+| attribution   | [Attribution](/ucp/draft/specification/reference/#attribution)                  | No       | Snapshot of the attribution associated with the originating checkout. Read-only on the order.                                                 |
 
 ### Order Line Item
 
@@ -271,6 +276,17 @@ Examples: `refund`, `return`, `credit`, `price_adjustment`, `dispute`, `cancella
 }
 ```
 
+## Scopes
+
+The Order capability defines the following well-known scopes for user-authenticated access:
+
+| Scope                           | Description                                                                                     |
+| ------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `dev.ucp.shopping.order:read`   | Read access to the user's orders — Get Order on resources owned by the authenticated user.      |
+| `dev.ucp.shopping.order:manage` | Post-purchase operations on the user's orders — cancellation, returns, and other modifications. |
+
+Scope declaration, derivation, and rules for extending this set with custom scopes are defined in [Identity Linking — Scopes](https://wry-ry.github.io/ucp/draft/specification/identity-linking/#scopes).
+
 ## Operations
 
 The order entity is a **current-state snapshot**: the authoritative latest state of the order at the time of retrieval or delivery. Businesses **MUST** return the full order entity on every response. The same schema is used for both synchronous retrieval (this section) and asynchronous event delivery (see [Events](#events)).
@@ -289,12 +305,12 @@ Returns the current-state snapshot of an order.
 
 #### Authorization
 
-The business **MUST** authenticate requests to order data before returning a response, using any supported UCP mechanism - API keys, OAuth 2.0, mutual TLS, or HTTP Message Signatures (see [Identity and Authentication](https://wry-ry.github.io/ucp/draft/specification/checkout-rest/#authentication)). The authentication method determines the scope of accessible orders:
+The business **MUST** authenticate requests to order data before returning a response, using any supported UCP mechanism - API keys, OAuth 2.0, mutual TLS, or HTTP Message Signatures (see [Identity and Authentication](https://wry-ry.github.io/ucp/draft/specification/checkout-rest/#authentication)). The authentication method determines which orders are accessible to the caller:
 
-| Authentication       | Recommended Access Scope                                 |
-| -------------------- | -------------------------------------------------------- |
-| Platform credentials | Orders originated by the platform                        |
-| Buyer authorization  | Orders originated by the buyer, subject to granted scope |
+| Authentication       | Accessible Orders                                              |
+| -------------------- | -------------------------------------------------------------- |
+| Platform credentials | Orders originated by the platform                              |
+| Buyer authorization  | Orders owned by the buyer, subject to the granted OAuth scopes |
 
 **Platform credentials** (API key, signatures, OAuth client credentials) - businesses **MAY** allow access for orders the platform originated. The platform provided buyer and payment information during the checkout flow, observed the order confirmation, and is retrieving the latest state of an order it already has context for.
 
@@ -545,9 +561,11 @@ Capability reference in responses. Only name/version required to confirm active 
 
 ### Total
 
-| Name | Type | Required | Description |
-| ---- | ---- | -------- | ----------- |
-|      |      |          |             |
+| Name         | Type                                                               | Required | Description                                                                                                                                                                                                                                                                                 |
+| ------------ | ------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| type         | string                                                             | **Yes**  | Cost category. Well-known values: subtotal, items_discount, discount, fulfillment, tax, fee, total. Businesses MAY use additional values.                                                                                                                                                   |
+| display_text | string                                                             | No       | Text to display against the amount. Should reflect appropriate method (e.g., 'Shipping', 'Delivery').                                                                                                                                                                                       |
+| amount       | [Signed Amount](/ucp/draft/specification/reference/#signed-amount) | **Yes**  | Monetary amount in the currency's minor unit as defined by ISO 4217. Refer to the currency's exponent to determine minor-to-major ratio (e.g., 2 for USD, 0 for JPY, 3 for KWD). May be negative — the sign is intrinsic to the value (e.g., discounts are negative, charges are positive). |
 
 ### UCP Response Order Schema
 

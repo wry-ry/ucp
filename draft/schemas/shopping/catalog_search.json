@@ -19,11 +19,14 @@
         "signals": {
           "$ref": "https://ucp.dev/draft/schemas/shopping/types/signals.json"
         },
+        "attribution": {
+          "$ref": "https://ucp.dev/draft/schemas/shopping/types/attribution.json"
+        },
         "filters": {
           "$ref": "https://ucp.dev/draft/schemas/shopping/types/search_filters.json"
         },
         "pagination": {
-          "$ref": "https://ucp.dev/draft/schemas/shopping/types/pagination.json#/$defs/request"
+          "$ref": "https://ucp.dev/draft/schemas/common/types/pagination.json#/$defs/request"
         }
       }
     },
@@ -45,17 +48,17 @@
           "description": "Products matching the search criteria."
         },
         "pagination": {
-          "$ref": "https://ucp.dev/draft/schemas/shopping/types/pagination.json#/$defs/response"
+          "$ref": "https://ucp.dev/draft/schemas/common/types/pagination.json#/$defs/response"
         },
         "messages": {
           "type": "array",
           "items": {
-            "$ref": "https://ucp.dev/draft/schemas/shopping/types/message.json"
+            "$ref": "https://ucp.dev/draft/schemas/common/types/message.json"
           },
           "description": "Errors, warnings, or informational messages about the search results."
         }
       }
     }
   },
-  "version": "2026-04-20"
+  "version": "2026-05-19"
 }

@@ -14,7 +14,7 @@
         <link rel="canonical" href="https://wry-ry.github.io/ucp/draft/specification/cart/">
       
       
-        <link rel="prev" href="../fulfillment/">
+        <link rel="prev" href="../loyalty/">
       
       
         <link rel="next" href="../cart-rest/">
@@ -862,6 +862,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../loyalty/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loyalty Extension
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1015,6 +1043,17 @@
     <span class="md-ellipsis">
       
         Cart-to-Checkout Conversion
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scopes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scopes
       
     </span>
   </a>
@@ -1243,6 +1282,17 @@
     <span class="md-ellipsis">
       
         Signals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Attribution
       
     </span>
   </a>
@@ -2404,6 +2454,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#scopes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scopes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#guidelines" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2632,6 +2693,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#attribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Attribution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#total" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2837,6 +2909,25 @@ SHOULD be linked for the duration of the checkout.</p>
     session with <code>create_cart</code>.</p>
 </li>
 </ul>
+<h2 id="scopes">Scopes<a class="headerlink" href="#scopes" title="Permanent link">&para;</a></h2>
+<p>The Cart capability defines the following well-known scopes for
+user-authenticated access:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Scope</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>dev.ucp.shopping.cart:manage</code></td>
+<td style="text-align: left;">All cart operations on behalf of the authenticated user — create, read, update, persist.</td>
+</tr>
+</tbody>
+</table>
+<p>Scope declaration, derivation, and rules for extending this set with
+custom scopes are defined in <a href="../identity-linking/#scopes">Identity Linking — Scopes</a>.</p>
 <h2 id="guidelines">Guidelines<a class="headerlink" href="#guidelines" title="Permanent link">&para;</a></h2>
 <h3 id="platform">Platform<a class="headerlink" href="#platform" title="Permanent link">&para;</a></h3>
 <ul>
@@ -2896,6 +2987,12 @@ SHOULD be linked for the duration of the checkout.</p>
 <td style="text-align: left;"><a href="/ucp/draft/specification/reference/#signals">Signals</a></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Environment data provided by the platform to support authorization and abuse prevention. Values MUST NOT be buyer-asserted claims — platforms provide signals based on direct observation or independently verifiable third-party attestations. All signal keys MUST use reverse-domain naming to ensure provenance and prevent collisions when multiple extensions contribute to the shared namespace.</td>
+</tr>
+<tr>
+<td style="text-align: left;">attribution</td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#attribution">Attribution</a></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Platform-emitted referral and conversion-event context — campaign identifiers, click IDs, source/medium markers, etc. The same parameters platforms communicate via URL query parameters in browser-based flows.</td>
 </tr>
 <tr>
 <td style="text-align: left;">buyer</td>
@@ -3332,6 +3429,12 @@ requirements.</p>
 </tr>
 </tbody>
 </table>
+<h3 id="attribution">Attribution<a class="headerlink" href="#attribution" title="Permanent link">&para;</a></h3>
+<p>Platform-provided referral and conversion-event context — campaign IDs,
+click identifiers, and source/medium markers communicated by the platform.
+See <a href="../overview/#attribution">Attribution</a> for details and consent
+requirements.</p>
+<p>Platform-emitted referral and conversion-event context — campaign identifiers, click IDs, source/medium markers, etc. The same parameters platforms communicate via URL query parameters in browser-based flows.</p>
 <h3 id="total">Total<a class="headerlink" href="#total" title="Permanent link">&para;</a></h3>
 <p>The same totals contract applies to cart and checkout. See
 <a href="../checkout/#totals">Checkout Totals</a> for the rendering contract, accounting
@@ -3347,10 +3450,22 @@ identity, well-known types, repeating types, and sub-line semantics.</p>
 </thead>
 <tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td style="text-align: left;">type</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Cost category. Well-known values: subtotal, items_discount, discount, fulfillment, tax, fee, total. Businesses MAY use additional values.</td>
+</tr>
+<tr>
+<td style="text-align: left;">display_text</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Text to display against the amount. Should reflect appropriate method (e.g., 'Shipping', 'Delivery').</td>
+</tr>
+<tr>
+<td style="text-align: left;">amount</td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#signed-amount">Signed Amount</a></td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Monetary amount in the currency's minor unit as defined by ISO 4217. Refer to the currency's exponent to determine minor-to-major ratio (e.g., 2 for USD, 0 for JPY, 3 for KWD). May be negative — the sign is intrinsic to the value (e.g., discounts are negative, charges are positive).</td>
 </tr>
 </tbody>
 </table>
@@ -3379,7 +3494,7 @@ are estimates; accurate taxes are computed at checkout.</p>
 <td style="text-align: left;">code</td>
 <td style="text-align: left;"><a href="/ucp/draft/specification/reference/#error-code">Error Code</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
-<td style="text-align: left;">Error code identifying the type of error. Standard errors are defined in specification (see examples), and have standardized semantics; freeform codes are permitted.</td>
+<td style="text-align: left;">Error code identifying the type of error. Standard errors are defined in capability specifications (see examples) and have standardized semantics; freeform codes are permitted.</td>
 </tr>
 <tr>
 <td style="text-align: left;">path</td>
@@ -3432,9 +3547,9 @@ are estimates; accurate taxes are computed at checkout.</p>
 </tr>
 <tr>
 <td style="text-align: left;">code</td>
-<td style="text-align: left;">string</td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#info-code">Info Code</a></td>
 <td style="text-align: left;">No</td>
-<td style="text-align: left;">Info code for programmatic handling.</td>
+<td style="text-align: left;">Info code identifying the type of informational message. Standard codes are defined in capability specifications (see examples) and have standardized semantics; freeform codes are permitted.</td>
 </tr>
 <tr>
 <td style="text-align: left;">content_type</td>
@@ -3475,9 +3590,9 @@ are estimates; accurate taxes are computed at checkout.</p>
 </tr>
 <tr>
 <td style="text-align: left;">code</td>
-<td style="text-align: left;">string</td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#warning-code">Warning Code</a></td>
 <td style="text-align: left;"><strong>Yes</strong></td>
-<td style="text-align: left;">Warning code. Machine-readable identifier for the warning type (e.g., final_sale, prop65, fulfillment_changed, age_restricted, etc.).</td>
+<td style="text-align: left;">Warning code identifying the type of warning. Standard codes are defined in capability specifications (see examples) and have standardized semantics; freeform codes are permitted.</td>
 </tr>
 <tr>
 <td style="text-align: left;">content</td>
@@ -3581,7 +3696,7 @@ are estimates; accurate taxes are computed at checkout.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../fulfillment/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Fulfillment Extension">
+          <a href="../loyalty/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Loyalty Extension">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -3591,7 +3706,7 @@ are estimates; accurate taxes are computed at checkout.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                Fulfillment Extension
+                Loyalty Extension
               </div>
             </div>
           </a>
@@ -3621,7 +3736,7 @@ are estimates; accurate taxes are computed at checkout.</p>
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright 2026 UCP Authors. Licensed under the <a href="https://github.com/Universal-Commerce-Protocol/ucp/blob/main/LICENSE">Apache License, Version 2.0</a>.
+      Copyright 2026 UCP Authors. Licensed under the <a href="https://github.com/Universal-Commerce-Protocol/ucp/blob/main/LICENSE" >Apache License, Version 2.0</a>.
     </div>
   
   

@@ -13,6 +13,7 @@ This page provides a reference for all the capability data models and types used
 | line_items   | Array\[[Line Item](/ucp/draft/specification/reference/#line-item)\] | **Yes**  | Cart line items. Same structure as checkout. Full replacement on update.                                                                                                                                                                                                                                                                                                                                |
 | context      | [Context](/ucp/draft/specification/reference/#context)              | No       | Buyer signals for localization (country, region, postal_code). Merchant uses for pricing, availability, currency. Falls back to geo-IP if omitted.                                                                                                                                                                                                                                                      |
 | signals      | [Signals](/ucp/draft/specification/reference/#signals)              | No       | Environment data provided by the platform to support authorization and abuse prevention. Values MUST NOT be buyer-asserted claims — platforms provide signals based on direct observation or independently verifiable third-party attestations. All signal keys MUST use reverse-domain naming to ensure provenance and prevent collisions when multiple extensions contribute to the shared namespace. |
+| attribution  | [Attribution](/ucp/draft/specification/reference/#attribution)      | No       | Platform-emitted referral and conversion-event context — campaign identifiers, click IDs, source/medium markers, etc. The same parameters platforms communicate via URL query parameters in browser-based flows.                                                                                                                                                                                        |
 | buyer        | [Buyer](/ucp/draft/specification/reference/#buyer)                  | No       | Optional buyer information for personalized estimates.                                                                                                                                                                                                                                                                                                                                                  |
 | currency     | string                                                              | **Yes**  | ISO 4217 currency code. Determined by merchant based on context or geo-IP.                                                                                                                                                                                                                                                                                                                              |
 | totals       | [Totals](/ucp/draft/specification/reference/#totals)                | **Yes**  | Estimated cost breakdown. May be partial if shipping/tax not yet calculable.                                                                                                                                                                                                                                                                                                                            |
@@ -45,6 +46,7 @@ ______________________________________________________________________
 | buyer        | [Buyer](/ucp/draft/specification/reference/#buyer)                           | No       | Representation of the buyer.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | context      | [Context](/ucp/draft/specification/reference/#context)                       | No       | Provisional buyer signals for relevance and localization—not authoritative data. Businesses SHOULD use these values when verified inputs (e.g., shipping address) are absent, and MAY ignore or down-rank them if inconsistent with higher-confidence signals (authenticated account, risk detection) or regulatory constraints (export controls). Eligibility and policy enforcement MUST occur at checkout time using binding transaction data. Context SHOULD be non-identifying and can be disclosed progressively—coarse signals early, finer resolution as the session progresses. Higher-resolution data (shipping address, billing address) supersedes context. |
 | signals      | [Signals](/ucp/draft/specification/reference/#signals)                       | No       | Environment data provided by the platform to support authorization and abuse prevention. Values MUST NOT be buyer-asserted claims — platforms provide signals based on direct observation or independently verifiable third-party attestations. All signal keys MUST use reverse-domain naming to ensure provenance and prevent collisions when multiple extensions contribute to the shared namespace.                                                                                                                                                                                                                                                                 |
+| attribution  | [Attribution](/ucp/draft/specification/reference/#attribution)               | No       | Platform-emitted referral and conversion-event context — campaign identifiers, click IDs, source/medium markers, etc. The same parameters platforms communicate via URL query parameters in browser-based flows.                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | status       | string                                                                       | **Yes**  | Checkout state indicating the current phase and required action. See Checkout Status lifecycle documentation for state transition details. **Enum:** `incomplete`, `requires_escalation`, `ready_for_complete`, `complete_in_progress`, `completed`, `canceled`                                                                                                                                                                                                                                                                                                                                                                                                         |
 | currency     | string                                                                       | **Yes**  | ISO 4217 currency code reflecting the merchant's market determination. Derived from address, context, and geo IP—buyers provide signals, merchants determine currency.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | totals       | [Totals](/ucp/draft/specification/reference/#totals)                         | **Yes**  | Different cart totals.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
@@ -72,6 +74,7 @@ ______________________________________________________________________
 | currency      | string                                                                          | **Yes**  | ISO 4217 currency code. MUST match the currency from the originating checkout session.                                                        |
 | totals        | [Totals](/ucp/draft/specification/reference/#totals)                            | **Yes**  | Different totals for the order.                                                                                                               |
 | messages      | Array\[[Message](/ucp/draft/specification/reference/#message)\]                 | No       | Business outcome messages (errors, warnings, informational). Present when the business needs to communicate status or issues to the platform. |
+| attribution   | [Attribution](/ucp/draft/specification/reference/#attribution)                  | No       | Snapshot of the attribution associated with the originating checkout. Read-only on the order.                                                 |
 
 ______________________________________________________________________
 
@@ -84,6 +87,163 @@ ______________________________________________________________________
 ______________________________________________________________________
 
 ## Type Schemas
+
+### Amount
+
+Monetary amount in the currency's minor unit as defined by ISO 4217. Refer to the currency's exponent to determine minor-to-major ratio (e.g., 2 for USD, 0 for JPY, 3 for KWD).
+
+______________________________________________________________________
+
+### Description
+
+| Name     | Type   | Required | Description                                                                                                                                                               |
+| -------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| plain    | string | No       | Plain text content.                                                                                                                                                       |
+| html     | string | No       | HTML-formatted content. Security: Platforms MUST sanitize before rendering—strip scripts, event handlers, and untrusted elements. Treat all rich text as untrusted input. |
+| markdown | string | No       | Markdown-formatted content.                                                                                                                                               |
+
+______________________________________________________________________
+
+### Error Code
+
+Error code identifying the type of error. Standard errors are defined in capability specifications (see examples) and have standardized semantics; freeform codes are permitted.
+
+______________________________________________________________________
+
+### Error Response
+
+| Name         | Type                                                            | Required | Description                                                       |
+| ------------ | --------------------------------------------------------------- | -------- | ----------------------------------------------------------------- |
+| ucp          | any                                                             | **Yes**  | UCP protocol metadata. Status MUST be 'error' for error response. |
+| messages     | Array\[[Message](/ucp/draft/specification/reference/#message)\] | **Yes**  | Array of messages describing why the operation failed.            |
+| continue_url | string                                                          | No       | URL for buyer handoff or session recovery.                        |
+
+______________________________________________________________________
+
+### Info Code
+
+Info code identifying the type of informational message. Standard codes are defined in capability specifications (see examples) and have standardized semantics; freeform codes are permitted.
+
+______________________________________________________________________
+
+### Link
+
+| Name  | Type   | Required | Description                                                                                                                                                                                                                          |
+| ----- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| type  | string | **Yes**  | Type of link. Well-known values: `privacy_policy`, `terms_of_service`, `refund_policy`, `shipping_policy`, `faq`. Consumers SHOULD handle unknown values gracefully by displaying them using the `title` field or omitting the link. |
+| url   | string | **Yes**  | The actual URL pointing to the content to be displayed.                                                                                                                                                                              |
+| title | string | No       | Optional display text for the link. When provided, use this instead of generating from type.                                                                                                                                         |
+
+______________________________________________________________________
+
+### Media
+
+| Name     | Type    | Required | Description                                                  |
+| -------- | ------- | -------- | ------------------------------------------------------------ |
+| type     | string  | **Yes**  | Media type. Well-known values: `image`, `video`, `model_3d`. |
+| url      | string  | **Yes**  | URL to the media resource.                                   |
+| alt_text | string  | No       | Accessibility text describing the media.                     |
+| width    | integer | No       | Width in pixels (for images/video).                          |
+| height   | integer | No       | Height in pixels (for images/video).                         |
+
+______________________________________________________________________
+
+### Message
+
+This object MUST be one of the following types: [Message Error](/ucp/draft/specification/reference/#message-error), [Message Warning](/ucp/draft/specification/reference/#message-warning), [Message Info](/ucp/draft/specification/reference/#message-info).
+
+______________________________________________________________________
+
+### Message Error
+
+| Name         | Type                                                         | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| ------------ | ------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| type         | string                                                       | **Yes**  | **Constant = error**. Message type discriminator.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| code         | [Error Code](/ucp/draft/specification/reference/#error-code) | **Yes**  | Error code identifying the type of error. Standard errors are defined in capability specifications (see examples) and have standardized semantics; freeform codes are permitted.                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| path         | string                                                       | No       | RFC 9535 JSONPath to the component the message refers to (e.g., $.items[1]).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| content_type | string                                                       | No       | Content format, default = plain. **Enum:** `plain`, `markdown`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| content      | string                                                       | **Yes**  | Human-readable message.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| severity     | string                                                       | **Yes**  | Reflects the resource state and recommended action. 'recoverable': platform can resolve by modifying inputs and retrying via API. 'requires_buyer_input': merchant requires information their API doesn't support collecting programmatically (checkout incomplete). 'requires_buyer_review': buyer must authorize before order placement due to policy, regulatory, or entitlement rules. 'unrecoverable': no valid resource exists to act on, retry with new resource or inputs. Errors with 'requires\_*' severity contribute to 'status: requires_escalation'.* *Enum:*\* `recoverable`, `requires_buyer_input`, `requires_buyer_review`, `unrecoverable` |
+
+______________________________________________________________________
+
+### Message Info
+
+| Name         | Type                                                       | Required | Description                                                                                                                                                                                    |
+| ------------ | ---------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| type         | string                                                     | **Yes**  | **Constant = info**. Message type discriminator.                                                                                                                                               |
+| path         | string                                                     | No       | RFC 9535 JSONPath to the component the message refers to.                                                                                                                                      |
+| code         | [Info Code](/ucp/draft/specification/reference/#info-code) | No       | Info code identifying the type of informational message. Standard codes are defined in capability specifications (see examples) and have standardized semantics; freeform codes are permitted. |
+| content_type | string                                                     | No       | Content format, default = plain. **Enum:** `plain`, `markdown`                                                                                                                                 |
+| content      | string                                                     | **Yes**  | Human-readable message.                                                                                                                                                                        |
+
+______________________________________________________________________
+
+### Message Warning
+
+| Name         | Type                                                             | Required | Description                                                                                                                                                                                                                                         |
+| ------------ | ---------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| type         | string                                                           | **Yes**  | **Constant = warning**. Message type discriminator.                                                                                                                                                                                                 |
+| path         | string                                                           | No       | JSONPath (RFC 9535) to related field (e.g., $.line_items[0]).                                                                                                                                                                                       |
+| code         | [Warning Code](/ucp/draft/specification/reference/#warning-code) | **Yes**  | Warning code identifying the type of warning. Standard codes are defined in capability specifications (see examples) and have standardized semantics; freeform codes are permitted.                                                                 |
+| content      | string                                                           | **Yes**  | Human-readable warning message that MUST be displayed.                                                                                                                                                                                              |
+| content_type | string                                                           | No       | Content format, default = plain. **Enum:** `plain`, `markdown`                                                                                                                                                                                      |
+| presentation | string                                                           | No       | Rendering contract for this warning. 'notice' (default): platform MUST display, MAY dismiss. 'disclosure': platform MUST display in proximity to the path-referenced component, MUST NOT hide or auto-dismiss. See specification for full contract. |
+| image_url    | string                                                           | No       | URL to a required visual element (e.g., warning symbol, energy class label).                                                                                                                                                                        |
+| url          | string                                                           | No       | Reference URL for more information (e.g., regulatory site, registry entry, policy page).                                                                                                                                                            |
+
+______________________________________________________________________
+
+### Pagination
+
+Cursor-based pagination for list operations.
+
+______________________________________________________________________
+
+### Postal Address
+
+| Name             | Type   | Required | Description                                                                                                                                                                                                                               |
+| ---------------- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| extended_address | string | No       | An address extension such as an apartment number, C/O or alternative name.                                                                                                                                                                |
+| street_address   | string | No       | The street address.                                                                                                                                                                                                                       |
+| address_locality | string | No       | The locality in which the street address is, and which is in the region. For example, Mountain View.                                                                                                                                      |
+| address_region   | string | No       | The region in which the locality is, and which is in the country. Required for applicable countries (i.e. state in US, province in CA). For example, California or another appropriate first-level Administrative division.               |
+| address_country  | string | No       | The country. Recommended to be in 2-letter ISO 3166-1 alpha-2 format, for example "US". For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as "SGP" or a full country name such as "Singapore" can also be used. |
+| postal_code      | string | No       | The postal code. For example, 94043.                                                                                                                                                                                                      |
+| first_name       | string | No       | Optional. First name of the contact associated with the address.                                                                                                                                                                          |
+| last_name        | string | No       | Optional. Last name of the contact associated with the address.                                                                                                                                                                           |
+| phone_number     | string | No       | Optional. Phone number of the contact associated with the address.                                                                                                                                                                        |
+
+______________________________________________________________________
+
+### Price
+
+| Name     | Type                                                 | Required | Description                                           |
+| -------- | ---------------------------------------------------- | -------- | ----------------------------------------------------- |
+| amount   | [Amount](/ucp/draft/specification/reference/#amount) | **Yes**  | Amount in ISO 4217 minor units. Use 0 for free items. |
+| currency | string                                               | **Yes**  | ISO 4217 currency code (e.g., 'USD', 'EUR', 'GBP').   |
+
+______________________________________________________________________
+
+### Reverse Domain Name
+
+Reverse-domain identifier used for collision-safe namespacing of capabilities, services, handlers, eligibility claims, and extension-contributed keys. Must contain at least two dot-separated segments (e.g., 'dev.ucp.shopping.checkout', 'com.example.loyalty_gold').
+
+**Pattern:** `^[a-z][a-z0-9]*(?:\.[a-z][a-z0-9_]*)+$`
+
+______________________________________________________________________
+
+### Signed Amount
+
+Monetary amount in the currency's minor unit as defined by ISO 4217. Refer to the currency's exponent to determine minor-to-major ratio (e.g., 2 for USD, 0 for JPY, 3 for KWD). May be negative — the sign is intrinsic to the value (e.g., discounts are negative, charges are positive).
+
+______________________________________________________________________
+
+### Warning Code
+
+Warning code identifying the type of warning. Standard codes are defined in capability specifications (see examples) and have standardized semantics; freeform codes are permitted.
+
+______________________________________________________________________
 
 ### Payment Account Info
 
@@ -107,9 +267,9 @@ ______________________________________________________________________
 
 ______________________________________________________________________
 
-### Amount
+### Attribution
 
-Monetary amount in the currency's minor unit as defined by ISO 4217. Refer to the currency's exponent to determine minor-to-major ratio (e.g., 2 for USD, 0 for JPY, 3 for KWD).
+Platform-emitted referral and conversion-event context — campaign identifiers, click IDs, source/medium markers, etc. The same parameters platforms communicate via URL query parameters in browser-based flows.
 
 ______________________________________________________________________
 
@@ -206,38 +366,12 @@ ______________________________________________________________________
 
 ______________________________________________________________________
 
-### Description
-
-| Name     | Type   | Required | Description                                                                                                                                                               |
-| -------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| plain    | string | No       | Plain text content.                                                                                                                                                       |
-| html     | string | No       | HTML-formatted content. Security: Platforms MUST sanitize before rendering—strip scripts, event handlers, and untrusted elements. Treat all rich text as untrusted input. |
-| markdown | string | No       | Markdown-formatted content.                                                                                                                                               |
-
-______________________________________________________________________
-
 ### Detail Option Value
 
-| Name  | Type   | Required | Description                                                                                                                                           |
-| ----- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| id    | string | No       | Optional server-assigned identifier for this option value. When present in a selected_option, the server SHOULD use it for matching instead of label. |
-| label | string | **Yes**  | Display text for this option value (e.g., 'Small', 'Blue').                                                                                           |
-
-______________________________________________________________________
-
-### Error Code
-
-Error code identifying the type of error. Standard errors are defined in specification (see examples), and have standardized semantics; freeform codes are permitted.
-
-______________________________________________________________________
-
-### Error Response
-
-| Name         | Type                                                            | Required | Description                                                       |
-| ------------ | --------------------------------------------------------------- | -------- | ----------------------------------------------------------------- |
-| ucp          | any                                                             | **Yes**  | UCP protocol metadata. Status MUST be 'error' for error response. |
-| messages     | Array\[[Message](/ucp/draft/specification/reference/#message)\] | **Yes**  | Array of messages describing why the operation failed.            |
-| continue_url | string                                                          | No       | URL for buyer handoff or session recovery.                        |
+| Name      | Type    | Required | Description                                                                                    |
+| --------- | ------- | -------- | ---------------------------------------------------------------------------------------------- |
+| available | boolean | No       | Whether a variant matching this value and the current option selections is purchasable.        |
+| exists    | boolean | No       | Whether a variant matching this value and the current option selections exists in the catalog. |
 
 ______________________________________________________________________
 
@@ -365,80 +499,12 @@ ______________________________________________________________________
 
 ______________________________________________________________________
 
-### Link
-
-| Name  | Type   | Required | Description                                                                                                                                                                                                                          |
-| ----- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| type  | string | **Yes**  | Type of link. Well-known values: `privacy_policy`, `terms_of_service`, `refund_policy`, `shipping_policy`, `faq`. Consumers SHOULD handle unknown values gracefully by displaying them using the `title` field or omitting the link. |
-| url   | string | **Yes**  | The actual URL pointing to the content to be displayed.                                                                                                                                                                              |
-| title | string | No       | Optional display text for the link. When provided, use this instead of generating from type.                                                                                                                                         |
-
-______________________________________________________________________
-
-### Media
-
-| Name     | Type    | Required | Description                                                  |
-| -------- | ------- | -------- | ------------------------------------------------------------ |
-| type     | string  | **Yes**  | Media type. Well-known values: `image`, `video`, `model_3d`. |
-| url      | string  | **Yes**  | URL to the media resource.                                   |
-| alt_text | string  | No       | Accessibility text describing the media.                     |
-| width    | integer | No       | Width in pixels (for images/video).                          |
-| height   | integer | No       | Height in pixels (for images/video).                         |
-
-______________________________________________________________________
-
 ### Merchant Fulfillment Config
 
 | Name                       | Type         | Required | Description                                    |
 | -------------------------- | ------------ | -------- | ---------------------------------------------- |
 | allows_multi_destination   | object       | No       | Permits multiple destinations per method type. |
 | allows_method_combinations | Array[array] | No       | Allowed method type combinations.              |
-
-______________________________________________________________________
-
-### Message
-
-This object MUST be one of the following types: [Message Error](/ucp/draft/specification/reference/#message-error), [Message Warning](/ucp/draft/specification/reference/#message-warning), [Message Info](/ucp/draft/specification/reference/#message-info).
-
-______________________________________________________________________
-
-### Message Error
-
-| Name         | Type                                                         | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| ------------ | ------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| type         | string                                                       | **Yes**  | **Constant = error**. Message type discriminator.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| code         | [Error Code](/ucp/draft/specification/reference/#error-code) | **Yes**  | Error code identifying the type of error. Standard errors are defined in specification (see examples), and have standardized semantics; freeform codes are permitted.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| path         | string                                                       | No       | RFC 9535 JSONPath to the component the message refers to (e.g., $.items[1]).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| content_type | string                                                       | No       | Content format, default = plain. **Enum:** `plain`, `markdown`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| content      | string                                                       | **Yes**  | Human-readable message.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| severity     | string                                                       | **Yes**  | Reflects the resource state and recommended action. 'recoverable': platform can resolve by modifying inputs and retrying via API. 'requires_buyer_input': merchant requires information their API doesn't support collecting programmatically (checkout incomplete). 'requires_buyer_review': buyer must authorize before order placement due to policy, regulatory, or entitlement rules. 'unrecoverable': no valid resource exists to act on, retry with new resource or inputs. Errors with 'requires\_*' severity contribute to 'status: requires_escalation'.* *Enum:*\* `recoverable`, `requires_buyer_input`, `requires_buyer_review`, `unrecoverable` |
-
-______________________________________________________________________
-
-### Message Info
-
-| Name         | Type   | Required | Description                                                    |
-| ------------ | ------ | -------- | -------------------------------------------------------------- |
-| type         | string | **Yes**  | **Constant = info**. Message type discriminator.               |
-| path         | string | No       | RFC 9535 JSONPath to the component the message refers to.      |
-| code         | string | No       | Info code for programmatic handling.                           |
-| content_type | string | No       | Content format, default = plain. **Enum:** `plain`, `markdown` |
-| content      | string | **Yes**  | Human-readable message.                                        |
-
-______________________________________________________________________
-
-### Message Warning
-
-| Name         | Type   | Required | Description                                                                                                                                                                                                                                         |
-| ------------ | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| type         | string | **Yes**  | **Constant = warning**. Message type discriminator.                                                                                                                                                                                                 |
-| path         | string | No       | JSONPath (RFC 9535) to related field (e.g., $.line_items[0]).                                                                                                                                                                                       |
-| code         | string | **Yes**  | Warning code. Machine-readable identifier for the warning type (e.g., final_sale, prop65, fulfillment_changed, age_restricted, etc.).                                                                                                               |
-| content      | string | **Yes**  | Human-readable warning message that MUST be displayed.                                                                                                                                                                                              |
-| content_type | string | No       | Content format, default = plain. **Enum:** `plain`, `markdown`                                                                                                                                                                                      |
-| presentation | string | No       | Rendering contract for this warning. 'notice' (default): platform MUST display, MAY dismiss. 'disclosure': platform MUST display in proximity to the path-referenced component, MUST NOT hide or auto-dismiss. See specification for full contract. |
-| image_url    | string | No       | URL to a required visual element (e.g., warning symbol, energy class label).                                                                                                                                                                        |
-| url          | string | No       | Reference URL for more information (e.g., regulatory site, registry entry, policy page).                                                                                                                                                            |
 
 ______________________________________________________________________
 
@@ -471,12 +537,6 @@ ______________________________________________________________________
 | totals    | Array\[[Total](/ucp/draft/specification/reference/#total)\] | **Yes**  | Line item totals breakdown.                                                                                                                                                                                                                                         |
 | status    | string                                                      | **Yes**  | Derived status: removed if quantity.total == 0, fulfilled if quantity.total > 0 and quantity.fulfilled == quantity.total, partial if quantity.total > 0 and quantity.fulfilled > 0, otherwise processing. **Enum:** `processing`, `partial`, `fulfilled`, `removed` |
 | parent_id | string                                                      | No       | Parent line item identifier for any nested structures.                                                                                                                                                                                                              |
-
-______________________________________________________________________
-
-### Pagination
-
-Cursor-based pagination for list operations.
 
 ______________________________________________________________________
 
@@ -514,31 +574,6 @@ ______________________________________________________________________
 | Name                 | Type    | Required | Description                         |
 | -------------------- | ------- | -------- | ----------------------------------- |
 | supports_multi_group | boolean | No       | Enables multiple groups per method. |
-
-______________________________________________________________________
-
-### Postal Address
-
-| Name             | Type   | Required | Description                                                                                                                                                                                                                               |
-| ---------------- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| extended_address | string | No       | An address extension such as an apartment number, C/O or alternative name.                                                                                                                                                                |
-| street_address   | string | No       | The street address.                                                                                                                                                                                                                       |
-| address_locality | string | No       | The locality in which the street address is, and which is in the region. For example, Mountain View.                                                                                                                                      |
-| address_region   | string | No       | The region in which the locality is, and which is in the country. Required for applicable countries (i.e. state in US, province in CA). For example, California or another appropriate first-level Administrative division.               |
-| address_country  | string | No       | The country. Recommended to be in 2-letter ISO 3166-1 alpha-2 format, for example "US". For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as "SGP" or a full country name such as "Singapore" can also be used. |
-| postal_code      | string | No       | The postal code. For example, 94043.                                                                                                                                                                                                      |
-| first_name       | string | No       | Optional. First name of the contact associated with the address.                                                                                                                                                                          |
-| last_name        | string | No       | Optional. Last name of the contact associated with the address.                                                                                                                                                                           |
-| phone_number     | string | No       | Optional. Phone number of the contact associated with the address.                                                                                                                                                                        |
-
-______________________________________________________________________
-
-### Price
-
-| Name     | Type                                                 | Required | Description                                           |
-| -------- | ---------------------------------------------------- | -------- | ----------------------------------------------------- |
-| amount   | [Amount](/ucp/draft/specification/reference/#amount) | **Yes**  | Amount in ISO 4217 minor units. Use 0 for free items. |
-| currency | string                                               | **Yes**  | ISO 4217 currency code (e.g., 'USD', 'EUR', 'GBP').   |
 
 ______________________________________________________________________
 
@@ -611,14 +646,6 @@ ______________________________________________________________________
 
 ______________________________________________________________________
 
-### Reverse Domain Name
-
-Reverse-domain identifier used for collision-safe namespacing of capabilities, services, handlers, eligibility claims, and extension-contributed keys. Must contain at least two dot-separated segments (e.g., 'dev.ucp.shopping.checkout', 'com.example.loyalty_gold').
-
-**Pattern:** `^[a-z][a-z0-9]*(?:\.[a-z][a-z0-9_]*)+$`
-
-______________________________________________________________________
-
 ### Search Filters
 
 | Name       | Type                                                             | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
@@ -664,12 +691,6 @@ ______________________________________________________________________
 
 ______________________________________________________________________
 
-### Signed Amount
-
-Monetary amount in the currency's minor unit as defined by ISO 4217. Refer to the currency's exponent to determine minor-to-major ratio (e.g., 2 for USD, 0 for JPY, 3 for KWD). May be negative — the sign is intrinsic to the value (e.g., discounts are negative, charges are positive).
-
-______________________________________________________________________
-
 ### Token Credential
 
 | Name  | Type   | Required | Description                                                                                  |
@@ -682,17 +703,17 @@ ______________________________________________________________________
 
 ### Total
 
-| Name | Type | Required | Description |
-| ---- | ---- | -------- | ----------- |
-|      |      |          |             |
+| Name         | Type                                                               | Required | Description                                                                                                                                                                                                                                                                                 |
+| ------------ | ------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| type         | string                                                             | **Yes**  | Cost category. Well-known values: subtotal, items_discount, discount, fulfillment, tax, fee, total. Businesses MAY use additional values.                                                                                                                                                   |
+| display_text | string                                                             | No       | Text to display against the amount. Should reflect appropriate method (e.g., 'Shipping', 'Delivery').                                                                                                                                                                                       |
+| amount       | [Signed Amount](/ucp/draft/specification/reference/#signed-amount) | **Yes**  | Monetary amount in the currency's minor unit as defined by ISO 4217. Refer to the currency's exponent to determine minor-to-major ratio (e.g., 2 for USD, 0 for JPY, 3 for KWD). May be negative — the sign is intrinsic to the value (e.g., discounts are negative, charges are positive). |
 
 ______________________________________________________________________
 
 ### Totals
 
-| Name | Type | Required | Description |
-| ---- | ---- | -------- | ----------- |
-|      |      |          |             |
+Pricing breakdown provided by the business. MUST contain exactly one subtotal and one total entry. Detail types (tax, fee, discount, fulfillment) may appear multiple times for itemization. Platforms MUST render all entries in order using display_text and amount.
 
 ______________________________________________________________________
 
@@ -756,7 +777,15 @@ Pagination information in responses.
 
 ### Error Code
 
-Error code identifying the type of error. Standard errors are defined in specification (see examples), and have standardized semantics; freeform codes are permitted.
+Error code identifying the type of error. Standard errors are defined in capability specifications (see examples) and have standardized semantics; freeform codes are permitted.
+
+### Warning Code
+
+Warning code identifying the type of warning. Standard codes are defined in capability specifications (see examples) and have standardized semantics; freeform codes are permitted.
+
+### Info Code
+
+Info code identifying the type of informational message. Standard codes are defined in capability specifications (see examples) and have standardized semantics; freeform codes are permitted.
 
 ## Extension Schemas
 
@@ -806,6 +835,7 @@ Checkout extended with AP2 mandate support.
 | buyer        | object        | No       | Representation of the buyer.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | context      | object        | No       | Provisional buyer signals for relevance and localization—not authoritative data. Businesses SHOULD use these values when verified inputs (e.g., shipping address) are absent, and MAY ignore or down-rank them if inconsistent with higher-confidence signals (authenticated account, risk detection) or regulatory constraints (export controls). Eligibility and policy enforcement MUST occur at checkout time using binding transaction data. Context SHOULD be non-identifying and can be disclosed progressively—coarse signals early, finer resolution as the session progresses. Higher-resolution data (shipping address, billing address) supersedes context. |
 | signals      | object        | No       | Environment data provided by the platform to support authorization and abuse prevention. Values MUST NOT be buyer-asserted claims — platforms provide signals based on direct observation or independently verifiable third-party attestations. All signal keys MUST use reverse-domain naming to ensure provenance and prevent collisions when multiple extensions contribute to the shared namespace.                                                                                                                                                                                                                                                                 |
+| attribution  | object        | No       | Platform-emitted referral and conversion-event context — campaign identifiers, click IDs, source/medium markers, etc. The same parameters platforms communicate via URL query parameters in browser-based flows.                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | status       | string        | **Yes**  | Checkout state indicating the current phase and required action. See Checkout Status lifecycle documentation for state transition details. **Enum:** `incomplete`, `requires_escalation`, `ready_for_complete`, `complete_in_progress`, `completed`, `canceled`                                                                                                                                                                                                                                                                                                                                                                                                         |
 | currency     | string        | **Yes**  | ISO 4217 currency code reflecting the merchant's market determination. Derived from address, context, and geo IP—buyers provide signals, merchants determine currency.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | totals       | Array[any]    | **Yes**  | Different cart totals.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
@@ -864,6 +894,7 @@ Checkout extended with consent tracking via buyer object.
 | buyer        | object        | No       | Representation of the buyer.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | context      | object        | No       | Provisional buyer signals for relevance and localization—not authoritative data. Businesses SHOULD use these values when verified inputs (e.g., shipping address) are absent, and MAY ignore or down-rank them if inconsistent with higher-confidence signals (authenticated account, risk detection) or regulatory constraints (export controls). Eligibility and policy enforcement MUST occur at checkout time using binding transaction data. Context SHOULD be non-identifying and can be disclosed progressively—coarse signals early, finer resolution as the session progresses. Higher-resolution data (shipping address, billing address) supersedes context. |
 | signals      | object        | No       | Environment data provided by the platform to support authorization and abuse prevention. Values MUST NOT be buyer-asserted claims — platforms provide signals based on direct observation or independently verifiable third-party attestations. All signal keys MUST use reverse-domain naming to ensure provenance and prevent collisions when multiple extensions contribute to the shared namespace.                                                                                                                                                                                                                                                                 |
+| attribution  | object        | No       | Platform-emitted referral and conversion-event context — campaign identifiers, click IDs, source/medium markers, etc. The same parameters platforms communicate via URL query parameters in browser-based flows.                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | status       | string        | **Yes**  | Checkout state indicating the current phase and required action. See Checkout Status lifecycle documentation for state transition details. **Enum:** `incomplete`, `requires_escalation`, `ready_for_complete`, `complete_in_progress`, `completed`, `canceled`                                                                                                                                                                                                                                                                                                                                                                                                         |
 | currency     | string        | **Yes**  | ISO 4217 currency code reflecting the merchant's market determination. Derived from address, context, and geo IP—buyers provide signals, merchants determine currency.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | totals       | Array[any]    | **Yes**  | Different cart totals.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
@@ -924,6 +955,7 @@ Cart extended with discount capability.
 | line_items   | Array[object] | **Yes**  | Cart line items. Same structure as checkout. Full replacement on update.                                                                                                                                                                                                                                                                                                                                |
 | context      | object        | No       | Buyer signals for localization (country, region, postal_code). Merchant uses for pricing, availability, currency. Falls back to geo-IP if omitted.                                                                                                                                                                                                                                                      |
 | signals      | object        | No       | Environment data provided by the platform to support authorization and abuse prevention. Values MUST NOT be buyer-asserted claims — platforms provide signals based on direct observation or independently verifiable third-party attestations. All signal keys MUST use reverse-domain naming to ensure provenance and prevent collisions when multiple extensions contribute to the shared namespace. |
+| attribution  | object        | No       | Platform-emitted referral and conversion-event context — campaign identifiers, click IDs, source/medium markers, etc. The same parameters platforms communicate via URL query parameters in browser-based flows.                                                                                                                                                                                        |
 | buyer        | object        | No       | Optional buyer information for personalized estimates.                                                                                                                                                                                                                                                                                                                                                  |
 | currency     | string        | **Yes**  | ISO 4217 currency code. Determined by merchant based on context or geo-IP.                                                                                                                                                                                                                                                                                                                              |
 | totals       | Array[any]    | **Yes**  | Estimated cost breakdown. May be partial if shipping/tax not yet calculable.                                                                                                                                                                                                                                                                                                                            |
@@ -945,6 +977,7 @@ Checkout extended with discount capability.
 | buyer        | object        | No       | Representation of the buyer.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | context      | object        | No       | Provisional buyer signals for relevance and localization—not authoritative data. Businesses SHOULD use these values when verified inputs (e.g., shipping address) are absent, and MAY ignore or down-rank them if inconsistent with higher-confidence signals (authenticated account, risk detection) or regulatory constraints (export controls). Eligibility and policy enforcement MUST occur at checkout time using binding transaction data. Context SHOULD be non-identifying and can be disclosed progressively—coarse signals early, finer resolution as the session progresses. Higher-resolution data (shipping address, billing address) supersedes context. |
 | signals      | object        | No       | Environment data provided by the platform to support authorization and abuse prevention. Values MUST NOT be buyer-asserted claims — platforms provide signals based on direct observation or independently verifiable third-party attestations. All signal keys MUST use reverse-domain naming to ensure provenance and prevent collisions when multiple extensions contribute to the shared namespace.                                                                                                                                                                                                                                                                 |
+| attribution  | object        | No       | Platform-emitted referral and conversion-event context — campaign identifiers, click IDs, source/medium markers, etc. The same parameters platforms communicate via URL query parameters in browser-based flows.                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | status       | string        | **Yes**  | Checkout state indicating the current phase and required action. See Checkout Status lifecycle documentation for state transition details. **Enum:** `incomplete`, `requires_escalation`, `ready_for_complete`, `complete_in_progress`, `completed`, `canceled`                                                                                                                                                                                                                                                                                                                                                                                                         |
 | currency     | string        | **Yes**  | ISO 4217 currency code reflecting the merchant's market determination. Derived from address, context, and geo IP—buyers provide signals, merchants determine currency.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | totals       | Array[any]    | **Yes**  | Different cart totals.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
@@ -1030,6 +1063,7 @@ Checkout extended with hierarchical fulfillment.
 | buyer        | object        | No       | Representation of the buyer.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | context      | object        | No       | Provisional buyer signals for relevance and localization—not authoritative data. Businesses SHOULD use these values when verified inputs (e.g., shipping address) are absent, and MAY ignore or down-rank them if inconsistent with higher-confidence signals (authenticated account, risk detection) or regulatory constraints (export controls). Eligibility and policy enforcement MUST occur at checkout time using binding transaction data. Context SHOULD be non-identifying and can be disclosed progressively—coarse signals early, finer resolution as the session progresses. Higher-resolution data (shipping address, billing address) supersedes context. |
 | signals      | object        | No       | Environment data provided by the platform to support authorization and abuse prevention. Values MUST NOT be buyer-asserted claims — platforms provide signals based on direct observation or independently verifiable third-party attestations. All signal keys MUST use reverse-domain naming to ensure provenance and prevent collisions when multiple extensions contribute to the shared namespace.                                                                                                                                                                                                                                                                 |
+| attribution  | object        | No       | Platform-emitted referral and conversion-event context — campaign identifiers, click IDs, source/medium markers, etc. The same parameters platforms communicate via URL query parameters in browser-based flows.                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | status       | string        | **Yes**  | Checkout state indicating the current phase and required action. See Checkout Status lifecycle documentation for state transition details. **Enum:** `incomplete`, `requires_escalation`, `ready_for_complete`, `complete_in_progress`, `completed`, `canceled`                                                                                                                                                                                                                                                                                                                                                                                                         |
 | currency     | string        | **Yes**  | ISO 4217 currency code reflecting the merchant's market determination. Derived from address, context, and geo IP—buyers provide signals, merchants determine currency.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | totals       | Array[any]    | **Yes**  | Different cart totals.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |

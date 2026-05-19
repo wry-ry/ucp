@@ -17,7 +17,7 @@
         <link rel="prev" href="../discount/">
       
       
-        <link rel="next" href="../cart/">
+        <link rel="next" href="../loyalty/">
       
       
         
@@ -1255,6 +1255,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../loyalty/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loyalty Extension
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -3148,10 +3176,22 @@ method.</p>
 </thead>
 <tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td style="text-align: left;">type</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Cost category. Well-known values: subtotal, items_discount, discount, fulfillment, tax, fee, total. Businesses MAY use additional values.</td>
+</tr>
+<tr>
+<td style="text-align: left;">display_text</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Text to display against the amount. Should reflect appropriate method (e.g., 'Shipping', 'Delivery').</td>
+</tr>
+<tr>
+<td style="text-align: left;">amount</td>
+<td style="text-align: left;"><a href="/ucp/draft/specification/reference/#signed-amount">Signed Amount</a></td>
+<td style="text-align: left;"><strong>Yes</strong></td>
+<td style="text-align: left;">Monetary amount in the currency's minor unit as defined by ISO 4217. Refer to the currency's exponent to determine minor-to-major ratio (e.g., 2 for USD, 0 for JPY, 3 for KWD). May be negative — the sign is intrinsic to the value (e.g., discounts are negative, charges are positive).</td>
 </tr>
 </tbody>
 </table>
@@ -3787,13 +3827,13 @@ same type, each with its own destination.</p>
         
         
           
-          <a href="../cart/" class="md-footer__link md-footer__link--next" aria-label="Next: Overview">
+          <a href="../loyalty/" class="md-footer__link md-footer__link--next" aria-label="Next: Loyalty Extension">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Overview
+                Loyalty Extension
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -3810,7 +3850,7 @@ same type, each with its own destination.</p>
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright 2026 UCP Authors. Licensed under the <a href="https://github.com/Universal-Commerce-Protocol/ucp/blob/main/LICENSE">Apache License, Version 2.0</a>.
+      Copyright 2026 UCP Authors. Licensed under the <a href="https://github.com/Universal-Commerce-Protocol/ucp/blob/main/LICENSE" >Apache License, Version 2.0</a>.
     </div>
   
   

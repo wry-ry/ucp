@@ -93,6 +93,7 @@ Maps to the [Get Order](https://wry-ry.github.io/ucp/draft/specification/order/#
 | currency      | string                                                                          | **Yes**  | ISO 4217 currency code. MUST match the currency from the originating checkout session.                                                        |
 | totals        | [Totals](/ucp/draft/specification/reference/#totals)                            | **Yes**  | Different totals for the order.                                                                                                               |
 | messages      | Array\[[Message](/ucp/draft/specification/reference/#message)\]                 | No       | Business outcome messages (errors, warnings, informational). Present when the business needs to communicate status or issues to the platform. |
+| attribution   | [Attribution](/ucp/draft/specification/reference/#attribution)                  | No       | Snapshot of the attribution associated with the originating checkout. Read-only on the order.                                                 |
 
 #### Example
 

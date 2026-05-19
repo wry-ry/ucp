@@ -53,6 +53,9 @@
         },
         "signals": {
           "$ref": "https://ucp.dev/draft/schemas/shopping/types/signals.json"
+        },
+        "attribution": {
+          "$ref": "https://ucp.dev/draft/schemas/shopping/types/attribution.json"
         }
       }
     },
@@ -89,7 +92,7 @@
         "messages": {
           "type": "array",
           "items": {
-            "$ref": "https://ucp.dev/draft/schemas/shopping/types/message.json"
+            "$ref": "https://ucp.dev/draft/schemas/common/types/message.json"
           },
           "description": "Errors, warnings, or informational messages about the requested items."
         }
@@ -129,6 +132,9 @@
         },
         "signals": {
           "$ref": "https://ucp.dev/draft/schemas/shopping/types/signals.json"
+        },
+        "attribution": {
+          "$ref": "https://ucp.dev/draft/schemas/shopping/types/attribution.json"
         }
       }
     },
@@ -190,12 +196,12 @@
         "messages": {
           "type": "array",
           "items": {
-            "$ref": "https://ucp.dev/draft/schemas/shopping/types/message.json"
+            "$ref": "https://ucp.dev/draft/schemas/common/types/message.json"
           },
           "description": "Warnings or informational messages about the product (e.g., price recently changed, limited availability)."
         }
       }
     }
   },
-  "version": "2026-04-20"
+  "version": "2026-05-19"
 }

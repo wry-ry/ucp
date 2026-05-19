@@ -99,10 +99,15 @@
     "messages": {
       "type": "array",
       "items": {
-        "$ref": "https://ucp.dev/draft/schemas/shopping/types/message.json"
+        "$ref": "https://ucp.dev/draft/schemas/common/types/message.json"
       },
       "description": "Business outcome messages (errors, warnings, informational). Present when the business needs to communicate status or issues to the platform."
+    },
+    "attribution": {
+      "$ref": "https://ucp.dev/draft/schemas/shopping/types/attribution.json",
+      "description": "Snapshot of the attribution associated with the originating checkout. Read-only on the order.",
+      "ucp_request": "omit"
     }
   },
-  "version": "2026-04-20"
+  "version": "2026-05-19"
 }
