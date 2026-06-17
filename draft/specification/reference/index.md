@@ -300,6 +300,14 @@ ______________________________________________________________________
 
 ______________________________________________________________________
 
+### Business Split Payments Config
+
+| Name                 | Type         | Required | Description                                                                                                                                  |
+| -------------------- | ------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| allowed_combinations | Array[array] | **Yes**  | Array of valid instrument combinations. Each combination is an array of instrument groups. A payment is valid if it matches any combination. |
+
+______________________________________________________________________
+
 ### Buyer
 
 | Name         | Type   | Required | Description              |
@@ -332,8 +340,8 @@ ______________________________________________________________________
 
 | Name            | Type                                                                         | Required | Description                                                                                                                                                  |
 | --------------- | ---------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| id              | string                                                                       | No       | A unique identifier for this instrument instance, assigned by the platform.                                                                                  |
-| handler_id      | string                                                                       | No       | The unique identifier for the handler instance that produced this instrument. This corresponds to the 'id' field in the Payment Handler definition.          |
+| id              | string                                                                       | **Yes**  | A unique identifier for this instrument instance, assigned by the platform.                                                                                  |
+| handler_id      | string                                                                       | **Yes**  | The unique identifier for the handler instance that produced this instrument. This corresponds to the 'id' field in the Payment Handler definition.          |
 | type            | string                                                                       | **Yes**  | The broad category of the instrument (e.g., 'card', 'tokenized_card'). Specific schemas will constrain this to a constant value.                             |
 | billing_address | [Postal Address](/ucp/draft/specification/reference/#postal-address)         | No       | The billing address associated with this payment method.                                                                                                     |
 | credential      | [Payment Credential](/ucp/draft/specification/reference/#payment-credential) | No       | The base definition for any payment credential. Handlers define specific credential types.                                                                   |
@@ -473,6 +481,16 @@ ______________________________________________________________________
 | ----- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | id    | string | **Yes**  | The identifier from the lookup request that resolved to this variant.                                                                                                                                                                                                                                                         |
 | match | string | No       | How the request identifier resolved to this variant. Well-known values: `exact` (input directly identifies this variant, e.g., variant ID, SKU), `featured` (server selected this variant as representative, e.g., product ID resolved to best match). Businesses MAY implement and provide additional resolution strategies. |
+
+______________________________________________________________________
+
+### Instrument Group
+
+| Name  | Type          | Required | Description                                                                                                   |
+| ----- | ------------- | -------- | ------------------------------------------------------------------------------------------------------------- |
+| types | Array[string] | **Yes**  | Instrument types accepted by this group (OR logic). Any listed type qualifies.                                |
+| min   | integer       | No       | Minimum number of instruments required from this group. Defaults to 0 (optional).                             |
+| max   | integer       | No       | Maximum number of instruments allowed from this group. Defaults to 1. MUST be greater than or equal to `min`. |
 
 ______________________________________________________________________
 
@@ -859,32 +877,71 @@ ______________________________________________________________________
 
 ### Buyer Consent Extension
 
+#### Consent Purpose
+
+A buyer's consent decision for a purpose (e.g., marketing, analytics). Carries the current binary state, its source (business default or platform-captured buyer decision), human-readable context, and optional refinements scoping the decision to specific channels, vendors, or programs.
+
+| Name        | Type          | Required | Description                                                                                                                                                                                                                                                                                                                                               |
+| ----------- | ------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| granted     | boolean       | **Yes**  | Whether consent has been granted for this purpose. The `source` field identifies who asserted this state (business default or platform-captured buyer preference).                                                                                                                                                                                        |
+| source      | string        | **Yes**  | Identifies the party that asserted the current `granted` value. `business` means the value reflects the business's default policy; `platform` means the value reflects an explicit buyer decision captured by the platform. **Enum:** `business`, `platform`                                                                                              |
+| description | string        | **Yes**  | Human-readable description of what the buyer is consenting to (e.g., 'Promotional communications across all channels').                                                                                                                                                                                                                                   |
+| links       | Array[object] | No       | Optional links providing context (e.g., privacy policy, terms).                                                                                                                                                                                                                                                                                           |
+| segments    | object        | No       | Optional refinements scoping this purpose to specific channels, vendors, or programs. Keys are reverse-DNS identifiers. UCP currently defines two well-known segment identifiers under `dev.ucp.consent.marketing`: `dev.ucp.consent.marketing.email`, `dev.ucp.consent.marketing.sms`. Other segments follow vendor or merchant reverse-DNS conventions. |
+
+#### Consent Segment
+
+A buyer's consent decision for a specific refinement of a parent purpose (e.g., email marketing under the marketing purpose). Overrides the parent's `granted` value for this scope. Segments do not nest further.
+
+| Name        | Type          | Required | Description                                                                                                                                                                                                                                                                   |
+| ----------- | ------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| granted     | boolean       | **Yes**  | Whether consent has been granted for this segment. Overrides the parent purpose's `granted` value for this specific scope.                                                                                                                                                    |
+| source      | string        | **Yes**  | Identifies the party that asserted the current `granted` value for this segment. `business` means the value reflects the business's default policy; `platform` means the value reflects an explicit buyer decision captured by the platform. **Enum:** `business`, `platform` |
+| description | string        | **Yes**  | Human-readable description of what the buyer is consenting to within this segment (e.g., 'Promotional emails and exclusive offers').                                                                                                                                          |
+| links       | Array[object] | No       | Optional segment-specific links (e.g., channel terms or privacy disclosures).                                                                                                                                                                                                 |
+
 #### Consent
 
-User consent states for data processing
+Per-purpose consent. Keys are reverse-DNS purpose identifiers. UCP defines four well-known purposes: `dev.ucp.consent.marketing`, `dev.ucp.consent.analytics`, `dev.ucp.consent.preferences`, `dev.ucp.consent.sale_or_sharing`. Vendors and merchants may define additional purposes under their own reverse-DNS namespace.
 
-| Name         | Type    | Required | Description                                       |
-| ------------ | ------- | -------- | ------------------------------------------------- |
-| analytics    | boolean | No       | Consent for analytics and performance tracking.   |
-| preferences  | boolean | No       | Consent for storing user preferences.             |
-| marketing    | boolean | No       | Consent for marketing communications.             |
-| sale_of_data | boolean | No       | Consent for selling data to third parties (CCPA). |
+Per-purpose consent. Keys are reverse-DNS purpose identifiers. UCP defines four well-known purposes: `dev.ucp.consent.marketing`, `dev.ucp.consent.analytics`, `dev.ucp.consent.preferences`, `dev.ucp.consent.sale_or_sharing`. Vendors and merchants may define additional purposes under their own reverse-DNS namespace.
 
 #### Buyer with Consent
 
-Buyer object extended with consent tracking.
+Buyer object extended with per-purpose consent.
 
-| Name         | Type   | Required | Description              |
-| ------------ | ------ | -------- | ------------------------ |
-| first_name   | string | No       | First name of the buyer. |
-| last_name    | string | No       | Last name of the buyer.  |
-| email        | string | No       | Email of the buyer.      |
-| phone_number | string | No       | E.164 standard.          |
-| consent      | object | No       | Consent tracking fields. |
+| Name         | Type   | Required | Description                                                            |
+| ------------ | ------ | -------- | ---------------------------------------------------------------------- |
+| first_name   | string | No       | First name of the buyer.                                               |
+| last_name    | string | No       | Last name of the buyer.                                                |
+| email        | string | No       | Email of the buyer.                                                    |
+| phone_number | string | No       | E.164 standard.                                                        |
+| consent      | object | No       | Per-purpose consent decisions and business-advertised consent options. |
+
+#### Cart with Buyer Consent
+
+Cart extended with buyer consent.
+
+| Name         | Type          | Required | Description                                                                                                                                                                                                                                                                                                                                                                                             |
+| ------------ | ------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ucp          | any           | **Yes**  | UCP metadata for cart responses. No payment handlers needed pre-checkout.                                                                                                                                                                                                                                                                                                                               |
+| id           | string        | **Yes**  | Unique cart identifier.                                                                                                                                                                                                                                                                                                                                                                                 |
+| line_items   | Array[object] | **Yes**  | Cart line items. Same structure as checkout. Full replacement on update.                                                                                                                                                                                                                                                                                                                                |
+| context      | object        | No       | Buyer signals for localization (country, region, postal_code). Merchant uses for pricing, availability, currency. Falls back to geo-IP if omitted.                                                                                                                                                                                                                                                      |
+| signals      | object        | No       | Environment data provided by the platform to support authorization and abuse prevention. Values MUST NOT be buyer-asserted claims — platforms provide signals based on direct observation or independently verifiable third-party attestations. All signal keys MUST use reverse-domain naming to ensure provenance and prevent collisions when multiple extensions contribute to the shared namespace. |
+| attribution  | object        | No       | Platform-emitted referral and conversion-event context — campaign identifiers, click IDs, source/medium markers, etc. The same parameters platforms communicate via URL query parameters in browser-based flows.                                                                                                                                                                                        |
+| buyer        | object        | No       | Optional buyer information for personalized estimates.                                                                                                                                                                                                                                                                                                                                                  |
+| currency     | string        | **Yes**  | ISO 4217 currency code. Determined by merchant based on context or geo-IP.                                                                                                                                                                                                                                                                                                                              |
+| totals       | Array[any]    | **Yes**  | Estimated cost breakdown. May be partial if shipping/tax not yet calculable.                                                                                                                                                                                                                                                                                                                            |
+| messages     | Array[object] | No       | Validation messages, warnings, or informational notices.                                                                                                                                                                                                                                                                                                                                                |
+| links        | Array[object] | No       | Optional merchant links (policies, FAQs).                                                                                                                                                                                                                                                                                                                                                               |
+| continue_url | string        | No       | URL for cart handoff and session recovery. Enables sharing and human-in-the-loop flows.                                                                                                                                                                                                                                                                                                                 |
+| expires_at   | string        | No       | Cart expiry timestamp (RFC 3339). Optional.                                                                                                                                                                                                                                                                                                                                                             |
+| buyer        | any           | No       | Buyer with consent tracking.                                                                                                                                                                                                                                                                                                                                                                            |
 
 #### Checkout with Buyer Consent
 
-Checkout extended with consent tracking via buyer object.
+Checkout extended with buyer consent.
 
 | Name         | Type          | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | ------------ | ------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1081,6 +1138,62 @@ Checkout extended with hierarchical fulfillment.
 
 ______________________________________________________________________
 
+### Split Payments Extension
+
+#### Instrument Group
+
+A constraint within an allowed combination that defines which instrument types can fill this group and how many are permitted.
+
+| Name  | Type          | Required | Description                                                                                                   |
+| ----- | ------------- | -------- | ------------------------------------------------------------------------------------------------------------- |
+| types | Array[string] | **Yes**  | Instrument types accepted by this group (OR logic). Any listed type qualifies.                                |
+| min   | integer       | No       | Minimum number of instruments required from this group. Defaults to 0 (optional).                             |
+| max   | integer       | No       | Maximum number of instruments allowed from this group. Defaults to 1. MUST be greater than or equal to `min`. |
+
+#### Payment Instrument (Split Payments)
+
+Payment instrument extended with an optional per-instrument amount for split payments.
+
+| Name            | Type    | Required | Description                                                                                                                                                                                                                                                 |
+| --------------- | ------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id              | string  | **Yes**  | A unique identifier for this instrument instance, assigned by the platform.                                                                                                                                                                                 |
+| handler_id      | string  | **Yes**  | The unique identifier for the handler instance that produced this instrument. This corresponds to the 'id' field in the Payment Handler definition.                                                                                                         |
+| type            | string  | **Yes**  | The broad category of the instrument (e.g., 'card', 'tokenized_card'). Specific schemas will constrain this to a constant value.                                                                                                                            |
+| billing_address | object  | No       | The billing address associated with this payment method.                                                                                                                                                                                                    |
+| credential      | object  | No       | The base definition for any payment credential. Handlers define specific credential types.                                                                                                                                                                  |
+| display         | object  | No       | Display information for this payment instrument. Each payment instrument schema defines its specific display properties, as outlined by the payment handler.                                                                                                |
+| amount          | integer | No       | Contribution amount for this instrument in `checkout.currency` minor units (ISO 4217). On request: the platform's requested contribution (omit for open-amount). On response: the actual amount authorized or charged (omitted when not finally processed). |
+
+#### Checkout with Split Payments
+
+Checkout extended with split payment instrument amounts.
+
+| Name         | Type          | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| ------------ | ------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ucp          | any           | **Yes**  | UCP metadata for checkout responses.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| id           | string        | **Yes**  | Unique identifier of the checkout session.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| line_items   | Array[object] | **Yes**  | List of line items being checked out.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| buyer        | object        | No       | Representation of the buyer.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| context      | object        | No       | Provisional buyer signals for relevance and localization—not authoritative data. Businesses SHOULD use these values when verified inputs (e.g., shipping address) are absent, and MAY ignore or down-rank them if inconsistent with higher-confidence signals (authenticated account, risk detection) or regulatory constraints (export controls). Eligibility and policy enforcement MUST occur at checkout time using binding transaction data. Context SHOULD be non-identifying and can be disclosed progressively—coarse signals early, finer resolution as the session progresses. Higher-resolution data (shipping address, billing address) supersedes context. |
+| signals      | object        | No       | Environment data provided by the platform to support authorization and abuse prevention. Values MUST NOT be buyer-asserted claims — platforms provide signals based on direct observation or independently verifiable third-party attestations. All signal keys MUST use reverse-domain naming to ensure provenance and prevent collisions when multiple extensions contribute to the shared namespace.                                                                                                                                                                                                                                                                 |
+| attribution  | object        | No       | Platform-emitted referral and conversion-event context — campaign identifiers, click IDs, source/medium markers, etc. The same parameters platforms communicate via URL query parameters in browser-based flows.                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| status       | string        | **Yes**  | Checkout state indicating the current phase and required action. See Checkout Status lifecycle documentation for state transition details. **Enum:** `incomplete`, `requires_escalation`, `ready_for_complete`, `complete_in_progress`, `completed`, `canceled`                                                                                                                                                                                                                                                                                                                                                                                                         |
+| currency     | string        | **Yes**  | ISO 4217 currency code reflecting the merchant's market determination. Derived from address, context, and geo IP—buyers provide signals, merchants determine currency.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| totals       | Array[any]    | **Yes**  | Different cart totals.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| messages     | Array[object] | No       | List of messages with error and info about the checkout session state.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| links        | Array[object] | **Yes**  | Links to be displayed by the platform (Privacy Policy, TOS). Mandatory for legal compliance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| expires_at   | string        | No       | RFC 3339 expiry timestamp. Default TTL is 6 hours from creation if not sent.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| continue_url | string        | No       | URL for checkout handoff and session recovery. MUST be provided when status is requires_escalation. See specification for format and availability requirements.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| payment      | object        | No       | Payment configuration containing handlers.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| order        | object        | No       | Details about an order created for this checkout session.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| payment      | object        | No       |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+
+#### Dev.Ucp.Shopping.Split Payments
+
+*No properties defined.*
+
+______________________________________________________________________
+
 ## UCP Metadata
 
 The following schemas define the structure of UCP metadata used in discovery and responses.
@@ -1142,6 +1255,21 @@ UCP metadata for checkout responses.
 The `ucp` object included in cart responses.
 
 UCP metadata for cart responses. No payment handlers needed pre-checkout.
+
+| Name             | Type   | Required | Description                                                                 |
+| ---------------- | ------ | -------- | --------------------------------------------------------------------------- |
+| version          | string | **Yes**  | UCP version in YYYY-MM-DD format.                                           |
+| status           | string | No       | Application-level status of the UCP operation. **Enum:** `success`, `error` |
+| services         | object | No       | Service registry keyed by reverse-domain name.                              |
+| capabilities     | object | No       | Capability registry keyed by reverse-domain name.                           |
+| payment_handlers | object | No       | Payment handler registry keyed by reverse-domain name.                      |
+| capabilities     | any    | No       |                                                                             |
+
+### Catalog Response Metadata
+
+The `ucp` object included in catalog responses.
+
+UCP metadata for catalog responses.
 
 | Name             | Type   | Required | Description                                                                 |
 | ---------------- | ------ | -------- | --------------------------------------------------------------------------- |

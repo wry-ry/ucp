@@ -188,7 +188,7 @@ Messages communicate business outcomes and provide context:
 
 Warnings with `presentation: "disclosure"` carry notices (e.g., allergen declarations, safety warnings) that platforms must not hide or dismiss. See [Warning Presentation](https://wry-ry.github.io/ucp/draft/specification/checkout/#warning-presentation) for the full rendering contract.
 
-**Note**: All catalog errors use `severity: "recoverable"` - agents handle them programmatically (retry, inform user, show alternatives).
+**Note**: Most catalog errors use `severity: "recoverable"` - agents handle them programmatically (retry, inform user, show alternatives). `get_product` returns `severity: "unrecoverable"` when an identifier doesn't resolve; agents MUST NOT retry the same `id` (see the [REST](https://wry-ry.github.io/ucp/draft/specification/catalog/rest/#product-not-found) and [MCP](https://wry-ry.github.io/ucp/draft/specification/catalog/mcp/#product-not-found) examples).
 
 #### Message (Error)
 

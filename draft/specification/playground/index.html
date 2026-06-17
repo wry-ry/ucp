@@ -883,6 +883,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../split-payments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Split Payments Extension
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2553,7 +2581,7 @@ const UcpData = {
     ],
     "dev.ucp.shopping.buyer_consent": [
       {
-        extends: "dev.ucp.shopping.checkout",
+        extends: ["dev.ucp.shopping.cart", "dev.ucp.shopping.checkout"],
         version: "draft",
         spec: "https://ucp.dev/draft/specification/buyer-consent",
         schema: "https://ucp.dev/draft/schemas/shopping/buyer_consent.json"

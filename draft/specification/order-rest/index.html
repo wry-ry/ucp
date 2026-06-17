@@ -890,6 +890,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../split-payments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Split Payments Extension
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2804,6 +2832,33 @@ order capability is defined in the <code>rest.endpoint</code> field of the busin
 <td style="text-align: left;"><code>Accept-Encoding</code></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;">Compression. The client tells the server which content-codings it supports, usually for compression.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Response Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Header</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>Signature</code></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">RFC 9421 HTTP Message Signature for response. Contains the signature value in the format <code>sig1=:&lt;base64-signature&gt;:</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Signature-Input</code></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">RFC 9421 Signature-Input header for response. Describes signed components, timestamp, and key ID.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Content-Digest</code></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">JCS-canonicalized body digest per RFC 8785. Format: <code>sha-256=:&lt;base64-digest&gt;:</code>.</td>
 </tr>
 </tbody>
 </table>

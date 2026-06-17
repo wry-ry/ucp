@@ -4,6 +4,39 @@ This document specifies the REST binding for the [Checkout Capability](https://w
 
 ## Protocol Fundamentals
 
+### Discovery
+
+Businesses advertise REST transport availability through their UCP profile at `/.well-known/ucp`.
+
+```json
+{
+  "ucp": {
+    "version": "draft",
+    "services": {
+      "dev.ucp.shopping": [
+        {
+          "version": "draft",
+          "spec": "https://ucp.dev/draft/specification/overview",
+          "transport": "rest",
+          "schema": "https://ucp.dev/draft/services/shopping/rest.openapi.json",
+          "endpoint": "https://business.example.com/ucp/v1"
+        }
+      ]
+    },
+    "capabilities": {
+      "dev.ucp.shopping.checkout": [
+        {
+          "version": "draft",
+          "spec": "https://ucp.dev/draft/specification/checkout",
+          "schema": "https://ucp.dev/draft/schemas/shopping/checkout.json"
+        }
+      ]
+    },
+    "payment_handlers": {}
+  }
+}
+```
+
 ### Base URL
 
 All UCP REST endpoints are relative to the business's base URL, which is discovered through the UCP profile at `/.well-known/ucp`. The endpoint for the checkout capability is defined in the `rest.endpoint` field of the business profile.
@@ -1194,8 +1227,8 @@ The following headers are defined for the HTTP binding and apply to all operatio
 - **UCP-Agent**: All requests **MUST** include the `UCP-Agent` header containing the platform profile URI using Dictionary Structured Field syntax ([RFC 8941](https://datatracker.ietf.org/doc/html/rfc8941)). Format: `profile="https://platform.example/profile"`.
 - **Idempotency-Key**: Operations that modify state **SHOULD** support idempotency. When provided, the server **MUST**:
   1. Store the key with the operation result for at least 24 hours.
-  1. Return the cached result for duplicate keys.
-  1. Return `409 Conflict` if the key is reused with different parameters.
+  1. Return the cached result for duplicate keys whose request body matches the original.
+  1. Return `409 Conflict` if the key is reused with a mismatched body. See [Message Signatures — Idempotency Key Requirements](https://wry-ry.github.io/ucp/draft/specification/signatures/#replay-protection) for the full payload-matching contract.
 
 ## Protocol Mechanics
 

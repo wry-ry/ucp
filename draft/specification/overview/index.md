@@ -362,6 +362,11 @@ Businesses publish their profile at `/.well-known/ucp`. An example:
           "spec": "https://ucp.dev/draft/specification/identity-linking",
           "schema": "https://ucp.dev/draft/schemas/common/identity_linking.json",
           "config": {
+            "providers": {
+              "com.example.idp": [
+                { "type": "oauth2", "auth_url": "https://accounts.example.com/" }
+              ]
+            },
             "scopes": {
               "dev.ucp.shopping.order:read":   {},
               "dev.ucp.shopping.order:manage": {}
@@ -1006,6 +1011,8 @@ Payment handlers allow for a variety of different payment instruments and token-
 **Dynamic Filtering:** Businesses **MUST** filter the `handlers` list based on the context of the cart (e.g., removing "Buy Now Pay Later" for subscription items, or filtering regional methods based on shipping address).
 
 **Available Instrument Resolution:** Within each active handler, both the platform and the business independently advertise `available_instruments` — the set of instrument types and constraints each party supports. The business is responsible for resolving these into an authoritative value in the checkout response. The platform's declaration (from its profile) signals what it can handle; the business intersects that with its own `business_schema` declaration and cart context, then returns the resolved result. Platforms **MUST** treat the `available_instruments` in the response as authoritative for that checkout. See the [Payment Handler Guide](https://wry-ry.github.io/ucp/draft/specification/payment-handler-guide/#resolving-available_instruments) for the full resolution semantics.
+
+**Instrument Cardinality:** A checkout submission **MUST** contain exactly one payment instrument unless the `dev.ucp.shopping.split_payments` capability is active. Businesses **MUST** reject submissions that violate this constraint with a `payment_failed` error in `messages[]`. See [Split Payments](https://wry-ry.github.io/ucp/draft/specification/split-payments/index.md) for the extension that relaxes this constraint.
 
 ### Implementation Scenarios
 
